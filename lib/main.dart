@@ -1,4 +1,7 @@
 import 'package:codeit_app/Docs_view.dart';
+
+import 'package:codeit_app/views/register_view.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,12 +14,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+        return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: DocsView(),
+      home: RegisterView(),
     );
   }
 }
