@@ -1,5 +1,6 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/register_view.dart';
+import 'package:codeit_app/views/forgot_password_view.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -38,11 +39,7 @@ class _LoginViewState extends State<LoginView> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   //w1 logo
-                  Image.asset(
-                    'assets/images/code-it-logo.png',
-                    height: 40,
-                    
-                  ),
+                  Image.asset('assets/images/code-it-logo.png', height: 40),
                   SizedBox(height: 20),
 
                   //w2
@@ -179,7 +176,15 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       Flexible(
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ForgotPasswordView(),
+                              ),
+                            );
+                          },
+
                           child: Text(
                             "Forget Password?",
                             style: TextStyle(

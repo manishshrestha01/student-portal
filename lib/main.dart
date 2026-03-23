@@ -1,5 +1,5 @@
-import 'package:codeit_app/views/register_view.dart';
-
+import 'package:codeit_app/Docs_view.dart';
+import 'package:codeit_app/views/forgot_password_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: RegisterView(),
+      home: ForgotPasswordView(),
     );
   }
 }
