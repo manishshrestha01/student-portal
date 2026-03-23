@@ -1,5 +1,3 @@
-import 'package:codeit_app/Docs_view.dart';
-
 import 'package:codeit_app/views/register_view.dart';
 
 import 'package:flutter/material.dart';
