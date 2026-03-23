@@ -181,10 +181,13 @@ class _SupportViewState extends State<SupportView> {
                               letterSpacing: -0.15,
                             ),
                           ),
-                        ),style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF2B7FFF),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusGeometry.circular(14)
-                        ))
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF2B7FFF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(14),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -192,9 +195,423 @@ class _SupportViewState extends State<SupportView> {
               ),
             ),
             //w4
+            Gap(16),
+            Container(
+              width: 352.94,
+              height: 169.45,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFFF3F4F6), width: 0.77),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 3,
+                    offset: Offset(0, 1),
+                    spreadRadius: 0,
+                  ),
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 2,
+                    offset: Offset(0, 1),
+                    spreadRadius: -1,
+                  ),
+                ],
+              ),
+              //w4 logo
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap(21),
+                  SizedBox(
+                    child: Row(
+                      children: [
+                        Gap(21),
+                        Container(
+                          width: 48,
+                          height: 48,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFF7ED),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: SvgPicture.asset(
+                            'assets/support/technical-support.svg',
+                            width: 19,
+                            height: 19,
+                            colorFilter: ColorFilter.mode(
+                              const Color(0xFFF85604),
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                        Gap(16),
+                        SizedBox(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Technical Support",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    color: AppColors.textDark,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: -0.31,
+                                  ),
+                                ),
+                              ),
+                              Gap(4),
+                              Text(
+                                "App bugs, login problems,\nand technical difficulties",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    color: AppColors.textLight,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    letterSpacing: -0.15,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Gap(16),
+                  Center(
+                    child: SizedBox(
+                      width: 311.42,
+                      height: 43.97,
+                      child: ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        label: Text(
+                          "Create Ticket",
+                          style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                              color: AppColors.boxColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: -0.15,
+                            ),
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFF85604),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(14),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             //w5
+            Gap(16),
+            Container(
+              width: 352.94,
+              height: 169.45,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFFF3F4F6), width: 0.77),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 3,
+                    offset: Offset(0, 1),
+                    spreadRadius: 0,
+                  ),
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 2,
+                    offset: Offset(0, 1),
+                    spreadRadius: -1,
+                  ),
+                ],
+              ),
+              //w5 logo
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap(21),
+                  SizedBox(
+                    child: Row(
+                      children: [
+                        Gap(21),
+                        Container(
+                          width: 48,
+                          height: 48,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFF0FDF4),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: SvgPicture.asset(
+                            'assets/support/counselling-support.svg',
+                            width: 19,
+                            height: 19,
+                            colorFilter: ColorFilter.mode(
+                              const Color(0xFF00C950),
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                        Gap(16),
+                        SizedBox(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Counseling Support",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    color: AppColors.textDark,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: -0.31,
+                                  ),
+                                ),
+                              ),
+                              Gap(4),
+                              Text(
+                                "Career guidance, course selection,\nand mentorship",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    color: AppColors.textLight,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    letterSpacing: -0.15,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Gap(16),
+                  Center(
+                    child: SizedBox(
+                      width: 311.42,
+                      height: 43.97,
+                      child: ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        label: Text(
+                          "Create Ticket",
+                          style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                              color: AppColors.boxColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: -0.15,
+                            ),
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF00C950),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(14),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             //w6
+            Gap(16),
+            Container(
+              width: 352.94,
+              height: 169.45,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: const Color(0xFFFAF5FF), width: 0.77),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 3,
+                    offset: Offset(0, 1),
+                    spreadRadius: 0,
+                  ),
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 2,
+                    offset: Offset(0, 1),
+                    spreadRadius: -1,
+                  ),
+                ],
+              ),
+              //w6 logo
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap(21),
+                  SizedBox(
+                    child: Row(
+                      children: [
+                        Gap(21),
+                        Container(
+                          width: 48,
+                          height: 48,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFEFF6FF),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: SvgPicture.asset(
+                            'assets/support/internship-support.svg',
+                            width: 19,
+                            height: 19,
+                            colorFilter: ColorFilter.mode(
+                              const Color(0xFFAD46FF),
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                        ),
+                        Gap(16),
+                        SizedBox(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Internship Support",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    color: AppColors.textDark,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    letterSpacing: -0.31,
+                                  ),
+                                ),
+                              ),
+                              Gap(4),
+                              Text(
+                                "Internship opportunities, applications,\nand placements",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    color: AppColors.textLight,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    letterSpacing: -0.15,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Gap(16),
+                  Center(
+                    child: SizedBox(
+                      width: 311.42,
+                      height: 43.97,
+                      child: ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        label: Text(
+                          "Create Ticket",
+                          style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                              color: AppColors.boxColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: -0.15,
+                            ),
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFAD46FF),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadiusGeometry.circular(14),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             //w7
+            Gap(24),
+            Text(
+              "Need immediate assistance?",
+              style: GoogleFonts.inter(
+                textStyle: TextStyle(
+                  color: AppColors.textLight,
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  letterSpacing: -0.15,
+                ),
+              ),
+            ),
+            //w8
+            Gap(16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "support@codeit.com",
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      letterSpacing: -0.15,
+                    ),
+                  ),
+                ),
+                Gap(12),
+                Text(
+                  "|",
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      color: AppColors.textLight,
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      letterSpacing: -0.15,
+                    ),
+                  ),
+                ),
+                Gap(12),
+                Text(
+                  "+977 981-2345678",
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      letterSpacing: -0.15,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
