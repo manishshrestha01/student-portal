@@ -1,5 +1,4 @@
-import 'package:codeit_app/views/register_view.dart';
-
+import 'package:codeit_app/views/support_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,11 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
         return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'CODE IT',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: RegisterView(),
+      home: SupportView(),
     );
   }
 }
