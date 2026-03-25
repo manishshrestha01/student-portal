@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class GeneralView extends StatefulWidget {
+class GeneralView extends StatelessWidget {
   const GeneralView({super.key});
 
-  @override
-  State<GeneralView> createState() => _GeneralViewState();
-}
-
-class _GeneralViewState extends State<GeneralView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,7 +105,9 @@ class _GeneralViewState extends State<GeneralView> {
                                   height: 24,
                                   decoration: BoxDecoration(
                                     color: AppColors.primary,
-                                    borderRadius: BorderRadius.circular(25953100)
+                                    borderRadius: BorderRadius.circular(
+                                      25953100,
+                                    ),
                                   ),
                                 ),
                                 Gap(8),
@@ -129,13 +126,15 @@ class _GeneralViewState extends State<GeneralView> {
                             Row(
                               children: [
                                 Gap(20),
-                                Text("Category",
+                                Text(
+                                  "Category",
                                   style: TextStyle(
                                     color: AppColors.lightblue,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                     letterSpacing: -0.15,
-                                  ),)
+                                  ),
+                                ),
                               ],
                             ),
                             Gap(8),
@@ -146,37 +145,38 @@ class _GeneralViewState extends State<GeneralView> {
                                 color: AppColors.cannotedit,
                                 borderRadius: BorderRadius.circular(14),
                                 border: Border.all(
-                                  color: const Color(0xFFE5E7EB)
-                                )
+                                  color: const Color(0xFFE5E7EB),
+                                ),
                               ),
                               child: Row(
                                 children: [
                                   Gap(20),
-                                  Text("General Support",
-                                  style: TextStyle(
-                                    color: AppColors.lightblue,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                    letterSpacing: -0.15,
-                                  ),)
+                                  Text(
+                                    "General Support",
+                                    style: TextStyle(
+                                      color: AppColors.lightblue,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      letterSpacing: -0.15,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                             Gap(20),
+                            Gap(20),
                             Row(
                               children: [
-                                 Gap(20),
-                                Text("Subject",
+                                Gap(20),
+                                Text(
+                                  "Subject",
                                   style: TextStyle(
                                     color: AppColors.lightblue,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                     letterSpacing: -0.15,
-                                  ),),
-                                  Text(" *",
-                                  style: TextStyle(
-                                    color: Colors.red
-                                  ),)
+                                  ),
+                                ),
+                                Text(" *", style: TextStyle(color: Colors.red)),
                               ],
                             ),
                             Gap(8),
@@ -186,53 +186,75 @@ class _GeneralViewState extends State<GeneralView> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(14),
                                 border: Border.all(
-                                  color: const Color(0xFFE5E7EB)
-                                )
+                                  color: const Color(0xFFE5E7EB),
+                                ),
                               ),
-                              child: Row(
-                                children: [
-                                  Gap(20),
-                                  Text("e.g. Cannot access course materials",
-                                  style: TextStyle(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText:
+                                      "e.g. Cannot access course materials",
+                                  hintStyle: TextStyle(
                                     color: AppColors.textLight,
                                     fontSize: 14,
                                     fontWeight: FontWeight.normal,
                                     letterSpacing: -0.15,
-                                  ),)
-                                ],
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 12,
+                                  ),
+                                ),
                               ),
                             ),
-                             Gap(20),
-                             Row(
+                            Gap(20),
+                            Row(
                               children: [
                                 Gap(20),
-                                Text("Description",
+                                Text(
+                                  "Description",
                                   style: TextStyle(
                                     color: AppColors.lightblue,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                     letterSpacing: -0.15,
-                                  ),),
-                                  Text(" *",
-                                  style: TextStyle(
-                                    color: Colors.red
-                                  ),)
+                                  ),
+                                ),
+                                Text(" *", style: TextStyle(color: Colors.red)),
                               ],
-                             ),
-                             Gap(8),
+                            ),
+                            Gap(8),
                             Container(
                               width: 311.42,
                               height: 145.46,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(14),
                                 border: Border.all(
-                                  color: const Color(0xFFE5E7EB)
-                                )
+                                  color: const Color(0xFFE5E7EB),
+                                ),
                               ),
-                              child: Row(
-                                children: [
-                                  Gap(20),
-                                ],
+                              child: TextField(
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                expands: true,
+                                textAlignVertical: TextAlignVertical.top,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText:
+                                      "Please explain in detail what happened,\nwhat you tried, any error messages, etc.",
+                                  hintStyle: TextStyle(
+                                    color: AppColors.textLight,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    letterSpacing: -0.15,
+                                  ),
+                                  contentPadding: EdgeInsets.fromLTRB(
+                                    20,
+                                    16,
+                                    20,
+                                    16,
+                                  ),
+                                ),
                               ),
                             ),
                           ],
