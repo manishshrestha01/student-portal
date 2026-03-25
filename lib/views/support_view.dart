@@ -1,6 +1,11 @@
 import 'package:codeit_app/core/constants/colors.dart';
+import 'package:codeit_app/views/counseling_view.dart';
+import 'package:codeit_app/views/general_view.dart';
+import 'package:codeit_app/views/internship_view.dart';
+import 'package:codeit_app/views/technical_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -165,7 +170,9 @@ class _SupportViewState extends State<SupportView> {
                       width: 311.42,
                       height: 43.97,
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAll(()=>GeneralView(1));
+                        },
                         icon: const Icon(
                           Icons.add,
                           color: Colors.white,
@@ -285,7 +292,9 @@ class _SupportViewState extends State<SupportView> {
                       width: 311.42,
                       height: 43.97,
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAll(()=>TechnicalView());
+                        },
                         icon: const Icon(
                           Icons.add,
                           color: Colors.white,
@@ -406,7 +415,9 @@ class _SupportViewState extends State<SupportView> {
                       width: 311.42,
                       height: 43.97,
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAll(()=>CounselingView());
+                        },
                         icon: const Icon(
                           Icons.add,
                           color: Colors.white,
@@ -527,7 +538,9 @@ class _SupportViewState extends State<SupportView> {
                       width: 311.42,
                       height: 43.97,
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAll(()=>InternshipView());
+                        },
                         icon: const Icon(
                           Icons.add,
                           color: Colors.white,
