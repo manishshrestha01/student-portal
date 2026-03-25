@@ -61,11 +61,13 @@ class _CounselingViewState extends State<CounselingView> {
                 Text(
                   "Counselling Support — Describe your issue and\nwe'll respond as soon as possible.",
                   textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    color: AppColors.textLight,
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    letterSpacing: -0.15,
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      color: AppColors.textLight,
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      letterSpacing: -0.15,
+                    ),
                   ),
                 ),
               ],
@@ -121,11 +123,13 @@ class _CounselingViewState extends State<CounselingView> {
                                 Gap(8),
                                 Text(
                                   "Ticket Information",
-                                  style: TextStyle(
-                                    color: AppColors.textDark,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: -0.31,
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: AppColors.textDark,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: -0.31,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -136,11 +140,13 @@ class _CounselingViewState extends State<CounselingView> {
                                 Gap(20),
                                 Text(
                                   "Category",
-                                  style: TextStyle(
-                                    color: AppColors.lightblue,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: -0.15,
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: AppColors.lightblue,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: -0.15,
+                                    ),
                                   ),
                                 ),
                               ],
@@ -161,11 +167,13 @@ class _CounselingViewState extends State<CounselingView> {
                                   Gap(20),
                                   Text(
                                     "Counselling Support",
-                                    style: TextStyle(
-                                      color: AppColors.lightblue,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                      letterSpacing: -0.15,
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        color: AppColors.lightblue,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        letterSpacing: -0.15,
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -177,11 +185,13 @@ class _CounselingViewState extends State<CounselingView> {
                                 Gap(20),
                                 Text(
                                   "Subject",
-                                  style: TextStyle(
-                                    color: AppColors.lightblue,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: -0.15,
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: AppColors.lightblue,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: -0.15,
+                                    ),
                                   ),
                                 ),
                                 Text(" *", style: TextStyle(color: Colors.red)),
@@ -198,15 +208,25 @@ class _CounselingViewState extends State<CounselingView> {
                                 ),
                               ),
                               child: TextField(
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    color: AppColors.textDark,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    letterSpacing: -0.15,
+                                  ),
+                                ),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText:
                                       "e.g. Cannot access course materials",
-                                  hintStyle: TextStyle(
-                                    color: AppColors.textLight,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                    letterSpacing: -0.15,
+                                  hintStyle: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: AppColors.textLight,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      letterSpacing: -0.15,
+                                    ),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
                                     horizontal: 20,
@@ -221,11 +241,13 @@ class _CounselingViewState extends State<CounselingView> {
                                 Gap(20),
                                 Text(
                                   "Description",
-                                  style: TextStyle(
-                                    color: AppColors.lightblue,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    letterSpacing: -0.15,
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: AppColors.lightblue,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      letterSpacing: -0.15,
+                                    ),
                                   ),
                                 ),
                                 Text(" *", style: TextStyle(color: Colors.red)),
@@ -246,15 +268,25 @@ class _CounselingViewState extends State<CounselingView> {
                                 maxLines: null,
                                 expands: true,
                                 textAlignVertical: TextAlignVertical.top,
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    color: AppColors.textDark,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    letterSpacing: -0.15,
+                                  ),
+                                ),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText:
                                       "Please explain in detail what happened,\nwhat you tried, any error messages, etc.",
-                                  hintStyle: TextStyle(
-                                    color: AppColors.textLight,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                    letterSpacing: -0.15,
+                                  hintStyle: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: AppColors.textLight,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      letterSpacing: -0.15,
+                                    ),
                                   ),
                                   contentPadding: EdgeInsets.fromLTRB(
                                     20,
@@ -309,35 +341,32 @@ class _CounselingViewState extends State<CounselingView> {
                                 ),
                                 Gap(12),
                                 SizedBox(
-                                    width: 93.34,
-                                    height: 47.98,
-                                    child: ElevatedButton.icon(
-                                      onPressed: () {
-                                        Get.offAll(()=>SupportView());
-                                      },
-                                      label: Text(
-                                        "Cancel",
-                                        style: GoogleFonts.inter(
-                                          textStyle: TextStyle(
-                                            color: AppColors.lightblue,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            letterSpacing: -0.15,
-                                          ),
-                                        ),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(
-                                          0xFFF3F4F6,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadiusGeometry.circular(14),
+                                  width: 93.34,
+                                  height: 47.98,
+                                  child: ElevatedButton.icon(
+                                    onPressed: () {
+                                      Get.offAll(() => SupportView());
+                                    },
+                                    label: Text(
+                                      "Cancel",
+                                      style: GoogleFonts.inter(
+                                        textStyle: TextStyle(
+                                          color: AppColors.lightblue,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                          letterSpacing: -0.15,
                                         ),
                                       ),
                                     ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: const Color(0xFFF3F4F6),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadiusGeometry.circular(14),
+                                      ),
+                                    ),
                                   ),
-                               
+                                ),
                               ],
                             ),
                           ],
