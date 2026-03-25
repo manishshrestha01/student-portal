@@ -1,11 +1,13 @@
 import 'package:codeit_app/core/constants/colors.dart';
+import 'package:codeit_app/views/support_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GeneralView extends StatelessWidget {
-  const GeneralView({super.key});
+  const GeneralView(_, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -305,7 +307,9 @@ class GeneralView extends StatelessWidget {
                                     width: 93.34,
                                     height: 47.98,
                                     child: ElevatedButton.icon(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Get.offAll(()=>SupportView());
+                                      },
                                       label: Text(
                                         "Cancel",
                                         style: GoogleFonts.inter(

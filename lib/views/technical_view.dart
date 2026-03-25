@@ -1,7 +1,9 @@
 import 'package:codeit_app/core/constants/colors.dart';
+import 'package:codeit_app/views/support_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TechnicalView extends StatefulWidget {
@@ -15,7 +17,7 @@ class _TechnicalViewState extends State<TechnicalView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(        
         title: Text(
           "CODE IT",
           style: GoogleFonts.inter(
@@ -310,7 +312,9 @@ class _TechnicalViewState extends State<TechnicalView> {
                                     width: 93.34,
                                     height: 47.98,
                                     child: ElevatedButton.icon(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Get.offAll(()=>SupportView());
+                                      },
                                       label: Text(
                                         "Cancel",
                                         style: GoogleFonts.inter(

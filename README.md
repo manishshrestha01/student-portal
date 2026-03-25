@@ -19,4 +19,4 @@ samples, guidance on mobile development, and a full API reference.
 
 
 
-## Install gap, flutter_svg
+## Install gap, flutter_svg,get
