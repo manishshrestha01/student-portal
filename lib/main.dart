@@ -1,4 +1,4 @@
-import 'package:codeit_app/views/general_view.dart';
+import 'package:codeit_app/views/internship_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
       title: 'CODE IT',
-      home: GeneralView(),
+      home: InternshipView(),
     );
   }
 }

@@ -1,12 +1,17 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class GeneralView extends StatelessWidget {
-  const GeneralView({super.key});
+class InternshipView extends StatefulWidget {
+  const InternshipView({super.key});
 
+  @override
+  State<InternshipView> createState() => _InternshipViewState();
+}
+
+class _InternshipViewState extends State<InternshipView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +57,7 @@ class GeneralView extends StatelessWidget {
               children: [
                 Gap(20),
                 Text(
-                  "General Support — Describe your issue and\nwe'll respond as soon as possible.",
+                  "Internship Support — Describe your issue and\nwe'll respond as soon as possible.",
                   textAlign: TextAlign.justify,
                   style: TextStyle(
                     color: AppColors.textLight,
@@ -153,7 +158,7 @@ class GeneralView extends StatelessWidget {
                                 children: [
                                   Gap(20),
                                   Text(
-                                    "General Support",
+                                    "Internship Support",
                                     style: TextStyle(
                                       color: AppColors.lightblue,
                                       fontSize: 14,
