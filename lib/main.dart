@@ -1,4 +1,3 @@
-import 'package:codeit_app/views/forgot_password_view.dart';
 import 'package:codeit_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 
