@@ -1,5 +1,6 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/forgot_password_view.dart';
+import 'package:codeit_app/views/profile_view.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -164,7 +165,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         
                       SizedBox(height: 20),
                       //w4 button
-                      CustomButton(text: "Update Password", onPressed: () {}),
+                      CustomButton(text: "Update Password", onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileView()));
+                      }),
                         
                       SizedBox(height: 14),
                       //w5

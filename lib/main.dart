@@ -2,6 +2,7 @@ import 'package:codeit_app/views/forgot_password_view.dart';
 import 'package:codeit_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,9 +14,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        fontFamily: 'Inter',
       ),
       home: LoginView(),
     );
