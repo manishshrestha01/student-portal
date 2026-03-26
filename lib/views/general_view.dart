@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/app_size.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/support_view.dart';
 import 'package:flutter/material.dart';
@@ -32,10 +33,10 @@ class GeneralView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Gap(20),
+            Gap(AppSize.gap20),
             Row(
               children: [
-                Gap(20),
+                Gap(AppSize.gap20),
                 Text(
                   "Create Support Ticket",
                   style: GoogleFonts.inter(
@@ -49,10 +50,10 @@ class GeneralView extends StatelessWidget {
                 ),
               ],
             ),
-            Gap(8),
+            Gap(AppSize.gap8),
             Row(
               children: [
-                Gap(20),
+                Gap(AppSize.gap20),
                 Text(
                   "General Support — Describe your issue and\nwe'll respond as soon as possible.",
                   textAlign: TextAlign.justify,
@@ -69,11 +70,11 @@ class GeneralView extends StatelessWidget {
             ),
             Row(
               children: [
-                Gap(20),
+                Gap(AppSize.gap20),
                 SizedBox(
                   child: Column(
                     children: [
-                      Gap(24),
+                      Gap(AppSize.gap24),
                       Container(
                         width: 352.94,
                         height: 528.08,
@@ -101,10 +102,10 @@ class GeneralView extends StatelessWidget {
                         ),
                         child: Column(
                           children: [
-                            Gap(21),
+                            Gap(AppSize.gap21),
                             Row(
                               children: [
-                                Gap(21),
+                                Gap(AppSize.gap21),
                                 Container(
                                   width: 4,
                                   height: 24,
@@ -115,7 +116,7 @@ class GeneralView extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Gap(8),
+                                Gap(AppSize.gap8),
                                 Text(
                                   "Ticket Information",
                                   style: GoogleFonts.inter(
@@ -129,10 +130,10 @@ class GeneralView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Gap(20),
+                            Gap(AppSize.gap20),
                             Row(
                               children: [
-                                Gap(20),
+                                Gap(AppSize.gap20),
                                 Text(
                                   "Category",
                                   style: GoogleFonts.inter(
@@ -146,7 +147,7 @@ class GeneralView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Gap(8),
+                            Gap(AppSize.gap8),
                             Container(
                               width: 311.42,
                               height: 45.51,
@@ -159,7 +160,7 @@ class GeneralView extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  Gap(20),
+                                  Gap(AppSize.gap20),
                                   Text(
                                     "General Support",
                                     style: GoogleFonts.inter(
@@ -174,10 +175,10 @@ class GeneralView extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Gap(20),
+                            Gap(AppSize.gap20),
                             Row(
                               children: [
-                                Gap(20),
+                                Gap(AppSize.gap20),
                                 Text(
                                   "Subject",
                                   style: GoogleFonts.inter(
@@ -192,7 +193,7 @@ class GeneralView extends StatelessWidget {
                                 Text(" *", style: TextStyle(color: Colors.red)),
                               ],
                             ),
-                            Gap(8),
+                            Gap(AppSize.gap8),
                             Container(
                               width: 311.42,
                               height: 45.51,
@@ -230,10 +231,10 @@ class GeneralView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Gap(20),
+                            Gap(AppSize.gap20),
                             Row(
                               children: [
-                                Gap(20),
+                                Gap(AppSize.gap20),
                                 Text(
                                   "Description",
                                   style: GoogleFonts.inter(
@@ -248,7 +249,7 @@ class GeneralView extends StatelessWidget {
                                 Text(" *", style: TextStyle(color: Colors.red)),
                               ],
                             ),
-                            Gap(8),
+                            Gap(AppSize.gap8),
                             Container(
                               width: 311.42,
                               height: 145.46,
@@ -292,10 +293,10 @@ class GeneralView extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Gap(20),
+                            Gap(AppSize.gap20),
                             Row(
                               children: [
-                                Gap(21),
+                                Gap(AppSize.gap21),
                                 Center(
                                   child: SizedBox(
                                     width: 200,
@@ -334,7 +335,7 @@ class GeneralView extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Gap(12),
+                                Gap(AppSize.gap12),
                                 SizedBox(
                                   width: 93.34,
                                   height: 47.98,

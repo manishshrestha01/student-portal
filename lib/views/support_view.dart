@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/app_size.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/counseling_view.dart';
 import 'package:codeit_app/views/general_view.dart';
@@ -41,11 +42,11 @@ class _SupportViewState extends State<SupportView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Gap(20),
+            Gap(AppSize.gap),
             //w1
             Row(
               children: [
-                Gap(20),
+                Gap(AppSize.gap),
                 Text(
                   "Support Center",
                   textAlign: TextAlign.center,
@@ -61,10 +62,10 @@ class _SupportViewState extends State<SupportView> {
               ],
             ),
             //w2
-            Gap(8),
+            Gap(AppSize.gap8),
             Row(
               children: [
-                Gap(20),
+                Gap(AppSize.gap),
                 Text(
                   "How can we help you today?",
                   textAlign: TextAlign.center,
@@ -80,7 +81,7 @@ class _SupportViewState extends State<SupportView> {
               ],
             ),
             //w3
-            Gap(24),
+            Gap(AppSize.gap24),
             Container(
               width: 352.94,
               height: 169.45,
@@ -107,11 +108,11 @@ class _SupportViewState extends State<SupportView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Gap(21),
+                  Gap(AppSize.gap21),
                   SizedBox(
                     child: Row(
                       children: [
-                        Gap(21),
+                        Gap(AppSize.gap21),
                         Container(
                           width: 48,
                           height: 48,
@@ -130,7 +131,7 @@ class _SupportViewState extends State<SupportView> {
                             ),
                           ),
                         ),
-                        Gap(16),
+                        Gap(AppSize.gap16),
                         SizedBox(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,7 +147,7 @@ class _SupportViewState extends State<SupportView> {
                                   ),
                                 ),
                               ),
-                              Gap(4),
+                              Gap(AppSize.gap4),
                               Text(
                                 "Course queries, account issues,\nand general questions",
                                 style: GoogleFonts.inter(
@@ -164,7 +165,7 @@ class _SupportViewState extends State<SupportView> {
                       ],
                     ),
                   ),
-                  Gap(16),
+                  Gap(AppSize.gap16),
                   Center(
                     child: SizedBox(
                       width: 311.42,
@@ -202,7 +203,7 @@ class _SupportViewState extends State<SupportView> {
               ),
             ),
             //w4
-            Gap(16),
+            Gap(AppSize.gap16),
             Container(
               width: 352.94,
               height: 169.45,
@@ -229,11 +230,11 @@ class _SupportViewState extends State<SupportView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Gap(21),
+                  Gap(AppSize.gap21),
                   SizedBox(
                     child: Row(
                       children: [
-                        Gap(21),
+                        Gap(AppSize.gap21),
                         Container(
                           width: 48,
                           height: 48,
@@ -252,7 +253,7 @@ class _SupportViewState extends State<SupportView> {
                             ),
                           ),
                         ),
-                        Gap(16),
+                        Gap(AppSize.gap16),
                         SizedBox(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -268,7 +269,7 @@ class _SupportViewState extends State<SupportView> {
                                   ),
                                 ),
                               ),
-                              Gap(4),
+                              Gap(AppSize.gap4),
                               Text(
                                 "App bugs, login problems,\nand technical difficulties",
                                 style: GoogleFonts.inter(
@@ -286,7 +287,7 @@ class _SupportViewState extends State<SupportView> {
                       ],
                     ),
                   ),
-                  Gap(16),
+                  Gap(AppSize.gap16),
                   Center(
                     child: SizedBox(
                       width: 311.42,
@@ -325,7 +326,7 @@ class _SupportViewState extends State<SupportView> {
             ),
 
             //w5
-            Gap(16),
+            Gap(AppSize.gap16),
             Container(
               width: 352.94,
               height: 169.45,
@@ -352,11 +353,11 @@ class _SupportViewState extends State<SupportView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Gap(21),
+                  Gap(AppSize.gap21),
                   SizedBox(
                     child: Row(
                       children: [
-                        Gap(21),
+                        Gap(AppSize.gap21),
                         Container(
                           width: 48,
                           height: 48,
@@ -375,7 +376,7 @@ class _SupportViewState extends State<SupportView> {
                             ),
                           ),
                         ),
-                        Gap(16),
+                        Gap(AppSize.gap16),
                         SizedBox(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -391,7 +392,7 @@ class _SupportViewState extends State<SupportView> {
                                   ),
                                 ),
                               ),
-                              Gap(4),
+                              Gap(AppSize.gap4),
                               Text(
                                 "Career guidance, course selection,\nand mentorship",
                                 style: GoogleFonts.inter(
@@ -409,7 +410,7 @@ class _SupportViewState extends State<SupportView> {
                       ],
                     ),
                   ),
-                  Gap(16),
+                  Gap(AppSize.gap16),
                   Center(
                     child: SizedBox(
                       width: 311.42,
@@ -448,7 +449,7 @@ class _SupportViewState extends State<SupportView> {
             ),
 
             //w6
-            Gap(16),
+            Gap(AppSize.gap16),
             Container(
               width: 352.94,
               height: 169.45,
@@ -475,11 +476,11 @@ class _SupportViewState extends State<SupportView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Gap(21),
+                  Gap(AppSize.gap21),
                   SizedBox(
                     child: Row(
                       children: [
-                        Gap(21),
+                        Gap(AppSize.gap21),
                         Container(
                           width: 48,
                           height: 48,
@@ -498,7 +499,7 @@ class _SupportViewState extends State<SupportView> {
                             ),
                           ),
                         ),
-                        Gap(16),
+                        Gap(AppSize.gap16),
                         SizedBox(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -514,7 +515,7 @@ class _SupportViewState extends State<SupportView> {
                                   ),
                                 ),
                               ),
-                              Gap(4),
+                              Gap(AppSize.gap4),
                               Text(
                                 "Internship opportunities, applications,\nand placements",
                                 style: GoogleFonts.inter(
@@ -532,7 +533,7 @@ class _SupportViewState extends State<SupportView> {
                       ],
                     ),
                   ),
-                  Gap(16),
+                  Gap(AppSize.gap16),
                   Center(
                     child: SizedBox(
                       width: 311.42,
@@ -571,7 +572,7 @@ class _SupportViewState extends State<SupportView> {
             ),
 
             //w7
-            Gap(24),
+            Gap(AppSize.gap24),
             Text(
               "Need immediate assistance?",
               style: GoogleFonts.inter(
@@ -584,7 +585,7 @@ class _SupportViewState extends State<SupportView> {
               ),
             ),
             //w8
-            Gap(16),
+            Gap(AppSize.gap16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -599,7 +600,7 @@ class _SupportViewState extends State<SupportView> {
                     ),
                   ),
                 ),
-                Gap(12),
+                Gap(AppSize.gap12),
                 Text(
                   "|",
                   style: GoogleFonts.inter(
@@ -611,7 +612,7 @@ class _SupportViewState extends State<SupportView> {
                     ),
                   ),
                 ),
-                Gap(12),
+                Gap(AppSize.gap12),
                 Text(
                   "+977 981-2345678",
                   style: GoogleFonts.inter(
