@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/app_appbar.dart';
 import 'package:codeit_app/core/constants/app_size.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/counseling_view.dart';
@@ -22,23 +23,7 @@ class _SupportViewState extends State<SupportView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFfafafa),
-      appBar: AppBar(
-        title: Text(
-          "CODE IT",
-          style: GoogleFonts.inter(
-            textStyle: TextStyle(
-              color: const Color(0xFFFFFFFF),
-              fontWeight: FontWeight.w500,
-              letterSpacing: 0.01,
-            ),
-          ),
-        ),
-        centerTitle: false,
-        backgroundColor: const Color(0xFFf85604),
-        foregroundColor: const Color(0xFFFFFFFF),
-        elevation: 6.0,
-        shadowColor: Colors.black,
-      ),
+      appBar: AppAppBar.build(),
       body: SingleChildScrollView(
         child: Column(
           children: [
