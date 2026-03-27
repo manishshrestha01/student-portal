@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
+   final Color? textColor;
 
   const CustomTextField({
     super.key,
@@ -23,6 +24,7 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.validator,
+    this.textColor
   });
 
   @override
@@ -62,7 +64,7 @@ class CustomTextField extends StatelessWidget {
           validator: validator,
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
-            hintText: hintText,
+            hintText: hintText,hintStyle: TextStyle(color: AppColors.textLight, fontWeight: .w400),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.primary, width: 2),
