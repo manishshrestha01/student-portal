@@ -14,7 +14,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
         return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          fontFamily: 'Inter',
+        ),
       title: 'CODE IT',
       home: SupportView(),
     );
