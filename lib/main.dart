@@ -1,4 +1,4 @@
-import 'package:codeit_app/views/support_view.dart';
+import 'package:codeit_app/views/suggestions_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Inter',
         ),
       title: 'CODE IT',
-      home: SupportView(),
+      home: SuggestionsView(),
     );
   }
 }

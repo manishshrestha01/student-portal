@@ -2,6 +2,7 @@ import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/counseling_view.dart';
 import 'package:codeit_app/views/general_view.dart';
 import 'package:codeit_app/views/internship_view.dart';
+import 'package:codeit_app/views/suggestions_view.dart';
 import 'package:codeit_app/views/technical_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -20,11 +21,62 @@ class _SupportViewState extends State<SupportView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFfafafa),
+      backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(title: Text("CODEIT")),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Gap(32),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.offAll(() => SuggestionsView());
+                  },
+                  child: Row(
+                    children: [
+                      Gap(18),
+                      SvgPicture.asset(
+                        'assets/support/home.svg',
+                        width: 19.17,
+                        height: 17.35,
+                        colorFilter: const ColorFilter.mode(
+                          Color.fromRGBO(0, 0, 0, 0.70),
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                      Gap(8),
+                      Text(
+                        "Home",
+                        style: GoogleFonts.inter(
+                          fontStyle: FontStyle.normal,
+                          textStyle: TextStyle(
+                            color: const Color.fromRGBO(0, 0, 0, 0.70),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Gap(7),
+                Icon(Icons.chevron_right, color: const Color.fromRGBO(0, 0, 0, 0.9)),
+                Gap(7),
+                Text(
+                  "Support",
+                  style: GoogleFonts.inter(
+                    fontStyle: FontStyle.normal,
+                    textStyle: TextStyle(
+                      color: const Color(0xFF000000),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
             Gap(32),
             //w1
             Center(
@@ -36,6 +88,7 @@ class _SupportViewState extends State<SupportView> {
                     "How can we help you today?",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
+                      fontStyle: FontStyle.normal,
                       textStyle: TextStyle(
                         color: AppColors.textDark,
                         fontSize: 25,

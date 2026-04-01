@@ -1,4 +1,3 @@
-import 'package:codeit_app/core/constants/app_size.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/support_view.dart';
 import 'package:codeit_app/widgets/custom_dropdown.dart';
@@ -22,6 +21,7 @@ class _CounselingViewState extends State<CounselingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFFFFFF),
       appBar: AppBar(title: Text("CODEIT")),
       body: SingleChildScrollView(
         child: Column(
@@ -36,7 +36,15 @@ class _CounselingViewState extends State<CounselingView> {
                   child: Row(
                     children: [
                       Gap(18),
-                      Icon(Icons.home_filled, color: const Color(0xFF4b4b4b)),
+                      SvgPicture.asset(
+                        'assets/support/home.svg',
+                        width: 19.17,
+                        height: 17.35,
+                        colorFilter: const ColorFilter.mode(
+                          Color(0xFF4B4B4B),
+                          BlendMode.srcIn,
+                        ),
+                      ),
                       Gap(8),
                       Text(
                         "Home",
@@ -119,7 +127,7 @@ class _CounselingViewState extends State<CounselingView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Gap(AppSize.gap21),
+                Gap(21),
                 SvgPicture.asset(
                   'assets/support/bi_ticket-fill.svg',
                   width: 26,
@@ -130,7 +138,7 @@ class _CounselingViewState extends State<CounselingView> {
                   ),
                 ),
 
-                Gap(AppSize.gap8),
+                Gap(8),
                 Text(
                   "Ticket Information",
                   style: GoogleFonts.inter(
@@ -173,7 +181,7 @@ class _CounselingViewState extends State<CounselingView> {
                             Gap(10),
                             Row(
                               children: [
-                                Gap(AppSize.gap20),
+                                Gap(20),
                                 Text(
                                   "Category",
                                   style: GoogleFonts.inter(
@@ -198,10 +206,10 @@ class _CounselingViewState extends State<CounselingView> {
                                 });
                               },
                             ),
-                            Gap(AppSize.gap20),
+                            Gap(20),
                             Row(
                               children: [
-                                Gap(AppSize.gap20),
+                                Gap(20),
                                 Text(
                                   "Subject",
                                   style: GoogleFonts.inter(
@@ -216,7 +224,7 @@ class _CounselingViewState extends State<CounselingView> {
                                 Text(" *", style: TextStyle(color: Colors.red)),
                               ],
                             ),
-                            Gap(AppSize.gap8),
+                            Gap(8),
                             Container(
                               width: 295,
                               height: 39,
@@ -263,10 +271,10 @@ class _CounselingViewState extends State<CounselingView> {
                                 ),
                               ),
                             ),
-                            Gap(AppSize.gap20),
+                            Gap(20),
                             Row(
                               children: [
-                                Gap(AppSize.gap20),
+                                Gap(20),
                                 Text(
                                   "Description",
                                   style: GoogleFonts.inter(
@@ -281,7 +289,7 @@ class _CounselingViewState extends State<CounselingView> {
                                 Text(" *", style: TextStyle(color: Colors.red)),
                               ],
                             ),
-                            Gap(AppSize.gap8),
+                            Gap(8),
                             Container(
                               width: 295,
                               height: 153,
@@ -334,7 +342,7 @@ class _CounselingViewState extends State<CounselingView> {
                                 ),
                               ),
                             ),
-                            Gap(AppSize.gap20),
+                            Gap(20),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
