@@ -1,8 +1,11 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/login_view.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
+import 'package:codeit_app/widgets/custom_form_container.dart';
+import 'package:codeit_app/widgets/custom_text_button.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
@@ -16,122 +19,114 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
+      appBar: AppBar(
+        backgroundColor: AppColors.backgroundColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: Center(
         child: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            margin: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: AppColors.boxColor,
-              border: Border.all(color: Colors.grey.shade300, width: 1),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0x26000000),
-                  offset: const Offset(0, 4),
-                  blurRadius: 1,
-                ),
-              ],
-            ),
+          child: CustomFormContainer(
             child: Form(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   //w1 logo
-                  Image.asset('assets/images/code-it-logo.png', height: 40,),
-                  SizedBox(height: 20),
-            
+                  Image.asset(
+                    'assets/images/code-it-logo.png',
+                    height: 67,
+                    width: 284,
+                  ),
+                  Gap(20),
+
                   //w2
                   Text(
                     'Create a student account',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
                     textAlign: TextAlign.center,
                   ),
-            
+                  Gap(10),
                   //w3
                   Text(
                     "Join Code IT Student Portal",
-                    style: TextStyle(color: AppColors.textLight, fontSize: 16),
+                    style: TextStyle(
+                      color: AppColors.textLight,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    ),
                     textAlign: TextAlign.center,
                   ),
-            
-                  SizedBox(height: 30),
-            
-                  //w4 fullname 
-                   CustomTextField(
-                    prefixIcon: Icon(Icons.person),
+
+                  Gap(34),
+
+                  //w4 fullname
+                  CustomTextField(
                     labelText: "Full Name",
                     isRequired: true,
                     hintText: "Enter your full name",
                   ),
-                  SizedBox(height: 10),
-                 
-            
-                  //w5 email 
-              CustomTextField(
-                    prefixIcon: Icon(Icons.email),
+                  Gap(10),
+
+                  //w5 email
+                  CustomTextField(
                     labelText: "Email Address",
                     isRequired: true,
                     hintText: "Enter your email address",
                   ),
-                  SizedBox(height: 10),
-                 
-                   //w6 number 
-                CustomTextField(
-                  prefixIcon: Icon(Icons.phone),
-                  labelText: "WhatsApp Number",
-                  isRequired: true,
-                  keyboardType: TextInputType.numberWithOptions(),
-                  hintText: "WhatsApp Number"),
-                  SizedBox(height: 10),
-            
+                  Gap(20),
+
+                  //w6 number
+                  CustomTextField(
+                    labelText: "WhatsApp Number",
+                    isRequired: true,
+                    keyboardType: TextInputType.numberWithOptions(),
+                    hintText: "WhatsApp Number",
+                  ),
+                  Gap(20),
+
                   //w7
-                    CustomTextField(
-                    prefixIcon: Icon(Icons.lock),
+                  CustomTextField(
                     labelText: "Password",
                     isRequired: true,
                     hintText: "Enter your password",
                     suffixIcon: Icon(Icons.visibility),
                   ),
-                  SizedBox(height: 10),
-                 
-            
-                        
+                  Gap(20),
+
                   //w8 button
-                  CustomButton(
-                    text: "Create Account", onPressed: (){}),
-            
-                  SizedBox(height: 20),
-            
+                  CustomButton(text: "Create Account", onPressed: () {}),
+
+                  Gap(20),
+
                   //w9 row
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Flexible(child: Text("Already have an account?", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),)),
-                      TextButton(onPressed: (){
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context)=>LoginView(),)
-                        );
-                      }, child: Text("Sign in", style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w500,fontSize: 16, decoration: TextDecoration.underline,decorationColor: AppColors.primary, decorationThickness: 2, ),))
+                      Flexible(
+                        child: Text(
+                          "Already have an account?",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                     CustomTextButton(text: "Log in", page: LoginView())
                     ],
                   ),
-            
-                  SizedBox(height: 40),
-            
-                  //w10
-                  Text("@ 2026 Code IT. All rights reserved.", style: TextStyle(color: Colors.grey.shade800, fontSize: 14), textAlign: TextAlign.center, ),
-            
-           
-            
                 ],
               ),
             ),
-          ),
-           
+          
+          )
         ),
       ),
-
     );
   }
 }

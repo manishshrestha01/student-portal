@@ -1,8 +1,12 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/change_password_view.dart';
+import 'package:codeit_app/views/login_view.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
+import 'package:codeit_app/widgets/custom_form_container.dart';
+import 'package:codeit_app/widgets/custom_text_button.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -20,280 +24,214 @@ class _ProfileViewState extends State<ProfileView> {
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primary,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: double.infinity,
-          padding: EdgeInsets.all(12),
+      body: Center(
+        child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //w1
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-               
-                children: [
-                  Text(
-                    "Profile Setting",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                  Text(
-                    "Manage your account information",
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.textLight,
-                    ),
-                  ),
-                ],
-              ),
-
-              //w2
-              Center(
-                child: Container(
-                  width: double.infinity,
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  padding: EdgeInsets.all(15),
-                 
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade300,
-                        blurRadius: 10,
-                        spreadRadius: 1,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-
+              CustomFormContainer(
+                child: Form(
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Icon(Icons.circle, color: AppColors.primary, size: 80),
+                      //w1
                       Text(
-                        "Hem Raj Ojha",
+                        'Update Your Profile',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 26,
+                          fontWeight: FontWeight.w600,
                         ),
+                        textAlign: TextAlign.center,
                       ),
-
+                      Gap(10),
+                      //w2
                       Text(
-                        "Student",
+                        "Keep your current information",
                         style: TextStyle(
-                          fontSize: 16,
                           color: AppColors.textLight,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        "Change Profile Picture",
-                        style: TextStyle(
                           fontSize: 16,
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w400,
                         ),
+                        textAlign: TextAlign.center,
                       ),
-                    ],
-                  ),
-                ),
-              ),
 
-              //w3
-              Center(
-                child: Container(
-                  
-                   margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  padding: EdgeInsets.all(15),
-                
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade300,
-                        blurRadius: 10,
-                        spreadRadius: 1,
-                        offset: Offset(0, 4),
+                      Gap(34),
+
+                      //w3 fullname
+                      CustomTextField(
+                        labelText: "Full Name",
+                        hintText: "Enter your full name",
                       ),
-                    ],
-                  ),
+                      Gap(10),
 
-                  child: Form(
-                    child: Column(
-                      
-                      children: [
-                        Text(
-                          "Update Profile",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                      //w4 email
+                      CustomTextField(
+                        labelText: "Email Address",
+                        hintText: "Enter your email address",
+                      ),
+                      Gap(20),
+
+                      //w5 number
+                      CustomTextField(
+                        labelText: "WhatsApp Number",
+                        keyboardType: TextInputType.numberWithOptions(),
+                        hintText: "WhatsApp Number",
+                      ),
+                      Gap(20),
+
+                      //w6 address
+                      CustomTextField(
+                        labelText: "Address",
+                        hintText: "Enter your address",
+                      ),
+                      Gap(20),
+
+                      //w7 button
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: SizedBox(
+                          width: 192,
+                          height: 44,
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.save,
+                              size: 20,
+                              color: Colors.white,
+                            ),
+                            label: const Text(
+                              "Save Changes",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.textButtonColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
+                            ),
                           ),
                         ),
-                        SizedBox(height: 10),
-                        CustomTextField(
-                          labelText: "Full Name",
-                          hintText: "Enter your full name",
-                          prefixIcon: Icon(Icons.person),
-                        ),
-                        SizedBox(height: 10),
-                        CustomTextField(
-                          labelText: "Email Address",
-                          hintText: "Enter your email address",
-                          prefixIcon: Icon(Icons.email),
-                        ),
-                        SizedBox(height: 10),
-                        CustomTextField(
-                          labelText: "Phone Number",
-                          hintText: "Enter your phone number",
-                          prefixIcon: Icon(Icons.phone),
-                        ),
-                        SizedBox(height: 10),
-                        CustomTextField(
-                          labelText: "Location",
-                          hintText: "Enter your address",
-                          prefixIcon: Icon(Icons.location_city),
-                        ),
-                        SizedBox(height: 10),
-                        CustomTextField(
-                          labelText: "Date of Birth",
-                          hintText: "Enter your date of birth",
-                          prefixIcon: Icon(Icons.date_range),
-                        ),
-                    
-                        SizedBox(height: 20),
-                        CustomButton(text: "Save Changes", onPressed: () {}),
-                      ],
-                    ),
+                      ),
+                      Gap(10),
+                    ],
                   ),
                 ),
               ),
+              Gap(20),
 
-              //w4
-              Center(
-                child: Container(
-                   margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  padding: EdgeInsets.all(15),
-                
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.shade300,
-                        blurRadius: 10,
-                        spreadRadius: 1,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-
+              CustomFormContainer(
+                child: Form(
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      //w1
                       Text(
-                        "Security",
+                        'Change Your Password',
                         style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Gap(10),
+                      //w2
+                      Text(
+                        "Keep your account secure",
+                        style: TextStyle(
+                          color: AppColors.textLight,
                           fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w400,
                         ),
+                        textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 10),
 
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ChangePasswordView(),
+                      Gap(34),
+
+                      //w3 current password
+                      CustomTextField(
+                        labelText: "Current Password",
+                        hintText: "Enter your current password",
+                        suffixIcon: Icon(
+                          Icons.visibility,
+                          color: AppColors.textLight,
+                        ),
+                        obscureText: true,
+                      ),
+                      Gap(20),
+
+                      //w4 new password
+                      CustomTextField(
+                        labelText: "New Password",
+                        hintText: "Enter your new password",
+                        suffixIcon: Icon(
+                          Icons.visibility,
+                          color: AppColors.textLight,
+                        ),
+                        obscureText: true,
+                      ),
+                      Gap(20),
+
+                      //w5 confirm password
+                      CustomTextField(
+                        labelText: "Confirm New Password",
+                        hintText: "Confirm new password",
+                        suffixIcon: Icon(
+                          Icons.visibility,
+                          color: AppColors.textLight,
+                        ),
+                        obscureText: true,
+                      ),
+                      Gap(20),
+
+                      //w6 button
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: SizedBox(
+                          width: 192,
+                          height: 44,
+                          child: ElevatedButton.icon(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.save,
+                              size: 20,
+                              color: Colors.white,
+                            ),
+                            label: const Text(
+                              "Save Changes",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
                               ),
-                            );
-                          },
-                          hoverColor: Colors.grey.shade200,
-                          splashColor: Colors.blue.shade100,
-                          highlightColor: Colors.blue.shade50,
-                          borderRadius: BorderRadius.circular(20),
-                          child: Container(
-                            margin: EdgeInsets.all(12),
-
-                            child: Row(
-                              children: [
-                                Icon(Icons.lock),
-                                SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Change Password",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Update your password",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: AppColors.textLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.textButtonColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
                             ),
                           ),
                         ),
                       ),
-
-                      Material(
-                         color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ChangePasswordView(),
-                              ),
-                            );
-                          },
-                          hoverColor: Colors.grey.shade200,
-                          splashColor: Colors.blue.shade100,
-                          highlightColor: Colors.blue.shade50,
-                          borderRadius: BorderRadius.circular(20),
-                          child: Container(
-                            margin: EdgeInsets.all(12),
-                            child: Row(
-                              children: [
-                                Icon(Icons.logout),
-                                SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Logout",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Sign out of your account",
-                                       style: TextStyle(
-                                        fontSize: 12,
-                                        color: AppColors.textLight,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                      Gap(10),
                     ],
                   ),
                 ),
-              ),
+                ),
+                Gap(10),
             ],
           ),
         ),

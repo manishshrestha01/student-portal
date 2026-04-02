@@ -1,5 +1,6 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? labelText;
@@ -37,16 +38,16 @@ class CustomTextField extends StatelessWidget {
             children: [
               Text(
                 labelText!,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
               ),
 
               if (isRequired) ...[
-                SizedBox(width: 3),
+                Gap(2),
 
                 Text(
                   "*",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
                     color: AppColors.primary,
                     fontWeight: FontWeight.w500,
                   ),
@@ -55,7 +56,7 @@ class CustomTextField extends StatelessWidget {
             ],
           ),
         ],
-        const SizedBox(height: 8),
+        Gap(10),
 
         TextFormField(
           controller: controller,

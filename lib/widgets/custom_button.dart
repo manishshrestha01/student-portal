@@ -7,6 +7,7 @@ class CustomButton extends StatelessWidget {
   final bool isLoading;
   final Color? backgroundColor;
   final Color? textColor;
+  final Color? borderColor;
 
   const CustomButton({
     super.key,
@@ -15,6 +16,7 @@ class CustomButton extends StatelessWidget {
   this.isLoading = false,
   this.backgroundColor,
   this.textColor,
+  this.borderColor,
   });
 
   @override
@@ -24,7 +26,9 @@ class CustomButton extends StatelessWidget {
       height: 50,
       child: FilledButton(
         onPressed: isLoading ? null: onPressed, 
-        style: FilledButton.styleFrom(backgroundColor: backgroundColor ?? AppColors.primary),
+        style: FilledButton.styleFrom(backgroundColor: backgroundColor ?? AppColors.primary,side: BorderSide(color: borderColor ?? Colors.transparent, width: 2)  ,  shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        )),
         
         child: isLoading ? const SizedBox(
         height: 20,

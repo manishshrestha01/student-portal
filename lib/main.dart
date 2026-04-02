@@ -1,7 +1,8 @@
-import 'package:codeit_app/views/forgot_password_view.dart';
-import 'package:codeit_app/views/login_view.dart';
+import 'package:codeit_app/bindings/controller_binding.dart';
+import 'package:codeit_app/routes/app_pages.dart';
+import 'package:codeit_app/views/splash_view.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,17 +11,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         fontFamily: 'Inter',
       ),
-      home: LoginView(),
+      getPages: AppPages.routes,
+      initialBinding: ControllerBinding(),
+      home: SplashView(),
     );
   }
 }
