@@ -7,4 +7,5 @@ class AppColors{
   static const backgroundColor = Color(0xFFFAFAFA);
   static const boxColor = Color(0xFFFFFFFF);
   static const textButtonColor = Color(0xFFFF6900);
+  static const cannotedit = Color(0xFFF9FAFB);
 }
