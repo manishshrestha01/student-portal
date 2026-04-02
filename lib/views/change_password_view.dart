@@ -1,7 +1,5 @@
 import 'package:codeit_app/core/constants/colors.dart';
-import 'package:codeit_app/views/forgot_password_view.dart';
 import 'package:codeit_app/views/login_view.dart';
-import 'package:codeit_app/views/profile_view.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
 import 'package:codeit_app/widgets/custom_text_button.dart';

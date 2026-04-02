@@ -1,6 +1,7 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/views/register_view.dart';
 import 'package:codeit_app/views/forgot_password_view.dart';
+import 'package:codeit_app/views/support_view.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
 import 'package:codeit_app/widgets/custom_text_button.dart';
@@ -113,7 +114,14 @@ class _LoginViewState extends State<LoginView> {
                   Gap(20),
 
                   //w7 button
-                  CustomButton(text: "Log in", onPressed: () {}),
+                  CustomButton(text: "Log in", onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SupportView(),
+                        ),
+                      );
+                    },),
 
                   Gap(20),
 
