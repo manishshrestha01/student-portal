@@ -38,7 +38,7 @@ class _SupportViewState extends State<SupportView> {
             screenWidth - (horizontalPadding * 2),
             620,
           );
-          final double cardHeight = isSmall ? 278 : 252;
+          final double cardHeight = isSmall ? 238 : 252;
           final double buttonHeight = isSmall ? 52 : 50;
 
           return SingleChildScrollView(
