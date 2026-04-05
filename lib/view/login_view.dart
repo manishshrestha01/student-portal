@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
@@ -6,24 +7,22 @@ import 'package:codeit_app/widgets/custom_text_button.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
-class LoginView extends StatefulWidget {
+class LoginView extends GetView<AuthController> {
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-  @override
   Widget build(BuildContext context) {
-    bool isChecked = false;
-    return Scaffold(
+    var key = GlobalKey<FormState>();
+
+  return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Center(
         child: SingleChildScrollView(
           child: CustomFormContainer(
             child: Form(
+              key: key,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -58,17 +57,28 @@ class _LoginViewState extends State<LoginView> {
 
                   //w4 email
                   CustomTextField(
+                    controller: controller.email,
                     labelText: "Email Address",
                     hintText: "Enter your email address",
+                     validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Email address is required";
+                      } else if (!GetUtils.isEmail(value)) {
+                        return "Please enter a valid email address";
+                      }
+                      return null;
+                    },
                   ),
 
                   Gap(20),
                   //w5 password
                   CustomTextField(
+                    controller: controller.password,
                     labelText: "Password",
                     hintText: "Enter your password",
-
                     suffixIcon: Icon(Icons.visibility),
+                    validator: (value) =>
+                        value!.isEmpty ? "Password is required" : null,
                   ),
 
                   Gap(20),
@@ -81,13 +91,11 @@ class _LoginViewState extends State<LoginView> {
                         child: Row(
                           children: [
                             Checkbox(
-                              value: isChecked,
+                              value: false,
                               activeColor: AppColors.primary,
                               checkColor: Colors.white,
                               onChanged: (value) {
-                                setState(() {
-                                  isChecked = value!;
-                                });
+                                
                               },
                             ),
                             Flexible(
@@ -113,7 +121,13 @@ class _LoginViewState extends State<LoginView> {
                   Gap(20),
 
                   //w7 button
-                  CustomButton(text: "Log in", onPressed: () {}),
+                  CustomButton(text: "Log in", 
+                  
+                  onPressed: () {
+                    if (key.currentState!.validate()) {
+                      controller.login();
+                    }
+                  }),
 
                   Gap(20),
 

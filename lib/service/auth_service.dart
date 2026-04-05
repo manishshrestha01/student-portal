@@ -21,4 +21,14 @@ class AuthService {
     );
     return response;
   }
+
+  static Future<Response> login(String email, String password) async {
+    var response = await DioConnector.dio.post("login",
+    data:{
+      "email": email,
+      "password": password,
+    },
+    );
+    return response;
+  }
 }
