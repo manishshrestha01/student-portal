@@ -37,6 +37,8 @@ dependencies:
   gap: ^3.0.1
   dio: ^5.9.2
   get: ^4.7.3
+  flutter_svg: ^2.2.4
+  google_fonts: ^8.0.2
 
 dev_dependencies:
   flutter_test:
