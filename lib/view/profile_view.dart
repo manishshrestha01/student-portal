@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
@@ -17,6 +18,17 @@ class _ProfileViewState extends State<ProfileView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Code IT", style: TextStyle(color: Colors.white)),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // Implement logout functionality here
+             AuthController().logout();
+             
+            },
+            icon: Icon(Icons.logout, color: Colors.white),
+          ),
+        ],
+
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primary,
       ),
