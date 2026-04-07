@@ -70,7 +70,7 @@ class SupportController extends GetxController {
       return 'technical';
     }
     if (text.contains('counselling')) {
-      return 'counseling';
+      return 'counselling';
     }
     if (text.contains('internship')) {
       return 'internship';
