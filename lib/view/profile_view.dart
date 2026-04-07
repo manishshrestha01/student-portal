@@ -17,6 +17,7 @@ class _ProfileViewState extends State<ProfileView> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Code IT", style: TextStyle(color: Colors.white)),
+        
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.primary,
       ),

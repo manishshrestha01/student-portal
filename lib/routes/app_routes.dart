@@ -6,4 +6,8 @@ class AppRoutes {
   static const String verifyOtp = '/verify-otp';
   static const String changePassword = '/change-password';
   static const String profile = '/profile';
+  static const String support = '/support';
+  static const String ticket = '/ticket';
+  static const String suggestions = '/suggestions';
+    static const String sendTicket = '/support-ticket';
 }

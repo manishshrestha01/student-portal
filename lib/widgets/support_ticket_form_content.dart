@@ -1,10 +1,12 @@
 import 'dart:math' as math;
 
+import 'package:codeit_app/controller/support_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/widgets/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SupportTicketFormContent extends StatefulWidget {
@@ -23,12 +25,14 @@ class SupportTicketFormContent extends StatefulWidget {
 }
 
 class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
+  final SupportController supportController = Get.find<SupportController>();
   late String selectedCategory;
 
   @override
   void initState() {
     super.initState();
     selectedCategory = widget.initialCategory;
+    supportController.clearFields();
   }
 
   @override
@@ -52,13 +56,12 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
           620,
         );
         final double formWidth = math.min(contentWidth, 520);
-        final double formHeight = isSmall ? 500 : 470;
         final double titleSize = isSmall ? 22 : 26;
         final double subtitleSize = isSmall ? 14 : 16;
         final double sectionTitleSize = isSmall ? 18 : 20;
         final double fieldLabelSize = isSmall ? 16 : 18;
         final double buttonLabelSize = isSmall ? 18 : 20;
-        final double singleLineFieldHeight = isSmall ? 42 : 39;
+        final double singleLineFieldHeight = isSmall ? 52 : 50;
         final double descriptionFieldHeight = isSmall ? 170 : 153;
 
         return SingleChildScrollView(
@@ -199,7 +202,6 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                 Center(
                   child: Container(
                     width: formWidth,
-                    height: formHeight,
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 16),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -233,21 +235,23 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                         SizedBox(
                           height: singleLineFieldHeight,
                           child: _buildInputField(
+                            controller: supportController.subjectController,
                             hintText: 'e.g. Cannot access courses materials',
                             hintFontSize: isSmall ? 14 : 16,
                             inputFontSize: isSmall ? 16 : 18,
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
-                              vertical: 10,
+                              vertical: 12,
                             ),
                           ),
                         ),
                         const Gap(18),
-                        _buildRequiredLabel('Description', fieldLabelSize),
+                        _buildRequiredLabel('Message', fieldLabelSize),
                         const Gap(8),
                         SizedBox(
                           height: descriptionFieldHeight,
                           child: _buildInputField(
+                            controller: supportController.messageController,
                             hintText:
                                 'Please explain in detail what happened, what you tried, any error messages, etc.',
                             hintFontSize: isSmall ? 14 : 16,
@@ -262,38 +266,46 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                           ),
                         ),
                         const Gap(20),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: SvgPicture.asset(
-                              'assets/support/submit.svg',
-                              colorFilter: const ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
+                        Obx(() {
+                          return SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton.icon(
+                              onPressed: supportController.isLoading.value
+                                  ? null
+                                  : () => supportController.submitTicket(
+                                      selectedCategory,
+                                    ),
+                              icon: SvgPicture.asset(
+                                'assets/support/submit.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.srcIn,
+                                ),
+                                width: 22.5,
+                                height: 22.5,
                               ),
-                              width: 22.5,
-                              height: 22.5,
-                            ),
-                            label: Text(
-                              'Submit Ticket',
-                              style: GoogleFonts.inter(
-                                textStyle: TextStyle(
-                                  color: AppColors.boxColor,
-                                  fontSize: buttonLabelSize,
-                                  fontWeight: FontWeight.w700,
+                              label: Text(
+                                supportController.isLoading.value
+                                    ? 'Submitting...'
+                                    : 'Submit Ticket',
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    color: AppColors.boxColor,
+                                    fontSize: buttonLabelSize,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xFFFF6900),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
                             ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFF6900),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
-                        ),
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -326,6 +338,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
   }
 
   Widget _buildInputField({
+    required TextEditingController controller,
     required String hintText,
     required double hintFontSize,
     required double inputFontSize,
@@ -347,6 +360,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
         ],
       ),
       child: TextField(
+        controller: controller,
         style: GoogleFonts.inter(
           textStyle: TextStyle(
             color: isMultiline ? AppColors.textDark : Colors.black,
@@ -364,6 +378,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
             ? TextAlignVertical.top
             : TextAlignVertical.center,
         decoration: InputDecoration(
+          isDense: true,
           border: InputBorder.none,
           hintText: hintText,
           hintStyle: GoogleFonts.inter(

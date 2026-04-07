@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:codeit_app/controller/suggestion_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -17,6 +18,8 @@ class SuggestionsView extends StatefulWidget {
 }
 
 class _SuggestionsViewState extends State<SuggestionsView> {
+  final SuggestionController suggestionController = Get.find<SuggestionController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,6 +140,8 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                             width: double.infinity,
                             height: isSmall ? 180 : 156,
                             child: TextField(
+                              controller:
+                                  suggestionController.messageController,
                               expands: true,
                               maxLines: null,
                               minLines: null,
@@ -183,38 +188,44 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                             ),
                           ),
                           const Gap(20),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: SvgPicture.asset(
-                                'assets/support/submit.svg',
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.white,
-                                  BlendMode.srcIn,
+                          Obx(() {
+                            return SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton.icon(
+                                onPressed: suggestionController.isLoading.value
+                                    ? null
+                                    : suggestionController.submitSuggestion,
+                                icon: SvgPicture.asset(
+                                  'assets/support/submit.svg',
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.white,
+                                    BlendMode.srcIn,
+                                  ),
+                                  width: 22.5,
+                                  height: 22.5,
                                 ),
-                                width: 22.5,
-                                height: 22.5,
-                              ),
-                              label: Text(
-                                'Submit Ticket',
-                                style: GoogleFonts.inter(
-                                  textStyle: TextStyle(
-                                    color: AppColors.boxColor,
-                                    fontSize: isSmall ? 18 : 20,
-                                    fontWeight: FontWeight.w700,
+                                label: Text(
+                                  suggestionController.isLoading.value
+                                      ? 'Submitting...'
+                                      : 'Submit Suggestion',
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: AppColors.boxColor,
+                                      fontSize: isSmall ? 18 : 20,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFFF6900),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFFF6900),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                            ),
-                          ),
+                            );
+                          }),
                         ],
                       ),
                     ),

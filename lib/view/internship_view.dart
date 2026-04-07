@@ -12,7 +12,7 @@ class InternshipView extends StatelessWidget {
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(title: const Text('CODEIT')),
       body: SupportTicketFormContent(
-        initialCategory: 'Internship Support',
+        initialCategory: 'Internship',
         onHomeTap: () => Get.offAll(() => const SupportView()),
       ),
     );

@@ -1,11 +1,13 @@
 import 'dart:math' as math;
 
+import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/general_view.dart';
 import 'package:codeit_app/view/counseling_view.dart';
 import 'package:codeit_app/view/internship_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
 import 'package:codeit_app/view/technical_view.dart';
+import 'package:codeit_app/view/ticket_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -25,9 +27,20 @@ class _SupportViewState extends State<SupportView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    var authController = Get.find<AuthController>();
+    return Scaffold( 
       backgroundColor: const Color(0xFFFFFFFF),
-      appBar: AppBar(title: const Text('CODEIT')),
+      appBar: AppBar(
+        title: const Text('CODEIT'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              authController.logOut();
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
+      ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final double screenWidth = constraints.maxWidth;
@@ -62,7 +75,7 @@ class _SupportViewState extends State<SupportView> {
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
                             color: AppColors.textDark,
-                            fontSize: isSmall ? 22 : 25,
+                            fontSize: isSmall ? 22 : 24,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -136,7 +149,9 @@ class _SupportViewState extends State<SupportView> {
                       width: contentWidth,
                       height: buttonHeight,
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.offAll(TicketView());
+                        },
                         icon: SvgPicture.asset(
                           'assets/support/ticket.svg',
                           width: 23.83,

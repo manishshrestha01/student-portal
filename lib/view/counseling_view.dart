@@ -12,7 +12,7 @@ class CounselingView extends StatelessWidget {
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(title: const Text('CODEIT')),
       body: SupportTicketFormContent(
-        initialCategory: 'Counselling Support',
+        initialCategory: 'Counseling',
         onHomeTap: () => Get.offAll(() => const SupportView()),
       ),
     );
