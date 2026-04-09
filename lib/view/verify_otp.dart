@@ -1,18 +1,15 @@
+import 'package:codeit_app/controller/verify_otp_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
-import 'package:codeit_app/view/change_password.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
-class VerifyOtpView extends StatefulWidget {
+class VerifyOtpView extends GetView<VerifyOtpController> {
   const VerifyOtpView({super.key});
 
-  @override
-  State<VerifyOtpView> createState() => _VerifyOtpViewState();
-}
-
-class _VerifyOtpViewState extends State<VerifyOtpView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +18,7 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
         backgroundColor: AppColors.backgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -35,7 +32,6 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  //w1 logo
                   Image.asset(
                     'assets/images/code-it-logo.png',
                     height: 67,
@@ -43,14 +39,15 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
                   ),
                   Gap(20),
 
-                  //w2
                   Text(
                     'Check your mail',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w600,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   Gap(10),
-                  //w3
                   Text(
                     "We've sent the code to your email",
                     style: TextStyle(
@@ -63,22 +60,31 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
 
                   Gap(34),
 
-                  //w4  4 digits otp
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(4, (index) {
+                    children: List.generate(VerifyOtpController.otpLength, (
+                      index,
+                    ) {
                       return Container(
-                        width: 50,
+                        width: 44,
                         height: 50,
-                        margin: const EdgeInsets.symmetric(horizontal: 8),
+                        margin: EdgeInsets.symmetric(horizontal: 4),
                         child: TextField(
+                          controller: controller.otpControllers[index],
+                          focusNode: controller.otpFocusNodes[index],
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
                           maxLength: 1,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
+                          onChanged: (value) {
+                            controller.onOtpChanged(index, value);
+                          },
                           decoration: InputDecoration(
                             counterText: "",
                             border: OutlineInputBorder(
@@ -100,7 +106,6 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
                     }),
                   ),
 
-                  //w5
                   Text(
                     "Code expires in 00:59",
                     style: TextStyle(
@@ -112,34 +117,27 @@ class _VerifyOtpViewState extends State<VerifyOtpView> {
                   ),
 
                   Gap(20),
-                  //w5 button
-                  CustomButton(
-                    text: "Verify",
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ChangePasswordView(),
-                        ),
-                      );
-                    },
+                  Obx(
+                    () => CustomButton(
+                      text: "Verify",
+                      isLoading: controller.isLoading.value,
+                      onPressed: controller.verifyOtp,
+                    ),
                   ),
                   Gap(20),
 
-                  //w6
-                  CustomButton(
-                    text: "Send again",
-                    backgroundColor: Colors.white,
-                    textColor: AppColors.primary,
-                    borderColor: AppColors.primary,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VerifyOtpView(),
-                        ),
-                      );
-                    },
+                  Obx(
+                    () => CustomButton(
+                      text: controller.isResending.value
+                          ? "Sending..."
+                          : "Send again",
+                      backgroundColor: Colors.white,
+                      textColor: AppColors.primary,
+                      borderColor: AppColors.primary,
+                      onPressed: controller.isResending.value
+                          ? () {}
+                          : controller.resendOtp,
+                    ),
                   ),
                 ],
               ),

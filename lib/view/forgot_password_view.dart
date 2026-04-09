@@ -1,30 +1,28 @@
+import 'package:codeit_app/controller/forgot_password_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/routes/app_routes.dart';
-import 'package:codeit_app/view/verify_otp.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
 import 'package:codeit_app/widgets/custom_text_button.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
-class ForgotPasswordView extends StatefulWidget {
+class ForgotPasswordView extends GetView<ForgotPasswordController> {
   const ForgotPasswordView({super.key});
 
   @override
-  State<ForgotPasswordView> createState() => _ForgotPasswordViewState();
-}
-
-class _ForgotPasswordViewState extends State<ForgotPasswordView> {
-  @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.backgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -34,6 +32,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
         child: SingleChildScrollView(
           child: CustomFormContainer(
             child: Form(
+              key: formKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -68,26 +67,38 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
 
                   //w4 email label
                   CustomTextField(
+                    controller: controller.emailController,
                     labelText: "Email your registered email address",
                     hintText: "Enter your email address",
                     isRequired: true,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      final email = value?.trim() ?? '';
+                      if (email.isEmpty) {
+                        return 'Email address is required';
+                      }
+                      if (!GetUtils.isEmail(email)) {
+                        return 'Please enter a valid email address';
+                      }
+                      return null;
+                    },
                   ),
 
                   Gap(20),
                   //w5 button
-                  CustomButton(
-                    text: "Send OTP",
-                    backgroundColor: Colors.white,
-                    textColor: AppColors.primary,
-                    borderColor: AppColors.primary,
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => VerifyOtpView(),
-                        ),
-                      );
-                    },
+                  Obx(
+                    () => CustomButton(
+                      text: "Send OTP",
+                      isLoading: controller.isLoading.value,
+                      backgroundColor: Colors.white,
+                      textColor: AppColors.primary,
+                      borderColor: AppColors.primary,
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          controller.sendOtp();
+                        }
+                      },
+                    ),
                   ),
                   Gap(20),
 
