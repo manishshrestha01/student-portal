@@ -1,6 +1,9 @@
 import 'package:codeit_app/controller/storage_controller.dart';
+import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/model/login_model.dart';
 import 'package:codeit_app/model/register_model.dart';
+import 'package:codeit_app/model/reset_password_model.dart';
+import 'package:codeit_app/model/user_model.dart';
 import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/service/auth_service.dart';
 import 'package:codeit_app/utils/dio_connector.dart';
@@ -9,12 +12,21 @@ import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   var isLoggedIn = false.obs;
-  var registerMessage = RegisterModel(success: false, errors: null).obs;
+ var registerMessage = RegisterModel(success: null, errors: null).obs;
   var isLoading = false.obs;
+  var loginMessage = LoginModel(success: null, token: null, message: null).obs;
+  var user = Rxn<User>();
 
-  var loginMessage = LoginModel(success: false, token: null, message: null).obs;
 
-  //Text editing controller
+var rememberMe = false.obs;
+    //for password toggle
+  var isPasswordHidden = true.obs;
+  var currentPasswordHidden = true.obs;
+  var newPasswordHidden = true.obs;
+  var confirmPasswordHidden = true.obs;
+
+
+  // Text editing controllers
   var name = TextEditingController();
   var email = TextEditingController();
   var whatsapp = TextEditingController();
@@ -43,7 +55,7 @@ class AuthController extends GetxController {
     }
   }
 
-  //register user
+  // Register user
   Future register() async {
     try {
       isLoading(true);
@@ -60,6 +72,11 @@ class AuthController extends GetxController {
           Get.snackbar("Success", "Registration successful");
           clearForm();
           Get.toNamed(AppRoutes.login);
+        }
+        else{
+          Get.snackbar("Error", registerMessage.value.errors?.email.isNotEmpty == true
+              ? registerMessage.value.errors!.email[0]
+              : "Registration failed");
         }
       } else {
         registerMessage.value = RegisterModel.fromJson(response.data);

@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/view/login_view.dart';
@@ -7,15 +8,11 @@ import 'package:codeit_app/widgets/custom_text_button.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
-class ChangePasswordView extends StatefulWidget {
+class ChangePasswordView extends GetView<AuthController> {
   const ChangePasswordView({super.key});
 
-  @override
-  State<ChangePasswordView> createState() => _ChangePasswordViewState();
-}
-
-class _ChangePasswordViewState extends State<ChangePasswordView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +26,10 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
           },
         ),
       ),
-      body: Center(
+      body: Obx((){
+        
+
+       return Center(
         child: SingleChildScrollView(
           child: CustomFormContainer(
             child: Form(
@@ -144,7 +144,8 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
             ),
           ),
         ),
-      ),
+      );
+    
+      })
     );
-  }
-}
+    }} 

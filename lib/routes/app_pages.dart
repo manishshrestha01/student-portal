@@ -1,6 +1,7 @@
 import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/view/change_password.dart';
 import 'package:codeit_app/view/forgot_password_view.dart';
+import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/login_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
 import 'package:codeit_app/view/register_view.dart';
@@ -26,10 +27,11 @@ class AppPages {
       page: () => const ChangePasswordView(),
     ),
 
-    GetPage(name: AppRoutes.profile, page: () => const ProfileView()),
+    GetPage(name: AppRoutes.profile, page: () => ProfileView()),
     GetPage(name: AppRoutes.support, page: () => const SupportView()),
     GetPage(name: AppRoutes.ticket, page: () => const TicketView()),
     GetPage(name: AppRoutes.suggestions, page: () => const SuggestionsView()),
      GetPage(name: AppRoutes.sendTicket, page: () => const SupportView()),
+    GetPage(name: AppRoutes.home, page: () =>  HomeView()),
   ];
 }

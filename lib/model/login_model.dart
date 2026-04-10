@@ -13,7 +13,7 @@ class LoginModel {
     return LoginModel(
       success: json["success"],
       token: json["token"],
-      message: json["message"],
+      message: json["message"]
     );
   }
 }
