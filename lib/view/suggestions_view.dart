@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:codeit_app/controller/suggestion_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
+import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -24,7 +25,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
-      appBar: AppBar(title: const Text('CODEIT')),
+      appBar: CustomAppBar(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final double screenWidth = constraints.maxWidth;

@@ -8,6 +8,7 @@ import 'package:codeit_app/view/internship_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
 import 'package:codeit_app/view/technical_view.dart';
 import 'package:codeit_app/view/ticket_view.dart';
+import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -30,17 +31,7 @@ class _SupportViewState extends State<SupportView> {
     var authController = Get.find<AuthController>();
     return Scaffold( 
       backgroundColor: const Color(0xFFFFFFFF),
-      appBar: AppBar(
-        title: const Text('CODEIT'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              authController.logOut();
-            },
-            icon: Icon(Icons.logout),
-          )
-        ],
-      ),
+      appBar: CustomAppBar(),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final double screenWidth = constraints.maxWidth;

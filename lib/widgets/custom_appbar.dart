@@ -4,9 +4,9 @@ import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String title;
+  final String? title;
 
- CustomAppBar({super.key, required this.title});
+ CustomAppBar({super.key, this.title});
 
   final AuthController authController = Get.find<AuthController>();
 
@@ -16,7 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: AppColors.primary,
       elevation: 0.5,
       automaticallyImplyLeading: false,
-      title: Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+      title: Text(title ?? "Code IT", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
       actions: [
         Row(
           children: [

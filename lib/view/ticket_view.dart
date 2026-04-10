@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/ticket_model.dart';
+import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -33,7 +34,7 @@ class _TicketViewState extends State<TicketView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: const Text('CODE IT')),
+      appBar: CustomAppBar(),
       body: Obx(() {
         if (ticketController.isLoading.value) {
           return const Center(child: CircularProgressIndicator());

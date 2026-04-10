@@ -14,7 +14,7 @@ class ProfileView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Code IT"),
+      appBar: CustomAppBar(),
       body: Obx(() {
         final user = controller.user.value;
 
@@ -36,6 +36,7 @@ class ProfileView extends GetView<AuthController> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
+                                           
                         //w1
                         Text(
                           'Update Your Profile',

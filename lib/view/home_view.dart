@@ -12,7 +12,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
-      appBar: CustomAppBar(title: "Code IT"),
+      appBar: CustomAppBar(),
        body: Obx(() {
         final user = authController.user.value;
 
