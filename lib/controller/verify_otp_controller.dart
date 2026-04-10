@@ -92,7 +92,10 @@ class VerifyOtpController extends GetxController {
             'Success',
             verifyOtpResponse.value.message ?? 'OTP verified successfully.',
           );
-          Get.toNamed(AppRoutes.changePassword);
+          Get.toNamed(
+            AppRoutes.changePassword,
+            arguments: {'email': emailValue, 'otp': otp},
+          );
         } else {
           Get.snackbar('Error', _extractErrorMessage(data));
         }

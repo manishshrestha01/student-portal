@@ -60,50 +60,62 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
 
                   Gap(34),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(VerifyOtpController.otpLength, (
-                      index,
-                    ) {
-                      return Container(
-                        width: 44,
-                        height: 50,
-                        margin: EdgeInsets.symmetric(horizontal: 4),
-                        child: TextField(
-                          controller: controller.otpControllers[index],
-                          focusNode: controller.otpFocusNodes[index],
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          maxLength: 1,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          onChanged: (value) {
-                            controller.onOtpChanged(index, value);
-                          },
-                          decoration: InputDecoration(
-                            counterText: "",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.grey.shade400,
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      const spacing = 8.0;
+                      final boxWidth =
+                          ((constraints.maxWidth -
+                                      (spacing *
+                                          (VerifyOtpController.otpLength - 1))) /
+                                  VerifyOtpController.otpLength)
+                              .clamp(42.0, 48.0);
+
+                      return Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: spacing,
+                        children: List.generate(VerifyOtpController.otpLength, (
+                          index,
+                        ) {
+                          return SizedBox(
+                            width: boxWidth,
+                            height: 50,
+                            child: TextField(
+                              controller: controller.otpControllers[index],
+                              focusNode: controller.otpFocusNodes[index],
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              maxLength: 1,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
                               ),
-                              borderRadius: BorderRadius.circular(8),
+                              onChanged: (value) {
+                                controller.onOtpChanged(index, value);
+                              },
+                              decoration: InputDecoration(
+                                counterText: "",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.grey.shade400,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.pink),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
                             ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.pink),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                        ),
+                          );
+                        }),
                       );
-                    }),
+                    },
                   ),
 
                   Text(

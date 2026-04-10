@@ -6,7 +6,7 @@ import 'package:codeit_app/core/constants/colors.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
 
- CustomAppBar({Key? key, required this.title}) : super(key: key);
+ CustomAppBar({super.key, required this.title});
 
   final AuthController authController = Get.find<AuthController>();
 

@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/general_view.dart';
 import 'package:codeit_app/view/counseling_view.dart';
@@ -26,10 +27,19 @@ class _SupportViewState extends State<SupportView> {
 
   @override
   Widget build(BuildContext context) {
+    var authController = Get.find<AuthController>();
     return Scaffold( 
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
         title: const Text('CODEIT'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              authController.logOut();
+            },
+            icon: Icon(Icons.logout),
+          )
+        ],
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {

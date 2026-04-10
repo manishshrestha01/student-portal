@@ -1,3 +1,5 @@
+import 'package:codeit_app/controller/change_password_controller.dart';
+import 'package:codeit_app/controller/verify_otp_controller.dart';
 import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/view/change_password.dart';
 import 'package:codeit_app/view/forgot_password_view.dart';
@@ -21,10 +23,29 @@ class AppPages {
       name: AppRoutes.forgotPassword,
       page: () => const ForgotPasswordView(),
     ),
-    GetPage(name: AppRoutes.verifyOtp, page: () => const VerifyOtpView()),
+    GetPage(
+      name: AppRoutes.verifyOtp,
+      page: () => const VerifyOtpView(),
+      binding: BindingsBuilder(() {
+        if (!Get.isRegistered<VerifyOtpController>()) {
+          Get.lazyPut<VerifyOtpController>(
+            () => VerifyOtpController(),
+            fenix: true,
+          );
+        }
+      }),
+    ),
     GetPage(
       name: AppRoutes.changePassword,
       page: () => const ChangePasswordView(),
+      binding: BindingsBuilder(() {
+        if (!Get.isRegistered<ChangePasswordController>()) {
+          Get.lazyPut<ChangePasswordController>(
+            () => ChangePasswordController(),
+            fenix: true,
+          );
+        }
+      }),
     ),
 
     GetPage(name: AppRoutes.profile, page: () => ProfileView()),
