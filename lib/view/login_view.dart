@@ -16,6 +16,7 @@ class LoginView extends GetView<AuthController> {
   Widget build(BuildContext context) {
     var key = GlobalKey<FormState>();
 
+
   return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Center(
@@ -72,16 +73,25 @@ class LoginView extends GetView<AuthController> {
 
                   Gap(20),
                   //w5 password
-                  CustomTextField(
+                Obx((){
+                  return   CustomTextField(
                     controller: controller.password,
                     labelText: "Password",
                     hintText: "Enter your password",
-                    suffixIcon: Icon(Icons.visibility),
+                    obscureText: controller.isPasswordHidden.value,
+                    suffixIcon: IconButton(onPressed: (){
+                     controller.isPasswordHidden.value = !controller.isPasswordHidden.value;
+                    }, icon: Icon(
+                     controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility)),
                     validator: (value) =>
                         value!.isEmpty ? "Password is required" : null,
-                  ),
+                  );
 
-                  Gap(20),
+               
+
+                }),
+
+                   Gap(20),
 
                   //w6 row
                   Row(
@@ -90,13 +100,15 @@ class LoginView extends GetView<AuthController> {
                       Flexible(
                         child: Row(
                           children: [
-                            Checkbox(
-                              value: false,
-                              activeColor: AppColors.primary,
-                              checkColor: Colors.white,
-                              onChanged: (value) {
-                                
-                              },
+                          Obx(
+                              () => Checkbox(
+                                value: controller.rememberMe.value,
+                                activeColor: AppColors.primary,
+                                checkColor: Colors.white,
+                                onChanged: (value) {
+                                  controller.rememberMe.value = value!;
+                                },
+                              ),
                             ),
                             Flexible(
                               child: Text(
@@ -124,10 +136,21 @@ class LoginView extends GetView<AuthController> {
                   CustomButton(text: "Log in", 
                   
                   onPressed: () {
-                    if (key.currentState!.validate()) {
-                      controller.login();
-                    }
-                  }),
+                      if (key.currentState!.validate()) {
+                        if (!controller.rememberMe.value) {
+                          Get.snackbar(
+                            "Error",
+                            "Please accept Remember Me",
+                            backgroundColor: Colors.red,
+                            colorText: Colors.white,
+                          );
+                          return;
+                        }
+
+                        controller.login();
+                      }
+                    },
+                  ),
 
                   Gap(20),
 
@@ -158,4 +181,4 @@ class LoginView extends GetView<AuthController> {
       ),
     );
   }
-}
+} 

@@ -14,6 +14,7 @@ class RegisterView extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+
     var key = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
@@ -111,16 +112,27 @@ class RegisterView extends GetView<AuthController> {
                   Gap(20),
 
                   //w7
-                  CustomTextField(
-                    controller: controller.password,
-                    labelText: "Password",
-                    isRequired: true,
-                    hintText: "Enter your password",
-                    suffixIcon: Icon(Icons.visibility),
-                    obscureText: true,
-                    validator: (value) => value!.isEmpty ? "Password is required" : null
-                  ),
-                  Gap(20),
+                   Obx(() {
+                    return CustomTextField(
+                      controller: controller.password,
+                      labelText: "Password",
+                      hintText: "Enter your password",
+                      obscureText: controller.isPasswordHidden.value,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          controller.isPasswordHidden.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          controller.isPasswordHidden.value =
+                              !controller.isPasswordHidden.value;
+                        },
+                      ),
+                      validator: (value) =>
+                          value!.isEmpty ? "Password is required" : null,
+                    );
+                  }), Gap(20),
 
                   //w8 button
                   CustomButton(text: "Create Account", onPressed: () {

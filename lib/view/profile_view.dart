@@ -1,249 +1,285 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
+import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
-class ProfileView extends StatefulWidget {
+class ProfileView extends GetView<AuthController> {
+  
   const ProfileView({super.key});
 
   @override
-  State<ProfileView> createState() => _ProfileViewState();
-}
-
-class _ProfileViewState extends State<ProfileView> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Code IT", style: TextStyle(color: Colors.white)),
-        actions: [
-          IconButton(
-            onPressed: () {
-              // Implement logout functionality here
-             AuthController().logout();
-             
-            },
-            icon: Icon(Icons.logout, color: Colors.white),
-          ),
-        ],
+      appBar: CustomAppBar(title: "Code IT"),
+      body: Obx(() {
+        final user = controller.user.value;
 
-        automaticallyImplyLeading: false,
-        backgroundColor: AppColors.primary,
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              CustomFormContainer(
-                child: Form(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      //w1
-                      Text(
-                        'Update Your Profile',
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w600,
+        if (user != null ) {
+          final user = controller.user.value!;
+          controller.name.text = user.name ?? '';
+          controller.email.text = user.email ?? '';
+          controller.whatsapp.text = user.phone ?? '';
+          controller.countryCode.text = user.countryCode ?? '';
+        }
+
+        return Center(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CustomFormContainer(
+                  child: Form(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        //w1
+                        Text(
+                          'Update Your Profile',
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Gap(10),
-                      //w2
-                      Text(
-                        "Keep your current information",
-                        style: TextStyle(
-                          color: AppColors.textLight,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
+                        Gap(10),
+                        //w2
+                        Text(
+                          "Keep your current information",
+                          style: TextStyle(
+                            color: AppColors.textLight,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
 
-                      Gap(34),
+                        Gap(34),
 
-                      //w3 fullname
-                      CustomTextField(
-                        labelText: "Full Name",
-                        hintText: "Enter your full name",
-                      ),
-                      Gap(10),
+                        //w3 fullname
+                        CustomTextField(
+                          controller: controller.name,
+                          labelText: "Full Name",
+                          hintText: "Enter your full name",
+                        ),
+                        Gap(10),
 
-                      //w4 email
-                      CustomTextField(
-                        labelText: "Email Address",
-                        hintText: "Enter your email address",
-                      ),
-                      Gap(20),
+                        //w4 email
+                        CustomTextField(
+                          controller: controller.email,
+                          labelText: "Email Address",
+                          hintText: "Enter your email address",
+                        ),
+                        Gap(20),
 
-                      //w5 number
-                      CustomTextField(
-                        labelText: "WhatsApp Number",
-                        keyboardType: TextInputType.numberWithOptions(),
-                        hintText: "WhatsApp Number",
-                      ),
-                      Gap(20),
+                        //w5 number
+                        CustomTextField(
+                          controller: controller.whatsapp,
+                          labelText: "WhatsApp Number",
+                          keyboardType: TextInputType.numberWithOptions(),
+                          hintText: "WhatsApp Number",
+                        ),
+                        Gap(20),
 
-                      //w6 address
-                      CustomTextField(
-                        labelText: "Address",
-                        hintText: "Enter your address",
-                      ),
-                      Gap(20),
+                        //w6 address
+                        CustomTextField(
+                          controller: controller.countryCode,
+                          labelText: "Address",
+                          hintText: "Enter your address",
+                        ),
+                        Gap(20),
 
-                      //w7 button
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: SizedBox(
-                          width: 192,
-                          height: 44,
-                          child: ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.save,
-                              size: 20,
-                              color: Colors.white,
-                            ),
-                            label: const Text(
-                              "Save Changes",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                        //w7 button
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: SizedBox(
+                            width: 192,
+                            height: 44,
+                            child: ElevatedButton.icon(
+                              onPressed: () async {
+                                await controller.updateProfile();
+                              },
+                              icon: const Icon(
+                                Icons.save,
+                                size: 20,
                                 color: Colors.white,
                               ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.textButtonColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                              label: const Text(
+                                "Save Changes",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
                               ),
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.textButtonColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                alignment: Alignment.centerLeft,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Gap(10),
-                    ],
+                        Gap(10),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Gap(20),
+                Gap(20),
 
-              CustomFormContainer(
-                child: Form(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      //w1
-                      Text(
-                        'Change Your Password',
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w600,
+                CustomFormContainer(
+                  child: Form(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        //w1
+                        Text(
+                          'Change Your Password',
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Gap(10),
-                      //w2
-                      Text(
-                        "Keep your account secure",
-                        style: TextStyle(
-                          color: AppColors.textLight,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
+                        Gap(10),
+                        //w2
+                        Text(
+                          "Keep your account secure",
+                          style: TextStyle(
+                            color: AppColors.textLight,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
 
-                      Gap(34),
+                        Gap(34),
 
-                      //w3 current password
-                      CustomTextField(
-                        labelText: "Current Password",
-                        hintText: "Enter your current password",
-                        suffixIcon: Icon(
-                          Icons.visibility,
-                          color: AppColors.textLight,
-                        ),
-                        obscureText: true,
-                      ),
-                      Gap(20),
-
-                      //w4 new password
-                      CustomTextField(
-                        labelText: "New Password",
-                        hintText: "Enter your new password",
-                        suffixIcon: Icon(
-                          Icons.visibility,
-                          color: AppColors.textLight,
-                        ),
-                        obscureText: true,
-                      ),
-                      Gap(20),
-
-                      //w5 confirm password
-                      CustomTextField(
-                        labelText: "Confirm New Password",
-                        hintText: "Confirm new password",
-                        suffixIcon: Icon(
-                          Icons.visibility,
-                          color: AppColors.textLight,
-                        ),
-                        obscureText: true,
-                      ),
-                      Gap(20),
-
-                      //w6 button
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: SizedBox(
-                          width: 192,
-                          height: 44,
-                          child: ElevatedButton.icon(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.save,
-                              size: 20,
-                              color: Colors.white,
+                        //w3 current password
+                        Obx((){
+                          return CustomTextField(
+                          controller: controller.currentPassword,
+                          labelText: "Current Password",
+                          hintText: "Enter your current password",
+                           obscureText: controller.currentPasswordHidden.value,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              controller.currentPasswordHidden.value =
+                                  !controller.currentPasswordHidden.value;
+                            },
+                            icon: Icon(
+                              controller.currentPasswordHidden.value
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
                             ),
-                            label: const Text(
-                              "Save Changes",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
+                          ),
+                        );
+                        }),
+
+                        Gap(20),
+
+                        //w4 new password
+                       Obx((){
+                        return  CustomTextField(
+                          controller: controller.newPassword,
+                          labelText: "New Password",
+                          hintText: "Enter your new password",
+                          obscureText: controller.newPasswordHidden.value,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              controller.newPasswordHidden.value =
+                                  !controller.newPasswordHidden.value;
+                            },
+                            icon: Icon(
+                              controller.newPasswordHidden.value
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                          ),
+                        );
+                       }),
+                       
+                        Gap(20),
+
+                        //w5 confirm password
+                      Obx((){
+                        return   CustomTextField(
+                          controller: controller.confirmPassword,
+                          labelText: "Confirm New Password",
+                          hintText: "Confirm new password",
+                           obscureText: controller.confirmPasswordHidden.value,
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              controller.confirmPasswordHidden.value =
+                                  !controller.confirmPasswordHidden.value;
+                            },
+                            icon: Icon(
+                              controller.confirmPasswordHidden.value
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                          ),
+                        );
+                      }),
+
+                        Gap(20),
+
+                        //w6 button
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: SizedBox(
+                            width: 192,
+                            height: 44,
+                            child: ElevatedButton.icon(
+                              onPressed: () async {
+                                await controller.resetPassword();
+                              },
+                              icon: const Icon(
+                                Icons.save,
+                                size: 20,
                                 color: Colors.white,
                               ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.textButtonColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                              label: const Text(
+                                "Save Changes",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
                               ),
-                              alignment: Alignment.centerLeft,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.textButtonColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                alignment: Alignment.centerLeft,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Gap(10),
-                    ],
+                        Gap(10),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Gap(10),
-            ],
+                Gap(10),
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }),
     );
   }
 }
