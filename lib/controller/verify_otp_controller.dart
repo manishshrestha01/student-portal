@@ -6,9 +6,15 @@ import 'package:codeit_app/service/verify_otp_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:async';
 
 class VerifyOtpController extends GetxController {
   static const int otpLength = 6;
+
+
+var remainingSeconds = 59.obs;
+Timer? _timer;
+
 
   var verifyOtpResponse = VerifyOtpModel(success: false, message: null).obs;
   var isLoading = false.obs;
@@ -27,15 +33,32 @@ class VerifyOtpController extends GetxController {
   String get otpCode =>
       otpControllers.map((controller) => controller.text).join();
 
+
+//otp timer
+  void _startTimer() {
+    remainingSeconds.value = 59;
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (remainingSeconds.value > 0) {
+        remainingSeconds.value--;
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
   @override
   void onInit() {
     super.onInit();
+    _startTimer();
 
     final arguments = Get.arguments;
     if (arguments is Map && arguments['email'] is String) {
       email.value = (arguments['email'] as String).trim();
       return;
     }
+
+
 
     if (Get.isRegistered<ForgotPasswordController>()) {
       email.value = Get.find<ForgotPasswordController>().emailController.text
@@ -123,6 +146,8 @@ class VerifyOtpController extends GetxController {
         'Error',
         'Email is missing. Please try forgot password again.',
       );
+
+   
       Get.offNamed(AppRoutes.forgotPassword);
       return;
     }
@@ -138,6 +163,7 @@ class VerifyOtpController extends GetxController {
             controller.clear();
           }
           otpFocusNodes.first.requestFocus();
+           _startTimer(); 
 
           final message = data['message'];
           Get.snackbar(
@@ -190,6 +216,7 @@ class VerifyOtpController extends GetxController {
 
   @override
   void onClose() {
+     _timer?.cancel(); 
     for (final controller in otpControllers) {
       controller.dispose();
     }
@@ -198,4 +225,5 @@ class VerifyOtpController extends GetxController {
     }
     super.onClose();
   }
+
 }

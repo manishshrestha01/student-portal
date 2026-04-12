@@ -1,6 +1,7 @@
 import 'package:codeit_app/controller/forgot_password_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/routes/app_routes.dart';
+import 'package:codeit_app/utils/validators.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
 import 'package:codeit_app/widgets/custom_text_button.dart';
@@ -72,16 +73,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                     hintText: "Enter your email address",
                     isRequired: true,
                     keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      final email = value?.trim() ?? '';
-                      if (email.isEmpty) {
-                        return 'Email address is required';
-                      }
-                      if (!GetUtils.isEmail(email)) {
-                        return 'Please enter a valid email address';
-                      }
-                      return null;
-                    },
+                    validator: Validators.emailValidator,
                   ),
 
                   Gap(20),

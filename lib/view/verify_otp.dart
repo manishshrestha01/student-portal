@@ -118,15 +118,20 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                     },
                   ),
 
-                  Text(
-                    "Code expires in 00:59",
-                    style: TextStyle(
-                      color: AppColors.textDark,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                Obx(() {
+                    final seconds = controller.remainingSeconds.value;
+                    final formatted =
+                        '00:${seconds.toString().padLeft(2, '0')}';
+                    return Text(
+                      "Code expires in $formatted",
+                      style: TextStyle(
+                        color: AppColors.textDark,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      textAlign: TextAlign.center,
+                    );
+                  }),
 
                   Gap(20),
                   Obx(
@@ -138,16 +143,23 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                   ),
                   Gap(20),
 
-                  Obx(
+                 Obx(
                     () => CustomButton(
                       text: controller.isResending.value
                           ? "Sending..."
                           : "Send again",
                       backgroundColor: Colors.white,
-                      textColor: AppColors.primary,
-                      borderColor: AppColors.primary,
-                      onPressed: controller.isResending.value
-                          ? () {}
+                      textColor: controller.remainingSeconds.value > 0
+                          ? Colors
+                                .grey 
+                          : AppColors.primary,
+                      borderColor: controller.remainingSeconds.value > 0
+                          ? Colors.grey
+                          : AppColors.primary,
+                      onPressed:
+                          (controller.isResending.value ||
+                              controller.remainingSeconds.value > 0)
+                          ? () {} 
                           : controller.resendOtp,
                     ),
                   ),
