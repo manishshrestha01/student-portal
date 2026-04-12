@@ -1,5 +1,6 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
+import 'package:codeit_app/utils/validators.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
@@ -73,6 +74,7 @@ class ProfileView extends GetView<AuthController> {
                           controller: controller.email,
                           labelText: "Email Address",
                           hintText: "Enter your email address",
+                             validator: Validators.emailValidator,
                         ),
                         Gap(20),
 
