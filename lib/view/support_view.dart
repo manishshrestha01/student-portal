@@ -479,7 +479,7 @@ class _SupportViewState extends State<SupportView> {
     return Row(
       children: [
         GestureDetector(
-          onTap: () => Get.offAll(() => const SuggestionsView()),
+          onTap: () => Get.offAll(() => const SupportView()),
           child: Row(
             children: [
               SvgPicture.asset(
