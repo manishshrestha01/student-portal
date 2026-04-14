@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:codeit_app/controller/auth_controller.dart';
-import 'package:codeit_app/core/constants/colors.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
@@ -13,79 +14,53 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.primary,
-      elevation: 0.5,
-      automaticallyImplyLeading: false,
-      title: Text(title ?? "Code IT", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-      actions: [
-        Row(
-          children: [
-            Obx(() {
-              final user = authController.user.value;
-              return Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed("/profile");
-                    },
-                    child: CircleAvatar(
-                      radius: 18,
-                      backgroundColor: const Color(0xFF4F6CF7),
-                      child: Text(
-                        (user?.name?.isNotEmpty == true)
-                            ? user!.name![0].toUpperCase()
-                            : "?",
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  if (user != null)
-                    Text(
-                      user.name!,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    )
-                  else
-                    const Text(
-                      "User",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
-                ],
-              );
-            }),
-            IconButton(
-              icon: const Icon(Icons.logout, color: Colors.white),
-              onPressed: () {
-                Get.defaultDialog(
-                  title: "Logout",
-                  middleText: "Are you sure you want to logout?",
-                  textConfirm: "Yes",
-                  textCancel: "No",
-                  confirmTextColor: Colors.white,
-                  buttonColor: AppColors.primary,
-                  onConfirm: () {
-                    Get.back();
-                    authController.logout();
-                  },
-                );
-              },
-            ),
-          ],
+        actionsPadding: EdgeInsets.only(
+          left: 20,
+          right: 20,
+          top: 10,
+          bottom: 10,
         ),
-      ],
+        backgroundColor: const Color(0xFFFFFFFF),
+        elevation: 0,
+        title: Image.asset(
+          'assets/images/code-it-logo.png',
+          height: 33,
+          width: 300,
+        ),
+        centerTitle: true,
+        actions: [
+          TextButton.icon(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              'assets/support/profile_appbar.svg',
+              width: 16.66666603088379,
+              height: 16.66666603088379,
+              colorFilter: const ColorFilter.mode(
+                Color(0xFFFFFFFF),
+                BlendMode.srcIn,
+              ),
+            ),
+            label: Text(
+              "Name",
+              style: GoogleFonts.inter(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: const Color(0xFFFF6900),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
+        ],
+        shape: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
     );
-  }
+      }
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
