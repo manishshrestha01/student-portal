@@ -17,6 +17,7 @@ class ProfileView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: CustomAppBar(),
       body: Obx(() {
         final user = controller.user.value;
