@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
+import 'package:codeit_app/view/receipt_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
 import 'package:codeit_app/view/support_view.dart';
 import 'package:codeit_app/view/terms_view.dart';
@@ -116,6 +117,7 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
             ListTile(
+              onTap: () => Get.offAll(() => const ReceiptView()),
               contentPadding: EdgeInsets.only(left: 30),
               leading: SvgPicture.asset(
                 'assets/support/receipt.svg',

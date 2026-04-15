@@ -59,7 +59,7 @@ class AuthController extends GetxController {
     if (token != null) {
       fetchUser();
       Future.delayed(const Duration(seconds: 3), () {
-        Get.offAllNamed(AppRoutes.support);
+        Get.offAllNamed(AppRoutes.home);
       });
     } else {
       Future.delayed(const Duration(seconds: 3), () {
@@ -113,7 +113,7 @@ class AuthController extends GetxController {
         if (loginMessage.value.success == true) {
           StorageController().saveToken(loginMessage.value.token!);
           await fetchUser();
-          Get.offNamed(AppRoutes.support);
+          Get.offNamed(AppRoutes.home);
         }
       }
     } catch (e) {
