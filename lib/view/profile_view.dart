@@ -3,6 +3,7 @@ import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/utils/validators.dart';
 import 'package:codeit_app/view/support_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
+import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class ProfileView extends GetView<AuthController> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: CustomAppBar(),
+      drawer: CustomDrawer(),
       body: Obx(() {
         final user = controller.user.value;
 

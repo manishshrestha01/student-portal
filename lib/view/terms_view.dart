@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
+import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
@@ -35,6 +36,7 @@ class _TermsViewState extends State<TermsView> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: CustomAppBar(),
+      drawer: CustomDrawer(),
       body: Obx(() {
         if (termsController.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
