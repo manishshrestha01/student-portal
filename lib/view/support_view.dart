@@ -8,6 +8,7 @@ import 'package:codeit_app/view/internship_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
 import 'package:codeit_app/view/technical_view.dart';
+import 'package:codeit_app/view/terms_view.dart';
 import 'package:codeit_app/view/ticket_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -247,6 +248,7 @@ class _SupportViewState extends State<SupportView> {
                 ),
               ),
               ListTile(
+                onTap: () => Get.offAll(() => const TermsView()),
                 contentPadding: EdgeInsets.only(left: 30),
                 leading: SvgPicture.asset(
                   'assets/support/conditions.svg',

@@ -10,6 +10,7 @@ import 'package:codeit_app/view/register_view.dart';
 import 'package:codeit_app/view/splash_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
 import 'package:codeit_app/view/support_view.dart';
+import 'package:codeit_app/view/terms_view.dart';
 import 'package:codeit_app/view/ticket_view.dart';
 import 'package:codeit_app/view/verify_otp.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,8 @@ class AppPages {
     GetPage(name: AppRoutes.support, page: () => const SupportView()),
     GetPage(name: AppRoutes.ticket, page: () => const TicketView()),
     GetPage(name: AppRoutes.suggestions, page: () => const SuggestionsView()),
-     GetPage(name: AppRoutes.sendTicket, page: () => const SupportView()),
+    GetPage(name: AppRoutes.sendTicket, page: () => const SupportView()),
     GetPage(name: AppRoutes.home, page: () =>  HomeView()),
+    GetPage(name: AppRoutes.terms, page: () =>  TermsView()),
   ];
 }
