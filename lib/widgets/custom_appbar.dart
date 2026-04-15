@@ -1,3 +1,4 @@
+import 'package:codeit_app/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -30,7 +31,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
         actions: [
           TextButton.icon(
-            onPressed: () {},
+            onPressed: (){
+              Get.offAll(ProfileView());
+            },
             icon: SvgPicture.asset(
               'assets/support/profile_appbar.svg',
               width: 16.66666603088379,
