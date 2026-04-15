@@ -40,16 +40,20 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 BlendMode.srcIn,
               ),
             ),
-            label: Text(
-              "Name",
-              style: GoogleFonts.inter(
-                textStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
+            label: Obx(() {
+              final user = authController.user.value;
+              final firstName = (user?.name ?? '').split(' ').first;
+              return Text(
+                firstName.isNotEmpty ? firstName : "Name",
+                style: GoogleFonts.inter(
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-            ),
+              );
+            }),
             style: TextButton.styleFrom(
               backgroundColor: const Color(0xFFFF6900),
               shape: RoundedRectangleBorder(

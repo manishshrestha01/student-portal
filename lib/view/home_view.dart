@@ -1,5 +1,6 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
+import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: CustomAppBar(),
+      drawer: CustomDrawer(),
        body: Obx(() {
         final user = authController.user.value;
 
@@ -22,9 +24,10 @@ class HomeView extends StatelessWidget {
           );
         }
 
+        final firstName = (user.name ?? '').split(' ').first;
         return Center(
           child: Text(
-            "Welcome, ${user.name} ",
+            "Welcome, $firstName",
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w600,

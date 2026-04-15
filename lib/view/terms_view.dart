@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:codeit_app/core/constants/colors.dart';
+import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../controller/terms_controller.dart';
-import 'support_view.dart';
 
 class TermsView extends StatefulWidget {
   const TermsView({super.key});
@@ -146,7 +146,7 @@ class _TermsViewState extends State<TermsView> {
     return Row(
       children: [
         GestureDetector(
-          onTap: () => Get.offAll(() => const SupportView()),
+          onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [
               SvgPicture.asset(

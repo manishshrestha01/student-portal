@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/general_view.dart';
 import 'package:codeit_app/view/counseling_view.dart';
+import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/internship_view.dart';
 import 'package:codeit_app/view/technical_view.dart';
 import 'package:codeit_app/view/ticket_view.dart';
@@ -185,7 +186,7 @@ class _SupportViewState extends State<SupportView> {
     return Row(
       children: [
         GestureDetector(
-          onTap: () => Get.offAll(() => const SupportView()),
+          onTap: () => Get.offAll(() =>  HomeView()),
           child: Row(
             children: [
               SvgPicture.asset(

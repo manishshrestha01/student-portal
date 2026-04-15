@@ -1,7 +1,7 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/utils/validators.dart';
-import 'package:codeit_app/view/support_view.dart';
+import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
@@ -311,7 +311,7 @@ class ProfileView extends GetView<AuthController> {
     return Row(
       children: [
         GestureDetector(
-          onTap: () => Get.offAll(() => const SupportView()),
+          onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [
               SvgPicture.asset(

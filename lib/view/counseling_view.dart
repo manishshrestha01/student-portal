@@ -1,4 +1,4 @@
-import 'package:codeit_app/view/support_view.dart';
+import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:codeit_app/widgets/support_ticket_form_content.dart';
@@ -16,7 +16,7 @@ class CounselingView extends StatelessWidget {
       drawer: CustomDrawer(),
       body: SupportTicketFormContent(
         initialCategory: 'Counselling',
-        onHomeTap: () => Get.offAll(() => const SupportView()),
+        onHomeTap: () => Get.offAll(() => HomeView()),
       ),
     );
   }
