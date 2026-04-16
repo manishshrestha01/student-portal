@@ -12,11 +12,13 @@ import 'package:google_fonts/google_fonts.dart';
 class SupportTicketFormContent extends StatefulWidget {
   final String initialCategory;
   final VoidCallback onHomeTap;
+  final VoidCallback onSupportTap;
 
   const SupportTicketFormContent({
     super.key,
     required this.initialCategory,
     required this.onHomeTap,
+    required this.onSupportTap,
   });
 
   @override
@@ -109,13 +111,16 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                         size: isSmall ? 18 : 20,
                       ),
                       const Gap(7),
-                      Text(
-                        'Support',
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                            color: const Color(0xFF4B4B4B),
-                            fontSize: isSmall ? 13 : 14,
-                            fontWeight: FontWeight.w400,
+                      GestureDetector(
+                        onTap: widget.onSupportTap,
+                        child: Text(
+                          'Support',
+                          style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                              color: const Color(0xFF4B4B4B),
+                              fontSize: isSmall ? 13 : 14,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ),

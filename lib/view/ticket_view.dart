@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/ticket_model.dart';
 import 'package:codeit_app/view/home_view.dart';
+import 'package:codeit_app/view/support_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -181,8 +182,28 @@ class _TicketViewState extends State<TicketView> {
           size: isMobile ? 18 : 20,
         ),
         const Gap(7),
+        GestureDetector(
+          onTap: () => Get.offAll(() => SupportView()),
+          child: Text(
+            'Support',
+            style: GoogleFonts.inter(
+              textStyle: TextStyle(
+                color: const Color(0xFF000000),
+                fontSize: isMobile ? 13 : 15,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+        ),
+        const Gap(7),
+        Icon(
+          Icons.chevron_right,
+          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          size: isMobile ? 18 : 20,
+        ),
+        const Gap(7),
         Text(
-          'Tickets',
+          'My Tickets',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
               color: const Color(0xFF000000),
