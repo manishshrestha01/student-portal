@@ -67,6 +67,7 @@ flutter:
   assets:
     - assets/images/code-it-logo.png
     - assets/support/
+    - assets/images/dashboard/course_image.png
  
 
   # An image asset can refer to one or more resolution-specific "variants", see
