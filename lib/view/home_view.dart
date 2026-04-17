@@ -41,7 +41,7 @@ class HomeView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Welcome, $firstName",
+                      "Welcome back, $firstName!",
                       style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
