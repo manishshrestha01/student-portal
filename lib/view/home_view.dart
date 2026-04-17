@@ -21,55 +21,33 @@ class HomeView extends StatelessWidget {
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
-       body: Obx(() {
+      body: Obx(() {
         final user = authController.user.value;
-      body: SingleChildScrollView(
-        child: Obx(() {
-          // final user = authController.user.value;
-
         if (user == null) {
           return const Center(
             child: CircularProgressIndicator(color: Color(0xFF4F6CF7)),
           );
         }
-
         final firstName = (user.name ?? '').split(' ').first;
-        return Center(
-          child: Text(
-            "Welcome, $firstName",
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF1A1A2E),
-            ),
-          ),
-        );
-      }),
-          // if (user == null) {
-          //   return const Center(
-          //     child: CircularProgressIndicator(color: Color(0xFF4F6CF7)),
-          //   );
-          // }
-
-          return Container(
+        return SingleChildScrollView(
+          child: Container(
             padding: EdgeInsets.all(16),
             margin: EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //w1
+                // Welcome section
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Welcome back, Hem! ",
+                      "Welcome, $firstName",
                       style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                         color: Color(0xFF1A1A2E),
                       ),
                     ),
-
                     Text(
                       "Here's your learning snapshot today.",
                       style: TextStyle(
@@ -80,8 +58,8 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 Gap(20),
-
-                //w2
+          
+                // Info cards
                 Column(
                   children: [
                     InfoCard(
@@ -104,7 +82,8 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 Gap(20),
-                //w3 courses section
+          
+                // Courses section
                 CustomParentContainer(
                   title: "Your Courses",
                   seeall: "See All",
@@ -115,7 +94,6 @@ class HomeView extends StatelessWidget {
                       videos: "16",
                       image: "assets/images/dashboard/course_image.png",
                     ),
-
                     CustomCourseItem(
                       title: "Flutter Development",
                       mentor: "Er. Sajal Shrestha",
@@ -124,9 +102,9 @@ class HomeView extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 Gap(20),
-                //w4 payments
+          
+                // Payments section
                 CustomParentContainer(
                   title: "Recent Payments",
                   seeall: "See All",
@@ -137,7 +115,6 @@ class HomeView extends StatelessWidget {
                       date: "Feb 02, 2024",
                       icon: Icons.receipt,
                     ),
-
                     CustomPaymentReceipt(
                       title: "Flutter",
                       amount: "2499",
@@ -146,9 +123,9 @@ class HomeView extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 Gap(20),
-                //w5 certificates
+          
+                // Certificates section
                 CustomParentContainer(
                   title: "Certificates",
                   seeall: "See All",
@@ -158,7 +135,6 @@ class HomeView extends StatelessWidget {
                       completed: "Feb 02, 2024",
                       icon: Icons.star_border_sharp,
                     ),
-
                     CustomCertificateCard(
                       title: "Flutter",
                       completed: "Feb 02, 2025",
@@ -168,9 +144,9 @@ class HomeView extends StatelessWidget {
                 ),
               ],
             ),
-          );
-        }),
-      ),
+          ),
+        );
+      }),
     );
   }
 }
