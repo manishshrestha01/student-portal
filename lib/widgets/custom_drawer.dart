@@ -20,15 +20,6 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     var authController = Get.find<AuthController>();
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final double screenWidth = constraints.maxWidth;
-        final bool isSmall = screenWidth < 390;
-        final bool isMedium = screenWidth >= 390 && screenWidth < 768;
-        final double iconWidth = isSmall ? 23 : (isMedium ? 26 : 31);
-        final double iconHeight = isSmall ? 22 : (isMedium ? 24 : 29.04893684387207);
-        final double itemFontSize = isSmall ? 14 : (isMedium ? 19 : 20);
-
         return Drawer(
           child: Container(
             decoration: const BoxDecoration(
@@ -47,7 +38,7 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: isSmall ? 24 : (isMedium ? 32 : 40),
+                        fontSize: 40,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -55,14 +46,14 @@ class CustomDrawer extends StatelessWidget {
                   ),
                 ),
                 Divider(thickness: 0.5, color: const Color(0xFFFEFEFE)),
-                Gap( isSmall ? 20 : (isMedium ? 30 : 40)),
+                Gap(40),
                 ListTile(
                   onTap: () => Get.offAll(() => HomeView()),
                   contentPadding: EdgeInsets.only(left: 30),
                   leading: SvgPicture.asset(
                     'assets/support/dashboard.svg',
-                    width: iconWidth,
-                    height: iconHeight,
+                    width: 31,
+                    height: 29.04893684387207,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFFFFFFFF),
                       BlendMode.srcIn,
@@ -73,7 +64,7 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: itemFontSize,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0,
                       ),
@@ -84,8 +75,8 @@ class CustomDrawer extends StatelessWidget {
                   contentPadding: EdgeInsets.only(left: 30),
                   leading: SvgPicture.asset(
                     'assets/support/course.svg',
-                    width: iconWidth,
-                    height: iconHeight,
+                    width: 31,
+                    height: 29.04893684387207,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFFFFFFFF),
                       BlendMode.srcIn,
@@ -96,7 +87,7 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: itemFontSize,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0,
                       ),
@@ -107,8 +98,8 @@ class CustomDrawer extends StatelessWidget {
                   contentPadding: EdgeInsets.only(left: 30),
                   leading: SvgPicture.asset(
                     'assets/support/certificates.svg',
-                    width: iconWidth,
-                    height: iconHeight,
+                    width: 31,
+                    height: 29.04893684387207,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFFFFFFFF),
                       BlendMode.srcIn,
@@ -119,7 +110,7 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: itemFontSize,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0,
                       ),
@@ -131,8 +122,8 @@ class CustomDrawer extends StatelessWidget {
                   contentPadding: EdgeInsets.only(left: 30),
                   leading: SvgPicture.asset(
                     'assets/support/receipt.svg',
-                    width: iconWidth,
-                    height: iconHeight,
+                    width: 31,
+                    height: 29.04893684387207,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFFFFFFFF),
                       BlendMode.srcIn,
@@ -143,7 +134,7 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: itemFontSize,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0,
                       ),
@@ -155,8 +146,8 @@ class CustomDrawer extends StatelessWidget {
                   contentPadding: EdgeInsets.only(left: 30),
                   leading: SvgPicture.asset(
                     'assets/support/support.svg',
-                    width: iconWidth,
-                    height: iconHeight,
+                    width: 31,
+                    height: 29.04893684387207,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFFFFFFFF),
                       BlendMode.srcIn,
@@ -167,7 +158,7 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: itemFontSize,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0,
                       ),
@@ -179,8 +170,8 @@ class CustomDrawer extends StatelessWidget {
                   contentPadding: EdgeInsets.only(left: 30),
                   leading: SvgPicture.asset(
                     'assets/support/message.svg',
-                    width: iconWidth,
-                    height: iconHeight,
+                    width: 31,
+                    height: 29.04893684387207,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFFFFFFFF),
                       BlendMode.srcIn,
@@ -191,7 +182,7 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: itemFontSize,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0,
                       ),
@@ -203,8 +194,8 @@ class CustomDrawer extends StatelessWidget {
                   contentPadding: EdgeInsets.only(left: 30),
                   leading: SvgPicture.asset(
                     'assets/support/conditions.svg',
-                    width: iconWidth,
-                    height: iconHeight,
+                    width: 31,
+                    height: 29.04893684387207,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFFFFFFFF),
                       BlendMode.srcIn,
@@ -215,7 +206,7 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: itemFontSize,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0,
                       ),
@@ -227,8 +218,8 @@ class CustomDrawer extends StatelessWidget {
                   contentPadding: EdgeInsets.only(left: 30),
                   leading: SvgPicture.asset(
                     'assets/support/profile.svg',
-                    width: iconWidth,
-                    height: iconHeight,
+                    width: 31,
+                    height: 29.04893684387207,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFFFFFFFF),
                       BlendMode.srcIn,
@@ -239,14 +230,14 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: itemFontSize,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         letterSpacing: 0,
                       ),
                     ),
                   ),
                 ),
-                Gap(isSmall ? 30 : (isMedium ? 160 : 230)),
+                Gap(230),
                 Divider(thickness: 0.5, color: const Color(0xFFFEFEFE)),
                 ListTile(
                   onTap: () {
@@ -255,8 +246,8 @@ class CustomDrawer extends StatelessWidget {
                   contentPadding: EdgeInsets.only(left: 90),
                   leading: SvgPicture.asset(
                     'assets/support/logout.svg',
-                    width: iconWidth,
-                    height: iconHeight,
+                    width: 31,
+                    height: 29.04893684387207,
                     colorFilter: const ColorFilter.mode(
                       Color(0xFFFFFFFF),
                       BlendMode.srcIn,
@@ -267,7 +258,7 @@ class CustomDrawer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: Colors.white,
-                        fontSize: itemFontSize,
+                        fontSize: 20,
                         fontWeight: FontWeight.w600,
                         letterSpacing: 0,
                       ),
@@ -278,7 +269,5 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
+      }
   }
-}
