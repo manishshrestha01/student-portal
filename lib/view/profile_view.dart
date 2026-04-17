@@ -37,7 +37,7 @@ class ProfileView extends GetView<AuthController> {
                 Gap(12),
               Row(
                 children: [
-                  Gap(18),
+                  Gap(6),
                   Column(
                     children: [
                       Gap(18),
