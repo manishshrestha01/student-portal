@@ -19,8 +19,23 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var authController = Get.find<AuthController>();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double screenWidth = constraints.maxWidth;
+        final bool isSmall = screenWidth < 390;
+        final bool isMedium = screenWidth >= 500 && screenWidth < 768;
+
+        final double iconWidth = isSmall ? 23 : (isMedium ? 26 : 31);
+        final double iconHeight = isSmall ? 22 : (isMedium ? 24 : 29.05);
+        final double itemFontSize = isSmall ? 14 : (isMedium ? 18 : 20);
+        final double titleFontSize = isSmall ? 24 : (isMedium ? 32 : 40);
+        final double gapSize = isSmall ? 20 : (isMedium ? 30 : 40);
+        final double leftPadding = isSmall ? 16 : (isMedium ? 24 : 30);
+        final double logoutLeftPadding = isSmall ? 40 : (isMedium ? 60 : 90);
 
         return Drawer(
+          width: screenWidth < 500 ? screenWidth * 0.7 : (screenWidth < 900 ? 350 : 400),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
           child: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -30,244 +45,248 @@ class CustomDrawer extends StatelessWidget {
                 transform: GradientRotation(math.pi / 4),
               ),
             ),
-            child: ListView(
-              children: [
-                ListTile(
-                  title: Text(
-                    "</> CODE IT",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w700,
+            child: SafeArea(
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(
+                      "</> CODE IT",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: titleFontSize,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Divider(thickness: 0.5, color: const Color(0xFFFEFEFE)),
+                  Gap(gapSize),
+                  ListTile(
+                    onTap: () => Get.offAll(() => HomeView()),
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: SvgPicture.asset(
+                      'assets/support/dashboard.svg',
+                      width: iconWidth,
+                      height: iconHeight,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFFFFFFFF),
+                        BlendMode.srcIn,
                       ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Divider(thickness: 0.5, color: const Color(0xFFFEFEFE)),
-                Gap(40),
-                ListTile(
-                  onTap: () => Get.offAll(() => HomeView()),
-                  contentPadding: EdgeInsets.only(left: 30),
-                  leading: SvgPicture.asset(
-                    'assets/support/dashboard.svg',
-                    width: 31,
-                    height: 29.04893684387207,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFFFFFFF),
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                  title: Text(
-                    "Dashboard",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0,
-                      ),
-                    ),
-                  ),
-                ),
-                ListTile(
-                  contentPadding: EdgeInsets.only(left: 30),
-                  leading: SvgPicture.asset(
-                    'assets/support/course.svg',
-                    width: 31,
-                    height: 29.04893684387207,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFFFFFFF),
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                  title: Text(
-                    "My Courses",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0,
+                    title: Text(
+                      "Dashboard",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                ListTile(
-                  contentPadding: EdgeInsets.only(left: 30),
-                  leading: SvgPicture.asset(
-                    'assets/support/certificates.svg',
-                    width: 31,
-                    height: 29.04893684387207,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFFFFFFF),
-                      BlendMode.srcIn,
+                  ListTile(
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: SvgPicture.asset(
+                      'assets/support/course.svg',
+                      width: iconWidth,
+                      height: iconHeight,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFFFFFFFF),
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    "Certificate",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0,
+                    title: Text(
+                      "My Courses",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                ListTile(
-                  onTap: () => Get.offAll(() => const ReceiptView()),
-                  contentPadding: EdgeInsets.only(left: 30),
-                  leading: SvgPicture.asset(
-                    'assets/support/receipt.svg',
-                    width: 31,
-                    height: 29.04893684387207,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFFFFFFF),
-                      BlendMode.srcIn,
+                  ListTile(
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: SvgPicture.asset(
+                      'assets/support/certificates.svg',
+                      width: iconWidth,
+                      height: iconHeight,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFFFFFFFF),
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    "Payment Receipts",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0,
+                    title: Text(
+                      "Certificate",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                ListTile(
-                  onTap: () => Get.offAll(() => const SupportView()),
-                  contentPadding: EdgeInsets.only(left: 30),
-                  leading: SvgPicture.asset(
-                    'assets/support/support.svg',
-                    width: 31,
-                    height: 29.04893684387207,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFFFFFFF),
-                      BlendMode.srcIn,
+                  ListTile(
+                    onTap: () => Get.offAll(() => const ReceiptView()),
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: SvgPicture.asset(
+                      'assets/support/receipt.svg',
+                      width: iconWidth,
+                      height: iconHeight,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFFFFFFFF),
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    "Support",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0,
+                    title: Text(
+                      "Payment Receipts",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                ListTile(
-                  onTap: () => Get.offAll(() => const SuggestionsView()),
-                  contentPadding: EdgeInsets.only(left: 30),
-                  leading: SvgPicture.asset(
-                    'assets/support/message.svg',
-                    width: 31,
-                    height: 29.04893684387207,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFFFFFFF),
-                      BlendMode.srcIn,
+                  ListTile(
+                    onTap: () => Get.offAll(() => const SupportView()),
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: SvgPicture.asset(
+                      'assets/support/support.svg',
+                      width: iconWidth,
+                      height: iconHeight,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFFFFFFFF),
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    "Suggestions",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0,
+                    title: Text(
+                      "Support",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                ListTile(
-                  onTap: () => Get.offAll(() => const TermsView()),
-                  contentPadding: EdgeInsets.only(left: 30),
-                  leading: SvgPicture.asset(
-                    'assets/support/conditions.svg',
-                    width: 31,
-                    height: 29.04893684387207,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFFFFFFF),
-                      BlendMode.srcIn,
+                  ListTile(
+                    onTap: () => Get.offAll(() => const SuggestionsView()),
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: SvgPicture.asset(
+                      'assets/support/message.svg',
+                      width: iconWidth,
+                      height: iconHeight,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFFFFFFFF),
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    "Terms & Conditions",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0,
+                    title: Text(
+                      "Suggestions",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                ListTile(
-                  onTap: () => Get.offAll(() => const ProfileView()),
-                  contentPadding: EdgeInsets.only(left: 30),
-                  leading: SvgPicture.asset(
-                    'assets/support/profile.svg',
-                    width: 31,
-                    height: 29.04893684387207,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFFFFFFF),
-                      BlendMode.srcIn,
+                  ListTile(
+                    onTap: () => Get.offAll(() => const TermsView()),
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: SvgPicture.asset(
+                      'assets/support/conditions.svg',
+                      width: iconWidth,
+                      height: iconHeight,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFFFFFFFF),
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    "Profile",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0,
+                    title: Text(
+                      "Terms & Conditions",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Gap(230),
-                Divider(thickness: 0.5, color: const Color(0xFFFEFEFE)),
-                ListTile(
-                  onTap: () {
-                    authController.logOut();
-                  },
-                  contentPadding: EdgeInsets.only(left: 90),
-                  leading: SvgPicture.asset(
-                    'assets/support/logout.svg',
-                    width: 31,
-                    height: 29.04893684387207,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xFFFFFFFF),
-                      BlendMode.srcIn,
+                  ListTile(
+                    onTap: () => Get.offAll(() => const ProfileView()),
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: SvgPicture.asset(
+                      'assets/support/profile.svg',
+                      width: iconWidth,
+                      height: iconHeight,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFFFFFFFF),
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                  title: Text(
-                    "Logout",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0,
+                    title: Text(
+                      "Profile",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                  const Spacer(),
+                  Divider(thickness: 0.5, color: const Color(0xFFFEFEFE)),
+                  ListTile(
+                    onTap: () {
+                      authController.logOut();
+                    },
+                    contentPadding: EdgeInsets.only(left: logoutLeftPadding),
+                    leading: SvgPicture.asset(
+                      'assets/support/logout.svg',
+                      width: iconWidth,
+                      height: iconHeight,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xFFFFFFFF),
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    title: Text(
+                      "Logout",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
-      }
+      },
+    );
   }
+}
