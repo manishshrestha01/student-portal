@@ -34,7 +34,7 @@ class CustomDrawer extends StatelessWidget {
         final double logoutLeftPadding = isSmall ? 40 : (isMedium ? 60 : 90);
 
         return Drawer(
-          width: screenWidth < 500 ? screenWidth * 0.7 : (screenWidth < 900 ? 350 : 400),
+          width: screenWidth < 500 ? screenWidth * 0.75 : (screenWidth < 900 ? 350 : 400),
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
           child: Container(
             decoration: const BoxDecoration(
