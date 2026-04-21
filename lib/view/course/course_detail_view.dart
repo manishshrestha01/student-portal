@@ -1,6 +1,7 @@
+import 'package:codeit_app/widgets/custom_appbar.dart';
+import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:codeit_app/widgets/app_header_widget.dart';
 import 'package:codeit_app/widgets/course_header_widget.dart';
 import 'package:codeit_app/view/course/menu_tile/curriculum_screen.dart';
 import 'package:codeit_app/view/course/menu_tile/notes_resources_screen.dart';
@@ -14,7 +15,8 @@ class CourseDetailView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
 
-        appBar: AppHeader(),
+        appBar: CustomAppBar(),
+      drawer: CustomDrawer(),
 
         body: Padding(
           padding: const EdgeInsets.all(12),

@@ -1,3 +1,5 @@
+import 'package:codeit_app/widgets/custom_appbar.dart';
+import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:codeit_app/model/receipt_model.dart';
 import 'package:codeit_app/widgets/receipt_card_widget.dart';
@@ -31,7 +33,8 @@ class ReceiptsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
 
-      appBar: AppBar(title: const Text("My Receipts"), elevation: 0),
+      appBar: CustomAppBar(),
+      drawer: CustomDrawer(),
 
       body: Padding(
         padding: const EdgeInsets.all(16),

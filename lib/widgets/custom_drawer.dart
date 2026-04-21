@@ -1,9 +1,11 @@
 import 'dart:math' as math;
 
 import 'package:codeit_app/controller/auth_controller.dart';
+import 'package:codeit_app/view/certificates_view.dart';
+import 'package:codeit_app/view/course/my_courses_view.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
-import 'package:codeit_app/view/receipt_view.dart';
+import 'package:codeit_app/view/receipt/receipts_screen.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
 import 'package:codeit_app/view/support_view.dart';
 import 'package:codeit_app/view/terms_view.dart';
@@ -88,6 +90,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   ListTile(
+                    onTap: () => Get.offAll(() => const MyCoursesView()),
                     contentPadding: EdgeInsets.only(left: leftPadding),
                     leading: SvgPicture.asset(
                       'assets/support/course.svg',
@@ -111,6 +114,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   ListTile(
+                    onTap: () => Get.offAll(() => const CertificatesView()),
                     contentPadding: EdgeInsets.only(left: leftPadding),
                     leading: SvgPicture.asset(
                       'assets/support/certificates.svg',
@@ -134,7 +138,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   ListTile(
-                    onTap: () => Get.offAll(() => const ReceiptView()),
+                    onTap: () => Get.offAll(() => const ReceiptsScreen()),
                     contentPadding: EdgeInsets.only(left: leftPadding),
                     leading: SvgPicture.asset(
                       'assets/support/receipt.svg',

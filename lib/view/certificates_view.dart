@@ -8,14 +8,14 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ReceiptView extends StatefulWidget {
-  const ReceiptView({super.key});
+class CertificatesView extends StatefulWidget {
+  const CertificatesView({super.key});
 
   @override
-  State<ReceiptView> createState() => _ReceiptViewState();
+  State<CertificatesView> createState() => _CertificatesViewState();
 }
 
-class _ReceiptViewState extends State<ReceiptView> {
+class _CertificatesViewState extends State<CertificatesView> {
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class _ReceiptViewState extends State<ReceiptView> {
               ),
               const Gap(32),
               Text(
-                'Payment Receipts',
+                'My Certificates',
                 style: GoogleFonts.inter(
                   textStyle: const TextStyle(
                     color: AppColors.textDark,
@@ -114,7 +114,7 @@ class _ReceiptViewState extends State<ReceiptView> {
         ),
         const Gap(7),
         Text(
-          'Payment Receipts',
+          'Certificates',
           style: GoogleFonts.inter(
             textStyle: const TextStyle(
               color: Color(0xFF000000),
