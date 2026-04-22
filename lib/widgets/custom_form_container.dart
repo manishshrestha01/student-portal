@@ -8,22 +8,43 @@ class CustomFormContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppColors.boxColor,
-        border: Border.all(color: Colors.grey.shade300, width: 1),
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0x26000000),
-            offset: const Offset(0, 4),
-            blurRadius: 1,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double maxWidth;
+
+        // responsive breakpoints
+        if (constraints.maxWidth > 1000) {
+          maxWidth = 500; // desktop
+        } else if (constraints.maxWidth > 600) {
+          maxWidth = 450; // tablet
+        } else {
+          maxWidth = constraints.maxWidth * 0.92; // mobile
+        }
+
+        return Center(
+          child: Container(
+            width: maxWidth, 
+            padding: const EdgeInsets.all(16), 
+            margin: const EdgeInsets.symmetric(vertical: 20),
+
+            decoration: BoxDecoration(
+              color: AppColors.boxColor,
+              border: Border.all(color: Colors.grey.shade300, width: 1),
+              borderRadius: BorderRadius.circular(12),
+
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x26000000),
+                  offset: Offset(0, 4),
+                  blurRadius: 8,
+                ),
+              ],
+            ),
+
+            child: child,
           ),
-        ],
-      ),
-      child: child,
+        );
+      },
     );
   }
 }

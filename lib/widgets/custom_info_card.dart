@@ -16,11 +16,13 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return InkWell(
       onTap: (){
         
       },
       child: Container(
+       
       padding: EdgeInsets.all(16),
          
         decoration: BoxDecoration(
