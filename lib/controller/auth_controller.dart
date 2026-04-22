@@ -228,6 +228,7 @@ class AuthController extends GetxController {
     }
   }
 
+//logout
   void logout() {
     StorageController().deleteToken();
     user.value = null;
@@ -235,7 +236,6 @@ class AuthController extends GetxController {
     Get.offAllNamed(AppRoutes.login);
   }
 
-  // Backward compatible alias used by some older widgets.
   void logOut() {
     logout();
   }
@@ -243,6 +243,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    clearForm();
     checkAuth();
   }
 

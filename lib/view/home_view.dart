@@ -95,7 +95,7 @@ class HomeView extends StatelessWidget {
                       image: "assets/images/dashboard/course_image.png",
                     ),
                     CustomCourseItem(
-                      title: "Flutter Development",
+                      title: "Web Design",
                       mentor: "Er. Sajal Shrestha",
                       videos: "16",
                       image: "assets/images/dashboard/course_image.png",

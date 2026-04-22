@@ -17,8 +17,7 @@ class LoginView extends GetView<AuthController> {
   Widget build(BuildContext context) {
     var key = GlobalKey<FormState>();
 
-
-  return Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Center(
         child: SingleChildScrollView(
@@ -62,30 +61,34 @@ class LoginView extends GetView<AuthController> {
                     controller: controller.email,
                     labelText: "Email Address",
                     hintText: "Enter your email address",
-                       validator: Validators.emailValidator,
+                    validator: Validators.emailValidator,
                   ),
 
                   Gap(20),
                   //w5 password
-                Obx((){
-                  return   CustomTextField(
-                    controller: controller.password,
-                    labelText: "Password",
-                    hintText: "Enter your password",
-                    obscureText: controller.isPasswordHidden.value,
-                    suffixIcon: IconButton(onPressed: (){
-                     controller.isPasswordHidden.value = !controller.isPasswordHidden.value;
-                    }, icon: Icon(
-                     controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility)),
-                    validator: (value) =>
-                        value!.isEmpty ? "Password is required" : null,
-                  );
+                  Obx(() {
+                    return CustomTextField(
+                      controller: controller.password,
+                      labelText: "Password",
+                      hintText: "Enter your password",
+                      obscureText: controller.isPasswordHidden.value,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          controller.isPasswordHidden.value =
+                              !controller.isPasswordHidden.value;
+                        },
+                        icon: Icon(
+                          controller.isPasswordHidden.value
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                      ),
+                      validator: (value) =>
+                          value!.isEmpty ? "Password is required" : null,
+                    );
+                  }),
 
-               
-
-                }),
-
-                   Gap(20),
+                  Gap(20),
 
                   //w6 row
                   Row(
@@ -94,7 +97,7 @@ class LoginView extends GetView<AuthController> {
                       Flexible(
                         child: Row(
                           children: [
-                          Obx(
+                            Obx(
                               () => Checkbox(
                                 value: controller.rememberMe.value,
                                 activeColor: AppColors.primary,
@@ -127,21 +130,11 @@ class LoginView extends GetView<AuthController> {
                   Gap(20),
 
                   //w7 button
-                  CustomButton(text: "Log in", 
-                  
-                  onPressed: () {
+                  CustomButton(
+                    text: "Log in",
+                    onPressed: () {
                       if (key.currentState!.validate()) {
-                        if (!controller.rememberMe.value) {
-                          Get.snackbar(
-                            "Error",
-                            "Please accept Remember Me",
-                            backgroundColor: Colors.red,
-                            colorText: Colors.white,
-                          );
-                          return;
-                        }
-
-                        controller.login();
+                      controller.login();
                       }
                     },
                   ),
@@ -162,6 +155,7 @@ class LoginView extends GetView<AuthController> {
                         ),
                       ),
                       CustomTextButton(
+                        clearForm: controller.clearForm,
                         text: "Create Account",
                         routeName: AppRoutes.register,
                       ),
@@ -175,4 +169,4 @@ class LoginView extends GetView<AuthController> {
       ),
     );
   }
-} 
+}
