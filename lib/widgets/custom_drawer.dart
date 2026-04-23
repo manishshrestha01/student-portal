@@ -27,13 +27,13 @@ class CustomDrawer extends StatelessWidget {
         final bool isSmall = screenWidth < 390;
         final bool isMedium = screenWidth >= 500 && screenWidth < 768;
 
-        final double iconWidth = isSmall ? 23 : (isMedium ? 26 : 31);
-        final double iconHeight = isSmall ? 22 : (isMedium ? 24 : 29.05);
-        final double itemFontSize = isSmall ? 14 : (isMedium ? 18 : 20);
-        final double titleFontSize = isSmall ? 24 : (isMedium ? 32 : 40);
-        final double gapSize = isSmall ? 20 : (isMedium ? 30 : 40);
-        final double leftPadding = isSmall ? 16 : (isMedium ? 24 : 30);
-        final double logoutLeftPadding = isSmall ? 40 : (isMedium ? 60 : 90);
+        final double iconWidth = isSmall ? 26 : (isMedium ? 29 : 31);
+        final double iconHeight = isSmall ? 24 : (isMedium ? 27 : 29.05);
+        final double itemFontSize = isSmall ? 18 : (isMedium ? 20 : 20);
+        final double titleFontSize = isSmall ? 32 : (isMedium ? 36 : 40);
+        final double gapSize = isSmall ? 30 : (isMedium ? 35 : 40);
+        final double leftPadding = isSmall ? 24 : (isMedium ? 28 : 30);
+        final double logoutLeftPadding = isSmall ? 80 : (isMedium ? 60 : 90);
 
         return Drawer(
           width: screenWidth < 500 ? screenWidth * 0.75 : (screenWidth < 900 ? 350 : 400),
