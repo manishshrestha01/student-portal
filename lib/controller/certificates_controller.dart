@@ -21,10 +21,8 @@ class CertificatesController extends GetxController {
       var response = await CertificatesService.fetchCertificates();
       if (response.statusCode == 200) {
         final responseData = response.data;
-        print("RAW JSON FROM SERVER: $responseData");
         if (responseData is Map<String, dynamic>) {
           certificate.value = CertificatesModel.fromJson(responseData);
-          print("MODEL DATA COUNT: ${certificate.value.data.length}");
         } else {
           certificate.value = CertificatesModel(sucess: false, data: [],success: false,);
           errorMessage('Unexpected response format from server.');
