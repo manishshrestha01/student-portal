@@ -1,6 +1,5 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
-import 'package:codeit_app/widgets/custom_certificate_card.dart';
 import 'package:codeit_app/widgets/custom_course_item.dart';
 import 'package:codeit_app/widgets/custom_info_card.dart';
 import 'package:codeit_app/widgets/custom_parent_container.dart';
@@ -58,7 +57,7 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 Gap(20),
-          
+
                 // Info cards
                 Column(
                   children: [
@@ -82,7 +81,7 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 Gap(20),
-          
+
                 // Courses section
                 CustomParentContainer(
                   title: "Your Courses",
@@ -103,7 +102,7 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 Gap(20),
-          
+
                 // Payments section
                 CustomParentContainer(
                   title: "Recent Payments",
@@ -124,24 +123,6 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 Gap(20),
-          
-                // Certificates section
-                CustomParentContainer(
-                  title: "Certificates",
-                  seeall: "See All",
-                  children: [
-                    CustomCertificateCard(
-                      title: "Web Design",
-                      completed: "Feb 02, 2024",
-                      icon: Icons.star_border_sharp,
-                    ),
-                    CustomCertificateCard(
-                      title: "Flutter",
-                      completed: "Feb 02, 2025",
-                      icon: Icons.star_border_sharp,
-                    ),
-                  ],
-                ),
               ],
             ),
           ),

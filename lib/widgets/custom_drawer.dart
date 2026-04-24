@@ -126,7 +126,7 @@ class CustomDrawer extends StatelessWidget {
                       ),
                     ),
                     title: Text(
-                      "Certificate",
+                      "Certificates",
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
                           color: Colors.white,

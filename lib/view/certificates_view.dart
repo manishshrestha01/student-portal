@@ -16,7 +16,6 @@ class CertificatesView extends StatefulWidget {
 }
 
 class _CertificatesViewState extends State<CertificatesView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,9 +63,19 @@ class _CertificatesViewState extends State<CertificatesView> {
                   ),
                   child: Row(
                     children: [
-                      Text("data")
+                      Padding(padding: EdgeInsetsGeometry.all(10)),
+                      SvgPicture.asset(
+                        'assets/support/certificate_frame.svg',
+                        width: 40,
+                        height: 40,
+                        colorFilter: const ColorFilter.mode(
+                          Color(0xFFFF6900),
+                          BlendMode.srcIn,
+                        ),
+                      ),
                     ],
-                  )),
+                  ),
+                ),
               ),
               const Gap(36),
             ],
