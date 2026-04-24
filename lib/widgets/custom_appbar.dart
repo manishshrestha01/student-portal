@@ -22,6 +22,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           bottom: 10,
         ),
         backgroundColor: const Color(0xFFFFFFFF),
+        surfaceTintColor: Colors.transparent,
         elevation: 0,
         title: Image.asset(
           'assets/images/code-it-logo.png',
