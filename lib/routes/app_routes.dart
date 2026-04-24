@@ -10,6 +10,8 @@ class AppRoutes {
   static const String ticket = '/ticket';
   static const String suggestions = '/suggestions';
   static const String sendTicket = '/support-ticket';
+  static const String showTicket = '/show-ticket';
   static const String home = '/home';
   static const String terms = '/terms';
+  static const String cerificates = '/certificates';
 }
