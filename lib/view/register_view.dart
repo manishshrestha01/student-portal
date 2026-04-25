@@ -152,6 +152,7 @@ class RegisterView extends GetView<AuthController> {
                         ),
                       ),
                       CustomTextButton(
+                        clearForm: controller.clearForm,
                         text: "Log in",
                         routeName: AppRoutes.login,
                       ),
