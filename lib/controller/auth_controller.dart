@@ -8,7 +8,6 @@ import 'package:codeit_app/model/user_model.dart';
 import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/service/auth_service.dart';
 import 'package:codeit_app/utils/dio_connector.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,5 +1,6 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
+import 'package:codeit_app/widgets/custom_certificate_card.dart';
 import 'package:codeit_app/widgets/custom_course_item.dart';
 import 'package:codeit_app/widgets/custom_info_card.dart';
 import 'package:codeit_app/widgets/custom_parent_container.dart';
