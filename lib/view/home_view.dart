@@ -1,4 +1,5 @@
 import 'package:codeit_app/controller/auth_controller.dart';
+import 'package:codeit_app/view/receipt_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_certificate_card.dart';
 import 'package:codeit_app/widgets/custom_course_item.dart';
@@ -90,6 +91,11 @@ class HomeView extends StatelessWidget {
                   CustomParentContainer(
                     title: "Your Courses",
                     seeall: "See All",
+                    onTapSeeAll: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ReceiptView()),
+                    ),
+
                     children: [
                       CustomCourseItem(
                         title: "Flutter Development",
@@ -111,6 +117,8 @@ class HomeView extends StatelessWidget {
                   CustomParentContainer(
                     title: "Recent Payments",
                     seeall: "See All",
+                    onTapSeeAll: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ReceiptView())),
+                    
                     children: [
                       CustomPaymentReceipt(
                         title: "Web Design",
@@ -132,6 +140,11 @@ class HomeView extends StatelessWidget {
                   CustomParentContainer(
                     title: "Certificates",
                     seeall: "See All",
+                    onTapSeeAll: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ReceiptView()),
+                    ),
+
                     children: [
                       CustomCertificateCard(
                         title: "Web Design",

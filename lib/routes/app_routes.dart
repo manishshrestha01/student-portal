@@ -12,4 +12,5 @@ class AppRoutes {
   static const String sendTicket = '/support-ticket';
   static const String home = '/home';
   static const String terms = '/terms';
+  static const String receipt = '/receipt';
 }
