@@ -1,13 +1,11 @@
+import 'package:codeit_app/controller/email_certificates_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/certificates_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_navigation/src/snackbar/snackbar.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CertificatesWidget extends StatelessWidget {
   final Datum item;
@@ -15,6 +13,7 @@ class CertificatesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<EmailCertificatesController>();
     return Container(
       width: 387,
       padding: const EdgeInsets.all(20),
@@ -65,8 +64,8 @@ class CertificatesWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 'assets/support/issued.svg',
-                width: 15.53,
-                height: 19.76,
+                width: 25,
+                height: 30,
                 colorFilter: const ColorFilter.mode(
                   Color(0xB3000000),
                   BlendMode.srcIn,
@@ -81,7 +80,7 @@ class CertificatesWidget extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: const TextStyle(
                         color: Color(0xB3000000),
-                        fontSize: 10,
+                        fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -91,7 +90,7 @@ class CertificatesWidget extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: const TextStyle(
                         color: Color(0xFF000000),
-                        fontSize: 10,
+                        fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -105,8 +104,8 @@ class CertificatesWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 'assets/support/date.svg',
-                width: 15.53,
-                height: 19.76,
+                width: 25,
+                height: 25,
                 colorFilter: const ColorFilter.mode(
                   Color(0xB3000000),
                   BlendMode.srcIn,
@@ -121,7 +120,7 @@ class CertificatesWidget extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: const TextStyle(
                         color: Color(0xB3000000),
-                        fontSize: 10,
+                        fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -131,7 +130,7 @@ class CertificatesWidget extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: const TextStyle(
                         color: Color(0xFF000000),
-                        fontSize: 10,
+                        fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -141,73 +140,36 @@ class CertificatesWidget extends StatelessWidget {
             ],
           ),
           Gap(21),
-          SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: ElevatedButton.icon(
-              onPressed: () async {
-                final String? urlPath = item.downloadCertificate;
-
-                if (urlPath == null || urlPath.isEmpty) {
-                  _showSnack("Download Error", Colors.red);
-                  return;
-                }
-                _showSnack(
-                  "Downloading",
-                  const Color(0xFFFF6900),
-                );
-
-                try {
-                  final Uri url = Uri.parse(urlPath.trim());
-                  bool launched = await launchUrl(
-                    url,
-                    mode: LaunchMode.externalApplication,
-                  );
-
-                  if (launched) {
-                    Future.delayed(const Duration(seconds: 1), () {
-                      _showSnack(
-                        "Download Succeeded",
-                        Colors.green,
-                      );
-                    });
-                  } else {
-                    _showSnack(
-                      "Download Error",
-                      Colors.red,
-                    );
-                  }
-                } catch (e) {
-                  _showSnack(
-                    "Download Error",
-                    Colors.red,
-                  );
-                }
-              },
-              icon: SvgPicture.asset(
-                'assets/support/download.svg',
-                colorFilter: const ColorFilter.mode(
-                  Color(0xFFFF6900),
-                  BlendMode.srcIn,
+          Obx(()=>SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton.icon(
+                onPressed: controller.isLoadingForId(item.certicateId.toString()) ? null : ()=> controller.sendEmail(item.certicateId.toString()),
+                icon: SvgPicture.asset(
+                  'assets/support/download.svg',
+                  colorFilter: const ColorFilter.mode(
+                    Color(0xFFFF6900),
+                    BlendMode.srcIn,
+                  ),
+                  width: 26,
+                  height: 26,
                 ),
-                width: 26,
-                height: 26,
-              ),
-              label: Text(
-                'Download Certificates',
-                style: GoogleFonts.inter(
-                  textStyle: TextStyle(
-                    color: const Color(0xFFFF6900),
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
+                label: Text(
+                  controller.isLoadingForId(item.certicateId.toString()) ? 'Sending...' : 'Email Certificate',
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      color: const Color(0xFFFF6900),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFFFFFF),
-                side: BorderSide(color: const Color(0xFFFF6900), width: 1),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFFFFFFF),
+                  side: BorderSide(color: const Color(0xFFFF6900), width: 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
             ),
@@ -216,23 +178,4 @@ class CertificatesWidget extends StatelessWidget {
       ),
     );
   }
-}
-void _showSnack(String title, Color bgColor) {
-  if (Get.isSnackbarOpen) {
-    Get.closeCurrentSnackbar();
-  }
-
-  Get.snackbar(
-    title,
-    "",
-    snackPosition: SnackPosition.BOTTOM,
-    backgroundColor: bgColor,
-    colorText: Colors.white,
-    margin: const EdgeInsets.all(15),
-    duration: const Duration(seconds: 2),
-    icon: Icon(
-      bgColor == Colors.red ? Icons.error_outline : Icons.download_done_rounded,
-      color: Colors.white,
-    ),
-  );
 }
