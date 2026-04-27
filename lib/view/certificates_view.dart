@@ -35,57 +35,71 @@ class _CertificatesViewState extends State<CertificatesView> {
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
-      body: Obx(() {
-        if (certificateController.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        final certificatesList = certificateController.certificate.value.data;
-        print("Certificates Count: ${certificatesList.length}");
-        if (certificatesList.isEmpty) {
-          return const Center(child: Text("No certificates found."));
-        }
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final double screenWidth = constraints.maxWidth;
+          final bool isSmall = screenWidth < 390;
+          final bool isMedium = screenWidth >= 390 && screenWidth < 768;
+          
+          // Responsive values
+          final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
+          final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
+          final double titleFontSize = isSmall ? 20 : (isMedium ? 22 : 25);
+          final double breadcrumbFontSize = isSmall ? 12 : (isMedium ? 13 : 15);
+          
+          return Obx(() {
+            if (certificateController.isLoading.value) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            final certificatesList = certificateController.certificate.value.data;
+            print("Certificates Count: ${certificatesList.length}");
+            if (certificatesList.isEmpty) {
+              return const Center(child: Text("No certificates found."));
+            }
 
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Gap(32),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: _buildBreadcrumb(),
-                ),
-                const Gap(32),
-                Text(
-                  'My Certificates',
-                  style: GoogleFonts.inter(
-                    textStyle: const TextStyle(
-                      color: AppColors.textDark,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600,
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Gap(verticalGap),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _buildBreadcrumb(breadcrumbFontSize),
                     ),
-                  ),
+                    Gap(verticalGap),
+                    Text(
+                      'My Certificates',
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: AppColors.textDark,
+                          fontSize: titleFontSize,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    Gap(verticalGap),
+                    ...certificatesList.map((item) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: horizontalPadding),
+                        child: CertificatesWidget(
+                          item: item,
+                        ), 
+                      );
+                    }),
+                    Gap(horizontalPadding),
+                  ],
                 ),
-                const Gap(32),
-                ...certificatesList.map((item) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: CertificatesWidget(
-                      item: item,
-                    ), 
-                  );
-                }),
-                Gap(20),
-              ],
-            ),
-          ),
-        );
-      }),
+              ),
+            );
+          });
+        },
+      ),
     );
   }
 
-  Widget _buildBreadcrumb() {
+  Widget _buildBreadcrumb(double fontSize) {
     return Row(
       children: [
         GestureDetector(
@@ -105,9 +119,9 @@ class _CertificatesViewState extends State<CertificatesView> {
               Text(
                 'Home',
                 style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 0.7),
-                    fontSize: 15,
+                  textStyle: TextStyle(
+                    color: const Color.fromRGBO(0, 0, 0, 0.7),
+                    fontSize: fontSize,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -125,9 +139,9 @@ class _CertificatesViewState extends State<CertificatesView> {
         Text(
           'Certificates',
           style: GoogleFonts.inter(
-            textStyle: const TextStyle(
-              color: Color(0xFF000000),
-              fontSize: 15,
+            textStyle: TextStyle(
+              color: const Color(0xFF000000),
+              fontSize: fontSize,
               fontWeight: FontWeight.w400,
             ),
           ),
