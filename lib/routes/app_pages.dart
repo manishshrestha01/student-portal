@@ -57,6 +57,6 @@ class AppPages {
     GetPage(name: AppRoutes.sendTicket, page: () => const SupportView()),
     GetPage(name: AppRoutes.home, page: () =>  HomeView()),
     GetPage(name: AppRoutes.terms, page: () =>  TermsView()),
-    GetPage(name: AppRoutes.cerificates, page: () =>  CertificatesView()),
+    GetPage(name: AppRoutes.certificates, page: () =>  CertificatesView()),
   ];
 }

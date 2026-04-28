@@ -5,12 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:device_preview/device_preview.dart';
-
 
 void main() async {
   await GetStorage.init('MyStorage');
-  runApp(DevicePreview(builder: (context) => MyApp(),));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,10 +21,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       getPages: AppPages.routes,
       initialBinding: ControllerBinding(),
-      home:  SplashView(),
-      theme: ThemeData(
-        textTheme: GoogleFonts.interTextTheme(),
-      ),
+      home: SplashView(),
+      theme: ThemeData(textTheme: GoogleFonts.interTextTheme()),
     );
   }
 }

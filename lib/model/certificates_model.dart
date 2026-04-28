@@ -1,7 +1,7 @@
 class CertificatesModel {
     CertificatesModel({
         required this.sucess,
-        required this.data, required bool success,
+        required this.data,
     });
 
     final bool? sucess;
@@ -10,7 +10,6 @@ class CertificatesModel {
     factory CertificatesModel.fromJson(Map<String, dynamic> json){ 
         return CertificatesModel(
             sucess: json["sucess"],
-            success: json["success"] ?? false,
             data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
         );
     }
@@ -19,14 +18,14 @@ class CertificatesModel {
 
 class Datum {
     Datum({
-        required this.certificateId,
+        required this.certicateId,
         required this.courseName,
         required this.issuedTo,
         required this.courseCompletionDate,
         required this.downloadCertificate,
     });
 
-    final int? certificateId;
+    final int? certicateId;
     final String? courseName;
     final String? issuedTo;
     final String? courseCompletionDate;
@@ -34,7 +33,7 @@ class Datum {
 
     factory Datum.fromJson(Map<String, dynamic> json){ 
         return Datum(
-            certificateId: json["certificate_id"],
+            certicateId: int.tryParse(json["certicate_id"]?.toString() ?? ""),
             courseName: json["course_name"],
             issuedTo: json["Issued to"],
             courseCompletionDate: json["course_completion_Date"],

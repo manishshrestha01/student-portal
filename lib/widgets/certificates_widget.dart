@@ -105,7 +105,7 @@ class CertificatesWidget extends StatelessWidget {
               SvgPicture.asset(
                 'assets/support/date.svg',
                 width: 25,
-                height: 25,
+                height: 30,
                 colorFilter: const ColorFilter.mode(
                   Color(0xB3000000),
                   BlendMode.srcIn,

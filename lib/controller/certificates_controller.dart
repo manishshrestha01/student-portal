@@ -4,7 +4,7 @@ import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:get/get.dart';
 
 class CertificatesController extends GetxController {
-  var certificate = CertificatesModel(sucess: true, data: [], success: true).obs;
+  var certificate = CertificatesModel(sucess: true, data: [],).obs;
   var isLoading = false.obs;
   var errorMessage = ''.obs;
 
@@ -24,12 +24,12 @@ class CertificatesController extends GetxController {
         if (responseData is Map<String, dynamic>) {
           certificate.value = CertificatesModel.fromJson(responseData);
         } else {
-          certificate.value = CertificatesModel(sucess: false, data: [],success: false,);
+          certificate.value = CertificatesModel(sucess: false, data: []);
           errorMessage('Unexpected response format from server.');
         }
       }
     } catch (e) {
-      certificate.value = CertificatesModel(sucess: false, data: [],success: false,);
+      certificate.value = CertificatesModel(sucess: false, data: []);
       errorMessage('Could not load certificates. Please try again.');
     } finally {
       isLoading(false);
