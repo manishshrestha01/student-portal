@@ -5,6 +5,7 @@ import 'package:codeit_app/view/change_password.dart';
 import 'package:codeit_app/view/forgot_password_view.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/login_view.dart';
+import 'package:codeit_app/view/payment_page_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
 import 'package:codeit_app/view/receipt_view.dart';
 import 'package:codeit_app/view/register_view.dart';
@@ -58,6 +59,7 @@ class AppPages {
     GetPage(name: AppRoutes.home, page: () =>  HomeView()),
     GetPage(name: AppRoutes.terms, page: () =>  TermsView()),
     GetPage(name: AppRoutes.receipt, page: () =>  ReceiptView()),
+    GetPage(name: AppRoutes.payment, page: () =>  PaymentPage()),
 
   ];
 }

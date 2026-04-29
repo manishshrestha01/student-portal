@@ -6,12 +6,14 @@ class InfoCard extends StatelessWidget {
   final String title;
   final String value;
   final IconData icon;
+  final VoidCallback? onTap;
 
   const InfoCard({
     super.key,
     required this.title,
     required this.value,
     required this.icon,
+    this.onTap,
   });
 
   @override
@@ -19,7 +21,7 @@ class InfoCard extends StatelessWidget {
 
     return InkWell(
       onTap: (){
-        
+        onTap?.call();
       },
       child: Container(
        

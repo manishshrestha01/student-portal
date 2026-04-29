@@ -2,6 +2,7 @@ import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/receipt_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class CustomPaymentReceipt extends StatelessWidget {
   final String title;
@@ -28,10 +29,7 @@ class CustomPaymentReceipt extends StatelessWidget {
       ),
       child: InkWell(
         onTap: (){
-           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ReceiptView()),
-          );
+           Get.offAll(() => const ReceiptView());
         },
         child: Row(
           children: [
