@@ -9,6 +9,7 @@ class CustomPaymentReceipt extends StatelessWidget {
   final String amount;
   final String date;
   final IconData icon;
+  final int receiptId;
 
   const CustomPaymentReceipt({
     super.key,
@@ -16,6 +17,7 @@ class CustomPaymentReceipt extends StatelessWidget {
     required this.amount,
     required this.date,
     required this.icon,
+    required this.receiptId,
   });
 
   @override
@@ -29,7 +31,7 @@ class CustomPaymentReceipt extends StatelessWidget {
       ),
       child: InkWell(
         onTap: (){
-           Get.offAll(() => const ReceiptView());
+           Get.offAll(() => ReceiptView(receiptId: receiptId));
         },
         child: Row(
           children: [

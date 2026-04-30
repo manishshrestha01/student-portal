@@ -8,11 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PaymentPage extends StatelessWidget {
+  
   const PaymentPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ReceiptController controller = Get.find<ReceiptController>();
+    final ReceiptController controller = Get.put(ReceiptController());
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -37,15 +38,16 @@ class PaymentPage extends StatelessWidget {
 
         return CustomParentContainer(
           title: "Recent Payments",
-          seeall: "See All",
-          onTapSeeAll: () => Get.offAll(() => const ReceiptView()),
+          seeall: "",
+          onTapSeeAll: () => Get.offAll(() =>  ReceiptView(receiptId: 0)),
           
-          children: controller.receipts.take(2).map((receipt) {
+          children: controller.receipts.map((receipt) {
             return CustomPaymentReceipt(
               title: receipt.courseName ?? "Course",
               amount: receipt.amount?.toString() ?? "0",
               date: receipt.enrolledDate ?? "",
               icon: Icons.receipt,
+              receiptId: receipt.receiptId ?? 0,
             );
           }).toList(),
         );

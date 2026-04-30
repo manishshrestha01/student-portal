@@ -243,21 +243,9 @@ class CustomDrawer extends StatelessWidget {
 
             ListTile(
               onTap: () {
-                Get.defaultDialog(
-                  title: "Logout",
-                  middleText: "Are you sure you want to logout?",
-                  textConfirm: "Yes",
-                  textCancel: "No",
-                  confirmTextColor: Colors.white,
-                  buttonColor: AppColors.primary,
-                  onConfirm: () {
-                    Get.back();
-                    authController.logout();
-                    authController.clearForm();
-                  },
-                );
+                authController.logout();
+                authController.clearForm();
               },
-
               leading: SvgPicture.asset(
                 'assets/support/logout.svg',
                 width: 31,
@@ -267,7 +255,6 @@ class CustomDrawer extends StatelessWidget {
                   BlendMode.srcIn,
                 ),
               ),
-
               title: Text(
                 "Logout",
                 style: GoogleFonts.inter(

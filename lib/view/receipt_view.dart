@@ -13,7 +13,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ReceiptView extends StatelessWidget {
-  const ReceiptView({super.key});
+   final int receiptId;
+
+  const ReceiptView({super.key, required this.receiptId});
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -35,13 +38,11 @@ class ReceiptView extends StatelessWidget {
                 child: _buildBreadcrumb(),
               ),
               const Gap(22),
-              Obx(() {
-                // Loading state
+           Obx(() {
                 if (controller.isLoading.value) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                // Error state
                 if (controller.hasError.value) {
                   return Center(
                     child: Column(
@@ -60,18 +61,25 @@ class ReceiptView extends StatelessWidget {
                   );
                 }
 
-                // Empty state
                 if (controller.receipts.isEmpty) {
                   return const Center(child: Text("No receipts found."));
                 }
 
+                //Only show the receipt matching the receiptId
+                final filtered = controller.receipts
+                    .where((r) => r.receiptId == receiptId)
+                    .toList();
+
+                if (filtered.isEmpty) {
+                  return const Center(child: Text("Receipt not found."));
+                }
+
                 return Column(
-                  children: controller.receipts.map((Datum receipt) {
+                  children: filtered.map((Datum receipt) {
                     return _buildReceiptCard(receipt);
                   }).toList(),
                 );
-              }),
-              const Gap(36),
+              }),   const Gap(36),
             ],
           ),
         ),

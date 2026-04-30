@@ -58,7 +58,7 @@ class AppPages {
     GetPage(name: AppRoutes.sendTicket, page: () => const SupportView()),
     GetPage(name: AppRoutes.home, page: () =>  HomeView()),
     GetPage(name: AppRoutes.terms, page: () =>  TermsView()),
-    GetPage(name: AppRoutes.receipt, page: () =>  ReceiptView()),
+    GetPage(name: AppRoutes.receipt, page: () =>  ReceiptView(receiptId: Get.arguments as int? ?? 0)),
     GetPage(name: AppRoutes.payment, page: () =>  PaymentPage()),
 
   ];

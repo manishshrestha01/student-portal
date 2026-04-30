@@ -74,12 +74,18 @@ class HomeView extends StatelessWidget {
                         title: "Active Courses",
                         value: '2',
                         icon: Icons.menu_book,
+                        onTap: (){
+                          // Navigate to courses page
+                        } ,
                       ),
                       Gap(6),
                       InfoCard(
                         title: "Certificates",
                         value: '2',
                         icon: Icons.workspace_premium,
+                        onTap: (){
+                          // Navigate to certificates page
+                        },
                       ),
                       Gap(6),
 
@@ -88,7 +94,7 @@ class HomeView extends StatelessWidget {
                           title: "Payments",
                           value: controller.receipts.length.toString(),
                           icon: Icons.payment,
-                           onTap: () => Get.offAll(() => const PaymentPage()),
+                           onTap: () => Get.to(() => const PaymentPage()),
                           
                         );
                       }),
@@ -100,11 +106,9 @@ class HomeView extends StatelessWidget {
                   CustomParentContainer(
                     title: "Your Courses",
                     seeall: "See All",
-                    onTapSeeAll: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ReceiptView()),
-                    ),
-
+                    onTapSeeAll: (){
+                      // Navigate to courses page
+                    },
                     children: [
                       CustomCourseItem(
                         title: "Flutter Development",
@@ -131,11 +135,10 @@ class HomeView extends StatelessWidget {
                   CustomParentContainer(
                     title: "Certificates",
                     seeall: "See All",
-                    onTapSeeAll: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ReceiptView()),
-                    ),
-
+                   onTapSeeAll: (){
+                      // Navigate to certificates page
+                    },
+                    
                     children: [
                       CustomCertificateCard(
                         title: "Web Design",
@@ -179,7 +182,7 @@ return      Obx(() {
                     return CustomParentContainer(
                       title: "Recent Payments",
                       seeall: "See All",
-                      onTapSeeAll: () => Get.offAll(() => const ReceiptView()),
+                      onTapSeeAll: () => Get.to(() =>  const PaymentPage()),
                       
                       children: controller.receipts.take(2).map((receipt) {
                         return CustomPaymentReceipt(
@@ -187,6 +190,7 @@ return      Obx(() {
                           amount: receipt.amount?.toString() ?? "0",
                           date: receipt.enrolledDate ?? "",
                           icon: Icons.receipt,
+                          receiptId: receipt.receiptId ?? 0,
                         );
                       }).toList(),
                     );
