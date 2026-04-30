@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 class InfoCard extends StatelessWidget {
   final String title;
   final String value;
-  final IconData icon;
+  final Widget icon;
 
   const InfoCard({
     super.key,
@@ -16,41 +16,29 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return InkWell(
-      onTap: (){
-        
-      },
+    return GestureDetector(
+      onTap: () {},
       child: Container(
-       
-      padding: EdgeInsets.all(16),
-         
+        padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Color(0xFFF9FAFB),
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade300,
-              blurRadius: 6,
+              color: const Color.fromRGBO(0, 0, 0, 0.25),
+              blurRadius: 4,
               offset: Offset(0, 4),
+              spreadRadius: 0,
             ),
           ],
         ),
         child: Row(
           children: [
             //icon
-            Container(
-              height: 55,
-              width: 55,
-              decoration: BoxDecoration(
-                color: Colors.blueGrey.shade100,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Icon(icon, size: 28, color: Colors.blue.shade800),
-            ),
-      
+            icon,
+
             Gap(12),
-      
+
             // text
             Expanded(
               child: Column(
@@ -65,9 +53,9 @@ class InfoCard extends StatelessWidget {
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
-      
+
                   Gap(4),
-      
+
                   Text(
                     value,
                     style: TextStyle(

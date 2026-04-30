@@ -7,6 +7,7 @@ import 'package:codeit_app/widgets/custom_parent_container.dart';
 import 'package:codeit_app/widgets/custom_payment_receipt.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +18,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-                    double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: CustomAppBar(),
@@ -33,7 +34,7 @@ class HomeView extends StatelessWidget {
         return SingleChildScrollView(
           child: Center(
             child: Container(
-                 width: width > 600 ? 400 : width * 0.9,
+              width: width > 600 ? 400 : width * 0.9,
               padding: EdgeInsets.all(16),
               margin: EdgeInsets.all(16),
               child: Column(
@@ -60,32 +61,44 @@ class HomeView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Gap(20),
-            
+                  Gap(40),
+
                   // Info cards
                   Column(
                     children: [
                       InfoCard(
                         title: "Active Courses",
                         value: '2',
-                        icon: Icons.menu_book,
+                        icon: SvgPicture.asset(
+                          'assets/support/course_border.svg',
+                          width: 55,
+                          height: 55,
+                        ),
                       ),
-                      Gap(6),
+                      Gap(20),
                       InfoCard(
                         title: "Certificates",
                         value: '2',
-                        icon: Icons.workspace_premium,
+                        icon: SvgPicture.asset(
+                          'assets/support/certificate_border.svg',
+                          width: 55,
+                          height: 55,
+                        ),
                       ),
-                      Gap(6),
+                      Gap(20),
                       InfoCard(
                         title: "Payments",
                         value: '2',
-                        icon: Icons.payment,
+                        icon: SvgPicture.asset(
+                          'assets/support/payments_border.svg',
+                          width: 55,
+                          height: 55,
+                        ),
                       ),
                     ],
                   ),
                   Gap(20),
-            
+
                   // Courses section
                   CustomParentContainer(
                     title: "Your Courses",
@@ -106,7 +119,7 @@ class HomeView extends StatelessWidget {
                     ],
                   ),
                   Gap(20),
-            
+
                   // Payments section
                   CustomParentContainer(
                     title: "Recent Payments",
@@ -116,18 +129,26 @@ class HomeView extends StatelessWidget {
                         title: "Web Design",
                         amount: "1199",
                         date: "Feb 02, 2024",
-                        icon: Icons.receipt,
+                        icon: SvgPicture.asset(
+                          'assets/support/payments_border.svg',
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                       CustomPaymentReceipt(
                         title: "Flutter",
                         amount: "2499",
                         date: "Feb 02, 2025",
-                        icon: Icons.receipt,
+                        icon: SvgPicture.asset(
+                          'assets/support/payments_border.svg',
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                     ],
                   ),
                   Gap(20),
-            
+
                   // Certificates section
                   CustomParentContainer(
                     title: "Certificates",
@@ -136,12 +157,20 @@ class HomeView extends StatelessWidget {
                       CustomCertificateCard(
                         title: "Web Design",
                         completed: "Feb 02, 2024",
-                        icon: Icons.star_border_sharp,
+                        icon: SvgPicture.asset(
+                          'assets/support/certificate_border.svg',
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                       CustomCertificateCard(
                         title: "Flutter",
                         completed: "Feb 02, 2025",
-                        icon: Icons.star_border_sharp,
+                        icon: SvgPicture.asset(
+                          'assets/support/certificate_border.svg',
+                          width: 40,
+                          height: 40,
+                        ),
                       ),
                     ],
                   ),

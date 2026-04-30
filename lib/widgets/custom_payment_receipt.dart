@@ -6,7 +6,7 @@ class CustomPaymentReceipt extends StatelessWidget {
   final String title;
   final String amount;
   final String date;
-  final IconData icon;
+  final Widget icon;
 
   const CustomPaymentReceipt({
     super.key,
@@ -22,25 +22,16 @@ class CustomPaymentReceipt extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 12),
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: InkWell(
+      child: GestureDetector(
         onTap: (){
           
         },
         child: Row(
           children: [
             //icon
-            Container(
-              height: 55,
-              width: 55,
-              decoration: BoxDecoration(
-                color: Colors.blueGrey.shade100,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Icon(icon, size: 28, color: Colors.blue.shade800),
-            ),
+            icon,
         
         
            Gap(10),

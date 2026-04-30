@@ -26,9 +26,9 @@ class CertificatesWidget extends StatelessWidget {
         final double padding = isSmall ? 16 : (isMedium ? 18 : 20);
         final double gapSize = isSmall ? 8 : 9;
         final double iconSize = isSmall ? 32 : 40;
-        final double iconSizeSmall = isSmall ? 12 : (isMedium ? 14 : 17);
-        final double titleFontSize = isSmall ? 14 : (isMedium ? 16 : 18);
-        final double labelFontSize = isSmall ? 8 : (isMedium ? 9 : 10);
+        final double iconSizeSmall = isSmall ? 20 : (isMedium ? 25 : 35);
+        final double titleFontSize = isSmall ? 14 : (isMedium ? 16 : 17);
+        final double labelFontSize = isSmall ? 12 : (isMedium ? 14 : 17);
         final double buttonHeight = isSmall ? 44 : (isMedium ? 48 : 50);
         final double buttonFontSize = isSmall ? 14 : (isMedium ? 16 : 20);
         final double borderRadius = isSmall ? 16 : 20;
@@ -60,7 +60,8 @@ class CertificatesWidget extends StatelessWidget {
                     width: iconSize,
                     height: iconSize,
                     colorFilter: const ColorFilter.mode(
-                      Color(0xFFFF6900),
+                      // Color(0xFF9A1CB9), /purple in dashboard
+                      Color(0xFFFF6900), // orange in ui
                       BlendMode.srcIn,
                     ),
                   ),
