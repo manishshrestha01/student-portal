@@ -1,7 +1,6 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/controller/receipt_controller.dart';
 import 'package:codeit_app/view/payment_page_view.dart';
-import 'package:codeit_app/view/receipt_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_certificate_card.dart';
 import 'package:codeit_app/widgets/custom_course_item.dart';

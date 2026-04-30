@@ -7,6 +7,7 @@ class CustomPaymentReceipt extends StatelessWidget {
   final String amount;
   final String date;
   final Widget icon;
+  final int? receiptId;
 
   const CustomPaymentReceipt({
     super.key,
@@ -14,6 +15,7 @@ class CustomPaymentReceipt extends StatelessWidget {
     required this.amount,
     required this.date,
     required this.icon,
+    this.receiptId,
   });
 
   @override

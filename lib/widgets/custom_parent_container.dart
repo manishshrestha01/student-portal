@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 class CustomParentContainer extends StatelessWidget {
   final String title;
   final String seeall;
-
+  final VoidCallback? onTapSeeAll;
   final List<Widget> children;
 
   const CustomParentContainer({super.key,
   required this.title,
   required this.seeall,
+  this.onTapSeeAll,
    required this.children});
 
   @override
@@ -41,7 +42,7 @@ class CustomParentContainer extends StatelessWidget {
                 ),
 
                 GestureDetector(
-                  onTap: () {},
+                  onTap: onTapSeeAll,
                   child: Text(
                     seeall,
                     style: TextStyle(
