@@ -7,8 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final Widget? leading;
 
- CustomAppBar({super.key, this.title});
+ CustomAppBar({super.key, this.title, this.leading});
 
   final AuthController authController = Get.find<AuthController>();
 
@@ -30,6 +31,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           width: 300,
         ),
         centerTitle: true,
+        leading: leading,
         actions: [
           TextButton.icon(
             onPressed: (){

@@ -15,4 +15,6 @@ class AppRoutes {
   static const String terms = '/terms';
   static const String certificates = '/certificates';  
   static const String courses = '/courses';    
+  static const String receipt = '/receipt';
+  static const String payment = '/payment';
 }

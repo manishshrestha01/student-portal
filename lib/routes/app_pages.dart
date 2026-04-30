@@ -7,7 +7,9 @@ import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/forgot_password_view.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/login_view.dart';
+import 'package:codeit_app/view/payment_page_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
+import 'package:codeit_app/view/receipt_view.dart';
 import 'package:codeit_app/view/register_view.dart';
 import 'package:codeit_app/view/splash_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
@@ -58,6 +60,9 @@ class AppPages {
     GetPage(name: AppRoutes.sendTicket, page: () => const SupportView()),
     GetPage(name: AppRoutes.home, page: () =>  HomeView()),
     GetPage(name: AppRoutes.terms, page: () =>  TermsView()),
+    GetPage(name: AppRoutes.receipt, page: () =>  ReceiptView(receiptId: Get.arguments as int? ?? 0)),
+    GetPage(name: AppRoutes.payment, page: () =>  PaymentPage()),
+
     GetPage(name: AppRoutes.certificates, page: () =>  CertificatesView()),
     GetPage(name: AppRoutes.courses, page: () =>  CourseView()),
   ];

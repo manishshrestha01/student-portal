@@ -4,6 +4,7 @@ import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/view/certificates_view.dart';
 import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/home_view.dart';
+import 'package:codeit_app/view/payment_page_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
 import 'package:codeit_app/view/support_view.dart';

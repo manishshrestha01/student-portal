@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 class CustomParentContainer extends StatelessWidget {
   final String title;
   final String seeall;
+  final VoidCallback onTapSeeAll;
 
   final List<Widget> children;
 
-  const CustomParentContainer({
-    super.key,
-    required this.title,
-    required this.seeall,
-    required this.children,
-  });
+  const CustomParentContainer({super.key,
+  required this.title,
+  required this.seeall,
+  required this.onTapSeeAll,
+   required this.children});
 
   @override
   Widget build(BuildContext context) {

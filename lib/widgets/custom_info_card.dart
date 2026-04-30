@@ -6,12 +6,14 @@ class InfoCard extends StatelessWidget {
   final String title;
   final String value;
   final Widget icon;
+  final VoidCallback? onTap;
 
   const InfoCard({
     super.key,
     required this.title,
     required this.value,
     required this.icon,
+    this.onTap,
   });
 
   @override
