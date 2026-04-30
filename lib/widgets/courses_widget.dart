@@ -195,7 +195,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                             width: double.infinity,
                             height: buttonHeight,
                             child: ElevatedButton.icon(
-                              onPressed: () => Get.offAll(() => CourseVideo()),
+                              onPressed: () => Get.offAll(() => CourseVideo(item: widget.item)),
                               icon: SvgPicture.asset(
                                 'assets/support/play.svg',
                                 colorFilter: const ColorFilter.mode(
