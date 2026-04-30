@@ -104,9 +104,9 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                             "${widget.item.courseName}",
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
                                 height: 1.0,
                                 letterSpacing: 0,
                               ),
