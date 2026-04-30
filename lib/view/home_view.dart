@@ -74,28 +74,27 @@ class HomeView extends StatelessWidget {
                         title: "Active Courses",
                         value: '2',
                         icon: Icons.menu_book,
-                        onTap: (){
+                        onTap: () {
                           // Navigate to courses page
-                        } ,
+                        },
                       ),
                       Gap(6),
                       InfoCard(
                         title: "Certificates",
                         value: '2',
                         icon: Icons.workspace_premium,
-                        onTap: (){
+                        onTap: () {
                           // Navigate to certificates page
                         },
                       ),
                       Gap(6),
 
-                     Obx(() {
+                      Obx(() {
                         return InfoCard(
                           title: "Payments",
                           value: controller.receipts.length.toString(),
                           icon: Icons.payment,
-                           onTap: () => Get.to(() => const PaymentPage()),
-                          
+                          onTap: () => Get.to(() => const PaymentPage()),
                         );
                       }),
                     ],
@@ -103,56 +102,18 @@ class HomeView extends StatelessWidget {
                   Gap(20),
 
                   // Courses section
-                  CustomParentContainer(
-                    title: "Your Courses",
-                    seeall: "See All",
-                    onTapSeeAll: (){
-                      // Navigate to courses page
-                    },
-                    children: [
-                      CustomCourseItem(
-                        title: "Flutter Development",
-                        mentor: "Er. Sajal Shrestha",
-                        videos: "16",
-                        image: "assets/images/dashboard/course_image.png",
-                      ),
-                      CustomCourseItem(
-                        title: "Web Design",
-                        mentor: "Er. Sajal Shrestha",
-                        videos: "16",
-                        image: "assets/images/dashboard/course_image.png",
-                      ),
-                    ],
-                  ),
+                  _buildCourseSection(context),
                   Gap(20),
 
                   // Payments section
                   _buildPaymentSection(context),
-             
+
                   Gap(20),
 
                   // Certificates section
-                  CustomParentContainer(
-                    title: "Certificates",
-                    seeall: "See All",
-                   onTapSeeAll: (){
-                      // Navigate to certificates page
-                    },
-                    
-                    children: [
-                      CustomCertificateCard(
-                        title: "Web Design",
-                        completed: "Feb 02, 2024",
-                        icon: Icons.star_border_sharp,
-                      ),
-                      CustomCertificateCard(
-                        title: "Flutter",
-                        completed: "Feb 02, 2025",
-                        icon: Icons.star_border_sharp,
-                      ),
-                    ],
-                  ),
-                ],
+                  _buildCertificateSection(context),
+             
+              ],
               ),
             ),
           ),
@@ -162,38 +123,136 @@ class HomeView extends StatelessWidget {
   }
 }
 
-
 Widget _buildPaymentSection(BuildContext context) {
-final ReceiptController controller = Get.find<ReceiptController>();
+  final ReceiptController controller = Get.find<ReceiptController>();
 
-return      Obx(() {
-                    if (controller.isLoading.value) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
+  return Obx(() {
+    if (controller.isLoading.value) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
-                    if (controller.hasError.value) {
-                      return const Text("Failed to load payments");
-                    }
+    if (controller.hasError.value) {
+      return const Text("Failed to load payments");
+    }
 
-                    if (controller.receipts.isEmpty) {
-                      return const Text("No payments found");
-                    }
+    if (controller.receipts.isEmpty) {
+      return const Text("No payments found");
+    }
 
-                    return CustomParentContainer(
-                      title: "Recent Payments",
-                      seeall: "See All",
-                      onTapSeeAll: () => Get.to(() =>  const PaymentPage()),
-                      
-                      children: controller.receipts.take(2).map((receipt) {
-                        return CustomPaymentReceipt(
-                          title: receipt.courseName ?? "Course",
-                          amount: receipt.amount?.toString() ?? "0",
-                          date: receipt.enrolledDate ?? "",
-                          icon: Icons.receipt,
-                          receiptId: receipt.receiptId ?? 0,
-                        );
-                      }).toList(),
-                    );
-                  });
+    return CustomParentContainer(
+      title: "Recent Payments",
+      seeall: "See All",
+      onTapSeeAll: () => Get.to(() => const PaymentPage()),
 
+      children: () {
+        final items = controller.receipts.take(2).toList();
+        final widgets = <Widget>[];
+        for (int i = 0; i < items.length; i++) {
+          final receipt = items[i];
+          widgets.add(
+            CustomPaymentReceipt(
+              title: receipt.courseName ?? "Course",
+              amount: receipt.amount?.toString() ?? "0",
+              date: receipt.enrolledDate ?? "",
+              icon: Icons.receipt,
+              receiptId: receipt.receiptId ?? 0,
+            ),
+          );
+          //add divider between items
+          if (i < items.length - 1) {
+            widgets.add(
+              const Divider(color: Color(0xFFE0E0E0), thickness: 1, height: 16),
+            );
+          }
+        }
+        return widgets;
+      }(),
+    );
+  });
+}
+
+
+Widget _buildCourseSection(BuildContext context) {
+  final ReceiptController controller = Get.find<ReceiptController>();
+
+  return Obx(() {
+    if (controller.isLoading.value) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (controller.hasError.value) {
+      return const Text("Failed to load courses");
+    }
+
+    final courseItems = [
+      CustomCourseItem(
+        title: "Flutter Development",
+        mentor: "Er. Sajal Shrestha",
+        videos: "16",
+        image: "assets/images/dashboard/course_image.png",
+      ),
+      CustomCourseItem(
+        title: "Web Design",
+        mentor: "Er. Sajal Shrestha",
+        videos: "16",
+        image: "assets/images/dashboard/course_image.png",
+      ),
+    ];
+
+
+    return CustomParentContainer(
+      title: "Your Courses",
+      seeall: "See All",
+      onTapSeeAll: () {
+        // Navigate to courses page
+      },
+      children: courseItems,
+    );
+  });
+}
+
+Widget _buildCertificateSection(BuildContext context) {
+  final ReceiptController controller = Get.find<ReceiptController>();
+
+  return Obx(() {
+    if (controller.isLoading.value) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (controller.hasError.value) {
+      return const Text("Failed to load certificates");
+    }
+
+    final certItems = [
+      CustomCertificateCard(
+        title: "Web Design",
+        completed: "Feb 02, 2024",
+        icon: Icons.star_border_sharp,
+      ),
+      CustomCertificateCard(
+        title: "Flutter",
+        completed: "Feb 02, 2025",
+        icon: Icons.star_border_sharp,
+      ),
+    ];
+
+    final widgets = <Widget>[];
+    for (int i = 0; i < certItems.length; i++) {
+      widgets.add(certItems[i]);
+      if (i < certItems.length - 1) {
+        widgets.add(
+          const Divider(color: Color(0xFFE0E0E0), thickness: 1, height: 16),
+        );
+      }
+    }
+
+    return CustomParentContainer(
+      title: "Certificates",
+      seeall: "See All",
+      onTapSeeAll: () {
+        // Navigate to certificates page
+      },
+      children: widgets,
+    );
+  });
 }
