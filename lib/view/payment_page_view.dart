@@ -1,14 +1,13 @@
 import 'package:codeit_app/controller/receipt_controller.dart';
 import 'package:codeit_app/view/home_view.dart';
-import 'package:codeit_app/view/receipt_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_parent_container.dart';
 import 'package:codeit_app/widgets/custom_payment_receipt.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class PaymentPage extends StatelessWidget {
-  
   const PaymentPage({super.key});
 
   @override
@@ -20,7 +19,7 @@ class PaymentPage extends StatelessWidget {
         title: "Payments",
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.offAll(() =>  HomeView()),
+          onPressed: () => Get.offAll(() => HomeView()),
         ),
       ),
       body: Obx(() {
@@ -39,15 +38,16 @@ class PaymentPage extends StatelessWidget {
         return CustomParentContainer(
           title: "Recent Payments",
           seeall: "",
-          onTapSeeAll: () => Get.offAll(() =>  ReceiptView(receiptId: 0)),
-          
           children: controller.receipts.map((receipt) {
             return CustomPaymentReceipt(
               title: receipt.courseName ?? "Course",
               amount: receipt.amount?.toString() ?? "0",
               date: receipt.enrolledDate ?? "",
-              icon: Icons.receipt,
-              receiptId: receipt.receiptId ?? 0,
+              icon: SvgPicture.asset(
+                'assets/support/payments_border.svg',
+                width: 40,
+                height: 40,
+              ),
             );
           }).toList(),
         );

@@ -1,15 +1,12 @@
 import 'package:codeit_app/core/constants/colors.dart';
-import 'package:codeit_app/view/receipt_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 
 class CustomPaymentReceipt extends StatelessWidget {
   final String title;
   final String amount;
   final String date;
   final Widget icon;
-  final int receiptId;
 
   const CustomPaymentReceipt({
     super.key,
@@ -17,7 +14,6 @@ class CustomPaymentReceipt extends StatelessWidget {
     required this.amount,
     required this.date,
     required this.icon,
-    required this.receiptId,
   });
 
   @override
@@ -30,7 +26,6 @@ class CustomPaymentReceipt extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: (){
-           Get.offAll(() => ReceiptView(receiptId: receiptId));
         },
         child: Row(
           children: [

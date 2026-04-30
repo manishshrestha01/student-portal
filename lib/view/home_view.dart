@@ -1,7 +1,5 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/controller/receipt_controller.dart';
-import 'package:codeit_app/view/payment_page_view.dart';
-import 'package:codeit_app/view/receipt_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_certificate_card.dart';
 import 'package:codeit_app/widgets/custom_course_item.dart';
@@ -24,7 +22,6 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: const Color(0xFFF5F7FA),
       appBar: CustomAppBar(),
@@ -40,7 +37,6 @@ class HomeView extends StatelessWidget {
         return SingleChildScrollView(
           child: Center(
             child: Container(
-              width: width > 600 ? 400 : width * 0.9,
               width: width > 600 ? 400 : width * 0.9,
               padding: EdgeInsets.all(16),
               margin: EdgeInsets.all(16),
@@ -111,9 +107,6 @@ class HomeView extends StatelessWidget {
                   CustomParentContainer(
                     title: "Your Courses",
                     seeall: "See All",
-                    onTapSeeAll: (){
-                      // Navigate to courses page
-                    },
                     children: [
                       CustomCourseItem(
                         title: "Flutter Development",
@@ -166,9 +159,6 @@ class HomeView extends StatelessWidget {
                   CustomParentContainer(
                     title: "Certificates",
                     seeall: "See All",
-                   onTapSeeAll: (){
-                      // Navigate to certificates page
-                    },
                     
                     children: [
                       CustomCertificateCard(
@@ -199,40 +189,4 @@ class HomeView extends StatelessWidget {
       }),
     );
   }
-}
-
-
-Widget _buildPaymentSection(BuildContext context) {
-final ReceiptController controller = Get.find<ReceiptController>();
-
-return      Obx(() {
-                    if (controller.isLoading.value) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (controller.hasError.value) {
-                      return const Text("Failed to load payments");
-                    }
-
-                    if (controller.receipts.isEmpty) {
-                      return const Text("No payments found");
-                    }
-
-                    return CustomParentContainer(
-                      title: "Recent Payments",
-                      seeall: "See All",
-                      onTapSeeAll: () => Get.to(() =>  const PaymentPage()),
-                      
-                      children: controller.receipts.take(2).map((receipt) {
-                        return CustomPaymentReceipt(
-                          title: receipt.courseName ?? "Course",
-                          amount: receipt.amount?.toString() ?? "0",
-                          date: receipt.enrolledDate ?? "",
-                          icon: Icons.receipt,
-                          receiptId: receipt.receiptId ?? 0,
-                        );
-                      }).toList(),
-                    );
-                  });
-
 }
