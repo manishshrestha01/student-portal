@@ -31,7 +31,7 @@ class CoursesController extends GetxController {
       }
     } catch (e) {
       courses.value = CoursesModel(success: false, data: []);
-      errorMessage('Could not load coursess. Please try again.');
+      errorMessage('Could not load courses. Please try again.');
     } finally {
       isLoading(false);
     }
