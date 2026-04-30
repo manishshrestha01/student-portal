@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/view/certificates_view.dart';
+import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
@@ -88,6 +89,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   ListTile(
+                    onTap: () => Get.offAll(() => CourseView()),
                     contentPadding: EdgeInsets.only(left: leftPadding),
                     leading: SvgPicture.asset(
                       'assets/support/course.svg',

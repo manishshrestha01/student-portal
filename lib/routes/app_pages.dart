@@ -3,6 +3,7 @@ import 'package:codeit_app/controller/verify_otp_controller.dart';
 import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/view/certificates_view.dart';
 import 'package:codeit_app/view/change_password.dart';
+import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/forgot_password_view.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/login_view.dart';
@@ -58,5 +59,6 @@ class AppPages {
     GetPage(name: AppRoutes.home, page: () =>  HomeView()),
     GetPage(name: AppRoutes.terms, page: () =>  TermsView()),
     GetPage(name: AppRoutes.certificates, page: () =>  CertificatesView()),
+    GetPage(name: AppRoutes.courses, page: () =>  CourseView()),
   ];
 }
