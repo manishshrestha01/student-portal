@@ -155,7 +155,6 @@ Widget _buildPaymentSection(BuildContext context) {
       title: "Recent Payments",
       seeall: "See All",
       onTapSeeAll: () => Get.to(() => const PaymentPage()),
-
       children: () {
         final items = controller.receipts.take(2).toList();
         final widgets = <Widget>[];
