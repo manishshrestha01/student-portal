@@ -52,7 +52,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                     child: Container(
                       width: double.infinity,
                       height: 191,
-                      color: Colors.blue,
+                      color: Colors.transparent,
                       child: Stack(
                         children: [
                           Positioned.fill(
