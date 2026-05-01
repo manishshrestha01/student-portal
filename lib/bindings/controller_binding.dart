@@ -5,6 +5,8 @@ import 'package:codeit_app/controller/course_video_controller.dart';
 import 'package:codeit_app/controller/courses_controller.dart';
 import 'package:codeit_app/controller/email_certificates_controller.dart';
 import 'package:codeit_app/controller/forgot_password_controller.dart';
+import 'package:codeit_app/controller/link_controller.dart';
+import 'package:codeit_app/controller/notes_controller.dart';
 import 'package:codeit_app/controller/suggestion_controller.dart';
 import 'package:codeit_app/controller/support_controller.dart';
 import 'package:codeit_app/controller/terms_controller.dart';
@@ -26,6 +28,8 @@ class ControllerBinding extends Bindings {
     Get.put<CertificatesController>(CertificatesController(), permanent: true);
     Get.put<CoursesController>(CoursesController(), permanent: true);
     Get.put<EmailCertificatesController>(EmailCertificatesController(), permanent: true);
+    Get.put<LinkController>(LinkController(), permanent: true);
+    Get.put<NotesController>(NotesController(), permanent: true);
      Get.put<VideoPlayerController>(VideoPlayerController(), permanent: true);
     Get.put<CourseVideoController>(CourseVideoController(), permanent: true);
     Get.put<SuggestionController>(SuggestionController(), permanent: true);
