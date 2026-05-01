@@ -1,7 +1,8 @@
 import 'package:codeit_app/controller/receipt_controller.dart';
-import 'package:codeit_app/view/home_view.dart';
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/receipt_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
+import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:codeit_app/widgets/custom_parent_container.dart';
 import 'package:codeit_app/widgets/custom_payment_receipt.dart';
 import 'package:flutter/material.dart';
@@ -17,24 +18,20 @@ class PaymentPage extends StatelessWidget {
     final ReceiptController controller = Get.put(ReceiptController());
 
     return Scaffold(
-      appBar: CustomAppBar(
-        title: "Payments",
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.offAll(() =>  HomeView()),
-        ),
-      ),
+      backgroundColor: AppColors.backgroundColor,
+      appBar: CustomAppBar(),
+      drawer: CustomDrawer(),
       body: Obx(() {
-        if (controller.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
-        }
-
         if (controller.hasError.value) {
-          return const Text("Failed to load payments");
+          return const Center(
+            child: Text("Failed to load payments"),
+          );
         }
 
         if (controller.receipts.isEmpty) {
-          return const Text("No payments found");
+          return const Center(
+            child: Text("No payments found"),
+          );
         }
 
         return CustomParentContainer(

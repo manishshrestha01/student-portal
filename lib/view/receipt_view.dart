@@ -39,10 +39,6 @@ class ReceiptView extends StatelessWidget {
               ),
               const Gap(22),
            Obx(() {
-                if (controller.isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-
                 if (controller.hasError.value) {
                   return Center(
                     child: Column(

@@ -1,5 +1,9 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/controller/receipt_controller.dart';
+import 'package:codeit_app/controller/courses_controller.dart';
+import 'package:codeit_app/controller/certificates_controller.dart';
+import 'package:codeit_app/view/certificates_view.dart';
+import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/payment_page_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_certificate_card.dart';
@@ -13,12 +17,27 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   HomeView({super.key});
 
-  final AuthController authController = Get.find<AuthController>();
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
 
-  final ReceiptController controller = Get.put(ReceiptController());
+class _HomeViewState extends State<HomeView> {
+  final AuthController authController = Get.find<AuthController>();
+  final ReceiptController receiptController = Get.put(ReceiptController());
+  final CoursesController coursesController = Get.put(CoursesController());
+  final CertificatesController certificatesController = Get.put(CertificatesController());
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      coursesController.getCourses();
+      certificatesController.getCertificates();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +49,7 @@ class HomeView extends StatelessWidget {
       body: Obx(() {
         final user = authController.user.value;
         if (user == null) {
-          return const Center(
-            child: CircularProgressIndicator(color: Color(0xFF4F6CF7)),
-          );
+          return const SizedBox.shrink();
         }
         final firstName = (user.name ?? '').split(' ').first;
         return SingleChildScrollView(
@@ -70,37 +87,37 @@ class HomeView extends StatelessWidget {
                   // Info cards
                   Column(
                     children: [
-                      InfoCard(
-                        title: "Active Courses",
-                        value: '2',
-                        icon: SvgPicture.asset(
-                          'assets/support/course_border.svg',
-                          width: 55,
-                          height: 55,
-                        ),
-                        onTap: () {
-                          // Navigate to courses page
-                        },
-                      ),
+                      Obx(() {
+                        return InfoCard(
+                          title: "Active Courses",
+                          value: coursesController.courses.value.data.length.toString(),
+                          icon: SvgPicture.asset(
+                            'assets/support/course_border.svg',
+                            width: 55,
+                            height: 55,
+                          ),
+                          onTap: () => Get.offAll(() => const CourseView()),
+                        );
+                      }),
                       Gap(20),
-                      InfoCard(
-                        title: "Certificates",
-                        value: '2',
-                        icon: SvgPicture.asset(
-                          'assets/support/certificate_border.svg',
-                          width: 55,
-                          height: 55,
-                        ),
-                        onTap: () {
-                          // Navigate to certificates page
-                        },
-                      ),
+                      Obx(() {
+                        return InfoCard(
+                          title: "Certificates",
+                          value: certificatesController.certificate.value.data.length.toString(),
+                          icon: SvgPicture.asset(
+                            'assets/support/certificate_border.svg',
+                            width: 55,
+                            height: 55,
+                          ),
+                          onTap: () => Get.offAll(() => const CertificatesView()),
+                        );
+                      }),
                       Gap(20),
 
                       Obx(() {
                         return InfoCard(
                           title: "Payments",
-                          value: controller.receipts.length.toString(),
+                          value: receiptController.receipts.length.toString(),
                           icon: SvgPicture.asset(
                             'assets/support/payments_border.svg',
                             width: 55,
@@ -139,10 +156,6 @@ Widget _buildPaymentSection(BuildContext context) {
   final ReceiptController controller = Get.find<ReceiptController>();
 
   return Obx(() {
-    if (controller.isLoading.value) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
     if (controller.hasError.value) {
       return const Text("Failed to load payments");
     }
@@ -188,32 +201,27 @@ Widget _buildPaymentSection(BuildContext context) {
 
 
 Widget _buildCourseSection(BuildContext context) {
-  final ReceiptController controller = Get.find<ReceiptController>();
+  final CoursesController coursesController = Get.find<CoursesController>();
 
   return Obx(() {
-    if (controller.isLoading.value) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    if (controller.hasError.value) {
+    if (coursesController.errorMessage.value.isNotEmpty) {
       return const Text("Failed to load courses");
     }
 
-    final courseItems = [
-      CustomCourseItem(
-        title: "Flutter Development",
-        mentor: "Er. Sajal Shrestha",
-        videos: "16",
-        image: "assets/images/dashboard/course_image.png",
-      ),
-      CustomCourseItem(
-        title: "Web Design",
-        mentor: "Er. Sajal Shrestha",
-        videos: "16",
-        image: "assets/images/dashboard/course_image.png",
-      ),
-    ];
+    final courses = coursesController.courses.value.data;
+    
+    if (courses.isEmpty) {
+      return const Text("No courses available");
+    }
 
+    final courseItems = courses.take(2).map((course) {
+      return CustomCourseItem(
+        title: course.courseName ?? "Course",
+        mentor: course.mentorName ?? "Instructor",
+        videos: course.lessons?.toString() ?? "0",
+        image: "assets/images/dashboard/course_image.png",
+      );
+    }).toList();
 
     return CustomParentContainer(
       title: "Your Courses",
@@ -227,37 +235,30 @@ Widget _buildCourseSection(BuildContext context) {
 }
 
 Widget _buildCertificateSection(BuildContext context) {
-  final ReceiptController controller = Get.find<ReceiptController>();
+  final CertificatesController certificatesController = Get.find<CertificatesController>();
 
   return Obx(() {
-    if (controller.isLoading.value) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    if (controller.hasError.value) {
+    if (certificatesController.errorMessage.value.isNotEmpty) {
       return const Text("Failed to load certificates");
     }
 
-    final certItems = [
-      CustomCertificateCard(
-        title: "Web Design",
-        completed: "Feb 02, 2024",
+    final certificates = certificatesController.certificate.value.data;
+    
+    if (certificates.isEmpty) {
+      return const Text("No certificates available");
+    }
+
+    final certItems = certificates.take(2).map((cert) {
+      return CustomCertificateCard(
+        title: cert.courseName ?? "Certificate",
+        completed: cert.courseCompletionDate ?? "N/A",
         icon: SvgPicture.asset(
           'assets/support/certificate_border.svg',
           width: 40,
           height: 40,
         ),
-      ),
-      CustomCertificateCard(
-        title: "Flutter",
-        completed: "Feb 02, 2025",
-        icon: SvgPicture.asset(
-          'assets/support/certificate_border.svg',
-          width: 40,
-          height: 40,
-        ),
-      ),
-    ];
+      );
+    }).toList();
 
     final widgets = <Widget>[];
     for (int i = 0; i < certItems.length; i++) {

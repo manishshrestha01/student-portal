@@ -4,8 +4,7 @@ import 'package:codeit_app/model/course_video_model.dart';
 import 'package:codeit_app/model/courses_model.dart';
 import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/home_view.dart';
-import 'package:codeit_app/view/menu_tile/curriculum_screen.dart';
-import 'package:codeit_app/view/menu_tile/notes_resources_screen.dart';
+import 'package:codeit_app/view/notes.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -99,64 +98,63 @@ class _CourseVideoState extends State<CourseVideo> {
                         ),
                       ),
                       Gap(14),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //   },
+                      //   child: Container(
+                      //     width: double.infinity,
+                      //     height: 66,
+                      //     padding: EdgeInsets.all(20),
+                      //     decoration: BoxDecoration(
+                      //       color: const Color(0xFFF9FAFB),
+                      //       borderRadius: BorderRadius.circular(10),
+                      //       boxShadow: [
+                      //         BoxShadow(
+                      //           color: const Color.fromRGBO(0, 0, 0, 0.25),
+                      //           offset: Offset(4, 4),
+                      //           blurRadius: 4,
+                      //           spreadRadius: 0,
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     child: Row(
+                      //       children: [
+                      //         SvgPicture.asset(
+                      //           'assets/support/course.svg',
+                      //           width: 26,
+                      //           height: 26,
+                      //           colorFilter: const ColorFilter.mode(
+                      //             Colors.black,
+                      //             BlendMode.srcIn,
+                      //           ),
+                      //         ),
+                      //         Gap(10),
+                      //         Text(
+                      //           "Course Curriculum",
+                      //           style: GoogleFonts.inter(
+                      //             textStyle: const TextStyle(
+                      //               color: Colors.black,
+                      //               fontSize: 18,
+                      //               fontWeight: FontWeight.w400,
+                      //               height: 1.0,
+                      //               letterSpacing: 0,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         Spacer(),
+                      //         const Icon(
+                      //           Icons.chevron_right,
+                      //           color: Colors.black,
+                      //           size: 20,
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // Gap(20),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => CurriculumScreen());
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 66,
-                          padding: EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF9FAFB),
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color.fromRGBO(0, 0, 0, 0.25),
-                                offset: Offset(4, 4),
-                                blurRadius: 4,
-                                spreadRadius: 0,
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/support/course.svg',
-                                width: 26,
-                                height: 26,
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.black,
-                                  BlendMode.srcIn,
-                                ),
-                              ),
-                              Gap(10),
-                              Text(
-                                "Course Curriculum",
-                                style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.0,
-                                    letterSpacing: 0,
-                                  ),
-                                ),
-                              ),
-                              Spacer(),
-                              const Icon(
-                                Icons.chevron_right,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Gap(20),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(() => NotesResourcesScreen());
+                          Get.to(() => Notes());
                         },
                         child: Container(
                           width: double.infinity,
