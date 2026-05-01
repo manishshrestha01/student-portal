@@ -3,9 +3,9 @@ import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/course_video_model.dart';
 import 'package:codeit_app/model/courses_model.dart';
 import 'package:codeit_app/view/course_view.dart';
-import 'package:codeit_app/view/curriculum.dart';
 import 'package:codeit_app/view/home_view.dart';
-import 'package:codeit_app/view/note.dart';
+import 'package:codeit_app/view/menu_tile/curriculum_screen.dart';
+import 'package:codeit_app/view/menu_tile/notes_resources_screen.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -101,7 +101,7 @@ class _CourseVideoState extends State<CourseVideo> {
                       Gap(14),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => Curriculum());
+                          Get.to(() => CurriculumScreen());
                         },
                         child: Container(
                           width: double.infinity,
@@ -156,7 +156,7 @@ class _CourseVideoState extends State<CourseVideo> {
                       Gap(20),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => Note());
+                          Get.to(() => NotesResourcesScreen());
                         },
                         child: Container(
                           width: double.infinity,
