@@ -1,5 +1,6 @@
 import 'package:codeit_app/model/courses_model.dart';
 import 'package:codeit_app/view/course_video.dart';
+import 'package:codeit_app/utils/status_mapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -9,7 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 class CoursesWidget extends StatefulWidget {
   final Datum item;
   const CoursesWidget({super.key, required this.item});
-
   @override
   State<CoursesWidget> createState() => _CoursesWidgetState();
 }
@@ -75,7 +75,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
-                                "${widget.item.status}",
+                                StatusMapper.mapCourseStatus(widget.item.status),
                                 style: GoogleFonts.inter(
                                   textStyle: const TextStyle(
                                     color: Colors.white,
