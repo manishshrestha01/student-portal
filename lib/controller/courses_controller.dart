@@ -9,6 +9,12 @@ class CoursesController extends GetxController {
   var isLoading = false.obs;
   var errorMessage = ''.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    getCourses();
+  }
+
   Future<void> getCourses() async {
     try {
       isLoading(true);

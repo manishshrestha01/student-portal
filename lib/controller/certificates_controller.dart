@@ -8,6 +8,12 @@ class CertificatesController extends GetxController {
   var isLoading = false.obs;
   var errorMessage = ''.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    getCertificates();
+  }
+
   Future<void> getCertificates() async {
     try {
       isLoading(true);

@@ -383,6 +383,25 @@ class ReceiptView extends StatelessWidget {
             ),
           ),
         ),
+      
+              const Gap(7),
+        const Icon(
+          Icons.chevron_right,
+          color: Color.fromRGBO(0, 0, 0, 0.9),
+          size: 20,
+        ),
+
+         Text(
+          'Receipts',
+          style: GoogleFonts.inter(
+            textStyle: const TextStyle(
+              color: Color(0xFF000000),
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
+      
       ],
     );
   }

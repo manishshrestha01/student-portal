@@ -6,12 +6,14 @@ class CustomCertificateCard extends StatelessWidget {
   final String title;
   final String completed;
   final Widget icon;
+  final VoidCallback? onTap;
 
   const CustomCertificateCard({
     super.key,     
     required this.title,
     required this.completed,
     required this.icon,
+    this.onTap,
   });
 
   @override
@@ -23,9 +25,7 @@ class CustomCertificateCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: InkWell(
-        onTap: (){
-          
-        },
+        onTap: onTap,
         child: Row(
           children: [
             //icon

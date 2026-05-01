@@ -1,6 +1,11 @@
 import 'package:codeit_app/controller/auth_controller.dart';
+import 'package:codeit_app/controller/certificates_controller.dart';
+import 'package:codeit_app/controller/courses_controller.dart';
 import 'package:codeit_app/controller/receipt_controller.dart';
+import 'package:codeit_app/view/certificates_view.dart';
+import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/payment_page_view.dart';
+import 'package:codeit_app/widgets/courses_widget.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_certificate_card.dart';
 import 'package:codeit_app/widgets/custom_course_item.dart';
@@ -16,9 +21,10 @@ import 'package:get/get.dart';
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
-  final AuthController authController = Get.find<AuthController>();
-
-  final ReceiptController controller = Get.put(ReceiptController());
+final AuthController authController = Get.find<AuthController>();
+final ReceiptController receiptController = Get.put(ReceiptController());
+final CoursesController coursesController = Get.put(CoursesController());
+final CertificatesController certificatesController = Get.put(CertificatesController());
 
   @override
   Widget build(BuildContext context) {
@@ -70,60 +76,70 @@ class HomeView extends StatelessWidget {
                   // Info cards
                   Column(
                     children: [
-                      InfoCard(
-                        title: "Active Courses",
-                        value: '2',
-                        icon: SvgPicture.asset(
-                          'assets/support/course_border.svg',
-                          width: 55,
-                          height: 55,
-                        ),
-                        onTap: () {
-                          // Navigate to courses page
-                        },
+                    
+                    // Active courses card
+                      Obx((){
+                        return InfoCard(
+                          title: "Active Courses",
+                          value: coursesController.courses.value.data.length
+                              .toString(),
+                          icon: SvgPicture.asset(
+                            'assets/support/course_border.svg',
+                            width: 55,
+                            height: 55,
+                          ),
+                          onTap: () => Get.to(() => CourseView()),
+                        );
+                      }
+                        
                       ),
+
                       Gap(20),
-                      InfoCard(
+
+                     // Certificates card
+                    Obx((){
+                       return InfoCard(
                         title: "Certificates",
-                        value: '2',
+                        value: certificatesController.certificate.value.data.length.toString(),
                         icon: SvgPicture.asset(
                           'assets/support/certificate_border.svg',
                           width: 55,
                           height: 55,
                         ),
-                        onTap: () {
-                          // Navigate to certificates page
-                        },
-                      ),
+                        onTap: () => Get.to(() => CertificatesView()),
+                      );
+                    }),
                       Gap(20),
 
+                      // Payments card
                       Obx(() {
                         return InfoCard(
                           title: "Payments",
-                          value: controller.receipts.length.toString(),
+                          value: receiptController.receipts.length.toString(),
                           icon: SvgPicture.asset(
                             'assets/support/payments_border.svg',
                             width: 55,
                             height: 55,
                           ),
-                          onTap: () => Get.to(() => const PaymentPage()),
+                         onTap: () => Get.to(() => PaymentPage()),
                         );
+                        
                       }),
                     ],
                   ),
                   Gap(20),
 
                   // Courses section
-                  _buildCourseSection(context),
+                  buildCourseSection(context),
                   Gap(20),
 
                   // Payments section
-                  _buildPaymentSection(context),
+                  buildPaymentSection(context),
 
                   Gap(20),
 
                   // Certificates section
-                  _buildCertificateSection(context),
+                  buildCertificateSection(context),
              
               ],
               ),
@@ -135,28 +151,28 @@ class HomeView extends StatelessWidget {
   }
 }
 
-Widget _buildPaymentSection(BuildContext context) {
-  final ReceiptController controller = Get.find<ReceiptController>();
+Widget buildPaymentSection(BuildContext context) {
+  final ReceiptController receiptController = Get.find<ReceiptController>();
 
   return Obx(() {
-    if (controller.isLoading.value) {
+    if (receiptController.isLoading.value) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (controller.hasError.value) {
+    if (receiptController.hasError.value) {
       return const Text("Failed to load payments");
     }
 
-    if (controller.receipts.isEmpty) {
+    if (receiptController.receipts.isEmpty) {
       return const Text("No payments found");
     }
 
     return CustomParentContainer(
       title: "Recent Payments",
       seeall: "See All",
-      onTapSeeAll: () => Get.to(() => const PaymentPage()),
+      onTapSeeAll: () => Get.to(() => PaymentPage()),
       children: () {
-        final items = controller.receipts.take(2).toList();
+        final items = receiptController.receipts.take(2).toList();
         final widgets = <Widget>[];
         for (int i = 0; i < items.length; i++) {
           final receipt = items[i];
@@ -187,82 +203,77 @@ Widget _buildPaymentSection(BuildContext context) {
 }
 
 
-Widget _buildCourseSection(BuildContext context) {
-  final ReceiptController controller = Get.find<ReceiptController>();
+
+Widget buildCourseSection(BuildContext context) {
+  final CoursesController coursesController = Get.find<CoursesController>();
 
   return Obx(() {
-    if (controller.isLoading.value) {
+    if (coursesController.isLoading.value) {
       return const Center(child: CircularProgressIndicator());
     }
-
-    if (controller.hasError.value) {
+    if (coursesController.errorMessage.value.isNotEmpty) {
       return const Text("Failed to load courses");
     }
 
-    final courseItems = [
-      CustomCourseItem(
-        title: "Flutter Development",
-        mentor: "Er. Sajal Shrestha",
-        videos: "16",
-        image: "assets/images/dashboard/course_image.png",
-      ),
-      CustomCourseItem(
-        title: "Web Design",
-        mentor: "Er. Sajal Shrestha",
-        videos: "16",
-        image: "assets/images/dashboard/course_image.png",
-      ),
-    ];
+    final data = coursesController.courses.value.data ?? [];
 
+    if (data.isEmpty) {
+      return const Text("No courses found");
+    }
 
     return CustomParentContainer(
       title: "Your Courses",
       seeall: "See All",
-      onTapSeeAll: () {
-        // Navigate to courses page
-      },
-      children: courseItems,
+      onTapSeeAll: () => Get.to(() => CourseView()),
+      children: data
+          .map(
+            (course) => CustomCourseItem(
+              title: course.courseName ?? "Course",
+              mentor: course.mentorName ?? "",
+              videos: course.lessons?.toString() ?? "0",
+              image: course.courseImage ?? "assets/images/course_placeholder.png",
+              onTap: () => Get.to(() => CoursesWidget(item: course)),
+            ),
+          )
+          .toList(),
     );
   });
 }
 
-Widget _buildCertificateSection(BuildContext context) {
-  final ReceiptController controller = Get.find<ReceiptController>();
+
+Widget buildCertificateSection(BuildContext context) {
+  final CertificatesController certificatesController =
+      Get.find<CertificatesController>();
 
   return Obx(() {
-    if (controller.isLoading.value) {
+    if (certificatesController.isLoading.value) {
       return const Center(child: CircularProgressIndicator());
     }
-
-    if (controller.hasError.value) {
+    if (certificatesController.errorMessage.value.isNotEmpty) {
       return const Text("Failed to load certificates");
     }
 
-    final certItems = [
-      CustomCertificateCard(
-        title: "Web Design",
-        completed: "Feb 02, 2024",
-        icon: SvgPicture.asset(
-          'assets/support/certificate_border.svg',
-          width: 40,
-          height: 40,
-        ),
-      ),
-      CustomCertificateCard(
-        title: "Flutter",
-        completed: "Feb 02, 2025",
-        icon: SvgPicture.asset(
-          'assets/support/certificate_border.svg',
-          width: 40,
-          height: 40,
-        ),
-      ),
-    ];
+    final data = certificatesController.certificate.value.data ?? [];
+
+    if (data.isEmpty) {
+      return const Text("No certificates found");
+    }
 
     final widgets = <Widget>[];
-    for (int i = 0; i < certItems.length; i++) {
-      widgets.add(certItems[i]);
-      if (i < certItems.length - 1) {
+    for (int i = 0; i < data.length; i++) {
+      widgets.add(
+        CustomCertificateCard(
+          title: data[i].courseName ?? "Certificate",
+          completed: data[i].courseCompletionDate ?? "",
+          icon: SvgPicture.asset(
+            'assets/support/certificate_border.svg',
+            width: 40,
+            height: 40,
+          ),
+         onTap:()=> Get.to(() => CertificatesView()),
+        ),
+      );
+      if (i < data.length - 1) {
         widgets.add(
           const Divider(color: Color(0xFFE0E0E0), thickness: 1, height: 16),
         );
@@ -272,9 +283,7 @@ Widget _buildCertificateSection(BuildContext context) {
     return CustomParentContainer(
       title: "Certificates",
       seeall: "See All",
-      onTapSeeAll: () {
-        // Navigate to certificates page
-      },
+      onTapSeeAll: () => Get.to(() => CertificatesView()),
       children: widgets,
     );
   });

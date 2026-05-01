@@ -6,6 +6,7 @@ class CustomCourseItem extends StatelessWidget {
   final String mentor;
   final String videos;
   final String image;
+  final VoidCallback? onTap;
 
   const CustomCourseItem({
     super.key,
@@ -13,57 +14,78 @@ class CustomCourseItem extends StatelessWidget {
     required this.mentor,
     required this.videos,
     required this.image,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 12),
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: InkWell(
-        onTap: (){
-          
-        },
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(15),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
         child: Row(
           children: [
-            //image
-            Container(
-              height: 60,
-              width: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  image: AssetImage(image),
+            // Image
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.network(
+                image,
+                height: 80,
+                width: 80,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => Image.asset(
+                  'assets/images/dashboard/course_image.png',
+                  height: 80,
+                  width: 80,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-        
-            SizedBox(width: 10),
-        
-            //text
+
+            const SizedBox(width: 14),
+
+            // Text
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-                  SizedBox(height: 4),
-                  Text(mentor, style: TextStyle(
-                      color: AppColors.textDark,
-                      fontWeight: FontWeight.w500,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
-                  SizedBox(height: 4),
-                  Text("$videos videos", style: TextStyle(
+                  const SizedBox(height: 4),
+                  Text(
+                    "Mentor: $mentor",
+                    style: TextStyle(
                       color: AppColors.textDark,
                       fontWeight: FontWeight.w500,
+                      fontSize: 13,
                     ),
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.play_circle,
+                        size: 16,
+                        color: Colors.black87,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        "$videos Videos",
+                        style: TextStyle(
+                          color: AppColors.textDark,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

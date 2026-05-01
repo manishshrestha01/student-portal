@@ -18,8 +18,10 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
+    return InkWell(
+      onTap: () {
+        onTap?.call();
+      },
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
