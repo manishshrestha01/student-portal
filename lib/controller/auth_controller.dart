@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
+ final _storage = StorageController();
+  
   final isLoggedIn = false.obs;
   final registerMessage = RegisterModel(success: null, errors: null).obs;
   final isLoading = false.obs;
@@ -35,7 +37,7 @@ class AuthController extends GetxController {
   final email = TextEditingController();
   final whatsapp = TextEditingController();
   final password = TextEditingController();
-  final countryCode = TextEditingController();
+  final countryCode = TextEditingController(text: '+977');
   final currentPassword = TextEditingController();
   final newPassword = TextEditingController();
   final confirmPassword = TextEditingController();
@@ -45,7 +47,7 @@ class AuthController extends GetxController {
     email.clear();
     whatsapp.clear();
     password.clear();
-    countryCode.clear();
+    countryCode.text = '+977';
   }
 
   void clearPasswordForm() {
@@ -55,15 +57,27 @@ class AuthController extends GetxController {
   }
 
   // Check auth splash screen.
-  void checkAuth() {
-    final token = StorageController().getToken();
+ void checkAuth() {
+    final token = _storage.getToken();
     if (token != null) {
-      fetchUser();
-      Future.delayed(const Duration(seconds: 3), () {
+
+      final cachedUser = _storage.getUser();
+      if (cachedUser != null) {
+        user.value = User.fromJson(cachedUser);
+
+        name.text = user.value?.name ?? '';
+        email.text = user.value?.email ?? '';
+        whatsapp.text = user.value?.phone ?? '';
+        countryCode.text = user.value?.countryCode ?? '+977';
+      }
+
+      Future.delayed(const Duration(seconds: 1), () {
         Get.offAllNamed(AppRoutes.home);
       });
+
+      fetchUser();
     } else {
-      Future.delayed(const Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 1), () {
         Get.offAllNamed(AppRoutes.login);
       });
     }
@@ -115,7 +129,7 @@ class AuthController extends GetxController {
 
       if (response.statusCode == 200 && loginMessage.value.success == true) {
 
-          StorageController().saveToken(loginMessage.value.token!);
+          _storage.saveToken(loginMessage.value.token!);
           await fetchUser();
           Get.offNamed(AppRoutes.home);
       
@@ -143,7 +157,7 @@ class AuthController extends GetxController {
         final userResponse = UserModel.fromJson(response.data);
         user.value = userResponse.user;
         if (user.value != null) {
-          StorageController().saveUser({
+          _storage.saveUser({
             "id": user.value!.id,
             "name": user.value!.name,
             "email": user.value!.email,
@@ -153,11 +167,13 @@ class AuthController extends GetxController {
         }
       }
     } catch (_) {
-      final cachedUser = StorageController().getUser();
+       if (user.value == null) {
+      final cachedUser = _storage.getUser();
       if (cachedUser != null) {
         user.value = User.fromJson(cachedUser);
       }
     }
+  }
   }
 
   Future<void> updateProfile() async {
@@ -180,7 +196,7 @@ class AuthController extends GetxController {
             phone: whatsapp.text,
             countryCode: countryCode.text,
           );
-          StorageController().saveUser({
+          _storage.saveUser({
             "id": user.value?.id,
             "name": user.value?.name,
             "email": user.value?.email,
@@ -243,7 +259,7 @@ class AuthController extends GetxController {
 
 //logout
   void logout() {
-    StorageController().deleteToken();
+    _storage.deleteToken();
     user.value = null;
     DioConnector.dio.options.headers.remove('Authorization');
     Get.offAllNamed(AppRoutes.login);

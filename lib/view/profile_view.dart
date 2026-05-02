@@ -5,6 +5,7 @@ import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
+import 'package:codeit_app/widgets/custom_phonefield.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -34,7 +35,7 @@ class ProfileView extends GetView<AuthController> {
         return SingleChildScrollView(
           child: Column(
             children: [
-                Gap(12),
+              Gap(12),
               Row(
                 children: [
                   Gap(6),
@@ -42,7 +43,7 @@ class ProfileView extends GetView<AuthController> {
                     children: [
                       Gap(18),
                       _buildBreadcrumb(),
-                       Gap(32),
+                      Gap(32),
                       Row(
                         children: [
                           Gap(18),
@@ -109,11 +110,11 @@ class ProfileView extends GetView<AuthController> {
                             ),
                             Gap(20),
                             //w5 number
-                            CustomTextField(
+                            CustomPhoneField(
                               controller: controller.whatsapp,
+                              countryCodeController: controller.whatsapp,
                               labelText: "WhatsApp Number",
-                              keyboardType: TextInputType.numberWithOptions(),
-                              hintText: "WhatsApp Number",
+                              isRequired: true,
                             ),
                             Gap(20),
                             //w6 address
@@ -198,7 +199,8 @@ class ProfileView extends GetView<AuthController> {
                                 controller: controller.currentPassword,
                                 labelText: "Current Password",
                                 hintText: "Enter your current password",
-                                obscureText: controller.currentPasswordHidden.value,
+                                obscureText:
+                                    controller.currentPasswordHidden.value,
                                 suffixIcon: IconButton(
                                   onPressed: () {
                                     controller.currentPasswordHidden.value =
@@ -240,7 +242,8 @@ class ProfileView extends GetView<AuthController> {
                                 controller: controller.confirmPassword,
                                 labelText: "Confirm New Password",
                                 hintText: "Confirm new password",
-                                obscureText: controller.confirmPasswordHidden.value,
+                                obscureText:
+                                    controller.confirmPasswordHidden.value,
                                 suffixIcon: IconButton(
                                   onPressed: () {
                                     controller.confirmPasswordHidden.value =

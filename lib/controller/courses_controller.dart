@@ -5,7 +5,7 @@ import 'package:codeit_app/service/courses_service.dart';
 import 'package:get/get.dart';
 
 class CoursesController extends GetxController {
-  var courses = CoursesModel(success: true, data: [],).obs;
+  var courses = CoursesModel(success: true, data: []).obs;
   var isLoading = false.obs;
   var errorMessage = ''.obs;
 

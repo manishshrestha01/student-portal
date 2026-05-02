@@ -3,6 +3,7 @@ import 'package:codeit_app/controller/receipt_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/receipt_model.dart';
 import 'package:codeit_app/view/home_view.dart';
+import 'package:codeit_app/view/payment_page_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:codeit_app/widgets/custom_print_receipt.dart';
@@ -13,10 +14,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ReceiptView extends StatelessWidget {
-   final int receiptId;
+  final int receiptId;
 
   const ReceiptView({super.key, required this.receiptId});
- 
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ReceiptView extends StatelessWidget {
       drawer: CustomDrawer(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
+          padding: const EdgeInsets.symmetric(horizontal: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -38,7 +38,7 @@ class ReceiptView extends StatelessWidget {
                 child: _buildBreadcrumb(),
               ),
               const Gap(22),
-           Obx(() {
+              Obx(() {
                 if (controller.isLoading.value) {
                   return const Center(child: CircularProgressIndicator());
                 }
@@ -65,7 +65,6 @@ class ReceiptView extends StatelessWidget {
                   return const Center(child: Text("No receipts found."));
                 }
 
-                //Only show the receipt matching the receiptId
                 final filtered = controller.receipts
                     .where((r) => r.receiptId == receiptId)
                     .toList();
@@ -79,7 +78,8 @@ class ReceiptView extends StatelessWidget {
                     return _buildReceiptCard(receipt);
                   }).toList(),
                 );
-              }),   const Gap(36),
+              }),
+              const Gap(36),
             ],
           ),
         ),
@@ -91,40 +91,31 @@ class ReceiptView extends StatelessWidget {
     final AuthController authController = Get.find<AuthController>();
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Print button
-        Padding(
-          padding: const EdgeInsets.only(bottom: 12, right: 40),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(
-                width: 150,
-                child: TextButton.icon(
-                  onPressed: () async {
-                    await printReceipt(receipt);
-                  },
-                  icon: Icon(Icons.print, color: AppColors.backgroundColor),
-                  label: Text(
-                    "Print Receipt",
-                    style: TextStyle(color: AppColors.backgroundColor),
-                  ),
-                  style: TextButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 20,
-                      horizontal: 12,
-                    ),
-                    backgroundColor: const Color(0xFFFF6900),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
+        //Print button
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton.icon(
+            onPressed: () async => await printReceipt(receipt),
+            icon: Icon(Icons.print, color: AppColors.backgroundColor),
+            label: Text(
+              "Print Receipt",
+              style: TextStyle(color: AppColors.backgroundColor),
+            ),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
+              backgroundColor: const Color(0xFFFF6900),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-            ],
+            ),
           ),
         ),
 
+        const Gap(12),
+
+        //Receipt card
         Center(
           child: Container(
             width: 620,
@@ -154,9 +145,7 @@ class ReceiptView extends StatelessWidget {
                     color: AppColors.textDark,
                   ),
                 ),
-
                 const Gap(6),
-
                 Text(
                   receipt.courseName ?? '-',
                   textAlign: TextAlign.center,
@@ -166,7 +155,6 @@ class ReceiptView extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-
                 const Gap(20),
 
                 // Logo
@@ -180,7 +168,6 @@ class ReceiptView extends StatelessWidget {
                     ),
                   ],
                 ),
-
                 const Gap(20),
 
                 // Transaction details
@@ -189,7 +176,6 @@ class ReceiptView extends StatelessWidget {
                   receipt.receiptId?.toString() ?? '-',
                 ),
                 _infoBlock("Date", receipt.enrolledDate ?? '-'),
-
                 const Gap(10),
 
                 // Payment status
@@ -198,7 +184,6 @@ class ReceiptView extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
                 ),
                 const Gap(6),
-
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 14,
@@ -230,7 +215,7 @@ class ReceiptView extends StatelessWidget {
 
                 const Divider(height: 30),
 
-                //Student details
+                // Student details
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -238,10 +223,8 @@ class ReceiptView extends StatelessWidget {
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
                   ),
                 ),
-
                 Obx(() {
                   final user = authController.user.value;
-
                   return Column(
                     children: [
                       _rowText("Name", user?.name ?? "-"),
@@ -251,7 +234,7 @@ class ReceiptView extends StatelessWidget {
                   );
                 }),
 
-                //Course details
+                // Course details
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -259,9 +242,7 @@ class ReceiptView extends StatelessWidget {
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
                   ),
                 ),
-
                 const Gap(10),
-
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -320,13 +301,12 @@ class ReceiptView extends StatelessWidget {
 
                 const Gap(20),
 
-                //footer
+                // Footer
                 const Text(
                   "Thank you for choosing CODE IT. This is a \n computer-generated receipt.\n\n For any queries, contact \n\n support@codeit.com.np | Reg No.\n 11757/6271/04 | PAN 602345817",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
-
                 const Gap(20),
               ],
             ),
@@ -373,25 +353,27 @@ class ReceiptView extends StatelessWidget {
           size: 20,
         ),
         const Gap(7),
-        Text(
-          'Payment Receipts',
-          style: GoogleFonts.inter(
-            textStyle: const TextStyle(
-              color: Color(0xFF000000),
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
+        GestureDetector(
+          onTap: () => Get.to(() => PaymentPage()),
+          child: Text(
+            'Payment Receipts',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                color: Color(0xFF000000),
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
         ),
-      
-              const Gap(7),
+        const Gap(7),
         const Icon(
           Icons.chevron_right,
           color: Color.fromRGBO(0, 0, 0, 0.9),
           size: 20,
         ),
-
-         Text(
+        const Gap(7),
+        Text(
           'Receipts',
           style: GoogleFonts.inter(
             textStyle: const TextStyle(
@@ -401,11 +383,12 @@ class ReceiptView extends StatelessWidget {
             ),
           ),
         ),
-      
       ],
     );
   }
 }
+
+//helpers widgets
 
 Widget _infoBlock(String title, String value) {
   return Column(
@@ -428,20 +411,19 @@ Widget _rowText(String label, String value) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 4),
     child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(
+        SizedBox(
+          width: 90,
           child: Text(
             label,
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
           ),
         ),
-
-    
-
-         Text(": "),
+        const Text(": "),
+        Gap(4),
 
         Expanded(
-        
           child: Text(
             value,
             style: GoogleFonts.inter(fontSize: 15, fontWeight: FontWeight.w500),

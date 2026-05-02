@@ -4,6 +4,7 @@ import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/utils/validators.dart';
 import 'package:codeit_app/widgets/custom_button.dart';
 import 'package:codeit_app/widgets/custom_form_container.dart';
+import 'package:codeit_app/widgets/custom_phonefield.dart';
 import 'package:codeit_app/widgets/custom_text_button.dart';
 import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -88,20 +89,11 @@ class RegisterView extends GetView<AuthController> {
                   Gap(20),
 
                   //w6 number
-                  CustomTextField(
+              CustomPhoneField(
                     controller: controller.whatsapp,
+                    countryCodeController: controller.countryCode,
                     labelText: "WhatsApp Number",
                     isRequired: true,
-                    keyboardType: TextInputType.numberWithOptions(),
-                    hintText: "WhatsApp Number",
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "WhatsApp number is required";
-                      } else if (!GetUtils.isPhoneNumber(value)) {
-                        return "Please enter a valid WhatsApp number";
-                      }
-                      return null;
-                    },
                   ),
                   Gap(20),
 
