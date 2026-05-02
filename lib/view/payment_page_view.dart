@@ -1,6 +1,9 @@
 import 'package:codeit_app/controller/receipt_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
+<<<<<<< HEAD
 import 'package:codeit_app/view/home_view.dart';
+=======
+>>>>>>> 4356d10cdf0ee8eb6664f68add0b757c039f6cba
 import 'package:codeit_app/view/receipt_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
@@ -36,6 +39,7 @@ class PaymentPage extends StatelessWidget {
               ),
               const Gap(22),
 
+<<<<<<< HEAD
               Obx(
                 () {
                   if (controller.isLoading.value) {
@@ -77,6 +81,45 @@ class PaymentPage extends StatelessWidget {
           ),
         ),
       ),
+=======
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
+      appBar: CustomAppBar(),
+      drawer: CustomDrawer(),
+      body: Obx(() {
+        if (controller.hasError.value) {
+          return const Center(
+            child: Text("Failed to load payments"),
+          );
+        }
+
+        if (controller.receipts.isEmpty) {
+          return const Center(
+            child: Text("No payments found"),
+          );
+        }
+
+        return CustomParentContainer(
+          title: "Recent Payments",
+          seeall: "",
+          onTapSeeAll: () => Get.offAll(() =>  ReceiptView(receiptId: 0)),
+          
+          children: controller.receipts.map((receipt) {
+            return CustomPaymentReceipt(
+              title: receipt.courseName ?? "Course",
+              amount: receipt.amount?.toString() ?? "0",
+              date: receipt.enrolledDate ?? "",
+              icon: SvgPicture.asset(
+                'assets/support/payments_border.svg',
+                width: 40,
+                height: 40,
+              ),
+              receiptId: receipt.receiptId ?? 0,
+            );
+          }).toList(),
+        );
+      }),
+>>>>>>> 4356d10cdf0ee8eb6664f68add0b757c039f6cba
     );
   }
 
