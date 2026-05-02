@@ -5,6 +5,7 @@ import 'package:codeit_app/model/courses_model.dart';
 import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/notes.dart';
+import 'package:codeit_app/view/video_player_page.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -291,11 +292,12 @@ class _CourseVideoState extends State<CourseVideo> {
                               if (!isAscending) {
                                 videos = videos.reversed.toList();
                               }
+                              final videosList = List<Video>.from(videos);
                               return ListView.separated(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  return videoItem(videos[index]);
+                                  return videoItem(videosList[index], videosList);
                                 },
                                 separatorBuilder: (context, index) =>
                                     const Divider(
@@ -323,75 +325,80 @@ class _CourseVideoState extends State<CourseVideo> {
 }
 
 // individual video row item
-Widget videoItem(Video video) {
+Widget videoItem(Video video, List<Video> allVideos) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 15),
-    child: Row(
-      children: [
-        Container(
-          width: 82,
-          height: 72,
-          padding: EdgeInsets.all(25),
-          decoration: BoxDecoration(
-            color: const Color(0xFFE0E0E0),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: SvgPicture.asset(
-            'assets/support/play.svg',
-            width: 24.75,
-            height: 24.75,
-            colorFilter: const ColorFilter.mode(
-              Color.fromRGBO(0, 0, 0, 0.7),
-              BlendMode.srcIn,
+    child: GestureDetector(
+      onTap: () {
+        Get.to(() => VideoPlayerPage(video: video, allVideos: allVideos));
+      },
+      child: Row(
+        children: [
+          Container(
+            width: 82,
+            height: 72,
+            padding: EdgeInsets.all(25),
+            decoration: BoxDecoration(
+              color: const Color(0xFFE0E0E0),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: SvgPicture.asset(
+              'assets/support/play.svg',
+              width: 24.75,
+              height: 24.75,
+              colorFilter: const ColorFilter.mode(
+                Color.fromRGBO(0, 0, 0, 0.7),
+                BlendMode.srcIn,
+              ),
             ),
           ),
-        ),
-        Gap(25),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${video.title}",
-                style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18,
+          Gap(25),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${video.title}",
+                  style: GoogleFonts.inter(
+                    textStyle: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
-              ),
-              Gap(0),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/support/date.svg',
-                    width: 20,
-                    height: 20,
-                    colorFilter: const ColorFilter.mode(
-                      Color(0xB3000000),
-                      BlendMode.srcIn,
+                Gap(0),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/support/date.svg',
+                      width: 20,
+                      height: 20,
+                      colorFilter: const ColorFilter.mode(
+                        Color(0xB3000000),
+                        BlendMode.srcIn,
+                      ),
                     ),
-                  ),
-                  Gap(9),
-                  Text(
-                    "Posted ${video.posted}",
-                    style: TextStyle(
-                      color: Color.fromRGBO(0, 0, 0, 0.7),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                    Gap(9),
+                    Text(
+                      "Posted ${video.posted}",
+                      style: TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 0.7),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-        Icon(
-          Icons.chevron_right,
-          color: Color.fromRGBO(0, 0, 0, 0.7),
-          size: 20,
-        ),
-      ],
+          Icon(
+            Icons.chevron_right,
+            color: Color.fromRGBO(0, 0, 0, 0.7),
+            size: 20,
+          ),
+        ],
+      ),
     ),
   );
 }
