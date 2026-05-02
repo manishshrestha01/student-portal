@@ -38,15 +38,11 @@ class ReceiptView extends StatelessWidget {
                 child: _buildBreadcrumb(),
               ),
               const Gap(22),
-<<<<<<< HEAD
               Obx(() {
                 if (controller.isLoading.value) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-=======
-           Obx(() {
->>>>>>> 4356d10cdf0ee8eb6664f68add0b757c039f6cba
                 if (controller.hasError.value) {
                   return Center(
                     child: Column(
