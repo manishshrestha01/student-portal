@@ -18,7 +18,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class HomeView extends StatefulWidget {
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -137,7 +137,7 @@ class _HomeViewState extends State<HomeView> {
                       }),
                     ],
                   ),
-                  Gap(20),
+                  Gap(40),
 
                   // Courses section
                   _buildCourseSection(context),

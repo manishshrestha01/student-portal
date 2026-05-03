@@ -23,27 +23,26 @@ class CustomCourseItem extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(15),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: Row(
           children: [
             // Image
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: SizedBox(
-                height: 80,
-                width: 80,
+                height: 108,
+                width: 97,
                 child: Image.network(
                   image,
-                  height: 80,
-                  width: 80,
+                  height: 108,
+                  width: 97,
                   fit: BoxFit.cover,
                   alignment: Alignment.center,
                 ),
               ),
             ),
-            const SizedBox(width: 14),
+            const SizedBox(width: 30),
 
             // Text
             Expanded(
@@ -58,7 +57,7 @@ class CustomCourseItem extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
                   Text(
                     "Mentor: $mentor",
                     style: TextStyle(
@@ -67,19 +66,19 @@ class CustomCourseItem extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
                   Row(
                     children: [
                       const Icon(
                         Icons.play_circle,
-                        size: 16,
-                        color: AppColors.textDark,
+                        size: 18,
+                        color: Colors.black,
                       ),
-                      const SizedBox(width: 4),
+                      const SizedBox(width: 2),
                       Text(
                         "$videos Videos",
                         style: TextStyle(
-                          color: AppColors.textLight,
+                          color: Colors.black,
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
                         ),

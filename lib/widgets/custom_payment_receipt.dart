@@ -3,7 +3,6 @@ import 'package:codeit_app/view/receipt_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomPaymentReceipt extends StatelessWidget {
   final String title;

@@ -32,7 +32,7 @@ class CustomParentContainer extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(14),
+            padding: EdgeInsets.all(20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
