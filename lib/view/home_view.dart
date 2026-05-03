@@ -45,7 +45,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F7FA),
+      backgroundColor:  Colors.white,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {
