@@ -3,6 +3,7 @@ import 'package:codeit_app/view/receipt_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomPaymentReceipt extends StatelessWidget {
   final String title;
@@ -22,44 +23,46 @@ class CustomPaymentReceipt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 12),
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: InkWell(
-        onTap: (){
-           Get.offAll(() => ReceiptView(receiptId: receiptId));
-        },
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: () => Get.offAll(() => ReceiptView(receiptId: receiptId)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
         child: Row(
           children: [
-            //icon
-            icon,
-        
-        
-           Gap(10),
-        
-            //text
+            // Icon Box
+            Container(
+              width: 52,
+              height: 52,
+              decoration: BoxDecoration(
+                color: const Color(0xFFDCEEF8),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(child: icon),
+            ),
+
+            const Gap(14),
+
+            // Text
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                  ),
-        
-                  Gap( 4),
-        
-                  Text("Rs.$amount", style: TextStyle(color: AppColors.textDark, fontWeight: FontWeight.w500)),
-        
-                  Gap(4),
-        
-                  Text(date, style: TextStyle(
+                   style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18,
                       color: AppColors.textDark,
+                    ),
+                  ),
+                  const Gap(4),
+                  Text(
+                    "Amount: Rs.$amount  |  Date: $date",
+                    style: TextStyle(
+                      color: AppColors.textLight,
                       fontWeight: FontWeight.w500,
+                      fontSize: 14,
                     ),
                   ),
                 ],

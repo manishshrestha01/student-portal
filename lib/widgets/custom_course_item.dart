@@ -53,8 +53,9 @@ class CustomCourseItem extends StatelessWidget {
                   Text(
                     title,
                     style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                     color: AppColors.textDark,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -63,7 +64,7 @@ class CustomCourseItem extends StatelessWidget {
                     style: TextStyle(
                       color: AppColors.textDark,
                       fontWeight: FontWeight.w500,
-                      fontSize: 13,
+                      fontSize: 16,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -72,15 +73,15 @@ class CustomCourseItem extends StatelessWidget {
                       const Icon(
                         Icons.play_circle,
                         size: 16,
-                        color: Colors.black87,
+                        color: AppColors.textDark,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         "$videos Videos",
                         style: TextStyle(
-                          color: AppColors.textDark,
+                          color: AppColors.textLight,
                           fontWeight: FontWeight.w500,
-                          fontSize: 13,
+                          fontSize: 15,
                         ),
                       ),
                     ],

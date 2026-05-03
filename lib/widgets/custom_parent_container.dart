@@ -17,11 +17,11 @@ class CustomParentContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xFFF9FAFB),
+         color: Color(0xFFF9FAFB),
         border: Border.all(width: 0.5),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-          BoxShadow(
+           BoxShadow(
             color: const Color.fromRGBO(0, 0, 0, 0.25),
             blurRadius: 4,
             offset: Offset(0, 4),
@@ -38,7 +38,7 @@ class CustomParentContainer extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600,color: AppColors.textDark),
                 ),
 
                 InkWell(
@@ -47,7 +47,8 @@ class CustomParentContainer extends StatelessWidget {
                     seeall,
                     style: TextStyle(
                       color: AppColors.textDark,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 17
                     ),
                   ),
                 ),

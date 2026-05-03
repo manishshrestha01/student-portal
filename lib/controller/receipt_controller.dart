@@ -31,8 +31,6 @@ class ReceiptController extends GetxController {
 
       if (result.success == true) {
         receipts.assignAll(result.data);
-        print(result.data);
-        print(result.runtimeType);
       } else {
         hasError(true);
         errorMessage('Failed to fetch receipts.');

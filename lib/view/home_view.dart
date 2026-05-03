@@ -28,7 +28,9 @@ class _HomeViewState extends State<HomeView> {
   final AuthController authController = Get.find<AuthController>();
   final ReceiptController receiptController = Get.put(ReceiptController());
   final CoursesController coursesController = Get.put(CoursesController());
-  final CertificatesController certificatesController = Get.put(CertificatesController());
+  final CertificatesController certificatesController = Get.put(
+    CertificatesController(),
+  );
 
   @override
   void initState() {
@@ -90,7 +92,8 @@ class _HomeViewState extends State<HomeView> {
                       Obx(() {
                         return InfoCard(
                           title: "Active Courses",
-                          value: coursesController.courses.value.data.length.toString(),
+                          value: coursesController.courses.value.data.length
+                              .toString(),
                           icon: SvgPicture.asset(
                             'assets/support/course_border.svg',
                             width: 55,
@@ -103,13 +106,19 @@ class _HomeViewState extends State<HomeView> {
                       Obx(() {
                         return InfoCard(
                           title: "Certificates",
-                          value: certificatesController.certificate.value.data.length.toString(),
+                          value: certificatesController
+                              .certificate
+                              .value
+                              .data
+                              .length
+                              .toString(),
                           icon: SvgPicture.asset(
                             'assets/support/certificate_border.svg',
                             width: 55,
                             height: 55,
                           ),
-                          onTap: () => Get.offAll(() => const CertificatesView()),
+                          onTap: () =>
+                              Get.offAll(() => const CertificatesView()),
                         );
                       }),
                       Gap(20),
@@ -141,8 +150,7 @@ class _HomeViewState extends State<HomeView> {
 
                   // Certificates section
                   _buildCertificateSection(context),
-             
-              ],
+                ],
               ),
             ),
           ),
@@ -173,7 +181,10 @@ Widget _buildPaymentSection(BuildContext context) {
         final widgets = <Widget>[];
         for (int i = 0; i < items.length; i++) {
           final receipt = items[i];
+           
+          
           widgets.add(
+           
             CustomPaymentReceipt(
               title: receipt.courseName ?? "Course",
               amount: receipt.amount?.toString() ?? "0",
@@ -186,10 +197,17 @@ Widget _buildPaymentSection(BuildContext context) {
               receiptId: receipt.receiptId ?? 0,
             ),
           );
+       Gap(12);
           //add divider between items
           if (i < items.length - 1) {
             widgets.add(
-              const Divider(color: Color(0xFFE0E0E0), thickness: 1, height: 16),
+              const Divider(
+                height: 1,
+                thickness: 1,
+                indent: 14,
+                endIndent: 14,
+                color: Color(0xFFDDE3E9),
+              ),
             );
           }
         }
@@ -198,7 +216,6 @@ Widget _buildPaymentSection(BuildContext context) {
     );
   });
 }
-
 
 Widget _buildCourseSection(BuildContext context) {
   final CoursesController coursesController = Get.find<CoursesController>();
@@ -209,7 +226,7 @@ Widget _buildCourseSection(BuildContext context) {
     }
 
     final courses = coursesController.courses.value.data;
-    
+
     if (courses.isEmpty) {
       return const Text("No courses available");
     }
@@ -220,7 +237,7 @@ Widget _buildCourseSection(BuildContext context) {
         mentor: course.mentorName ?? "Instructor",
         videos: course.lessons?.toString() ?? "0",
         image: course.courseImage ?? "",
-        onTap: ()=> Get.to(() => CourseView()),
+        onTap: () => Get.to(() => CourseView()),
       );
     }).toList();
 
@@ -234,7 +251,8 @@ Widget _buildCourseSection(BuildContext context) {
 }
 
 Widget _buildCertificateSection(BuildContext context) {
-  final CertificatesController certificatesController = Get.find<CertificatesController>();
+  final CertificatesController certificatesController =
+      Get.find<CertificatesController>();
 
   return Obx(() {
     if (certificatesController.errorMessage.value.isNotEmpty) {
@@ -242,7 +260,7 @@ Widget _buildCertificateSection(BuildContext context) {
     }
 
     final certificates = certificatesController.certificate.value.data;
-    
+
     if (certificates.isEmpty) {
       return const Text("No certificates available");
     }
@@ -256,16 +274,25 @@ Widget _buildCertificateSection(BuildContext context) {
           width: 40,
           height: 40,
         ),
-       onTap: () => Get. to(() => const CertificatesView()),
+        onTap: () => Get.to(() => const CertificatesView()),
       );
     }).toList();
-
+  
     final widgets = <Widget>[];
     for (int i = 0; i < certItems.length; i++) {
-      widgets.add(certItems[i]);
+      widgets.add(
+        certItems[i]);
+
       if (i < certItems.length - 1) {
         widgets.add(
-          const Divider(color: Color(0xFFE0E0E0), thickness: 1, height: 16),
+          const Divider(
+            
+            height: 1,
+            thickness: 1,
+            indent: 14,
+            endIndent: 14,
+            color: Color(0xFFDDE3E9),
+          ),
         );
       }
     }
@@ -273,7 +300,7 @@ Widget _buildCertificateSection(BuildContext context) {
     return CustomParentContainer(
       title: "Certificates",
       seeall: "See All",
-      onTapSeeAll: () => Get.to(()=> const CertificatesView()),
+      onTapSeeAll: () => Get.to(() => const CertificatesView()),
       children: widgets,
     );
   });

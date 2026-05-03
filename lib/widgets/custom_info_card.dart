@@ -52,8 +52,9 @@ class InfoCard extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      color: AppColors.textDark,
-                      fontWeight: FontWeight.w500,
+                      color: AppColors.textLight,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 18
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -63,7 +64,7 @@ class InfoCard extends StatelessWidget {
                   Text(
                     value,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),

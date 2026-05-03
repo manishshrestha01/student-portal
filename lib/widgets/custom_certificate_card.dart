@@ -40,7 +40,7 @@ class CustomCertificateCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18, color: AppColors.textDark),
                   ),
         
                   Gap(4),
@@ -48,8 +48,9 @@ class CustomCertificateCard extends StatelessWidget {
                   Text(
                     "Completed: $completed",
                     style: TextStyle(
-                      color: AppColors.textDark,
+                      color: AppColors.textLight,
                       fontWeight: FontWeight.w500,
+                      fontSize: 14,
                     ),
                   ),
                 
