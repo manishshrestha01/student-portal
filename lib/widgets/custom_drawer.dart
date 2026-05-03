@@ -138,7 +138,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   ),
                   ListTile(
-                    onTap: () => Get.offAll(() => const PaymentPage()),
+                    onTap: () => Get.to(() => PaymentPage()),
                     contentPadding: EdgeInsets.only(left: leftPadding),
                     leading: SvgPicture.asset(
                       'assets/support/receipt.svg',

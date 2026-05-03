@@ -29,7 +29,7 @@ class CustomPaymentReceipt extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
       ),
-      child: GestureDetector(
+      child: InkWell(
         onTap: (){
            Get.offAll(() => ReceiptView(receiptId: receiptId));
         },

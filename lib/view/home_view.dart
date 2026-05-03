@@ -219,16 +219,15 @@ Widget _buildCourseSection(BuildContext context) {
         title: course.courseName ?? "Course",
         mentor: course.mentorName ?? "Instructor",
         videos: course.lessons?.toString() ?? "0",
-        image: "assets/images/dashboard/course_image.png",
+        image: course.courseImage ?? "",
+        onTap: ()=> Get.to(() => CourseView()),
       );
     }).toList();
 
     return CustomParentContainer(
       title: "Your Courses",
       seeall: "See All",
-      onTapSeeAll: () {
-        // Navigate to courses page
-      },
+      onTapSeeAll: () => Get.to(() => const CourseView()),
       children: courseItems,
     );
   });
@@ -257,6 +256,7 @@ Widget _buildCertificateSection(BuildContext context) {
           width: 40,
           height: 40,
         ),
+       onTap: () => Get. to(() => const CertificatesView()),
       );
     }).toList();
 
@@ -273,9 +273,7 @@ Widget _buildCertificateSection(BuildContext context) {
     return CustomParentContainer(
       title: "Certificates",
       seeall: "See All",
-      onTapSeeAll: () {
-        // Navigate to certificates page
-      },
+      onTapSeeAll: () => Get.to(()=> const CertificatesView()),
       children: widgets,
     );
   });

@@ -29,22 +29,20 @@ class CustomCourseItem extends StatelessWidget {
         child: Row(
           children: [
             // Image
-            ClipRRect(
+           ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                image,
+              child: SizedBox(
                 height: 80,
                 width: 80,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Image.asset(
-                  'assets/images/dashboard/course_image.png',
+                child: Image.network(
+                  image,
                   height: 80,
                   width: 80,
                   fit: BoxFit.cover,
+                  alignment: Alignment.center,
                 ),
               ),
             ),
-
             const SizedBox(width: 14),
 
             // Text

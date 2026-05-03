@@ -41,7 +41,7 @@ class CustomParentContainer extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
 
-                GestureDetector(
+                InkWell(
                   onTap: onTapSeeAll,
                   child: Text(
                     seeall,
