@@ -29,7 +29,7 @@ class CustomCourseItem extends StatelessWidget {
         child: Row(
           children: [
             // Image
-           ClipRRect(
+            ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: SizedBox(
                 height: 80,
