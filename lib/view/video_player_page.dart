@@ -36,6 +36,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       initialVideoId: widget.video.videoId ?? '',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
+        forceHD: true,
         hideControls: false,
         hideThumbnail: false,
         mute: false,
@@ -101,10 +102,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                   YoutubePlayer(
                     controller: _youtubeController,
                     showVideoProgressIndicator: true,
-                    progressIndicatorColor: Colors.amber,
+                    progressIndicatorColor: Colors.white,
                     progressColors: const ProgressBarColors(
-                      playedColor: Colors.amber,
-                      handleColor: Colors.amberAccent,
+                      playedColor: Colors.white,
+                      handleColor: Colors.white,
                     ),
                   ),
                   Gap(verticalGap),
