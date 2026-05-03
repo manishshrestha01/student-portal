@@ -36,6 +36,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       initialVideoId: widget.video.videoId ?? '',
       flags: const YoutubePlayerFlags(
         autoPlay: false,
+        disableDragSeek: false,
         forceHD: true,
         hideControls: false,
         hideThumbnail: false,
