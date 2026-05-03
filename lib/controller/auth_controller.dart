@@ -38,6 +38,7 @@ class AuthController extends GetxController {
   final whatsapp = TextEditingController();
   final password = TextEditingController();
   final countryCode = TextEditingController(text: '+977');
+  final address = TextEditingController();
   final currentPassword = TextEditingController();
   final newPassword = TextEditingController();
   final confirmPassword = TextEditingController();
@@ -48,6 +49,7 @@ class AuthController extends GetxController {
     whatsapp.clear();
     password.clear();
     countryCode.text = '+977';
+    address.text = '';
   }
 
   void clearPasswordForm() {
@@ -69,6 +71,7 @@ class AuthController extends GetxController {
         email.text = user.value?.email ?? '';
         whatsapp.text = user.value?.phone ?? '';
         countryCode.text = user.value?.countryCode ?? '+977';
+        address.text = user.value?.address ?? '';
       }
 
       Future.delayed(const Duration(seconds: 1), () {
@@ -162,7 +165,7 @@ class AuthController extends GetxController {
             "name": user.value!.name,
             "email": user.value!.email,
             "phone": user.value!.phone,
-            "address": user.value!.countryCode,
+            "address": user.value!.address,
           });
         }
       }
@@ -183,7 +186,7 @@ class AuthController extends GetxController {
         name.text,
         email.text,
         whatsapp.text,
-        countryCode.text,
+        address.text,
       );
 
       if (response.statusCode == 200) {
@@ -194,14 +197,16 @@ class AuthController extends GetxController {
             name: name.text,
             email: email.text,
             phone: whatsapp.text,
-            countryCode: countryCode.text,
+            countryCode: user.value?.countryCode,
+            address: address.text,
           );
           _storage.saveUser({
             "id": user.value?.id,
             "name": user.value?.name,
             "email": user.value?.email,
             "phone": user.value?.phone,
-            "address": user.value?.countryCode,
+            "country_code": user.value?.countryCode,
+            "address": user.value?.address,
           });
           Get.snackbar(
             "Success",

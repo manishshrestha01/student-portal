@@ -19,6 +19,7 @@ class User {
     required this.email,
     required this.phone,
     required this.countryCode,
+    this.address,
   });
 
   final int? id;
@@ -26,14 +27,15 @@ class User {
   final String? email;
   final String? phone;
   final String? countryCode;
-
+  final String? address;
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json["id"],
       name: json["name"],
       email: json["email"],
       phone: json["phone"],
-      countryCode: json["address"],
+      countryCode: json["country_code"],
+      address: json["address"],
     );
   }
 }

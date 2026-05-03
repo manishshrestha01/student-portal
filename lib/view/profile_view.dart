@@ -30,6 +30,7 @@ class ProfileView extends GetView<AuthController> {
           controller.email.text = user.email ?? '';
           controller.whatsapp.text = user.phone ?? '';
           controller.countryCode.text = user.countryCode ?? '';
+          controller.address.text = user.address ?? '';
         }
 
         return SingleChildScrollView(
@@ -112,14 +113,14 @@ class ProfileView extends GetView<AuthController> {
                             //w5 number
                             CustomPhoneField(
                               controller: controller.whatsapp,
-                              countryCodeController: controller.whatsapp,
+                              countryCodeController: controller.countryCode,
                               labelText: "WhatsApp Number",
                               isRequired: true,
                             ),
                             Gap(20),
                             //w6 address
                             CustomTextField(
-                              controller: controller.countryCode,
+                              controller: controller.address,
                               labelText: "Address",
                               hintText: "Enter your address",
                             ),
