@@ -4,6 +4,7 @@ import 'package:codeit_app/controller/courses_controller.dart';
 import 'package:codeit_app/controller/certificates_controller.dart';
 import 'package:codeit_app/view/certificates_view.dart';
 import 'package:codeit_app/view/course_view.dart';
+import 'package:codeit_app/view/link_view.dart';
 import 'package:codeit_app/view/payment_page_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_certificate_card.dart';
@@ -84,6 +85,9 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ],
                   ),
+                  Gap(20),
+                  LinkView(),
+
                   Gap(20),
 
                   // Info cards
