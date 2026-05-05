@@ -30,7 +30,7 @@ class ProfileView extends GetView<AuthController> {
           controller.email.text = user.email ?? '';
           controller.whatsapp.text = user.phone ?? '';
           controller.countryCode.text = user.countryCode ?? '';
-          controller.address.text = user.address ?? '';
+        
         }
 
         return SingleChildScrollView(
