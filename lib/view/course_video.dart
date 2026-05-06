@@ -58,6 +58,11 @@ class _CourseVideoState extends State<CourseVideo> {
           final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
           final double titleFontSize = isSmall ? 20 : (isMedium ? 22 : 25);
           final double breadcrumbFontSize = isSmall ? 12 : (isMedium ? 13 : 15);
+          final double subtitleFontSize = isSmall ? 16 : (isMedium ? 18 : 20);
+          final double bodyFontSize = isSmall ? 14 : (isMedium ? 15 : 16);
+          final double containerWidth = double.infinity;
+          final double imageHeight = isSmall ? 180 : (isMedium ? 220 : 233);
+          final double containerHeight = isSmall ? 56 : 66;
 
           return SingleChildScrollView(
             child: Padding(
@@ -85,8 +90,8 @@ class _CourseVideoState extends State<CourseVideo> {
                   Column(
                     children: [
                       Container(
-                        width: 393,
-                        height: 233,
+                        width: containerWidth,
+                        height: imageHeight,
                         clipBehavior: Clip.antiAlias,
                         decoration: BoxDecoration(
                           color: Colors.grey[200],
@@ -159,7 +164,7 @@ class _CourseVideoState extends State<CourseVideo> {
                         },
                         child: Container(
                           width: double.infinity,
-                          height: 66,
+                          height: containerHeight,
                           padding: EdgeInsets.all(20),
                           decoration: BoxDecoration(
                             color: const Color(0xFFF9FAFB),
@@ -188,9 +193,9 @@ class _CourseVideoState extends State<CourseVideo> {
                               Text(
                                 "Notes & Resources",
                                 style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
+                                  textStyle: TextStyle(
                                     color: Colors.black,
-                                    fontSize: 18,
+                                    fontSize: bodyFontSize,
                                     fontWeight: FontWeight.w400,
                                     height: 1.0,
                                     letterSpacing: 0,
@@ -209,7 +214,7 @@ class _CourseVideoState extends State<CourseVideo> {
                       ),
                       Gap(20),
                       Container(
-                        width: 393,
+                        width: double.infinity,
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -243,7 +248,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 24,
+                                      fontSize: subtitleFontSize,
                                       fontWeight: FontWeight.w600,
                                       height: 1.0,
                                       letterSpacing: 0,
@@ -297,7 +302,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  return videoItem(videosList[index], videosList);
+                                  return videoItem(videosList[index], videosList, screenWidth, bodyFontSize, subtitleFontSize);
                                 },
                                 separatorBuilder: (context, index) =>
                                     const Divider(
@@ -325,9 +330,16 @@ class _CourseVideoState extends State<CourseVideo> {
 }
 
 // individual video row item
-Widget videoItem(Video video, List<Video> allVideos) {
+Widget videoItem(Video video, List<Video> allVideos, double screenWidth, double bodyFontSize, double subtitleFontSize) {
+  final isSmall = screenWidth < 390;
+  final playIconSize = isSmall ? 16.0 : 24.75;
+  final playContainerSize = isSmall ? 70.0 : 82.0;
+  final playContainerHeight = isSmall ? 60.0 : 72.0;
+  final gapSize = isSmall ? 8.0 : 25.0;
+  final dateIconSize = isSmall ? 14.0 : 20.0;
+
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 15),
+    padding: EdgeInsets.symmetric(vertical: isSmall ? 10 : 15),
     child: GestureDetector(
       onTap: () {
         Get.to(() => VideoPlayerPage(video: video, allVideos: allVideos));
@@ -335,56 +347,62 @@ Widget videoItem(Video video, List<Video> allVideos) {
       child: Row(
         children: [
           Container(
-            width: 82,
-            height: 72,
-            padding: EdgeInsets.all(25),
+            width: playContainerSize,
+            height: playContainerHeight,
+            padding: EdgeInsets.all(isSmall ? 15 : 25),
             decoration: BoxDecoration(
               color: const Color(0xFFE0E0E0),
               borderRadius: BorderRadius.circular(8),
             ),
             child: SvgPicture.asset(
               'assets/support/play.svg',
-              width: 24.75,
-              height: 24.75,
+              width: playIconSize,
+              height: playIconSize,
               colorFilter: const ColorFilter.mode(
                 Color.fromRGBO(0, 0, 0, 0.7),
                 BlendMode.srcIn,
               ),
             ),
           ),
-          Gap(25),
+          Gap(gapSize),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "${video.title}",
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.inter(
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 18,
+                      fontSize: subtitleFontSize,
                     ),
                   ),
                 ),
-                Gap(0),
+                Gap(isSmall ? 4 : 6),
                 Row(
                   children: [
                     SvgPicture.asset(
                       'assets/support/date.svg',
-                      width: 20,
-                      height: 20,
+                      width: dateIconSize,
+                      height: dateIconSize,
                       colorFilter: const ColorFilter.mode(
                         Color(0xB3000000),
                         BlendMode.srcIn,
                       ),
                     ),
-                    Gap(9),
-                    Text(
-                      "Posted ${video.posted}",
-                      style: TextStyle(
-                        color: Color.fromRGBO(0, 0, 0, 0.7),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                    Gap(isSmall ? 4 : 9),
+                    Expanded(
+                      child: Text(
+                        "Posted ${video.posted}",
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: Color.fromRGBO(0, 0, 0, 0.7),
+                          fontSize: bodyFontSize,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],

@@ -105,6 +105,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
               final double breadcrumbFontSize = isSmall
                   ? 12
                   : (isMedium ? 13 : 15);
+              final double videoTitleFontSize = isSmall ? 18 : (isMedium ? 20 : 22);
+              final double subtitleFontSize = isSmall ? 16 : (isMedium ? 18 : 24);
+              final double bodyFontSize = isSmall ? 12 : (isMedium ? 13 : 14);
 
               return SingleChildScrollView(
                 child: Padding(
@@ -142,9 +145,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                             Text(
                               currentVideo.title ?? 'Video',
                               style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
+                                textStyle: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 22,
+                                  fontSize: videoTitleFontSize,
                                   fontWeight: FontWeight.w600,
                                   height: 1.2,
                                 ),
@@ -166,9 +169,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                 Text(
                                   "Posted ${currentVideo.posted}",
                                   style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
+                                    textStyle: TextStyle(
                                       color: Color.fromRGBO(0, 0, 0, 0.6),
-                                      fontSize: 14,
+                                      fontSize: bodyFontSize,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -180,7 +183,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       ),
                       Gap(verticalGap),
                       Container(
-                        width: 393,
+                        width: double.infinity,
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -214,7 +217,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 24,
+                                      fontSize: subtitleFontSize,
                                       fontWeight: FontWeight.w600,
                                       height: 1.0,
                                       letterSpacing: 0,
@@ -252,7 +255,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                               thickness: 0.5,
                               color: Colors.black,
                             ),
-                            _buildVideosList(),
+                            _buildVideosList(videoTitleFontSize, bodyFontSize, screenWidth),
                           ],
                         ),
                       ),
@@ -345,7 +348,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     );
   }
 
-  Widget _buildVideosList() {
+  Widget _buildVideosList(double videoTitleFontSize, double bodyFontSize, double screenWidth) {
     var videos = widget.allVideos;
 
     if (videos.isEmpty) {
@@ -364,7 +367,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return _buildVideoItem(videos[index]);
+        return _buildVideoItem(videos[index], videoTitleFontSize, bodyFontSize, screenWidth);
       },
       separatorBuilder: (context, index) =>
           const Divider(height: 1, color: Colors.black, thickness: 0.5),
@@ -372,11 +375,14 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     );
   }
 
-  Widget _buildVideoItem(Video video) {
+  Widget _buildVideoItem(Video video, double videoTitleFontSize, double bodyFontSize, double screenWidth) {
     final isSelected = currentVideo.id == video.id;
+    final isSmall = screenWidth < 390;
+    final containerPadding = isSmall ? 10.0 : 12.0;
+    final playIconSize = isSmall ? 16.0 : 24.75;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15),
+      padding: EdgeInsets.symmetric(vertical: isSmall ? 10 : 15),
       child: GestureDetector(
         onTap: () => _playVideo(video),
         child: Container(
@@ -384,60 +390,66 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             color: isSelected ? const Color(0xFFD3D3D3) : Colors.transparent,
             borderRadius: BorderRadius.circular(8),
           ),
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(containerPadding),
           child: Row(
             children: [
               Container(
-                width: 82,
-                height: 72,
-                padding: EdgeInsets.all(25),
+                width: isSmall ? 70 : 82,
+                height: isSmall ? 60 : 72,
+                padding: EdgeInsets.all(isSmall ? 15 : 25),
                 decoration: BoxDecoration(
                   color: const Color(0xFFE0E0E0),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: SvgPicture.asset(
                   'assets/support/play.svg',
-                  width: 24.75,
-                  height: 24.75,
+                  width: playIconSize,
+                  height: playIconSize,
                   colorFilter: const ColorFilter.mode(
                     Color.fromRGBO(0, 0, 0, 0.7),
                     BlendMode.srcIn,
                   ),
                 ),
               ),
-              Gap(25),
+              Gap(isSmall ? 8 : 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "${video.title}",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           fontWeight: FontWeight.w400,
-                          fontSize: 18,
+                          fontSize: videoTitleFontSize,
                         ),
                       ),
                     ),
-                    Gap(0),
+                    Gap(isSmall ? 4 : 6),
                     Row(
                       children: [
                         SvgPicture.asset(
                           'assets/support/date.svg',
-                          width: 20,
-                          height: 20,
+                          width: isSmall ? 14 : 16,
+                          height: isSmall ? 14 : 16,
                           colorFilter: const ColorFilter.mode(
                             Color(0xB3000000),
                             BlendMode.srcIn,
                           ),
                         ),
-                        Gap(9),
-                        Text(
-                          "Posted ${video.posted}",
-                          style: TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 0.7),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                        Gap(isSmall ? 4 : 6),
+                        Expanded(
+                          child: Text(
+                            "Posted ${video.posted}",
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Color.fromRGBO(0, 0, 0, 0.7),
+                              fontSize: bodyFontSize,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
                       ],
