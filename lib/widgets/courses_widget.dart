@@ -31,7 +31,6 @@ class _CoursesWidgetState extends State<CoursesWidget> {
           children: [
             Container(
               width: 390,
-              height: 394,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -47,190 +46,186 @@ class _CoursesWidgetState extends State<CoursesWidget> {
               ),
               child: Column(
                 children: [
-                  Expanded(
-                    flex: 5,
-                    child: Container(
-                      width: double.infinity,
-                      height: 191,
-                      color: Colors.transparent,
-                      child: Stack(
-                        children: [
-                          Positioned.fill(
-                            child: Image.network(
-                              "${widget.item.courseImage}",
-                              fit: BoxFit.cover,
-                              alignment: Alignment.center,
-                            ),
+                  Container(
+                    width: double.infinity,
+                    height: 191,
+                    color: Colors.transparent,
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: Image.network(
+                            "${widget.item.courseImage}",
+                            fit: BoxFit.cover,
+                            alignment: Alignment.center,
                           ),
-                          Positioned(
-                            top: 15,
-                            right: 15,
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFFF6900),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Text(
-                                StatusMapper.mapCourseStatus(widget.item.status),
-                                style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.0,
-                                    letterSpacing: 0,
-                                  ),
+                        ),
+                        Positioned(
+                          top: 15,
+                          right: 15,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFFF6900),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              StatusMapper.mapCourseStatus(widget.item.status),
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.0,
+                                  letterSpacing: 0,
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                  // Gap(20),
-                  Expanded(
-                    flex: 6,
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${widget.item.courseName}",
-                            style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                height: 1.0,
-                                letterSpacing: 0,
-                              ),
+                  Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${widget.item.courseName}",
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              height: 1.2,
+                              letterSpacing: 0,
                             ),
                           ),
-                          Gap(6),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/support/mentor.svg',
-                                width: 24,
-                                height: 24,
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.black,
-                                  BlendMode.srcIn,
-                                ),
+                        ),
+                        Gap(6),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/support/mentor.svg',
+                              width: 24,
+                              height: 24,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.black,
+                                BlendMode.srcIn,
                               ),
-                              Gap(13),
-                              Text(
+                            ),
+                            Gap(13),
+                            Expanded(
+                              child: Text(
                                 "${widget.item.mentorName}",
-                                style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.0,
-                                    letterSpacing: 0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Gap(8),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                'assets/support/play.svg',
-                                width: 28,
-                                height: 28,
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.black,
-                                  BlendMode.srcIn,
-                                ),
-                              ),
-                              Gap(11),
-                              Text(
-                                "${widget.item.lessons} Lesson",
-                                style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.0,
-                                    letterSpacing: 0,
-                                  ),
-                                ),
-                              ),
-                              Spacer(),
-                              SvgPicture.asset(
-                                'assets/support/time.svg',
-                                width: 24,
-                                height: 24,
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.black,
-                                  BlendMode.srcIn,
-                                ),
-                              ),
-                              Gap(11),
-                              Text(
-                                "${widget.item.duration}",
-                                style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1.0,
-                                    letterSpacing: 0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Gap(26),
-                          //button
-                          SizedBox(
-                            width: double.infinity,
-                            height: buttonHeight,
-                            child: ElevatedButton.icon(
-                              onPressed: () => Get.offAll(() => CourseVideo(item: widget.item)),
-                              icon: SvgPicture.asset(
-                                'assets/support/play.svg',
-                                colorFilter: const ColorFilter.mode(
-                                  Color(0xFFFF6900),
-                                  BlendMode.srcIn,
-                                ),
-                                width: isSmall ? 20 : (isMedium ? 22 : 26),
-                                height: isSmall ? 20 : (isMedium ? 22 : 26),
-                              ),
-                              label: Text(
-                                'Watch Recorded Video',
-                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.inter(
-                                  textStyle: TextStyle(
-                                    color: const Color(0xFFFF6900),
-                                    fontSize: buttonFontSize,
-                                    fontWeight: FontWeight.w700,
+                                  textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.0,
+                                    letterSpacing: 0,
                                   ),
                                 ),
                               ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFFFFFFF),
-                                side: const BorderSide(
-                                  color: Color(0xFFFF6900),
-                                  width: 1,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                            ),
+                          ],
+                        ),
+                        Gap(8),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/support/play.svg',
+                              width: 28,
+                              height: 28,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.black,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                            Gap(11),
+                            Text(
+                              "${widget.item.lessons} Lesson",
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.0,
+                                  letterSpacing: 0,
                                 ),
                               ),
                             ),
+                            Spacer(),
+                            SvgPicture.asset(
+                              'assets/support/time.svg',
+                              width: 24,
+                              height: 24,
+                              colorFilter: const ColorFilter.mode(
+                                Colors.black,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                            Gap(11),
+                            Text(
+                              "${widget.item.duration}",
+                              style: GoogleFonts.inter(
+                                textStyle: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.0,
+                                  letterSpacing: 0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Gap(26),
+                        //button
+                        SizedBox(
+                          width: double.infinity,
+                          height: buttonHeight,
+                          child: ElevatedButton.icon(
+                            onPressed: () => Get.offAll(() => CourseVideo(item: widget.item)),
+                            icon: SvgPicture.asset(
+                              'assets/support/play.svg',
+                              colorFilter: const ColorFilter.mode(
+                                Color(0xFFFF6900),
+                                BlendMode.srcIn,
+                              ),
+                              width: isSmall ? 20 : (isMedium ? 22 : 26),
+                              height: isSmall ? 20 : (isMedium ? 22 : 26),
+                            ),
+                            label: Text(
+                              'Watch Recorded Video',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  color: const Color(0xFFFF6900),
+                                  fontSize: buttonFontSize,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFFFFFFF),
+                              side: const BorderSide(
+                                color: Color(0xFFFF6900),
+                                width: 1,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
