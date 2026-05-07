@@ -30,17 +30,9 @@ class CustomPaymentReceipt extends StatelessWidget {
         child: Row(
           children: [
             // Icon Box
-            Container(
-              width: 52,
-              height: 52,
-              decoration: BoxDecoration(
-                color: const Color(0xFFDCEEF8),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(child: icon),
-            ),
+            icon,
 
-            const Gap(14),
+            const Gap(20),
 
             // Text
             Expanded(
@@ -55,9 +47,9 @@ class CustomPaymentReceipt extends StatelessWidget {
                       color: AppColors.textDark,
                     ),
                   ),
-                  const Gap(4),
+                  const Gap(3),
                   Text(
-                    "Amount: Rs.$amount  |  Date: $date",
+                    "Amount: Rs.$amount \nDate: $date",
                     style: TextStyle(
                       color: AppColors.textLight,
                       fontWeight: FontWeight.w500,

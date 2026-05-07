@@ -19,10 +19,9 @@ class CustomCertificateCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 12),
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: InkWell(
         onTap: onTap,
@@ -31,7 +30,7 @@ class CustomCertificateCard extends StatelessWidget {
             //icon
             icon,
         
-            Gap(10),
+            Gap(20),
         
             //text
             Expanded(
@@ -43,7 +42,7 @@ class CustomCertificateCard extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18, color: AppColors.textDark),
                   ),
         
-                  Gap(4),
+                  Gap(3),
         
                   Text(
                     "Completed: $completed",

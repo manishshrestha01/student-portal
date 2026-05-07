@@ -145,12 +145,12 @@ class _HomeViewState extends State<HomeView> {
 
                   // Courses section
                   _buildCourseSection(context),
-                  Gap(20),
+                  Gap(40),
 
                   // Payments section
                   _buildPaymentSection(context),
 
-                  Gap(20),
+                  Gap(40),
 
                   // Certificates section
                   _buildCertificateSection(context),
@@ -210,7 +210,7 @@ Widget _buildPaymentSection(BuildContext context) {
                 thickness: 1,
                 indent: 14,
                 endIndent: 14,
-                color: Color(0xFFDDE3E9),
+                color: Color.fromRGBO(0, 0, 0, 0.40),
               ),
             );
           }
@@ -290,12 +290,11 @@ Widget _buildCertificateSection(BuildContext context) {
       if (i < certItems.length - 1) {
         widgets.add(
           const Divider(
-            
             height: 1,
             thickness: 1,
             indent: 14,
             endIndent: 14,
-            color: Color(0xFFDDE3E9),
+            color: Color.fromRGBO(0, 0, 0, 0.40),
           ),
         );
       }
