@@ -96,7 +96,7 @@ class _LinkViewState extends State<LinkView> {
                       ),
                       ElevatedButton(
                         onPressed: () async{
-                          launchUrl(Uri.parse(item.meetLink ?? ''));
+                          await launchUrl(Uri.parse(item.meetLink ?? ''));
                           
                         },
                         style: ElevatedButton.styleFrom(

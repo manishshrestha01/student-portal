@@ -160,7 +160,7 @@ class _CourseVideoState extends State<CourseVideo> {
                       // Gap(20),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => Notes());
+                          Get.to(() => Notes(id: widget.item.enrollmentId,));
                         },
                         child: Container(
                           width: double.infinity,
