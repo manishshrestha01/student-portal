@@ -9,7 +9,6 @@ Future<void> printReceipt(Datum receipt) async {
   final AuthController authController = Get.find<AuthController>();
   final user = authController.user.value;
 
-
   final fontRegular = await PdfGoogleFonts.interRegular();
   final fontBold = await PdfGoogleFonts.interBold();
   final fontMedium = await PdfGoogleFonts.interMedium();
@@ -29,7 +28,6 @@ Future<void> printReceipt(Datum receipt) async {
         return pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.center,
           children: [
-
             pw.Text(
               'Payment Receipt',
               style: pw.TextStyle(font: fontBold, fontSize: 22),
@@ -45,7 +43,6 @@ Future<void> printReceipt(Datum receipt) async {
             pw.Image(logoImage, width: 120, height: 40),
             pw.SizedBox(height: 16),
 
-    
             _pdfInfoBlock(
               'Transaction ID',
               receipt.receiptId?.toString() ?? '-',
@@ -65,22 +62,47 @@ Future<void> printReceipt(Datum receipt) async {
               style: pw.TextStyle(font: fontRegular, fontSize: 13),
             ),
             pw.SizedBox(height: 6),
+
             pw.Container(
               padding: const pw.EdgeInsets.symmetric(
                 horizontal: 14,
                 vertical: 6,
               ),
               decoration: pw.BoxDecoration(
-                color: PdfColors.green100,
-                borderRadius: pw.BorderRadius.circular(20),
+                color: PdfColors.green200,
+                borderRadius: pw.BorderRadius.circular(15),
               ),
-              child: pw.Text(
-                'PAID',
-                style: pw.TextStyle(
-                  font: fontBold,
-                  color: PdfColors.green700,
-                  fontSize: 13,
-                ),
+              child: pw.Row(
+                mainAxisSize: pw.MainAxisSize.min,
+                children: [
+                  pw.Container(
+                    width: 18,
+                    height: 18,
+                    decoration: pw.BoxDecoration(
+                      color: PdfColors.green600,
+                      shape: pw.BoxShape.circle,
+                    ),
+                    alignment: pw.Alignment.center,
+                    child: pw.Text(
+                      '✓',
+                      style: pw.TextStyle(
+                        font: fontBold,
+                        color: PdfColors.white,
+                        fontSize: 11,
+                      ),
+                      textAlign: pw.TextAlign.center,
+                    ),
+                  ),
+                  pw.SizedBox(width: 8),
+                  pw.Text(
+                    'Paid',
+                    style: pw.TextStyle(
+                      font: fontMedium,
+                      color: PdfColors.green700,
+                      fontSize: 14,
+                    ),
+                  ),
+                ],
               ),
             ),
 
@@ -168,7 +190,6 @@ Future<void> printReceipt(Datum receipt) async {
     name: 'Receipt_${receipt.receiptId ?? 'unknown'}.pdf',
   );
 }
-
 
 pw.Widget _pdfInfoBlock(
   String title,
