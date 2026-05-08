@@ -45,6 +45,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor:  Colors.white,
       appBar: CustomAppBar(),

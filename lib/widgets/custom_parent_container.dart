@@ -15,6 +15,19 @@ class CustomParentContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    // for responsivedesign
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    const baseWidth = 375.0;
+    final scale = (screenWidth / baseWidth).clamp(0.8, 1.0);
+
+    final titleFontSize = 25.0 * scale;
+    final seeAllFontSize = 17.0 * scale;
+
+    final horizontalPadding = (20.0 * scale).clamp(12.0, 32.0);
+    final verticalPadding = (20.0 * scale).clamp(12.0, 32.0);
+
     return Container(
       decoration: BoxDecoration(
          color: Color(0xFFF9FAFB),
@@ -32,13 +45,15 @@ class CustomParentContainer extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600,color: AppColors.textDark),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: titleFontSize, fontWeight: FontWeight.w600,color: AppColors.textDark),
+                  ),
                 ),
 
                 InkWell(
@@ -48,7 +63,7 @@ class CustomParentContainer extends StatelessWidget {
                     style: TextStyle(
                       color: AppColors.textDark,
                       fontWeight: FontWeight.w400,
-                      fontSize: 17
+                      fontSize: seeAllFontSize
                     ),
                   ),
                 ),

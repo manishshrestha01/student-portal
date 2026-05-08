@@ -93,7 +93,7 @@ class AuthController extends GetxController {
         name.text,
         email.text,
         whatsapp.text,
-        password.text,
+        password.text.trim(),
         countryCode.text,
       );
       if (response.statusCode == 200) {
@@ -164,6 +164,7 @@ class AuthController extends GetxController {
             "name": user.value!.name,
             "email": user.value!.email,
             "phone": user.value!.phone,
+            "country_code": user.value!.countryCode,
           });
         }
       }
@@ -231,9 +232,9 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
       final response = await AuthService.resetPassword(
-        currentPassword.text,
-        newPassword.text,
-        confirmPassword.text,
+        currentPassword.text.trim(),
+        newPassword.text.trim(),
+        confirmPassword.text.trim(),
       );
 
       if (response.statusCode == 200) {
