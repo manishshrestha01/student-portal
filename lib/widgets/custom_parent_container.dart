@@ -1,5 +1,6 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class CustomParentContainer extends StatelessWidget {
   final String title;
@@ -7,15 +8,16 @@ class CustomParentContainer extends StatelessWidget {
   final VoidCallback? onTapSeeAll;
   final List<Widget> children;
 
-  const CustomParentContainer({super.key,
-  required this.title,
-  required this.seeall,
-  this.onTapSeeAll,
-   required this.children});
+  const CustomParentContainer({
+    super.key,
+    required this.title,
+    required this.seeall,
+    this.onTapSeeAll,
+    required this.children,
+  });
 
   @override
   Widget build(BuildContext context) {
-
     // for responsivedesign
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -30,11 +32,11 @@ class CustomParentContainer extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-         color: Color(0xFFF9FAFB),
+        color: Color(0xFFF9FAFB),
         border: Border.all(width: 0.5),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
-           BoxShadow(
+          BoxShadow(
             color: const Color.fromRGBO(0, 0, 0, 0.25),
             blurRadius: 4,
             offset: Offset(0, 4),
@@ -45,17 +47,24 @@ class CustomParentContainer extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
+            padding: EdgeInsets.symmetric(
+              horizontal: horizontalPadding,
+              vertical: verticalPadding,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: Text(
                     title,
-                    style: TextStyle(fontSize: titleFontSize, fontWeight: FontWeight.w600,color: AppColors.textDark),
+                    style: TextStyle(
+                      fontSize: titleFontSize,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textDark,
+                    ),
                   ),
                 ),
-
+                Gap(20),
                 InkWell(
                   onTap: onTapSeeAll,
                   child: Text(
@@ -63,7 +72,7 @@ class CustomParentContainer extends StatelessWidget {
                     style: TextStyle(
                       color: AppColors.textDark,
                       fontWeight: FontWeight.w400,
-                      fontSize: seeAllFontSize
+                      fontSize: seeAllFontSize,
                     ),
                   ),
                 ),
