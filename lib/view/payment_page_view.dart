@@ -34,7 +34,7 @@ class PaymentPage extends StatelessWidget {
               const Gap(22),
 
               Text(
-                "My Payments",
+                "Payment Receipts",
                 style: GoogleFonts.inter(
                   textStyle: const TextStyle(
                     fontSize: 18,
