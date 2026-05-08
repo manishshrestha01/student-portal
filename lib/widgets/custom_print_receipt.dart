@@ -130,12 +130,16 @@ Future<void> printReceipt(Datum receipt) async {
               ),
             ),
             pw.SizedBox(height: 8),
+
             pw.Container(
               padding: const pw.EdgeInsets.all(14),
+
               decoration: pw.BoxDecoration(
                 color: PdfColors.grey100,
-                borderRadius: pw.BorderRadius.circular(12),
+                borderRadius: pw.BorderRadius.circular(16),
+                border: pw.Border.all(color: PdfColors.grey300),
               ),
+
               child: pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
