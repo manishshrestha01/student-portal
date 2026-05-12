@@ -31,19 +31,19 @@ class PaymentPage extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: _buildBreadcrumb(),
               ),
-              const Gap(22),
+              const Gap(24),
 
               Text(
-                "Payment Receipts",
+                "My Receipts",
                 style: GoogleFonts.inter(
                   textStyle: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 25,
                     fontWeight: FontWeight.w600,
                     color: Colors.black,
                   ),
                 ),
               ),
-              const Gap(12),
+              const Gap(24),
 
               Obx(() {
                 if (controller.isLoading.value) {

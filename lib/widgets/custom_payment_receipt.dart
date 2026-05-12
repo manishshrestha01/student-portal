@@ -49,7 +49,7 @@ class CustomPaymentReceipt extends StatelessWidget {
                   ),
                   const Gap(3),
                   Text(
-                    "Amount: Rs.$amount \nDate: $date",
+                    "Amount: Rs.$amount | Date: $date",
                     style: TextStyle(
                       color: AppColors.textLight,
                       fontWeight: FontWeight.w500,
