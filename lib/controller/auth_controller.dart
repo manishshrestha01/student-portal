@@ -71,6 +71,7 @@ class AuthController extends GetxController {
         email.text = user.value?.email ?? '';
         whatsapp.text = user.value?.phone ?? '';
         countryCode.text = user.value?.countryCode ?? '+977';
+        address.text = user.value?.address ?? '';
       }
 
       Future.delayed(const Duration(seconds: 1), () {
@@ -159,12 +160,14 @@ class AuthController extends GetxController {
         final userResponse = UserModel.fromJson(response.data);
         user.value = userResponse.user;
         if (user.value != null) {
+          address.text = user.value?.address ?? '';
           _storage.saveUser({
             "id": user.value!.id,
             "name": user.value!.name,
             "email": user.value!.email,
             "phone": user.value!.phone,
             "country_code": user.value!.countryCode,
+            "address": user.value!.address,
           });
         }
       }
@@ -173,6 +176,7 @@ class AuthController extends GetxController {
       final cachedUser = _storage.getUser();
       if (cachedUser != null) {
         user.value = User.fromJson(cachedUser);
+        address.text = user.value?.address ?? '';
       }
     }
   }
@@ -197,6 +201,7 @@ class AuthController extends GetxController {
             email: email.text,
             phone: whatsapp.text,
             countryCode: user.value?.countryCode,
+            address: address.text,
           );
           _storage.saveUser({
             "id": user.value?.id,
@@ -204,6 +209,7 @@ class AuthController extends GetxController {
             "email": user.value?.email,
             "phone": user.value?.phone,
             "country_code": user.value?.countryCode,
+            "address": user.value?.address,
           });
           Get.snackbar(
             "Success",
@@ -285,6 +291,7 @@ class AuthController extends GetxController {
     whatsapp.dispose();
     password.dispose();
     countryCode.dispose();
+    address.dispose();
     currentPassword.dispose();
     newPassword.dispose();
     confirmPassword.dispose();
