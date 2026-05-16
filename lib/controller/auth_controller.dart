@@ -190,6 +190,7 @@ class AuthController extends GetxController {
         email.text,
         whatsapp.text,
         address.text,
+        countryCode.text,
       );
 
       if (response.statusCode == 200) {
@@ -200,7 +201,7 @@ class AuthController extends GetxController {
             name: name.text,
             email: email.text,
             phone: whatsapp.text,
-            countryCode: user.value?.countryCode,
+            countryCode: countryCode.text,
             address: address.text,
           );
           _storage.saveUser({

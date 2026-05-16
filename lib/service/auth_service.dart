@@ -48,7 +48,8 @@ static Future<Response> updateProfile(
   String name, 
   String email, 
   String whatsapp, 
-  String address
+  String address,
+  String countryCode,
   ) async {
   final token = StorageController().getToken();
   final response = await DioConnector.dio.post(
@@ -58,6 +59,7 @@ static Future<Response> updateProfile(
       "email": email,
       "phone": whatsapp,
       "address": address,
+      "country_code": countryCode,
     },
     options: Options(
       headers: {

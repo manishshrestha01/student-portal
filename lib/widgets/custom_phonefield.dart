@@ -2,6 +2,7 @@ import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/phone_number.dart' as intl_phone_field;
 
 class CustomPhoneField extends StatelessWidget {
@@ -22,8 +23,34 @@ class CustomPhoneField extends StatelessWidget {
     this.validator,
   });
 
+  String _resolveInitialCountryCode(String value) {
+    final normalizedValue = value.trim();
+    if (normalizedValue.isEmpty) {
+      return 'NP';
+    }
+
+    if (normalizedValue.length == 2 && normalizedValue == normalizedValue.toUpperCase()) {
+      return normalizedValue;
+    }
+
+    final dialCode = normalizedValue.startsWith('+')
+        ? normalizedValue.substring(1)
+        : normalizedValue;
+
+    final matchedCountry = countries.firstWhere(
+      (country) => country.dialCode == dialCode,
+      orElse: () => countries.firstWhere((country) => country.code == 'NP'),
+    );
+
+    return matchedCountry.code;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final initialCountry = _resolveInitialCountryCode(
+      countryCodeController?.text ?? initialCountryCode,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,8 +77,8 @@ class CustomPhoneField extends StatelessWidget {
         Gap(10),
 
         IntlPhoneField(
-          controller: controller, 
-          initialCountryCode: initialCountryCode,
+          controller: controller,
+          initialCountryCode: initialCountry,
           showCountryFlag: true,
           showDropdownIcon: true,
           disableLengthCheck: true,
@@ -93,7 +120,14 @@ class CustomPhoneField extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
           ),
           onChanged: (phone) {
-            countryCodeController?.text = '+${phone.countryCode}';
+            countryCodeController?.text = phone.countryCode;
+          },
+          onCountryChanged: (country) {
+            try {
+              countryCodeController?.text = country.dialCode.startsWith('+') == true
+                  ? country.dialCode
+                  : '+${country.dialCode}';
+            } catch (_) {}
           },
           validator:
               validator ??
