@@ -30,8 +30,14 @@ class ProfileView extends GetView<AuthController> {
           controller.email.text = user.email ?? '';
           controller.whatsapp.text = user.phone ?? '';
           controller.countryCode.text = user.countryCode ?? '';
+          controller.address.text = user.address ?? '';
         
         }
+        print("Name: ${controller.name.text}");
+        print("Email: ${controller.email.text}");
+        print("WhatsApp: ${controller.whatsapp.text}");
+        print("Country Code: ${controller.countryCode.text}");
+        print("Address: ${controller.address.text}");
 
         return SingleChildScrollView(
           child: Column(
