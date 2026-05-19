@@ -38,8 +38,8 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                 boxShadow: [
                   BoxShadow(
                     color: const Color.fromRGBO(0, 0, 0, 0.25),
-                    blurRadius: 4,
-                    offset: Offset(0, 4),
+                    blurRadius: 2,
+                    // offset: Offset(0, 4),
                     spreadRadius: 0,
                   ),
                 ],
@@ -68,16 +68,16 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFF6900),
+                              color: const Color(0xFFdcfce6),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
                               StatusMapper.mapCourseStatus(widget.item.status),
                               style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
-                                  color: Colors.white,
+                                  color: Color(0xFF016630),
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w600,
                                   height: 1.0,
                                   letterSpacing: 0,
                                 ),
@@ -110,14 +110,14 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                           children: [
                             SvgPicture.asset(
                               'assets/support/mentor.svg',
-                              width: 24,
-                              height: 24,
+                              width: 22,
+                              height: 22,
                               colorFilter: const ColorFilter.mode(
-                                Colors.black,
+                                Color(0xFFf85604),
                                 BlendMode.srcIn,
                               ),
                             ),
-                            Gap(13),
+                            Gap(8),
                             Expanded(
                               child: Text(
                                 "${widget.item.mentorName}",
@@ -140,16 +140,16 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                           children: [
                             SvgPicture.asset(
                               'assets/support/play.svg',
-                              width: 28,
-                              height: 28,
+                              width: 18,
+                              height: 18,
                               colorFilter: const ColorFilter.mode(
-                                Colors.black,
+                                 Color(0xFFf85604),
                                 BlendMode.srcIn,
                               ),
                             ),
                             Gap(11),
                             Text(
-                              "${widget.item.lessons} Lesson",
+                              "${widget.item.lessons} Lessons",
                               style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
                                   color: Colors.black,
@@ -163,10 +163,10 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                             Spacer(),
                             SvgPicture.asset(
                               'assets/support/time.svg',
-                              width: 24,
-                              height: 24,
+                              width: 18,
+                              height: 18,
                               colorFilter: const ColorFilter.mode(
-                                Colors.black,
+                                 Color(0xFFf85604),
                                 BlendMode.srcIn,
                               ),
                             ),

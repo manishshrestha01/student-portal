@@ -46,8 +46,8 @@ class _LinkViewState extends State<LinkView> {
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withAlpha(64),
-                  blurRadius: 4,
-                  offset: const Offset(0, 4),
+                  blurRadius: 1,
+                  // offset: const Offset(0, 4),
                 ),
               ],
             ),
@@ -70,7 +70,7 @@ class _LinkViewState extends State<LinkView> {
                           textStyle: TextStyle(
                             color: AppColors.textDark,
                             fontSize: 20,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),

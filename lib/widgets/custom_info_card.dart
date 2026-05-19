@@ -30,8 +30,8 @@ class InfoCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: const Color.fromRGBO(0, 0, 0, 0.25),
-              blurRadius: 4,
-              offset: Offset(0, 4),
+              blurRadius: 1,
+              // offset: Offset(0, 4),
               spreadRadius: 0,
             ),
           ],

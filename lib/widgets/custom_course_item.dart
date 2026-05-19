@@ -72,7 +72,7 @@ class CustomCourseItem extends StatelessWidget {
                       const Icon(
                         Icons.play_circle,
                         size: 18,
-                        color: Colors.black,
+                        color: Color(0xFFf85604),
                       ),
                       const SizedBox(width: 2),
                       Text(

@@ -63,8 +63,8 @@ class _NotesState extends State<Notes> {
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withValues(alpha: 0.25),
-                            blurRadius: 4,
-                            offset: const Offset(0, 4),
+                            blurRadius: 2,
+                            // offset: const Offset(0, 4),
                           ),
                         ],
                       ),
@@ -158,8 +158,8 @@ class _NotesState extends State<Notes> {
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withValues(alpha: 0.25),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 4),
+                                  blurRadius: 2,
+                                  // offset: const Offset(0, 4),
                                 ),
                               ],
                             ),

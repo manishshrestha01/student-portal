@@ -34,7 +34,7 @@ class _TermsViewState extends State<TermsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+       backgroundColor:  const Color(0xFFf9fafb),
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {
@@ -102,9 +102,8 @@ class _TermsViewState extends State<TermsView> {
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.25),
-                      blurRadius: 4,
+                      blurRadius: 2,
                       spreadRadius: 0,
-                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),

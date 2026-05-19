@@ -24,7 +24,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+      backgroundColor:  const Color(0xFFf9fafb),
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -77,8 +77,8 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withValues(alpha: 0.25),
-                            blurRadius: 4,
-                            offset: const Offset(0, 4),
+                            blurRadius: 2,
+                            // offset: const Offset(0, 4),
                           ),
                         ],
                       ),
@@ -93,7 +93,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                 textStyle: TextStyle(
                                   color: AppColors.textDark,
                                   fontSize: isSmall ? 18 : 20,
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),

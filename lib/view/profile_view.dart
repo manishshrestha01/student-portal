@@ -19,7 +19,7 @@ class ProfileView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+       backgroundColor:  const Color(0xFFf9fafb),
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {

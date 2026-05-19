@@ -43,8 +43,8 @@ class CertificatesWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withAlpha(64),
-                blurRadius: 4,
-                offset: const Offset(0, 4),
+                blurRadius: 2,
+                // offset: const Offset(0, 4),
               ),
             ],
           ),
@@ -98,7 +98,7 @@ class CertificatesWidget extends StatelessWidget {
                       BlendMode.srcIn,
                     ),
                   ),
-                  Gap(gapSize * 0.8),
+                  Gap(gapSize * 1.5),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

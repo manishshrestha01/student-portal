@@ -23,14 +23,12 @@ class SupportView extends StatefulWidget {
 }
 
 class _SupportViewState extends State<SupportView> {
-  static const String _supportDescription =
-      'Questions about courses, payments, schedule, enrollment or other general inquiries.';
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+      backgroundColor:  const Color(0xFFf9fafb),
       appBar:CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -100,7 +98,7 @@ class _SupportViewState extends State<SupportView> {
                     iconPath: 'assets/support/general.svg',
                     iconColor: const Color(0xFF22408B),
                     title: 'General Support',
-                    description: _supportDescription,
+                    description: 'Questions about courses, payments, schedule, enrollment or other general inquiries.',
                   ),
                   const Gap(23),
                   _buildSupportCard(
@@ -111,7 +109,7 @@ class _SupportViewState extends State<SupportView> {
                     iconPath: 'assets/support/technical.svg',
                     iconColor: const Color(0xFFBC120E),
                     title: 'Technical Support',
-                    description: _supportDescription,
+                    description: 'Login issues, platform errors, video not playing, file access problems, etc.'
                   ),
                   const Gap(23),
                   _buildSupportCard(
@@ -122,7 +120,7 @@ class _SupportViewState extends State<SupportView> {
                     iconPath: 'assets/support/counselling.svg',
                     iconColor: const Color(0xFF138023),
                     title: 'Counselling Support',
-                    description: _supportDescription,
+                    description: 'Help choosing courses, career guidance, learning path planning, or study advice.',
                   ),
                   const Gap(23),
                   _buildSupportCard(
@@ -133,7 +131,7 @@ class _SupportViewState extends State<SupportView> {
                     iconPath: 'assets/support/internship.svg',
                     iconColor: const Color(0xFF9A1CB9),
                     title: 'Internship Support',
-                    description: _supportDescription,
+                    description: 'Help with internship tasks, project guidance, workplace questions, or reports.',
                   ),
                   Gap(isSmall ? 40 : 70),
                   Center(
@@ -252,15 +250,10 @@ class _SupportViewState extends State<SupportView> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              width: 0.5,
-            ),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.25),
-                blurRadius: 4,
-                offset: const Offset(0, 4),
+                blurRadius: 2,
               ),
             ],
           ),

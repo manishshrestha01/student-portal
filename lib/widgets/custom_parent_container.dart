@@ -33,13 +33,13 @@ class CustomParentContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Color(0xFFF9FAFB),
-        border: Border.all(width: 0.5),
+        // border: Border.all(width: 0.5),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: const Color.fromRGBO(0, 0, 0, 0.25),
-            blurRadius: 4,
-            offset: Offset(0, 4),
+            blurRadius: 2,
+            // offset: Offset(0, 4),
             spreadRadius: 0,
           ),
         ],

@@ -32,7 +32,7 @@ class _CertificatesViewState extends State<CertificatesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+     backgroundColor: const Color(0xFFF9FAFB),
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(

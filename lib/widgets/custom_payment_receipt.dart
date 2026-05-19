@@ -42,7 +42,7 @@ class CustomPaymentReceipt extends StatelessWidget {
                   Text(
                     title,
                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w600,
                       fontSize: 18,
                       color: AppColors.textDark,
                     ),
@@ -51,7 +51,7 @@ class CustomPaymentReceipt extends StatelessWidget {
                   Text(
                     "Amount: Rs.$amount | Date: $date",
                     style: TextStyle(
-                      color: AppColors.textLight,
+                      color: const Color(0xFF4a5565),
                       fontWeight: FontWeight.w500,
                       fontSize: 14,
                     ),

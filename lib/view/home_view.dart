@@ -47,7 +47,7 @@ class _HomeViewState extends State<HomeView> {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor:  Colors.white,
+      backgroundColor:  const Color(0xFFf9fafb),
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {
@@ -211,7 +211,7 @@ Widget _buildPaymentSection(BuildContext context) {
                 thickness: 1,
                 indent: 14,
                 endIndent: 14,
-                color: Color.fromRGBO(0, 0, 0, 0.40),
+                color: Color.fromARGB(255, 223, 219, 219),
               ),
             );
           }
@@ -247,7 +247,7 @@ Widget _buildCourseSection(BuildContext context) {
     }).toList();
 
     return CustomParentContainer(
-      title: "Your Courses",
+      title: "My Courses",
       seeall: "See All",
       onTapSeeAll: () => Get.to(() => const CourseView()),
       children: courseItems,
@@ -295,7 +295,7 @@ Widget _buildCertificateSection(BuildContext context) {
             thickness: 1,
             indent: 14,
             endIndent: 14,
-            color: Color.fromRGBO(0, 0, 0, 0.40),
+            color: Color.fromARGB(255, 223, 219, 219),
           ),
         );
       }
