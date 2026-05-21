@@ -6,6 +6,7 @@ import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/payment_page_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
+import 'package:codeit_app/view/security_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
 import 'package:codeit_app/view/support_view.dart';
 import 'package:codeit_app/view/terms_view.dart';
@@ -190,7 +191,7 @@ class CustomDrawer extends StatelessWidget {
                     contentPadding: EdgeInsets.only(left: leftPadding),
                     leading: SvgPicture.asset(
                       'assets/support/message.svg',
-                      width: iconWidth,
+                      width: iconWidth, 
                       height: iconHeight,
                       colorFilter: const ColorFilter.mode(
                         Color(0xFFFFFFFF),
@@ -247,6 +248,22 @@ class CustomDrawer extends StatelessWidget {
                     ),
                     title: Text(
                       "Profile",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    onTap: () => Get.offAll(() => const SecurityView()),
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: Icon(Icons.shield, color: Colors.white, size: iconWidth),
+                    title: Text(
+                      "Security",
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
                           color: Colors.white,

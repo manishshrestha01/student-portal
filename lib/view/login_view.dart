@@ -141,6 +141,62 @@ class LoginView extends GetView<AuthController> {
                     ),
         
                     Gap(20),
+                    // "or continue with" Divider
+                    Row(
+                      children: [
+                        Expanded(child: Divider(color: Colors.grey[200], thickness: 1)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          key: const ValueKey('divider_text'),
+                          child: Text(
+                            "or continue with",
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 71, 71, 71),
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        Expanded(child: Divider(color: Colors.grey[200], thickness: 1)),
+                      ],
+                    ),
+                    const Gap(20),
+        
+                    // Use Biometrics Button
+                    InkWell(
+                      onTap: () {
+                      },
+                      borderRadius: BorderRadius.circular(12),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withOpacity(0.06), 
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: AppColors.primary.withOpacity(0.15),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.fingerprint,
+                              color: AppColors.primary,
+                              size: 22,
+                            ),
+                            const Gap(8),
+                            Text(
+                              "Use Biometrics",
+                              style: TextStyle(
+                                color: AppColors.primary,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const Gap(24),
         
                     //w8 row
                     Row(
