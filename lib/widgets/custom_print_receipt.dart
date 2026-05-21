@@ -35,12 +35,12 @@ Future<void> printReceipt(Datum receipt) async {
             pw.SizedBox(height: 6),
             pw.Text(
               receipt.courseName ?? '-',
-              style: pw.TextStyle(font: fontRegular, fontSize: 14),
+              style: pw.TextStyle(font: fontRegular, fontSize: 18),
               textAlign: pw.TextAlign.center,
             ),
             pw.SizedBox(height: 16),
 
-            pw.Image(logoImage, width: 120, height: 40),
+            pw.Image(logoImage, width: 270, height: 64),
             pw.SizedBox(height: 16),
 
             _pdfInfoBlock(
@@ -59,7 +59,7 @@ Future<void> printReceipt(Datum receipt) async {
 
             pw.Text(
               'Payment Status',
-              style: pw.TextStyle(font: fontRegular, fontSize: 13),
+              style: pw.TextStyle(font: fontRegular, fontSize: 18),
             ),
             pw.SizedBox(height: 6),
 
@@ -76,8 +76,8 @@ Future<void> printReceipt(Datum receipt) async {
                 mainAxisSize: pw.MainAxisSize.min,
                 children: [
                   pw.Container(
-                    width: 18,
-                    height: 18,
+                    width: 22,
+                    height: 22,
                     decoration: pw.BoxDecoration(
                       color: PdfColors.green600,
                       shape: pw.BoxShape.circle,
@@ -88,7 +88,7 @@ Future<void> printReceipt(Datum receipt) async {
                       style: pw.TextStyle(
                         font: fontBold,
                         color: PdfColors.white,
-                        fontSize: 11,
+                        fontSize: 15,
                       ),
                       textAlign: pw.TextAlign.center,
                     ),
@@ -99,7 +99,7 @@ Future<void> printReceipt(Datum receipt) async {
                     style: pw.TextStyle(
                       font: fontMedium,
                       color: PdfColors.green700,
-                      fontSize: 14,
+                      fontSize: 18,
                     ),
                   ),
                 ],
@@ -112,7 +112,7 @@ Future<void> printReceipt(Datum receipt) async {
               alignment: pw.Alignment.centerLeft,
               child: pw.Text(
                 'Student Details',
-                style: pw.TextStyle(font: fontBold, fontSize: 18),
+                style: pw.TextStyle(font: fontBold, fontSize: 24),
               ),
             ),
             pw.SizedBox(height: 8),
@@ -126,7 +126,7 @@ Future<void> printReceipt(Datum receipt) async {
               alignment: pw.Alignment.centerLeft,
               child: pw.Text(
                 'Course Details',
-                style: pw.TextStyle(font: fontBold, fontSize: 18),
+                style: pw.TextStyle(font: fontBold, fontSize: 24),
               ),
             ),
             pw.SizedBox(height: 8),
@@ -135,9 +135,9 @@ Future<void> printReceipt(Datum receipt) async {
               padding: const pw.EdgeInsets.all(14),
 
               decoration: pw.BoxDecoration(
-                color: PdfColors.grey100,
+                color: PdfColors.white,
                 borderRadius: pw.BorderRadius.circular(16),
-                border: pw.Border.all(color: PdfColors.grey300),
+                border: pw.Border.all(color: PdfColors.black),           
               ),
 
               child: pw.Column(
@@ -145,12 +145,12 @@ Future<void> printReceipt(Datum receipt) async {
                 children: [
                   pw.Text(
                     'Enrolled Course',
-                    style: pw.TextStyle(font: fontRegular, fontSize: 12),
+                    style: pw.TextStyle(font: fontRegular, fontSize: 18),
                   ),
                   pw.SizedBox(height: 4),
                   pw.Text(
                     receipt.courseName ?? '-',
-                    style: pw.TextStyle(font: fontBold, fontSize: 18),
+                    style: pw.TextStyle(font: fontBold, fontSize: 24),
                   ),
                   pw.Divider(),
                   pw.Row(
@@ -158,14 +158,14 @@ Future<void> printReceipt(Datum receipt) async {
                     children: [
                       pw.Text(
                         'Amount Paid:',
-                        style: pw.TextStyle(font: fontBold, fontSize: 15),
+                        style: pw.TextStyle(font: fontBold, fontSize: 18),
                       ),
                       pw.Text(
                         'Rs. ${receipt.amount ?? '0'}/-',
                         style: pw.TextStyle(
                           font: fontBold,
                           color: const PdfColor.fromInt(0xFFFF6900),
-                          fontSize: 15,
+                          fontSize: 18,
                         ),
                       ),
                     ],
@@ -173,15 +173,17 @@ Future<void> printReceipt(Datum receipt) async {
                 ],
               ),
             ),
+               pw.SizedBox(height:10),
+            pw.Divider(height: 30),
 
-            pw.SizedBox(height: 20),
+            pw.SizedBox(height:10),
 
             pw.Text(
               'Thank you for choosing CODE IT. This is a computer-generated receipt.\n'
               'For any queries, contact\n'
               'support@codeit.com.np | Reg No. 11757/6271/04 | PAN 602345817',
               textAlign: pw.TextAlign.center,
-              style: pw.TextStyle(font: fontRegular, fontSize: 11),
+              style: pw.TextStyle(font: fontRegular, fontSize: 14),
             ),
           ],
         );
@@ -203,9 +205,9 @@ pw.Widget _pdfInfoBlock(
 ) {
   return pw.Column(
     children: [
-      pw.Text(title, style: pw.TextStyle(font: fontRegular, fontSize: 12)),
+      pw.Text(title, style: pw.TextStyle(font: fontRegular, fontSize: 18)),
       pw.SizedBox(height: 2),
-      pw.Text(value, style: pw.TextStyle(font: fontBold, fontSize: 14)),
+      pw.Text(value, style: pw.TextStyle(font: fontBold, fontSize: 20)),
       pw.SizedBox(height: 8),
     ],
   );
@@ -224,14 +226,14 @@ pw.Widget _pdfRowText(
         pw.Expanded(
           child: pw.Text(
             label,
-            style: pw.TextStyle(font: fontLight, fontSize: 13),
+            style: pw.TextStyle(font: fontLight, fontSize: 18),
           ),
         ),
-        pw.Text(': ', style: pw.TextStyle(font: fontLight, fontSize: 13)),
+        pw.Text(': ', style: pw.TextStyle(font: fontLight, fontSize: 18)),
         pw.Expanded(
           child: pw.Text(
             value,
-            style: pw.TextStyle(font: fontMedium, fontSize: 13),
+            style: pw.TextStyle(font: fontMedium, fontSize: 18),
           ),
         ),
       ],
