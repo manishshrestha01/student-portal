@@ -70,11 +70,11 @@ static Future<Response> updateProfile(
   return response;
 }
 
-static Future<Response> resetPassword(String currentPasword, String newPassword, String confirmPassword) async{
+static Future<Response> resetPassword(String password, String newPassword, String confirmPassword) async{
 final token = StorageController().getToken();
 final response = await DioConnector.dio.post("reset_password",
 data: {
-"currentPassword": currentPasword,
+"currentPassword": password,
 "newPassword": newPassword,
 "confirmPassword": confirmPassword,
 },
