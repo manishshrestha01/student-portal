@@ -133,7 +133,7 @@ class _SupportViewState extends State<SupportView> {
                     title: 'Internship Support',
                     description: 'Help with internship tasks, project guidance, workplace questions, or reports.',
                   ),
-                  Gap(isSmall ? 40 : 70),
+                  Gap(isSmall ? 20 : 40),
                   Center(
                     child: SizedBox(
                       width: contentWidth,
@@ -250,6 +250,10 @@ class _SupportViewState extends State<SupportView> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: const Color.fromARGB(255, 0, 0, 0),
+              width: 0.5,
+            ),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.25),

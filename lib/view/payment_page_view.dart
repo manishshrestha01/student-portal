@@ -66,9 +66,7 @@ class PaymentPage extends StatelessWidget {
                      boxShadow: [
                       BoxShadow(
                         color: Colors.black.withAlpha(25), 
-                        blurRadius: 4,
-                        spreadRadius: 0,
-                        offset: Offset(0, 4), 
+                        blurRadius: 2,
                       ),
                     ],
                   ),
