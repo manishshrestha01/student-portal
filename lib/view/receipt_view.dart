@@ -101,7 +101,11 @@ class ReceiptView extends StatelessWidget {
             icon: Icon(Icons.print, color: AppColors.backgroundColor),
             label: Text(
               "Print Receipt",
-              style: TextStyle(color: AppColors.backgroundColor, fontWeight: FontWeight.w800,fontSize: 16),
+              style: TextStyle(
+                color: AppColors.backgroundColor,
+                fontWeight: FontWeight.w800,
+                fontSize: 16,
+              ),
             ),
             style: TextButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
@@ -120,7 +124,8 @@ class ReceiptView extends StatelessWidget {
           child: Container(
             width: 620,
             margin: const EdgeInsets.only(bottom: 24),
-            padding: const EdgeInsets.fromLTRB(18, 14, 18, 20),
+            padding: const EdgeInsets.symmetric(vertical: 14),
+            clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: const Color(0xFFFFFFFF)),
@@ -216,39 +221,67 @@ class ReceiptView extends StatelessWidget {
                 const Divider(height: 30),
 
                 // Student details
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Student Details",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Student Details",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
                 Obx(() {
                   final user = authController.user.value;
-                  return Column(
-                    children: [
-                      _rowText("Name", user?.name ?? "-"),
-                      _rowText("WhatsApp", user?.phone ?? "-"),
-                      _rowText("Email", user?.email ?? "-"),
-                    ],
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Column(
+                      children: [
+                        _rowText("Name", user?.name ?? "-"),
+                        _rowText("WhatsApp", user?.phone ?? "-"),
+                        _rowText("Email", user?.email ?? "-"),
+                      ],
+                    ),
                   );
                 }),
+                Gap(20),
 
                 // Course details
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Course Details",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Course Details",
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ),
                 const Gap(10),
                 Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: const Color(0xFFE0E0E0)),
+                  decoration: ShapeDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        width: 0.50,
+                        color: Colors.black.withValues(alpha: 0.50),
+                      ),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    shadows: [
+                      BoxShadow(
+                        color: Color(0xFFf85604),
+                        blurRadius: 0,
+                        offset: Offset(0, 6),
+                      ),
+                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -257,7 +290,7 @@ class ReceiptView extends StatelessWidget {
                         "Enrolled Course",
                         style: TextStyle(
                           fontSize: 15,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       const Gap(5),
@@ -265,10 +298,10 @@ class ReceiptView extends StatelessWidget {
                         receipt.courseName ?? '-',
                         style: const TextStyle(
                           fontSize: 23,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
-                      const Divider(),
+                      const Divider(thickness: 1, height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -292,16 +325,20 @@ class ReceiptView extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                const Gap(20),
+                const Gap(10),
+                Divider(height: 30),
 
                 // Footer
                 const Text(
-                  "Thank you for choosing CODE IT. This is a \n computer-generated receipt.\n\n For any queries, contact \n\n support@codeit.com.np | Reg No.\n 11757/6271/04 | PAN 602345817",
+                  "Thank you for choosing CODE IT. This is a \n computer-generated receipt.",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
-                const Gap(20),
+                const Gap(9),
+                Text('For any queries, contact ',textAlign: TextAlign.center,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),),
+                Gap(9),
+                Text("support@codeit.com.np | Reg No.\n 11757/6371/04 | PAN 602345817",textAlign: TextAlign.center,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),),
+                Gap(20),
               ],
             ),
           ),
