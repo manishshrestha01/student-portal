@@ -101,7 +101,7 @@ class ReceiptView extends StatelessWidget {
             icon: Icon(Icons.print, color: AppColors.backgroundColor),
             label: Text(
               "Print Receipt",
-              style: TextStyle(color: AppColors.backgroundColor),
+              style: TextStyle(color: AppColors.backgroundColor, fontWeight: FontWeight.w800,fontSize: 16),
             ),
             style: TextButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
@@ -128,8 +128,8 @@ class ReceiptView extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withAlpha(64),
-                  blurRadius: 4,
-                  offset: const Offset(0, 4),
+                  blurRadius: 2,
+                  spreadRadius: 0,
                 ),
               ],
             ),
@@ -163,8 +163,8 @@ class ReceiptView extends StatelessWidget {
                   children: [
                     Image.asset(
                       'assets/images/code-it-logo.png',
-                      width: 120,
-                      height: 40,
+                      width: 270,
+                      height: 64,
                     ),
                   ],
                 ),
@@ -190,7 +190,7 @@ class ReceiptView extends StatelessWidget {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.green.withAlpha(38),
+                    color: const Color(0xFF138023).withAlpha(30),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -198,14 +198,14 @@ class ReceiptView extends StatelessWidget {
                     children: [
                       const Icon(
                         Icons.check_circle,
-                        color: Colors.green,
+                        color: Color(0xFF138023),
                         size: 18,
                       ),
                       const Gap(6),
                       Text(
                         "Paid",
                         style: GoogleFonts.inter(
-                          color: Colors.green,
+                          color: const Color(0xFF138023),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -246,15 +246,9 @@ class ReceiptView extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
+                    border: Border.all(color: const Color(0xFFE0E0E0)),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.textButtonColor.withAlpha(200),
-                        blurRadius: 4,
-                        offset: const Offset(0, 6),
-                      ),
-                    ],
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

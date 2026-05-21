@@ -132,9 +132,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color.fromRGBO(0, 0, 0, 0.1),
-                              offset: const Offset(0, 2),
-                              blurRadius: 4,
+                              color: const Color.fromRGBO(0, 0, 0, 0.25),
+                              blurRadius: 2,
                               spreadRadius: 0,
                             ),
                           ],
@@ -191,8 +190,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                           boxShadow: [
                             BoxShadow(
                               color: const Color.fromRGBO(0, 0, 0, 0.25),
-                              offset: Offset(0, 4),
-                              blurRadius: 4,
+                              blurRadius: 2,
                               spreadRadius: 0,
                             ),
                           ],

@@ -172,8 +172,7 @@ class _CourseVideoState extends State<CourseVideo> {
                             boxShadow: [
                               BoxShadow(
                                 color: const Color.fromRGBO(0, 0, 0, 0.25),
-                                offset: Offset(4, 4),
-                                blurRadius: 4,
+                                blurRadius: 2,
                                 spreadRadius: 0,
                               ),
                             ],
@@ -222,8 +221,7 @@ class _CourseVideoState extends State<CourseVideo> {
                           boxShadow: [
                             BoxShadow(
                               color: const Color.fromRGBO(0, 0, 0, 0.25),
-                              offset: Offset(0, 4),
-                              blurRadius: 4,
+                              blurRadius: 2,
                               spreadRadius: 0,
                             ),
                           ],
