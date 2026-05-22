@@ -178,7 +178,7 @@ Widget _buildPaymentSection(BuildContext context) {
     }
 
     return CustomParentContainer(
-      title: "Recent Payments",
+      title: "Payments",
       seeall: "See All",
       onTapSeeAll: () => Get.to(() => const PaymentPage()),
       children: () {
