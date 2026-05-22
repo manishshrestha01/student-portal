@@ -11,7 +11,6 @@ import 'package:codeit_app/utils/dio_connector.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/biometric_auth.dart';
 
 class AuthController extends GetxController {
   late final StorageController _storage;
