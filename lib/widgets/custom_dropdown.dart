@@ -106,8 +106,7 @@ class CustomCategoryDropdown extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.25),
-              blurRadius: 4,
-              offset: const Offset(4, 4),
+              blurRadius: 2,
             ),
           ],
         ),

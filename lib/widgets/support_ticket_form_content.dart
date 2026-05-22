@@ -215,8 +215,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withValues(alpha: 0.25),
-                          blurRadius: 4,
-                          offset: const Offset(0, 0),
+                          blurRadius: 2,
                         ),
                       ],
                     ),
@@ -359,8 +358,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.25),
-            blurRadius: 4,
-            offset: const Offset(4, 4),
+            blurRadius: 2,
           ),
         ],
       ),

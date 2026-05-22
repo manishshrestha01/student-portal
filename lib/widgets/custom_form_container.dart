@@ -36,7 +36,7 @@ class CustomFormContainer extends StatelessWidget {
                 BoxShadow(
                   color: Color(0x26000000),
                   offset: Offset(0, 4),
-                  blurRadius: 8,
+                  blurRadius: 2,
                 ),
               ],
             ),
