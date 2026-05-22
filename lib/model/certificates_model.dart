@@ -18,14 +18,14 @@ class CertificatesModel {
 
 class Datum {
     Datum({
-        required this.certicateId,
+        required this.certificateId,
         required this.courseName,
         required this.issuedTo,
         required this.courseCompletionDate,
         required this.downloadCertificate,
     });
 
-    final int? certicateId;
+    final int? certificateId;
     final String? courseName;
     final String? issuedTo;
     final String? courseCompletionDate;
@@ -33,7 +33,7 @@ class Datum {
 
     factory Datum.fromJson(Map<String, dynamic> json){ 
         return Datum(
-            certicateId: int.tryParse(json["certicate_id"]?.toString() ?? ""),
+            certificateId: int.tryParse(json["certificate_id"]?.toString() ?? ""),
             courseName: json["course_name"],
             issuedTo: json["Issued to"],
             courseCompletionDate: json["course_completion_Date"],

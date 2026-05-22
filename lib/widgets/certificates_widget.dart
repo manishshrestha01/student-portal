@@ -184,9 +184,9 @@ class CertificatesWidget extends StatelessWidget {
                   width: double.infinity,
                   height: buttonHeight,
                   child: ElevatedButton.icon(
-                    onPressed: controller.isLoadingForId(item.certicateId.toString())
+                    onPressed: controller.isLoadingForId(item.certificateId.toString())
                         ? null
-                        : () => controller.sendEmail(item.certicateId.toString()),
+                        : () => controller.sendEmail(item.certificateId.toString()),
                     icon: SvgPicture.asset(
                       'assets/support/download.svg',
                       colorFilter: const ColorFilter.mode(
@@ -197,7 +197,7 @@ class CertificatesWidget extends StatelessWidget {
                       height: isSmall ? 20 : (isMedium ? 22 : 26),
                     ),
                     label: Text(
-                      controller.isLoadingForId(item.certicateId.toString())
+                      controller.isLoadingForId(item.certificateId.toString())
                           ? 'Sending...'
                           : 'Email Certificate',
                       maxLines: 1,
