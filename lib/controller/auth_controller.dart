@@ -15,8 +15,8 @@ import '../utils/biometric_auth.dart';
 
 class AuthController extends GetxController {
   late final StorageController _storage;
- 
-StorageController get storageController => _storage;
+
+  StorageController get storageController => _storage;
 
   @override
   void onInit() {
@@ -25,15 +25,23 @@ StorageController get storageController => _storage;
     clearForm();
     checkAuth();
   }
-  
+
   final isLoggedIn = false.obs;
   final registerMessage = RegisterModel(success: null, errors: null).obs;
   final isLoading = false.obs;
-  final loginMessage = LoginModel(success: null, token: null, message: null).obs;
-  final updateProfileMessage =
-      UpdateProfileModel(success: null, message: null).obs;
-  final resetPasswordMessage =
-      ResetPasswordModel(success: null, message: null).obs;
+  final loginMessage = LoginModel(
+    success: null,
+    token: null,
+    message: null,
+  ).obs;
+  final updateProfileMessage = UpdateProfileModel(
+    success: null,
+    message: null,
+  ).obs;
+  final resetPasswordMessage = ResetPasswordModel(
+    success: null,
+    message: null,
+  ).obs;
   final user = Rxn<User>();
 
   final rememberMe = false.obs;
@@ -88,17 +96,12 @@ StorageController get storageController => _storage;
 
       final biometricEnabled = _storage.getBiometricEnabled();
       if (biometricEnabled) {
-        Future.delayed(const Duration(milliseconds: 500), () async {
-          bool result = await BiometricAuth().authenticateUser();
-          if (result) {
-            fetchUser();
-            Get.offAllNamed(AppRoutes.home);
-          } else {
-            DioConnector.dio.options.headers.remove('Authorization');
-            Get.offAllNamed(AppRoutes.login);
-          }
+     
+        Future.delayed(const Duration(seconds: 1), () {
+          Get.offAllNamed(AppRoutes.login);
         });
       } else {
+       
         Future.delayed(const Duration(seconds: 1), () {
           Get.offAllNamed(AppRoutes.home);
         });
@@ -110,7 +113,6 @@ StorageController get storageController => _storage;
       });
     }
   }
- 
   // Register user.
   Future<void> register() async {
     try {
@@ -153,20 +155,16 @@ StorageController get storageController => _storage;
 
       final response = await AuthService.login(email.text, password.text);
 
-        loginMessage.value = LoginModel.fromJson(response.data);
+      loginMessage.value = LoginModel.fromJson(response.data);
 
       if (response.statusCode == 200 && loginMessage.value.success == true) {
-
-          _storage.saveToken(loginMessage.value.token!);
-          // Enable biometric after first successful login
-          DioConnector.dio.options.headers["Authorization"] =
+        _storage.saveToken(loginMessage.value.token!);
+        // Enable biometric after first successful login
+        DioConnector.dio.options.headers["Authorization"] =
             "Bearer ${loginMessage.value.token!}";
-        if (rememberMe.value) {
-          await _storage.saveBiometricEnabled(true);
-        }
-          await fetchUser();
-          Get.offNamed(AppRoutes.home);
       
+        await fetchUser();
+        Get.offNamed(AppRoutes.home);
       } else {
         Get.snackbar(
           "Login Failed",
@@ -176,7 +174,6 @@ StorageController get storageController => _storage;
           snackPosition: SnackPosition.TOP,
         );
       }
-
     } catch (e) {
       Get.snackbar("Error", loginMessage.value.message ?? "Login failed");
     } finally {
@@ -203,14 +200,14 @@ StorageController get storageController => _storage;
         }
       }
     } catch (_) {
-       if (user.value == null) {
-      final cachedUser = _storage.getUser();
-      if (cachedUser != null) {
-        user.value = User.fromJson(cachedUser);
-        address.text = user.value?.address ?? '';
+      if (user.value == null) {
+        final cachedUser = _storage.getUser();
+        if (cachedUser != null) {
+          user.value = User.fromJson(cachedUser);
+          address.text = user.value?.address ?? '';
+        }
       }
     }
-  }
   }
 
   Future<void> updateProfile() async {
@@ -245,7 +242,8 @@ StorageController get storageController => _storage;
           });
           Get.snackbar(
             "Success",
-            updateProfileMessage.value.message ?? "Profile updated successfully",
+            updateProfileMessage.value.message ??
+                "Profile updated successfully",
           );
         } else {
           Get.snackbar(
@@ -281,7 +279,8 @@ StorageController get storageController => _storage;
           clearPasswordForm();
           Get.snackbar(
             "Success",
-            resetPasswordMessage.value.message ?? "Password updated successfully",
+            resetPasswordMessage.value.message ??
+                "Password updated successfully",
           );
         } else {
           Get.snackbar(
@@ -297,10 +296,11 @@ StorageController get storageController => _storage;
     }
   }
 
-//logout
+  //logout
   void logout() {
-   _storage.clearSession();
+    _storage.clearSession();
     user.value = null;
+     clearForm();
     DioConnector.dio.options.headers.remove('Authorization');
     Get.offAllNamed(AppRoutes.login);
   }
@@ -308,8 +308,6 @@ StorageController get storageController => _storage;
   void logOut() {
     logout();
   }
-
- 
 
   @override
   void onClose() {

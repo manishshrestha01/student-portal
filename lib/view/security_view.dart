@@ -1,4 +1,8 @@
+// security_view.dart — complete fixed file
+
+import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
+import 'package:codeit_app/utils/biometric_auth.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
@@ -17,11 +21,39 @@ class SecurityView extends StatefulWidget {
 }
 
 class _SecurityViewState extends State<SecurityView> {
-  bool _isBiometricEnabled = false;
+  late bool _isBiometricEnabled;
   final bool isIOS = GetPlatform.isIOS;
-  
+  final _storage = Get.find<StorageController>();
+  final _biometricAuth = BiometricAuth();
+
+  @override
+  void initState() {
+    super.initState();
+    // FIX: load actual saved value from storage
+    _isBiometricEnabled = _storage.getBiometricEnabled();
+  }
+
+  Future<void> _onBiometricToggle(bool newValue) async {
+    if (newValue) {
+      final bool canCheck = await _biometricAuth.canCheckBiometrics();
+      if (!canCheck) return;
+
+      final bool authenticated = await _biometricAuth.authenticateUser();
+      if (authenticated) {
+        await _storage.saveBiometricEnabled(true);
+        setState(() => _isBiometricEnabled = true);
+      } else {
+        setState(() => _isBiometricEnabled = false);
+      }
+    } else {
+      await _storage.saveBiometricEnabled(false);
+      setState(() => _isBiometricEnabled = false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // ... rest of build unchanged, just replace onChanged in both switches:
     return Scaffold(
       backgroundColor: const Color(0xFFf9fafb),
       appBar: CustomAppBar(),
@@ -97,17 +129,14 @@ class _SecurityViewState extends State<SecurityView> {
                             ),
                           ),
                         ),
+                        // FIX: use _onBiometricToggle for both switches
                         trailing: isIOS
                             ? CupertinoSwitch(
                                 value: _isBiometricEnabled,
                                 activeTrackColor: const Color(0xFFf65506),
                                 inactiveTrackColor:
                                     CupertinoColors.inactiveGray,
-                                onChanged: (bool newvalue) {
-                                  setState(() {
-                                    _isBiometricEnabled = newvalue;
-                                  });
-                                },
+                                onChanged: _onBiometricToggle,
                               )
                             : Switch(
                                 value: _isBiometricEnabled,
@@ -115,11 +144,7 @@ class _SecurityViewState extends State<SecurityView> {
                                 inactiveTrackColor: Colors.white,
                                 inactiveThumbColor: Colors.black,
                                 activeThumbColor: Colors.white,
-                                onChanged: (bool newvalue) {
-                                  setState(() {
-                                    _isBiometricEnabled = newvalue;
-                                  });
-                                },
+                                onChanged: _onBiometricToggle,
                               ),
                       ),
                     ),

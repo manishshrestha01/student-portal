@@ -174,22 +174,31 @@ class LoginView extends GetView<AuthController> {
 
                     InkWell(
                       onTap: () async {
-                        final token = controller.storageController.getToken();
-                        final biometricEnabled =
+                        final isEnabled =
                             controller.storageController.biometricEnabled.value;
+                        final token = controller.storageController.getToken();
 
+                        // final biometricEnabled =
+                        //     controller.storageController.biometricEnabled.value;
+
+                        if (!isEnabled) {
+                            Get.snackbar(
+                                "Info",
+                                "Please log in with email & password first to enable biometrics",
+                                backgroundColor: Colors.orange,
+                                colorText: Colors.white,
+                              );
+                          return;
+                        }
                         bool result = await biometricAuth.authenticateUser();
 
                         if (result) {
                           if (token != null) {
                             DioConnector.dio.options.headers["Authorization"] =
                                 "Bearer $token";
-                            Get.snackbar(
-                              "Success",
-                              "Authenticated successfully",
-                              backgroundColor: AppColors.primary,
-                              colorText: Colors.white,
-                            );
+
+                            await controller.fetchUser();
+
                             Get.offAllNamed(AppRoutes.home);
                           } else {
                             Get.snackbar(
