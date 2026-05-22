@@ -7,6 +7,7 @@ import 'package:codeit_app/controller/email_certificates_controller.dart';
 import 'package:codeit_app/controller/forgot_password_controller.dart';
 import 'package:codeit_app/controller/link_controller.dart';
 import 'package:codeit_app/controller/notes_controller.dart';
+import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/controller/suggestion_controller.dart';
 import 'package:codeit_app/controller/support_controller.dart';
 import 'package:codeit_app/controller/terms_controller.dart';
@@ -18,6 +19,7 @@ import 'package:get/instance_manager.dart';
 class ControllerBinding extends Bindings {
   @override
   void dependencies() {
+    Get.put<StorageController>(StorageController(), permanent: true);
     Get.put<AuthController>(AuthController(), permanent: true);
     Get.put<ForgotPasswordController>(
       ForgotPasswordController(),

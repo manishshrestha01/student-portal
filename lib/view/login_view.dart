@@ -9,6 +9,9 @@ import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:codeit_app/utils/biometric_auth.dart';
+
+import '../utils/dio_connector.dart';
 
 class LoginView extends GetView<AuthController> {
   const LoginView({super.key});
@@ -16,6 +19,7 @@ class LoginView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     var key = GlobalKey<FormState>();
+    final BiometricAuth biometricAuth = BiometricAuth();
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
@@ -36,11 +40,14 @@ class LoginView extends GetView<AuthController> {
                       width: 284,
                     ),
                     Gap(20),
-        
+
                     //w2
                     Text(
                       'Welcome back!',
-                      style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w600,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                     Gap(10),
@@ -54,9 +61,9 @@ class LoginView extends GetView<AuthController> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-        
+
                     Gap(34),
-        
+
                     //w4 email
                     CustomTextField(
                       controller: controller.email,
@@ -64,7 +71,7 @@ class LoginView extends GetView<AuthController> {
                       hintText: "Enter your email address",
                       validator: Validators.emailValidator,
                     ),
-        
+
                     Gap(20),
                     //w5 password
                     Obx(() {
@@ -88,9 +95,9 @@ class LoginView extends GetView<AuthController> {
                             value!.isEmpty ? "Password is required" : null,
                       );
                     }),
-        
+
                     Gap(20),
-        
+
                     //w6 row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -127,27 +134,29 @@ class LoginView extends GetView<AuthController> {
                         ),
                       ],
                     ),
-        
+
                     Gap(20),
-        
+
                     //w7 button
                     CustomButton(
                       text: "Log in",
                       onPressed: () {
                         if (key.currentState!.validate()) {
-                        controller.login();
+                          controller.login();
                         }
                       },
                     ),
-        
+
                     Gap(20),
-                    // "or continue with" Divider
+
+                    //divider with text
                     Row(
                       children: [
-                        Expanded(child: Divider(color: Colors.grey[200], thickness: 1)),
+                        Expanded(
+                          child: Divider(color: Colors.grey[200], thickness: 1),
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
-                          key: const ValueKey('divider_text'),
                           child: Text(
                             "or continue with",
                             style: TextStyle(
@@ -156,20 +165,49 @@ class LoginView extends GetView<AuthController> {
                             ),
                           ),
                         ),
-                        Expanded(child: Divider(color: Colors.grey[200], thickness: 1)),
+                        Expanded(
+                          child: Divider(color: Colors.grey[200], thickness: 1),
+                        ),
                       ],
                     ),
                     const Gap(20),
-        
-                    // Use Biometrics Button
+
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
+                        final token = controller.storageController.getToken();
+                        final biometricEnabled =
+                            controller.storageController.biometricEnabled.value;
+
+                        bool result = await biometricAuth.authenticateUser();
+
+                        if (result) {
+                          if (token != null) {
+                            DioConnector.dio.options.headers["Authorization"] =
+                                "Bearer $token";
+                            Get.snackbar(
+                              "Success",
+                              "Authenticated successfully",
+                              backgroundColor: AppColors.primary,
+                              colorText: Colors.white,
+                            );
+                            Get.offAllNamed(AppRoutes.home);
+                          } else {
+                            Get.snackbar(
+                              "Info",
+                              "Please log in with email & password first",
+                              backgroundColor: Colors.orange,
+                              colorText: Colors.white,
+                            );
+                          }
+                        } else {
+                          Get.snackbar("Failed", "Authentication failed");
+                        }
                       },
                       borderRadius: BorderRadius.circular(12),
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.06), 
+                          color: AppColors.primary.withOpacity(0.06),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
                             color: AppColors.primary.withOpacity(0.15),
@@ -196,8 +234,9 @@ class LoginView extends GetView<AuthController> {
                         ),
                       ),
                     ),
+
                     const Gap(24),
-        
+
                     //w8 row
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

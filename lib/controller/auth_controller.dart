@@ -11,8 +11,20 @@ import 'package:codeit_app/utils/dio_connector.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utils/biometric_auth.dart';
+
 class AuthController extends GetxController {
- final _storage = StorageController();
+  late final StorageController _storage;
+ 
+StorageController get storageController => _storage;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _storage = Get.find<StorageController>();
+    clearForm();
+    checkAuth();
+  }
   
   final isLoggedIn = false.obs;
   final registerMessage = RegisterModel(success: null, errors: null).obs;
@@ -58,15 +70,13 @@ class AuthController extends GetxController {
     confirmPassword.clear();
   }
 
-  // Check auth splash screen.
- void checkAuth() {
+  // Check auth splash screen
+  void checkAuth() {
     final token = _storage.getToken();
     if (token != null) {
-
       final cachedUser = _storage.getUser();
       if (cachedUser != null) {
         user.value = User.fromJson(cachedUser);
-
         name.text = user.value?.name ?? '';
         email.text = user.value?.email ?? '';
         whatsapp.text = user.value?.phone ?? '';
@@ -74,18 +84,33 @@ class AuthController extends GetxController {
         address.text = user.value?.address ?? '';
       }
 
-      Future.delayed(const Duration(seconds: 1), () {
-        Get.offAllNamed(AppRoutes.home);
-      });
+      DioConnector.dio.options.headers["Authorization"] = "Bearer $token";
 
-      fetchUser();
+      final biometricEnabled = _storage.getBiometricEnabled();
+      if (biometricEnabled) {
+        Future.delayed(const Duration(milliseconds: 500), () async {
+          bool result = await BiometricAuth().authenticateUser();
+          if (result) {
+            fetchUser();
+            Get.offAllNamed(AppRoutes.home);
+          } else {
+            DioConnector.dio.options.headers.remove('Authorization');
+            Get.offAllNamed(AppRoutes.login);
+          }
+        });
+      } else {
+        Future.delayed(const Duration(seconds: 1), () {
+          Get.offAllNamed(AppRoutes.home);
+        });
+        fetchUser();
+      }
     } else {
       Future.delayed(const Duration(seconds: 1), () {
         Get.offAllNamed(AppRoutes.login);
       });
     }
   }
-
+ 
   // Register user.
   Future<void> register() async {
     try {
@@ -133,6 +158,12 @@ class AuthController extends GetxController {
       if (response.statusCode == 200 && loginMessage.value.success == true) {
 
           _storage.saveToken(loginMessage.value.token!);
+          // Enable biometric after first successful login
+          DioConnector.dio.options.headers["Authorization"] =
+            "Bearer ${loginMessage.value.token!}";
+        if (rememberMe.value) {
+          await _storage.saveBiometricEnabled(true);
+        }
           await fetchUser();
           Get.offNamed(AppRoutes.home);
       
@@ -268,7 +299,7 @@ class AuthController extends GetxController {
 
 //logout
   void logout() {
-    _storage.deleteToken();
+   _storage.clearSession();
     user.value = null;
     DioConnector.dio.options.headers.remove('Authorization');
     Get.offAllNamed(AppRoutes.login);
@@ -278,12 +309,7 @@ class AuthController extends GetxController {
     logout();
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-    clearForm();
-    checkAuth();
-  }
+ 
 
   @override
   void onClose() {
