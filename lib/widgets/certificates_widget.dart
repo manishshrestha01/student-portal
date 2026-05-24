@@ -75,7 +75,7 @@ class CertificatesWidget extends StatelessWidget {
                         textStyle: TextStyle(
                           color: AppColors.textDark,
                           fontSize: titleFontSize,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
