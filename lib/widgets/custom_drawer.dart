@@ -41,12 +41,7 @@ class CustomDrawer extends StatelessWidget {
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
           child: Container(
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFFFF6900), Color(0xFFFB9252)],
-                begin: Alignment.center,
-                end: Alignment.bottomRight,
-                transform: GradientRotation(math.pi / 4),
-              ),
+              color: Color(0xFFf85604),
             ),
             child: SafeArea(
               child: Column(

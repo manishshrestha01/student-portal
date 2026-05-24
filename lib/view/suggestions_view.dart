@@ -120,7 +120,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                 width: 22,
                                 height: 20.62,
                                 colorFilter: const ColorFilter.mode(
-                                  Color(0xFFFF6900),
+                                  Color(0xFFf85604),
                                   BlendMode.srcIn,
                                 ),
                               ),
@@ -220,7 +220,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                   ),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFFF6900),
+                                  backgroundColor: const Color(0xFFf85604),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),

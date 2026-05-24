@@ -2,6 +2,7 @@ import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/controller/receipt_controller.dart';
 import 'package:codeit_app/controller/courses_controller.dart';
 import 'package:codeit_app/controller/certificates_controller.dart';
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/certificates_view.dart';
 import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/link_view.dart';
@@ -17,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -83,6 +85,25 @@ class _HomeViewState extends State<HomeView> {
                           fontSize: 16,
                           fontWeight: FontWeight.w300,
                         ),
+                      ),
+                      Gap(10),
+                      ElevatedButton.icon(
+                        onPressed: () => Get.to(() => const CourseView()),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:  Color(0xFFf85604),
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),  
+                        ),
+                        icon: Icon(Icons.add),
+                        label: Text("Enroll in a Course",style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                              color: AppColors.boxColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),),
                       ),
                     ],
                   ),

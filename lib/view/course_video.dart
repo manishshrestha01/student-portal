@@ -236,7 +236,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                   width: 30.6,
                                   height: 21.6,
                                   colorFilter: const ColorFilter.mode(
-                                    Color(0xFFFF6900),
+                                    Color(0xFFf85604),
                                     BlendMode.srcIn,
                                   ),
                                 ),

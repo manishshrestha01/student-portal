@@ -61,7 +61,7 @@ class CertificatesWidget extends StatelessWidget {
                     height: iconSize,
                     colorFilter: const ColorFilter.mode(
                       // Color(0xFF9A1CB9), /purple in dashboard
-                      Color(0xFFFF6900), // orange in ui
+                      Color(0xFFf85604), // orange in ui
                       BlendMode.srcIn,
                     ),
                   ),
@@ -190,7 +190,7 @@ class CertificatesWidget extends StatelessWidget {
                     icon: SvgPicture.asset(
                       'assets/support/download.svg',
                       colorFilter: const ColorFilter.mode(
-                        Color(0xFFFF6900),
+                        Color(0xFFf85604),
                         BlendMode.srcIn,
                       ),
                       width: isSmall ? 20 : (isMedium ? 22 : 26),
@@ -204,7 +204,7 @@ class CertificatesWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: const Color(0xFFFF6900),
+                          color: const Color(0xFFf85604),
                           fontSize: buttonFontSize,
                           fontWeight: FontWeight.w700,
                         ),
@@ -212,7 +212,7 @@ class CertificatesWidget extends StatelessWidget {
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFFFFFFFF),
-                      side: const BorderSide(color: Color(0xFFFF6900), width: 1),
+                      side: const BorderSide(color: Color(0xFFf85604), width: 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

@@ -83,7 +83,7 @@ class CustomCategoryDropdown extends StatelessWidget {
             const Gap(8),
             Icon(
               isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-              color: isSelected ? const Color(0xFFFF6900) : Colors.black,
+              color: isSelected ? const Color(0xFFf85604) : Colors.black,
               size: 20,
             ),
           ],

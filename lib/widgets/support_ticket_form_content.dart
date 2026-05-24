@@ -186,7 +186,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                       width: 26,
                       height: 16.25,
                       colorFilter: const ColorFilter.mode(
-                        Color(0xFFFF6900),
+                        Color(0xFFf85604),
                         BlendMode.srcIn,
                       ),
                     ),
@@ -302,7 +302,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                                 ),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFFF6900),
+                                backgroundColor: const Color(0xFFf85604),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),

@@ -195,7 +195,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                             icon: SvgPicture.asset(
                               'assets/support/play.svg',
                               colorFilter: const ColorFilter.mode(
-                                Color(0xFFFF6900),
+                                Color(0xFFf85604),
                                 BlendMode.srcIn,
                               ),
                               width: isSmall ? 20 : (isMedium ? 22 : 26),
@@ -207,7 +207,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               overflow: TextOverflow.ellipsis,
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
-                                  color: const Color(0xFFFF6900),
+                                  color: const Color(0xFFf85604),
                                   fontSize: buttonFontSize,
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -216,7 +216,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFFFFFFFF),
                               side: const BorderSide(
-                                color: Color(0xFFFF6900),
+                                color: Color(0xFFf85604),
                                 width: 1,
                               ),
                               shape: RoundedRectangleBorder(
