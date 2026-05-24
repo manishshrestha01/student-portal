@@ -1,5 +1,6 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomCourseItem extends StatelessWidget {
   final String title;
@@ -51,19 +52,23 @@ class CustomCourseItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                     color: AppColors.textDark,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 20,
+                    style: GoogleFonts.inter(
+                      textStyle: const TextStyle(
+                       color: AppColors.textDark,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 6),
                   Text(
                     "Mentor: $mentor",
-                    style: TextStyle(
-                      color: AppColors.textDark,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        color: AppColors.textDark,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -77,10 +82,12 @@ class CustomCourseItem extends StatelessWidget {
                       const SizedBox(width: 2),
                       Text(
                         "$videos Videos",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15,
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ],

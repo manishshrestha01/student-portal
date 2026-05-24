@@ -109,7 +109,7 @@ class ReceiptView extends StatelessWidget {
             ),
             style: TextButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
-              backgroundColor: const Color(0xFFFF6900),
+              backgroundColor: const Color(0xFFf85604),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),

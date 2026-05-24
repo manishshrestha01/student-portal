@@ -1,6 +1,7 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class InfoCard extends StatelessWidget {
   final String title;
@@ -51,10 +52,12 @@ class InfoCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
-                      color: AppColors.textLight,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 18
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        color: AppColors.textLight,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18
+                      ),
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -63,10 +66,12 @@ class InfoCard extends StatelessWidget {
 
                   Text(
                     value,
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ],

@@ -7,6 +7,7 @@ import 'package:codeit_app/view/certificates_view.dart';
 import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/link_view.dart';
 import 'package:codeit_app/view/payment_page_view.dart';
+import 'package:codeit_app/view/upcoming course/upcoming_classes_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_certificate_card.dart';
 import 'package:codeit_app/widgets/custom_course_item.dart';
@@ -73,22 +74,26 @@ class _HomeViewState extends State<HomeView> {
                     children: [
                       Text(
                         "Welcome back, $firstName!",
-                        style: const TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFF1A1A2E),
+                        style: GoogleFonts.inter(
+                          textStyle: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF1A1A2E),
+                          ),
                         ),
                       ),
                       Text(
                         "Here's your learning snapshot today.",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
+                        style: GoogleFonts.inter(
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
                       ),
                       Gap(10),
                       ElevatedButton.icon(
-                        onPressed: () => Get.to(() => const CourseView()),
+                        onPressed: () => Get.to(() => const UpcomingClassesView()),
                         style: ElevatedButton.styleFrom(
                           backgroundColor:  Color(0xFFf85604),
                           foregroundColor: Colors.white,

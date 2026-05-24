@@ -9,6 +9,7 @@ import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:codeit_app/utils/biometric_auth.dart';
 
 import '../utils/dio_connector.dart';
@@ -44,9 +45,11 @@ class LoginView extends GetView<AuthController> {
                     //w2
                     Text(
                       'Welcome back!',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.w600,
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -54,10 +57,12 @@ class LoginView extends GetView<AuthController> {
                     //w3
                     Text(
                       "Log into your email address",
-                      style: TextStyle(
-                        color: AppColors.textLight,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: AppColors.textLight,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                       textAlign: TextAlign.center,
                     ),

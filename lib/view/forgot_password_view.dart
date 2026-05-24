@@ -9,6 +9,7 @@ import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ForgotPasswordView extends GetView<ForgotPasswordController> {
   const ForgotPasswordView({super.key});
@@ -49,17 +50,21 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                   //w2
                   Text(
                     'Password recovery',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   Gap(10),
                   //w3
                   Text(
                     "Enter your email address to recover your password",
-                    style: TextStyle(
-                      color: AppColors.textLight,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        color: AppColors.textLight,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                     textAlign: TextAlign.center,
                   ),

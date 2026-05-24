@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/phone_number.dart' as intl_phone_field;
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomPhoneField extends StatelessWidget {
   final TextEditingController controller;
@@ -59,16 +60,20 @@ class CustomPhoneField extends StatelessWidget {
           children: [
             Text(
               labelText,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+              style: GoogleFonts.inter(
+                textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+              ),
             ),
             if (isRequired) ...[
               Gap(2),
               Text(
                 "*",
-                style: TextStyle(
-                  fontSize: 18,
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.w500,
+                style: GoogleFonts.inter(
+                  textStyle: TextStyle(
+                    fontSize: 18,
+                    color: AppColors.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ],
@@ -84,7 +89,9 @@ class CustomPhoneField extends StatelessWidget {
           disableLengthCheck: true,
           invalidNumberMessage:
               null, 
-          style: TextStyle(fontSize: 16),
+          style: GoogleFonts.inter(
+            textStyle: TextStyle(fontSize: 16),
+          ),
           flagsButtonPadding: EdgeInsets.symmetric(horizontal: 8),
           dropdownIconPosition: IconPosition.trailing,
           dropdownIcon: Icon(
@@ -94,9 +101,11 @@ class CustomPhoneField extends StatelessWidget {
           ),
           decoration: InputDecoration(
             hintText: 'Enter number',
-            hintStyle: TextStyle(
-              color: AppColors.textLight,
-              fontWeight: FontWeight.w400,
+            hintStyle: GoogleFonts.inter(
+              textStyle: TextStyle(
+                color: AppColors.textLight,
+                fontWeight: FontWeight.w400,
+              ),
             ),
             counterText: "", 
             isDense: true, 

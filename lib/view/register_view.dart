@@ -10,6 +10,7 @@ import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RegisterView extends GetView<AuthController> {
   const RegisterView({super.key});
@@ -50,17 +51,21 @@ class RegisterView extends GetView<AuthController> {
                   //w2
                   Text(
                     'Create a student account',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   Gap(10),
                   //w3
                   Text(
                     "Join Code IT Student Portal",
-                    style: TextStyle(
-                      color: AppColors.textLight,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        color: AppColors.textLight,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                     textAlign: TextAlign.center,
                   ),

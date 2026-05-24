@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Notes extends StatefulWidget {
@@ -32,12 +33,14 @@ class _NotesState extends State<Notes> {
 
       return Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Notes & Resources",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFF1A1A1A),
+            style: GoogleFonts.inter(
+              textStyle: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF1A1A1A),
+              ),
             ),
           ),
           backgroundColor: Colors.white,
@@ -102,14 +105,16 @@ class _NotesState extends State<Notes> {
                           const Gap(24),
 
                           // Title Text
-                          const Text(
+                          Text(
                             "No notes or resources yet",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF1A1A1A),
-                              letterSpacing: -0.3,
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF1A1A1A),
+                                letterSpacing: -0.3,
+                              ),
                             ),
                           ),
                           const Gap(12),
@@ -118,12 +123,14 @@ class _NotesState extends State<Notes> {
                           Text(
                             "Your mentor will upload important notes, PDFs, links, and other study materials here if available.",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black.withOpacity(0.6),
-                              height: 1.5,
-                              letterSpacing: -0.2,
+                            style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black.withOpacity(0.6),
+                                height: 1.5,
+                                letterSpacing: -0.2,
+                              ),
                             ),
                           ),
                         ],
@@ -196,10 +203,12 @@ class _NotesState extends State<Notes> {
                                         note.noteTitle ?? "Untitled",
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                          color: Color(0xFF1A1A1A),
+                                        style: GoogleFonts.inter(
+                                          textStyle: const TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color(0xFF1A1A1A),
+                                          ),
                                         ),
                                       ),
                                       const Gap(6),
@@ -217,14 +226,16 @@ class _NotesState extends State<Notes> {
                                           Gap(6),
                                           Text(
                                             note.postedOn ?? "Today",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              color: Color.fromRGBO(
-                                                0,
-                                                0,
-                                                0,
-                                                0.7,
+                                            style: GoogleFonts.inter(
+                                              textStyle: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                color: Color.fromRGBO(
+                                                  0,
+                                                  0,
+                                                  0,
+                                                  0.7,
+                                                ),
                                               ),
                                             ),
                                           ),

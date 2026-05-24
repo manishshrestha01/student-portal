@@ -396,10 +396,12 @@ Widget videoItem(Video video, List<Video> allVideos, double screenWidth, double 
                         "Posted ${video.posted}",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Color.fromRGBO(0, 0, 0, 0.7),
-                          fontSize: bodyFontSize,
-                          fontWeight: FontWeight.w500,
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            color: Color.fromRGBO(0, 0, 0, 0.7),
+                            fontSize: bodyFontSize,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),

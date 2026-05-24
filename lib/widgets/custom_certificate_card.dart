@@ -1,6 +1,7 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomCertificateCard extends StatelessWidget {
   final String title;
@@ -39,17 +40,21 @@ class CustomCertificateCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: AppColors.textDark),
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: AppColors.textDark),
+                    ),
                   ),
         
                   Gap(3),
         
                   Text(
                     "Completed: $completed",
-                    style: TextStyle(
-                       color: const Color(0xFF4a5565),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                         color: const Color(0xFF4a5565),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 

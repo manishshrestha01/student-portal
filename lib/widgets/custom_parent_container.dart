@@ -1,6 +1,7 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomParentContainer extends StatelessWidget {
   final String title;
@@ -57,10 +58,12 @@ class CustomParentContainer extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: TextStyle(
-                      fontSize: titleFontSize,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textDark,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        fontSize: titleFontSize,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textDark,
+                      ),
                     ),
                   ),
                 ),
@@ -69,10 +72,12 @@ class CustomParentContainer extends StatelessWidget {
                   onTap: onTapSeeAll,
                   child: Text(
                     seeall,
-                    style: TextStyle(
-                      color: AppColors.textDark,
-                      fontWeight: FontWeight.w400,
-                      fontSize: seeAllFontSize,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        color: AppColors.textDark,
+                        fontWeight: FontWeight.w400,
+                        fontSize: seeAllFontSize,
+                      ),
                     ),
                   ),
                 ),

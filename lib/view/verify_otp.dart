@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class VerifyOtpView extends GetView<VerifyOtpController> {
   const VerifyOtpView({super.key});
@@ -41,19 +42,23 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
 
                   Text(
                     'Check your mail',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w600,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     textAlign: TextAlign.center,
                   ),
                   Gap(10),
                   Text(
                     "We've sent the code to your email",
-                    style: TextStyle(
-                      color: AppColors.textLight,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        color: AppColors.textLight,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -88,9 +93,11 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                                 FilteringTextInputFormatter.digitsOnly,
                               ],
                               maxLength: 1,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                               onChanged: (value) {
                                 controller.onOtpChanged(index, value);
@@ -124,10 +131,12 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                         '00:${seconds.toString().padLeft(2, '0')}';
                     return Text(
                       "Code expires in $formatted",
-                      style: TextStyle(
-                        color: AppColors.textDark,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: AppColors.textDark,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                       textAlign: TextAlign.center,
                     );

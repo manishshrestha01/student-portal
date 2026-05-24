@@ -8,6 +8,7 @@ import 'package:codeit_app/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ChangePasswordView extends GetView<ChangePasswordController> {
   const ChangePasswordView({super.key});
@@ -47,17 +48,21 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                   //w2
                   Text(
                     'Reset your password',
-                    style: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   Gap(10),
                   //w3
                   Text(
                     "Please enter your new password",
-                    style: TextStyle(
-                      color: AppColors.textLight,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        color: AppColors.textLight,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -69,10 +74,12 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       controller.email.value.isEmpty
                           ? "Email: (not available)"
                           : "Email: ${controller.email.value}",
-                      style: const TextStyle(
-                        color: AppColors.textDark,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                      style: GoogleFonts.inter(
+                        textStyle: const TextStyle(
+                          color: AppColors.textDark,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -148,7 +155,9 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                     children: [
                       Text(
                         "Your password must contain",
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(fontWeight: FontWeight.w600),
+                        ),
                       ),
                       Row(
                         children: [
@@ -160,9 +169,11 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                           Gap(8),
                           Text(
                             "At least 6 characters",
-                            style: TextStyle(
-                              color: AppColors.textDark,
-                              fontSize: 14,
+                            style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                color: AppColors.textDark,
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                         ],

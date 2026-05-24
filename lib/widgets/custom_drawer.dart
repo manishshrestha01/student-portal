@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/view/certificates_view.dart';
 import 'package:codeit_app/view/course_view.dart';

@@ -2,6 +2,7 @@ import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextButton extends StatelessWidget {
   final String text;
@@ -24,10 +25,12 @@ class CustomTextButton extends StatelessWidget {
       },
       child: Text(
         text,
-        style: TextStyle(
-          color: AppColors.textButtonColor,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
+        style: GoogleFonts.inter(
+          textStyle: TextStyle(
+            color: AppColors.textButtonColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ),
     );

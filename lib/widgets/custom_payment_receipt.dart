@@ -3,6 +3,7 @@ import 'package:codeit_app/view/receipt_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomPaymentReceipt extends StatelessWidget {
   final String title;
@@ -41,19 +42,23 @@ class CustomPaymentReceipt extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                   style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: AppColors.textDark,
+                   style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        color: AppColors.textDark,
+                      ),
                     ),
                   ),
                   const Gap(3),
                   Text(
                     "Amount: Rs.$amount | Date: $date",
-                    style: TextStyle(
-                      color: const Color(0xFF4a5565),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        color: const Color(0xFF4a5565),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 ],

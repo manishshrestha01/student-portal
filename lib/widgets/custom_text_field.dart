@@ -1,6 +1,7 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? labelText;
@@ -38,7 +39,9 @@ class CustomTextField extends StatelessWidget {
             children: [
               Text(
                 labelText!,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                style: GoogleFonts.inter(
+                  textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                ),
               ),
 
               if (isRequired) ...[
@@ -46,10 +49,12 @@ class CustomTextField extends StatelessWidget {
 
                 Text(
                   "*",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w500,
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      fontSize: 18,
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ],
@@ -66,7 +71,9 @@ class CustomTextField extends StatelessWidget {
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
             hintText: hintText,
-            hintStyle: TextStyle(color: AppColors.textLight, fontWeight: .w400),
+            hintStyle: GoogleFonts.inter(
+              textStyle: TextStyle(color: AppColors.textLight, fontWeight: .w400),
+            ),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.primary, width: 2),
