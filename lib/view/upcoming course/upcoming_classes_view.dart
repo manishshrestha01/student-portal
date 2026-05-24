@@ -109,6 +109,12 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
                       ),
                     ),
                   ),
+                  Gap(15),
+                  Center(
+                    child: Container(
+                      
+                    )
+                  ),
                 ],
               ),
             ),
