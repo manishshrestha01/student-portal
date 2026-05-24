@@ -87,7 +87,7 @@ class _HomeViewState extends State<HomeView> {
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),

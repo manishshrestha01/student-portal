@@ -45,12 +45,10 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: const Color(
-                          0xFFffeee8,
-                        ), 
+                        color: const Color(0xFFffeee8),
                         borderRadius: BorderRadius.circular(20),
                         border: Border.all(
-                          color: const Color(0xFFfed1c0), 
+                          color: const Color(0xFFfed1c0),
                           width: 1,
                         ),
                       ),
@@ -66,17 +64,51 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
                       ),
                     ),
                   ),
-                  Gap(isSmall ? 24 : 32),
+                  Gap(15),
                   Center(
-                    child: Text("Upcoming Classes in \nGoogle Meet",
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
                         style: GoogleFonts.inter(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             color: Colors.black,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w700,
                             fontSize: 36,
+                            height: 1.2,
                           ),
-                        ),),
-                  )
+                        ),
+                        children: [
+                          const TextSpan(
+                            text: "Upcoming Classes in Google Meet ",
+                          ),
+                          WidgetSpan(
+                            alignment: PlaceholderAlignment.middle,
+                            child: Image.network(
+                              'https://codeit.com.np/images/google_meet.png',
+                              height: 36,
+                              width: 36,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Gap(15),
+                  Center(
+                    child: Text(
+                      "Miss a live class? No problem—recorded videos will be available for every session.",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: const Color(0xFF717787),
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.italic,
+                          fontSize: 14,
+                          height: 1.2,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
