@@ -27,7 +27,7 @@ class CertificatesWidget extends StatelessWidget {
         final double gapSize = isSmall ? 8 : 9;
         final double iconSize = isSmall ? 32 : 40;
         final double iconSizeSmall = isSmall ? 20 : (isMedium ? 25 : 35);
-        final double titleFontSize = isSmall ? 14 : (isMedium ? 16 : 17);
+        final double titleFontSize = isSmall ? 16 : (isMedium ? 18 : 19);
         final double labelFontSize = isSmall ? 12 : (isMedium ? 14 : 17);
         final double buttonHeight = isSmall ? 44 : (isMedium ? 50 : 50);
         final double buttonFontSize = isSmall ? 14 : (isMedium ? 20 : 20);
