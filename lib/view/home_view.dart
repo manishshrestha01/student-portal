@@ -116,8 +116,9 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ],
                   ),
+                  Gap(10),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.only(bottom: 10 , left: 0, top: 5, right: 0),
                     child: LinkView(),
                   ),
                   // Info cards
