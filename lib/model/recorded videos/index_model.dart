@@ -7,38 +7,20 @@ class IndexModel {
 
     final bool? success;
     final String? message;
-    final Data? data;
+    final List<Datum> data;
 
     factory IndexModel.fromJson(Map<String, dynamic> json){ 
         return IndexModel(
             success: json["success"],
             message: json["message"],
-            data: json["data"] == null ? null : Data.fromJson(json["data"]),
+            data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
         );
     }
 
 }
 
-class Data {
-    Data({
-        required this.course,
-        required this.terms,
-    });
-
-    final Course? course;
-    final Terms? terms;
-
-    factory Data.fromJson(Map<String, dynamic> json){ 
-        return Data(
-            course: json["course"] == null ? null : Course.fromJson(json["course"]),
-            terms: json["terms"] == null ? null : Terms.fromJson(json["terms"]),
-        );
-    }
-
-}
-
-class Course {
-    Course({
+class Datum {
+    Datum({
         required this.id,
         required this.name,
         required this.slug,
@@ -56,8 +38,8 @@ class Course {
     final List<Plan> plans;
     final PaymentInfo? paymentInfo;
 
-    factory Course.fromJson(Map<String, dynamic> json){ 
-        return Course(
+    factory Datum.fromJson(Map<String, dynamic> json){ 
+        return Datum(
             id: json["id"],
             name: json["name"],
             slug: json["slug"],
@@ -140,24 +122,6 @@ class Plan {
             features: json["features"] == null ? [] : List<String>.from(json["features"]!.map((x) => x)),
             missing: json["missing"] == null ? [] : List<String>.from(json["missing"]!.map((x) => x)),
             recommended: json["recommended"],
-        );
-    }
-
-}
-
-class Terms {
-    Terms({
-        required this.title,
-        required this.description,
-    });
-
-    final String? title;
-    final String? description;
-
-    factory Terms.fromJson(Map<String, dynamic> json){ 
-        return Terms(
-            title: json["title"],
-            description: json["description"],
         );
     }
 

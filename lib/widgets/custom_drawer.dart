@@ -4,6 +4,7 @@ import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/payment_page_view.dart';
 import 'package:codeit_app/view/profile_view.dart';
+import 'package:codeit_app/view/recorded%20videos/recorded_videos_view.dart';
 import 'package:codeit_app/view/security_view.dart';
 import 'package:codeit_app/view/suggestions_view.dart';
 import 'package:codeit_app/view/support_view.dart';
@@ -251,6 +252,22 @@ class CustomDrawer extends StatelessWidget {
                       ),
                     ),
                   ),
+                  ListTile(
+                    onTap: () => Get.offAll(() => const RecordedVideosView()),
+                    contentPadding: EdgeInsets.only(left: leftPadding),
+                    leading: Icon(Icons.videocam, color: Colors.white, size: iconWidth),
+                    title: Text(
+                      "Recorded Courses",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: itemFontSize,
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0,
+                        ),
+                      ),
+                    ),
+                  ),                 
                   ListTile(
                     onTap: () => Get.offAll(() => const SecurityView()),
                     contentPadding: EdgeInsets.only(left: leftPadding),
