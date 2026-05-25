@@ -50,7 +50,7 @@ class _HomeViewState extends State<HomeView> {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor:  const Color(0xFFf9fafb),
+      backgroundColor: const Color(0xFFf9fafb),
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {
@@ -93,30 +93,33 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       Gap(10),
                       ElevatedButton.icon(
-                        onPressed: () => Get.to(() => const UpcomingClassesView()),
+                        onPressed: () =>
+                            Get.to(() => const UpcomingClassesView()),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor:  Color(0xFFf85604),
+                          backgroundColor: Color(0xFFf85604),
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
-                          ),  
+                          ),
                         ),
                         icon: Icon(Icons.add),
-                        label: Text("Enroll in a Course",style: GoogleFonts.inter(
+                        label: Text(
+                          "Enroll in a Course",
+                          style: GoogleFonts.inter(
                             textStyle: TextStyle(
                               color: AppColors.boxColor,
                               fontSize: 18,
                               fontWeight: FontWeight.w700,
                             ),
-                          ),),
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                  Gap(20),
-                  LinkView(),
-
-                  Gap(20),
-
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: LinkView(),
+                  ),
                   // Info cards
                   Column(
                     children: [
@@ -212,10 +215,8 @@ Widget _buildPaymentSection(BuildContext context) {
         final widgets = <Widget>[];
         for (int i = 0; i < items.length; i++) {
           final receipt = items[i];
-           
-          
+
           widgets.add(
-           
             CustomPaymentReceipt(
               title: receipt.courseName ?? "Course",
               amount: receipt.amount?.toString() ?? "0",
@@ -228,7 +229,7 @@ Widget _buildPaymentSection(BuildContext context) {
               receiptId: receipt.receiptId ?? 0,
             ),
           );
-       Gap(12);
+          Gap(12);
           //add divider between items
           if (i < items.length - 1) {
             widgets.add(
@@ -308,11 +309,10 @@ Widget _buildCertificateSection(BuildContext context) {
         onTap: () => Get.to(() => const CertificatesView()),
       );
     }).toList();
-  
+
     final widgets = <Widget>[];
     for (int i = 0; i < certItems.length; i++) {
-      widgets.add(
-        certItems[i]);
+      widgets.add(certItems[i]);
 
       if (i < certItems.length - 1) {
         widgets.add(

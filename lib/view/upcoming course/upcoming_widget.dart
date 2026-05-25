@@ -287,9 +287,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                                 textStyle: const TextStyle(
                                   color: Color(0xFF6a7282),
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  letterSpacing: -1,
+                                  fontSize: 15,
                                   decoration: TextDecoration.lineThrough,
+                                  decorationColor: Color(0xFF6a7282),
+                                  decorationThickness: 1,
                                 ),
                               ),
                             ),
