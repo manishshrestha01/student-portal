@@ -259,17 +259,46 @@ class AuthController extends GetxController {
   }
 
   Future<void> resetPassword() async {
+    // Validate all fields are filled
+    if (currentPassword.text.isEmpty) {
+      Get.snackbar("Error", "Please enter your current password");
+      return;
+    }
+
+    if (newPassword.text.isEmpty) {
+      Get.snackbar("Error", "Please enter your new password");
+      return;
+    }
+
+    if (confirmPassword.text.isEmpty) {
+      Get.snackbar("Error", "Please confirm your new password");
+      return;
+    }
+
+    // Validate new password and confirm password match
     if (newPassword.text != confirmPassword.text) {
       Get.snackbar("Error", "New password and confirm password must match");
       return;
     }
 
+    // Validate new password is different from current password
+    if (currentPassword.text == newPassword.text) {
+      Get.snackbar("Error", "New password must be different from current password");
+      return;
+    }
+
+    // Validate new password minimum length
+    if (newPassword.text.length < 6) {
+      Get.snackbar("Error", "New password must be at least 6 characters long");
+      return;
+    }
+
     try {
       isLoading(true);
+      // Send email and new password to backend
       final response = await AuthService.resetPassword(
-        currentPassword.text.trim(),
+        email.text.trim(),
         newPassword.text.trim(),
-        confirmPassword.text.trim(),
       );
 
       if (response.statusCode == 200) {
@@ -280,6 +309,8 @@ class AuthController extends GetxController {
             "Success",
             resetPasswordMessage.value.message ??
                 "Password updated successfully",
+            backgroundColor: AppColors.primary,
+            colorText: Colors.white,
           );
         } else {
           Get.snackbar(
@@ -287,9 +318,14 @@ class AuthController extends GetxController {
             resetPasswordMessage.value.message ?? "Failed to update password",
           );
         }
+      } else {
+        Get.snackbar(
+          "Error",
+          resetPasswordMessage.value.message ?? "Failed to update password",
+        );
       }
     } catch (e) {
-      Get.snackbar("Error", "Failed to update password");
+      Get.snackbar("Error", "Failed to update password: ${e.toString()}");
     } finally {
       isLoading(false);
     }
