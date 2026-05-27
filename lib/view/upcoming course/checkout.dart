@@ -1,8 +1,11 @@
+import 'package:codeit_app/controller/terms_controller.dart';
 import 'package:codeit_app/view/upcoming%20course/upcoming_classes_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +20,17 @@ class Checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<Checkout> {
+  bool _agreeToTerms = false;
+  final TermsController termsController = Get.find<TermsController>();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      termsController.getTerms();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -403,12 +417,208 @@ class _CheckoutState extends State<Checkout> {
                                 ),
                               ),
                             ),
-                            const Gap(20),
+                            const Gap(10),
                             Divider(
                               color: const Color(0xFFffd6a8),
                               thickness: 2,
                             ),
-                            const Gap(20),
+                            const Gap(10),
+                            Row(
+                              children: [
+                                Text(
+                                  'Upload Payment Receipt',
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                                Gap(6),
+                                Text(
+                                  '*',
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Gap(20),
+                            DottedBorder(
+                              options: const RoundedRectDottedBorderOptions(
+                                radius: Radius.circular(20),
+                                color: Color(0xFF99a1af),
+                                strokeWidth: 3,
+                                dashPattern: [8, 4],
+                              ),
+                              child: Container(
+                                width: double.infinity,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(0xFF99a1af),
+                                    width: 3,
+                                    style: BorderStyle.none,
+                                  ),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                      'assets/support/upload.svg',
+                                      width: 48,
+                                      height: 48,
+                                      colorFilter: const ColorFilter.mode(
+                                        Color(0xFF6a7282),
+                                        BlendMode.srcIn,
+                                      ),
+                                    ),
+                                    const Gap(5),
+                                    Text(
+                                      'Click to upload receipt',
+                                      style: GoogleFonts.inter(
+                                        textStyle: TextStyle(
+                                          color: const Color(0xFF4a5565),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                    const Gap(5),
+                                    Text(
+                                      '(PNG, JPG • Max 2MB)',
+                                      style: GoogleFonts.inter(
+                                        textStyle: TextStyle(
+                                          color: const Color(0xFF4a5565),
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Gap(20),
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _agreeToTerms = !_agreeToTerms;
+                                    });
+                                  },
+                                  child: Checkbox(
+                                    value: _agreeToTerms,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        _agreeToTerms = value ?? false;
+                                      });
+                                    },
+                                    activeColor: Colors.deepOrange,
+                                    checkColor: Colors.white,
+                                    side: BorderSide(
+                                      color: Colors.black,
+                                      width: 2,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  'I agree to the',
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                Gap(4),
+                                GestureDetector(
+                                  onTap: () => _showTermsAndConditions(context),
+                                  child: Text(
+                                    'Terms and Conditions',
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        color: Colors.deepOrange,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Gap(20),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                onPressed: _agreeToTerms ? () {} : null,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFf85604),
+                                  disabledBackgroundColor: Colors.grey.shade400,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 16,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  elevation: 0,
+                                ),
+                                child: Text(
+                                  'Confirm Payment & Enroll',
+                                  style: GoogleFonts.inter(
+                                    textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w800,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Gap(20),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "🔒 Secure payment • Fast verification • Lifetime access after confirmation",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Gap(30),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "By completing this payment, you agree to our terms and conditions. Verification may take up to 24 hours. You'll receive WhatsApp group invite and portal access upon verification.",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.inter(
+                                      textStyle: const TextStyle(
+                                        color: Color.fromARGB(221, 78, 78, 78),
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -420,6 +630,122 @@ class _CheckoutState extends State<Checkout> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  void _showTermsAndConditions(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.8,
+            maxWidth: 600,
+          ),
+          child: Column(
+            children: [
+              // Header
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(color: Colors.black, width: 1),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Terms and Conditions',
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(Icons.close, size: 24, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              // Content
+              Expanded(
+                child: Obx(() {
+                  if (termsController.isLoading.value) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  final String content =
+                      (termsController.terms.value.data ?? '').trim();
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.all(20),
+                    child: content.isEmpty
+                        ? Text(
+                            'No terms available.',
+                            style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          )
+                        : HtmlWidget(
+                            content,
+                            textStyle: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
+                                height: 1.6,
+                              ),
+                            ),
+                          ),
+                  );
+                }),
+              ),
+              // Footer Button
+              Container(
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.black, width: 1),
+                  ),
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepOrange,
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: Text(
+                      'I Understand',
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
