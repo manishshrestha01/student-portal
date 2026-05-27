@@ -1,4 +1,6 @@
+import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/controller/terms_controller.dart';
+import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart';
 import 'package:codeit_app/view/upcoming%20course/upcoming_classes_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
@@ -20,6 +22,8 @@ class Checkout extends StatefulWidget {
 }
 
 class _CheckoutState extends State<Checkout> {
+  final UpcomingController upcomingController = Get.find<UpcomingController>();
+  final AuthController authController = Get.find<AuthController>();
   bool _agreeToTerms = false;
   final TermsController termsController = Get.find<TermsController>();
 
@@ -27,7 +31,10 @@ class _CheckoutState extends State<Checkout> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      authController.fetchUser();
       termsController.getTerms();
+      upcomingController.getUpcomingClasses();
+
     });
   }
 
@@ -103,7 +110,7 @@ class _CheckoutState extends State<Checkout> {
                             const Gap(10),
                             Divider(color: Colors.grey, thickness: 0.5),
                             const Gap(10),
-                            Row(
+                            Obx(() => Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
@@ -118,7 +125,7 @@ class _CheckoutState extends State<Checkout> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    'Graphic Design (Photoshop)',
+                                    upcomingController.selectedCourse.value?.courseName ?? 'N/A',
                                     textAlign: TextAlign.end,
                                     style: GoogleFonts.inter(
                                       textStyle: const TextStyle(
@@ -130,9 +137,9 @@ class _CheckoutState extends State<Checkout> {
                                   ),
                                 ),
                               ],
-                            ),
+                            )),
                             Gap(6),
-                            Row(
+                            Obx(() => Row(
                               children: [
                                 Text(
                                   'Batch Starts:',
@@ -146,7 +153,7 @@ class _CheckoutState extends State<Checkout> {
                                 ),
                                 Spacer(),
                                 Text(
-                                  'May 29, 2026',
+                                  upcomingController.selectedCourse.value?.startDate ?? '--',
                                   style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
                                       color: Colors.black,
@@ -156,9 +163,9 @@ class _CheckoutState extends State<Checkout> {
                                   ),
                                 ),
                               ],
-                            ),
+                            )),
                             Gap(6),
-                            Row(
+                            Obx(() => Row(
                               children: [
                                 Text(
                                   'Duration:',
@@ -172,7 +179,7 @@ class _CheckoutState extends State<Checkout> {
                                 ),
                                 Spacer(),
                                 Text(
-                                  '14 Days',
+                                  upcomingController.selectedCourse.value?.courseDuration ?? '--',
                                   style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
                                       color: Colors.black,
@@ -182,7 +189,7 @@ class _CheckoutState extends State<Checkout> {
                                   ),
                                 ),
                               ],
-                            ),
+                            )),
                             Gap(6),
                             Row(
                               children: [
@@ -212,7 +219,7 @@ class _CheckoutState extends State<Checkout> {
                             const Gap(10),
                             Divider(color: Colors.grey, thickness: 0.5),
                             const Gap(10),
-                            Row(
+                            Obx(() => Row(
                               children: [
                                 Text(
                                   'Total Amount:',
@@ -229,7 +236,7 @@ class _CheckoutState extends State<Checkout> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Rs. 999/-',
+                                      'Rs. ${upcomingController.selectedCourse.value?.offerPrice?.isEmpty ?? true ? '--' : upcomingController.selectedCourse.value!.offerPrice}/-',
                                       style: GoogleFonts.inter(
                                         textStyle: const TextStyle(
                                           color: Colors.deepOrange,
@@ -242,7 +249,7 @@ class _CheckoutState extends State<Checkout> {
                                     Row(
                                       children: [
                                         Text(
-                                          'Rs. 8,500',
+                                          'Rs. ${upcomingController.selectedCourse.value?.actualPrice?.isEmpty ?? true ? '--' : upcomingController.selectedCourse.value!.actualPrice}',
                                           style: GoogleFonts.inter(
                                             textStyle: const TextStyle(
                                               color: Color(0xFF6a7282),
@@ -270,7 +277,7 @@ class _CheckoutState extends State<Checkout> {
                                             ),
                                           ),
                                           child: Text(
-                                            'Save 88%',
+                                            'Save ${upcomingController.selectedCourse.value?.discount?.isEmpty ?? true ? '--' : upcomingController.selectedCourse.value!.discount}',
                                             style: GoogleFonts.inter(
                                               textStyle: const TextStyle(
                                                 color: Color(0xFF008236),
@@ -285,7 +292,7 @@ class _CheckoutState extends State<Checkout> {
                                   ],
                                 ),
                               ],
-                            ),
+                            )),
                             const Gap(20),
                             Divider(
                               color: const Color(0xFFffd6a8),
@@ -321,7 +328,7 @@ class _CheckoutState extends State<Checkout> {
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
-                                child: Column(
+                                child: Obx(() => Column(
                                   children: [
                                     Row(
                                       children: [
@@ -341,7 +348,9 @@ class _CheckoutState extends State<Checkout> {
                                     Row(
                                       children: [
                                         Text(
-                                          'Manish Shrestha',
+                                          authController.user.value?.name?.isEmpty ?? true 
+                                              ? '--' 
+                                              : authController.user.value!.name!,
                                           style: GoogleFonts.inter(
                                             textStyle: TextStyle(
                                               color: Colors.black,
@@ -371,7 +380,9 @@ class _CheckoutState extends State<Checkout> {
                                     Row(
                                       children: [
                                         Text(
-                                          'shresthamanish8080@gmail.com',
+                                          authController.user.value?.email?.isEmpty ?? true 
+                                              ? '--' 
+                                              : authController.user.value!.email!,
                                           style: GoogleFonts.inter(
                                             textStyle: TextStyle(
                                               color: Colors.black,
@@ -401,7 +412,9 @@ class _CheckoutState extends State<Checkout> {
                                     Row(
                                       children: [
                                         Text(
-                                          '9846922713',
+                                          authController.user.value?.phone?.isEmpty ?? true 
+                                              ? '--' 
+                                              : authController.user.value!.phone!,
                                           style: GoogleFonts.inter(
                                             textStyle: TextStyle(
                                               color: Colors.black,
@@ -414,7 +427,7 @@ class _CheckoutState extends State<Checkout> {
                                       ],
                                     ),
                                   ],
-                                ),
+                                )),
                               ),
                             ),
                             const Gap(10),

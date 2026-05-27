@@ -7,6 +7,7 @@ class UpcomingController extends GetxController {
   var upcomingclass = UpcomingModel(sucess: true, data: [],).obs;
   var isLoading = false.obs;
   var errorMessage = ''.obs;
+  var selectedCourse = Rxn<Datum>();
 
   @override
   void onInit() {
@@ -40,5 +41,9 @@ class UpcomingController extends GetxController {
     } finally {
       isLoading(false);
     }
+  }
+
+  void selectCourse(Datum course) {
+    selectedCourse.value = course;
   }
 }

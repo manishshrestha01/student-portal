@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart';
 import 'package:codeit_app/model/upcoming%20course/upcoming_model.dart';
 import 'package:codeit_app/view/upcoming%20course/checkout.dart';
 import 'package:flutter/material.dart';
@@ -321,7 +322,15 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     ),
                     const Spacer(),
                     ElevatedButton(
-                      onPressed: () => Get.offAll(() => const Checkout()),
+                      onPressed: () {
+                        final upcomingController = Get.find<UpcomingController>();
+                        upcomingController.selectCourse(widget.item);
+                        
+                        print('flutter: DEBUG: Sending ID to server -> ${widget.item.courseId}');
+                        print('flutter: Course: ${widget.item.courseName}');
+                        
+                        Get.offAll(() => const Checkout());
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFF65505),
                         padding: const EdgeInsets.symmetric(
