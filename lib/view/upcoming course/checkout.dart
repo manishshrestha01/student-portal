@@ -1,3 +1,4 @@
+import 'package:codeit_app/view/Payments/fonepay.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,13 @@ class _CheckoutState extends State<Checkout> {
       backgroundColor: const Color(0xFFf9fafb),
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
-      body: Text("Checkout"),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Fonepay(),
+          ],
+        ),
+      ),
     );
   }
 }
