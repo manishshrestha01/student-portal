@@ -110,7 +110,8 @@ class _TicketViewState extends State<TicketView> {
                 textStyle: TextStyle(
                   color: AppColors.textDark,
                   fontSize: isSmall ? 22 : 25,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0,
                 ),
               ),
             ),

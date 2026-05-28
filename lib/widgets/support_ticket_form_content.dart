@@ -135,7 +135,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                         'New Tickets',
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
-                            color: const Color(0xFF4B4B4B),
+                            color:  Colors.black,
                             fontSize: isSmall ? 13 : 14,
                             fontWeight: FontWeight.w400,
                           ),
@@ -155,7 +155,8 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                         textStyle: TextStyle(
                           color: Colors.black,
                           fontSize: titleSize,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0,
                         ),
                       ),
                     ),
@@ -170,9 +171,10 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Colors.black,
+                          color: Color(0xFF4a5565),
                           fontSize: subtitleSize,
-                          fontWeight: FontWeight.w300,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 0,
                         ),
                       ),
                     ),
@@ -197,7 +199,8 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                         textStyle: TextStyle(
                           color: Colors.black,
                           fontSize: sectionTitleSize,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0,
                         ),
                       ),
                     ),
@@ -356,10 +359,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: const Color(0xFFF9FAFB)),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.25),
-            blurRadius: 2,
-          ),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.25), blurRadius: 2),
         ],
       ),
       child: TextField(

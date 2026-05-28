@@ -55,6 +55,7 @@ class InfoCard extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: AppColors.textLight,
+                        letterSpacing: 0,
                         fontWeight: FontWeight.w400,
                         fontSize: 18
                       ),
@@ -69,6 +70,7 @@ class InfoCard extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         fontSize: 25,
+                         letterSpacing: 0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),

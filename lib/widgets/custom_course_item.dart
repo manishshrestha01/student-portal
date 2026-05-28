@@ -56,6 +56,7 @@ class CustomCourseItem extends StatelessWidget {
                       textStyle: const TextStyle(
                        color: AppColors.textDark,
                         fontWeight: FontWeight.w600,
+                         letterSpacing: 0,
                         fontSize: 20,
                       ),
                     ),
@@ -66,6 +67,7 @@ class CustomCourseItem extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: const Color(0xFF4a5565),
+                         letterSpacing: 0,
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                       ),
@@ -86,6 +88,7 @@ class CustomCourseItem extends StatelessWidget {
                           textStyle: TextStyle(
                             color: const Color(0xFF4a5565),
                             fontWeight: FontWeight.w500,
+                             letterSpacing: 0,
                             fontSize: 15,
                           ),
                         ),

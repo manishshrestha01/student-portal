@@ -103,7 +103,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                             textStyle: const TextStyle(
                               color: Colors.black,
                               fontSize: 20,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w700,
                               height: 1.2,
                               letterSpacing: 0,
                             ),

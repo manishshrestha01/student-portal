@@ -75,7 +75,8 @@ class _CertificatesViewState extends State<CertificatesView> {
                         textStyle: TextStyle(
                           color: AppColors.textDark,
                           fontSize: titleFontSize,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0,
                         ),
                       ),
                     ),

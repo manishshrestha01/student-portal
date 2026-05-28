@@ -860,8 +860,9 @@ class _CheckoutState extends State<Checkout> {
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
                           color: Colors.black,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
                           fontSize: 18,
+                          letterSpacing: 0,
                         ),
                       ),
                     ),

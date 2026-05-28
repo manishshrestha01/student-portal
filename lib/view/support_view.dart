@@ -23,13 +23,11 @@ class SupportView extends StatefulWidget {
 }
 
 class _SupportViewState extends State<SupportView> {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      backgroundColor:  const Color(0xFFf9fafb),
-      appBar:CustomAppBar(),
+      backgroundColor: const Color(0xFFf9fafb),
+      appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -66,7 +64,8 @@ class _SupportViewState extends State<SupportView> {
                           textStyle: TextStyle(
                             color: AppColors.textDark,
                             fontSize: isSmall ? 22 : 24,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0,
                           ),
                         ),
                       ),
@@ -81,9 +80,10 @@ class _SupportViewState extends State<SupportView> {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
-                            color: AppColors.textDark,
+                            color: Color(0xFF4a5565),
                             fontSize: isSmall ? 12 : 16,
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0,
                           ),
                         ),
                       ),
@@ -98,7 +98,8 @@ class _SupportViewState extends State<SupportView> {
                     iconPath: 'assets/support/general.svg',
                     iconColor: const Color(0xFF22408B),
                     title: 'General Support',
-                    description: 'Questions about courses, payments, schedule, enrollment or other general inquiries.',
+                    description:
+                        'Questions about courses, payments, schedule, enrollment or other general inquiries.',
                   ),
                   const Gap(23),
                   _buildSupportCard(
@@ -109,7 +110,8 @@ class _SupportViewState extends State<SupportView> {
                     iconPath: 'assets/support/technical.svg',
                     iconColor: const Color(0xFFBC120E),
                     title: 'Technical Support',
-                    description: 'Login issues, platform errors, video not playing, file access problems, etc.'
+                    description:
+                        'Login issues, platform errors, video not playing, file access problems, etc.',
                   ),
                   const Gap(23),
                   _buildSupportCard(
@@ -120,7 +122,8 @@ class _SupportViewState extends State<SupportView> {
                     iconPath: 'assets/support/counselling.svg',
                     iconColor: const Color(0xFF138023),
                     title: 'Counselling Support',
-                    description: 'Help choosing courses, career guidance, learning path planning, or study advice.',
+                    description:
+                        'Help choosing courses, career guidance, learning path planning, or study advice.',
                   ),
                   const Gap(23),
                   _buildSupportCard(
@@ -131,7 +134,8 @@ class _SupportViewState extends State<SupportView> {
                     iconPath: 'assets/support/internship.svg',
                     iconColor: const Color(0xFF9A1CB9),
                     title: 'Internship Support',
-                    description: 'Help with internship tasks, project guidance, workplace questions, or reports.',
+                    description:
+                        'Help with internship tasks, project guidance, workplace questions, or reports.',
                   ),
                   Gap(isSmall ? 20 : 40),
                   Center(
@@ -184,7 +188,7 @@ class _SupportViewState extends State<SupportView> {
     return Row(
       children: [
         GestureDetector(
-          onTap: () => Get.offAll(() =>  HomeView()),
+          onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [
               SvgPicture.asset(
@@ -292,9 +296,10 @@ class _SupportViewState extends State<SupportView> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Colors.black,
+                         color: Color(0xFF4a5565),
                           fontSize: isSmall ? 13 : 14,
-                          fontWeight: FontWeight.w300,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 0
                         ),
                       ),
                     ),

@@ -76,8 +76,9 @@ class _HomeViewState extends State<HomeView> {
                         "Welcome back, $firstName!",
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0,
                             color: Color(0xFF1A1A2E),
                           ),
                         ),
@@ -87,7 +88,9 @@ class _HomeViewState extends State<HomeView> {
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
                             fontSize: 16,
-                            fontWeight: FontWeight.w400,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF4a5565),
                           ),
                         ),
                       ),
@@ -102,14 +105,15 @@ class _HomeViewState extends State<HomeView> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        icon: Icon(Icons.add),
+                        icon: Icon(Icons.add, size: 20),
                         label: Text(
                           "Enroll in a Course",
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
                               color: AppColors.boxColor,
                               fontSize: 18,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0,
                             ),
                           ),
                         ),

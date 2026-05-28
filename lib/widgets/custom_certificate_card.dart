@@ -10,7 +10,7 @@ class CustomCertificateCard extends StatelessWidget {
   final VoidCallback? onTap;
 
   const CustomCertificateCard({
-    super.key,     
+    super.key,
     required this.title,
     required this.completed,
     required this.icon,
@@ -21,18 +21,16 @@ class CustomCertificateCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
       child: InkWell(
         onTap: onTap,
         child: Row(
           children: [
             //icon
             icon,
-        
+
             Gap(20),
-        
+
             //text
             Expanded(
               child: Column(
@@ -41,23 +39,28 @@ class CustomCertificateCard extends StatelessWidget {
                   Text(
                     title,
                     style: GoogleFonts.inter(
-                      textStyle: TextStyle(fontWeight: FontWeight.w600, fontSize: 18, color: AppColors.textDark),
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                        color: AppColors.textDark,
+                        letterSpacing: 0,
+                      ),
                     ),
                   ),
-        
+
                   Gap(3),
-        
+
                   Text(
                     "Completed: $completed",
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
-                         color: const Color(0xFF4a5565),
+                        color: const Color(0xFF4a5565),
                         fontWeight: FontWeight.w500,
                         fontSize: 14,
+                        letterSpacing: 0,
                       ),
                     ),
                   ),
-                
                 ],
               ),
             ),
@@ -65,6 +68,5 @@ class CustomCertificateCard extends StatelessWidget {
         ),
       ),
     );
- 
   }
 }

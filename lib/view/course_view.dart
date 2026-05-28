@@ -72,7 +72,8 @@ class _CourseViewState extends State<CourseView> {
                         textStyle: TextStyle(
                           color: AppColors.textDark,
                           fontSize: titleFontSize,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0,
                         ),
                       ),
                     ),

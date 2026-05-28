@@ -82,7 +82,8 @@ class _CourseVideoState extends State<CourseVideo> {
                       textStyle: TextStyle(
                         color: AppColors.textDark,
                         fontSize: titleFontSize,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0,
                       ),
                     ),
                   ),
@@ -167,7 +168,7 @@ class _CourseVideoState extends State<CourseVideo> {
                           height: containerHeight,
                           padding: EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF9FAFB),
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(

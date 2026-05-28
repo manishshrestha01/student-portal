@@ -50,7 +50,8 @@ class PaymentPage extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         fontSize: titleFontSize,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0,
                         color: Colors.black,
                       ),
                     ),
@@ -72,14 +73,12 @@ class PaymentPage extends StatelessWidget {
                     return Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color: Colors.grey.shade400),
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withAlpha(25),
-                            blurRadius: 4,
+                            color: Colors.black.withAlpha(64),
+                            blurRadius: 2,
                             spreadRadius: 0,
-                            offset: const Offset(0, 4),
                           ),
                         ],
                       ),

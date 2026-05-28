@@ -62,6 +62,7 @@ class CustomParentContainer extends StatelessWidget {
                       textStyle: TextStyle(
                         fontSize: titleFontSize,
                         fontWeight: FontWeight.w600,
+                         letterSpacing: 0,
                         color: AppColors.textDark,
                       ),
                     ),
@@ -75,6 +76,7 @@ class CustomParentContainer extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: AppColors.textDark,
+                         letterSpacing: 0,
                         fontWeight: FontWeight.w400,
                         fontSize: seeAllFontSize,
                       ),
