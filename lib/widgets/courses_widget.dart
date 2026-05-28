@@ -68,16 +68,20 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xFFdcfce6),
+                              color: widget.item.status?.toLowerCase() == 'pending' 
+                                  ? const Color(0xFFfff9c2)  // Yellow for pending
+                                  : const Color(0xFFdcfce6), // Green for active
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
                               StatusMapper.mapCourseStatus(widget.item.status),
                               style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
-                                  color: Color(0xFF016630),
+                                textStyle: TextStyle(
+                                  color: widget.item.status?.toLowerCase() == 'pending'
+                                      ? const Color(0xFF894b00)  // Dark brown text for pending
+                                      : const Color(0xFF016630), // Green text for active
                                   fontSize: 12,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w700,
                                   height: 1.0,
                                   letterSpacing: 0,
                                 ),
@@ -186,45 +190,98 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                           ],
                         ),
                         Gap(26),
-                        //button
-                        SizedBox(
-                          width: double.infinity,
-                          height: buttonHeight,
-                          child: ElevatedButton.icon(
-                            onPressed: () => Get.offAll(() => CourseVideo(item: widget.item)),
-                            icon: SvgPicture.asset(
-                              'assets/support/play.svg',
-                              colorFilter: const ColorFilter.mode(
-                                Color(0xFFf85604),
-                                BlendMode.srcIn,
-                              ),
-                              width: isSmall ? 20 : (isMedium ? 22 : 26),
-                              height: isSmall ? 20 : (isMedium ? 22 : 26),
-                            ),
-                            label: Text(
-                              'Watch Recorded Video',
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.inter(
-                                textStyle: TextStyle(
-                                  color: const Color(0xFFf85604),
-                                  fontSize: buttonFontSize,
-                                  fontWeight: FontWeight.w700,
+                        // Show pending message or watch button based on status
+                        widget.item.status?.toLowerCase() == 'pending'
+                            ? Container(
+                                padding: EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFEFF6FF),
+                                  border: Border(
+                                    left: BorderSide(
+                                      color: const Color(0xFF3B82F6),
+                                      width: 4,
+                                    ),
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF3B82F6),
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          'i',
+                                          style: GoogleFonts.inter(
+                                            textStyle: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Gap(12),
+                                    Expanded(
+                                      child: Text(
+                                        'Your enrollment is being processed. We\'ll notify you once approved.',
+                                        style: GoogleFonts.inter(
+                                          textStyle: const TextStyle(
+                                            color: Color(0xFF1447e5),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            height: 1.5,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : SizedBox(
+                                width: double.infinity,
+                                height: buttonHeight,
+                                child: ElevatedButton.icon(
+                                  onPressed: () => Get.offAll(() => CourseVideo(item: widget.item)),
+                                  icon: SvgPicture.asset(
+                                    'assets/support/play.svg',
+                                    colorFilter: const ColorFilter.mode(
+                                      Color(0xFFf85604),
+                                      BlendMode.srcIn,
+                                    ),
+                                    width: isSmall ? 20 : (isMedium ? 22 : 26),
+                                    height: isSmall ? 20 : (isMedium ? 22 : 26),
+                                  ),
+                                  label: Text(
+                                    'Watch Recorded Video',
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        color: const Color(0xFFf85604),
+                                        fontSize: buttonFontSize,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFFFFFFFF),
+                                    side: const BorderSide(
+                                      color: Color(0xFFf85604),
+                                      width: 1,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFFFFFF),
-                              side: const BorderSide(
-                                color: Color(0xFFf85604),
-                                width: 1,
-                              ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),

@@ -13,6 +13,7 @@ import 'package:codeit_app/controller/suggestion_controller.dart';
 import 'package:codeit_app/controller/support_controller.dart';
 import 'package:codeit_app/controller/terms_controller.dart';
 import 'package:codeit_app/controller/ticket_controller.dart';
+import 'package:codeit_app/controller/upcoming%20course/admission_controller.dart';
 import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart';
 import 'package:codeit_app/controller/verify_otp_controller.dart';
 import 'package:codeit_app/controller/video_player_controller.dart';
@@ -33,6 +34,7 @@ class ControllerBinding extends Bindings {
     Get.put<UpcomingController>(UpcomingController(), permanent: true);
     Get.put<RecordedController>(RecordedController(), permanent: true);
     Get.put<CoursesController>(CoursesController(), permanent: true);
+    Get.put<AdmissionController>(AdmissionController(), permanent: true);
     Get.put<EmailCertificatesController>(EmailCertificatesController(), permanent: true);
     Get.put<LinkController>(LinkController(), permanent: true);
     Get.put<NotesController>(NotesController(), permanent: true);

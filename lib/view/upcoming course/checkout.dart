@@ -1,6 +1,7 @@
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/controller/terms_controller.dart';
 import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart';
+import 'package:codeit_app/controller/upcoming%20course/admission_controller.dart';
 import 'package:codeit_app/view/upcoming%20course/upcoming_classes_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
@@ -11,6 +12,8 @@ import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart' as image_picker;
+import 'dart:io';
 
 import '../home_view.dart';
 
@@ -24,8 +27,10 @@ class Checkout extends StatefulWidget {
 class _CheckoutState extends State<Checkout> {
   final UpcomingController upcomingController = Get.find<UpcomingController>();
   final AuthController authController = Get.find<AuthController>();
+  final AdmissionController admissionController = Get.find<AdmissionController>();
   bool _agreeToTerms = false;
   final TermsController termsController = Get.find<TermsController>();
+  String? _selectedFilePath;
 
   @override
   void initState() {
@@ -462,59 +467,97 @@ class _CheckoutState extends State<Checkout> {
                               ],
                             ),
                             Gap(20),
-                            DottedBorder(
-                              options: const RoundedRectDottedBorderOptions(
-                                radius: Radius.circular(20),
-                                color: Color(0xFF99a1af),
-                                strokeWidth: 3,
-                                dashPattern: [8, 4],
-                              ),
-                              child: Container(
-                                width: double.infinity,
-                                height: 200,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color(0xFF99a1af),
-                                    width: 3,
-                                    style: BorderStyle.none,
-                                  ),
-                                  borderRadius: BorderRadius.circular(20),
+                            GestureDetector(
+                              onTap: _pickFromGallery,
+                              child: DottedBorder(
+                                options: const RoundedRectDottedBorderOptions(
+                                  radius: Radius.circular(20),
+                                  color: Color(0xFF99a1af),
+                                  strokeWidth: 3,
+                                  dashPattern: [8, 4],
                                 ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/support/upload.svg',
-                                      width: 48,
-                                      height: 48,
-                                      colorFilter: const ColorFilter.mode(
-                                        Color(0xFF6a7282),
-                                        BlendMode.srcIn,
-                                      ),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: const Color(0xFF99a1af),
+                                      width: 3,
+                                      style: BorderStyle.none,
                                     ),
-                                    const Gap(5),
-                                    Text(
-                                      'Click to upload receipt',
-                                      style: GoogleFonts.inter(
-                                        textStyle: TextStyle(
-                                          color: const Color(0xFF4a5565),
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 18,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: _selectedFilePath != null
+                                      ? Stack(
+                                          alignment: Alignment.topRight,
+                                          children: [
+                                            Image.file(
+                                              File(_selectedFilePath!),
+                                              fit: BoxFit.cover,
+                                              width: double.infinity,
+                                              height: double.infinity,
+                                            ),
+                                            Positioned(
+                                              top: 8,
+                                              right: 8,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    _selectedFilePath = null;
+                                                  });
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.red,
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  padding: const EdgeInsets.all(4),
+                                                  child: const Icon(
+                                                    Icons.close,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      : Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                              'assets/support/upload.svg',
+                                              width: 48,
+                                              height: 48,
+                                              colorFilter: const ColorFilter.mode(
+                                                Color(0xFF6a7282),
+                                                BlendMode.srcIn,
+                                              ),
+                                            ),
+                                            const Gap(5),
+                                            Text(
+                                              'Click to upload receipt',
+                                              style: GoogleFonts.inter(
+                                                textStyle: TextStyle(
+                                                  color: const Color(0xFF4a5565),
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 18,
+                                                ),
+                                              ),
+                                            ),
+                                            const Gap(5),
+                                            Text(
+                                              '(PNG, JPG • Max 2MB)',
+                                              style: GoogleFonts.inter(
+                                                textStyle: TextStyle(
+                                                  color: const Color(0xFF4a5565),
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                    ),
-                                    const Gap(5),
-                                    Text(
-                                      '(PNG, JPG • Max 2MB)',
-                                      style: GoogleFonts.inter(
-                                        textStyle: TextStyle(
-                                          color: const Color(0xFF4a5565),
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
                                 ),
                               ),
                             ),
@@ -572,7 +615,23 @@ class _CheckoutState extends State<Checkout> {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: _agreeToTerms ? () {} : null,
+                                onPressed: _agreeToTerms ? () {
+                                  if (_selectedFilePath == null) {
+                                    Get.snackbar(
+                                      'Error',
+                                      'Please upload payment receipt',
+                                      snackPosition: SnackPosition.TOP,
+                                      backgroundColor: Colors.red,
+                                      colorText: Colors.white,
+                                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                      borderRadius: 12,
+                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                      dismissDirection: DismissDirection.up,
+                                    );
+                                  } else {
+                                    _confirmPayment();
+                                  }
+                                } : null,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFFf85604),
                                   disabledBackgroundColor: Colors.grey.shade400,
@@ -645,6 +704,129 @@ class _CheckoutState extends State<Checkout> {
         },
       ),
     );
+  }
+
+  Future<void> _pickFromGallery() async {
+    try {
+      final picker = image_picker.ImagePicker();
+      final image = await picker.pickImage(source: image_picker.ImageSource.gallery);
+      
+      if (image != null) {
+        final int fileSizeInBytes = await image.length();
+        final double fileSizeInMB = fileSizeInBytes / (1024 * 1024);
+        
+        // Validate file size (max 2MB)
+        if (fileSizeInMB > 2) {
+          Get.snackbar(
+            'Error',
+            'File size must be less than 2MB',
+            snackPosition: SnackPosition.TOP,
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            borderRadius: 12,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            dismissDirection: DismissDirection.up,
+          );
+          return;
+        }
+        
+        setState(() {
+          _selectedFilePath = image.path;
+        });
+        
+        Get.snackbar(
+          'Success',
+          'File uploaded successfully',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          borderRadius: 12,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          dismissDirection: DismissDirection.up,
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Error picking image: $e',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        borderRadius: 12,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        dismissDirection: DismissDirection.up,
+      );
+    }
+  }
+
+  Future<void> _confirmPayment() async {
+    try {
+      if (_selectedFilePath == null) {
+        Get.snackbar(
+          'Error',
+          'Please upload payment receipt',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          borderRadius: 12,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          dismissDirection: DismissDirection.up,
+        );
+        return;
+      }
+
+      // Get the upcoming ID from the selected course (NOT courseId)
+      final selectedCourseData = upcomingController.selectedCourse.value;
+      print("DEBUG: selectedCourse -> $selectedCourseData");
+      
+      final upcomingId = selectedCourseData?.upcomingId;
+      print("DEBUG: upcomingId extracted -> $upcomingId");
+      
+      if (upcomingId == null) {
+        Get.snackbar(
+          'Error',
+          'Course information not available. Please select a course.',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          borderRadius: 12,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          dismissDirection: DismissDirection.up,
+        );
+        return;
+      }
+
+      // Submit admission with payment receipt using upcomingId
+      await admissionController.submitAdmissionWithPayment(
+        upcomingId,
+        _selectedFilePath!,
+        _agreeToTerms,
+      );
+
+      // Navigate to home after successful submission
+      if (admissionController.submitadmission.value.success == true) {
+        Future.delayed(const Duration(seconds: 2), () {
+          Get.offAll(() => HomeView());
+        });
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Error confirming payment: $e',
+        snackPosition: SnackPosition.TOP,
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        borderRadius: 12,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        dismissDirection: DismissDirection.up,
+      );
+    }
   }
 
   void _showTermsAndConditions(BuildContext context) {

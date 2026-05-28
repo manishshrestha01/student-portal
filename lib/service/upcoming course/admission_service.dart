@@ -1,0 +1,48 @@
+import 'package:dio/dio.dart';
+import 'package:codeit_app/utils/dio_connector.dart';
+import 'package:codeit_app/controller/storage_controller.dart';
+
+class AdmissionService {
+  static Future<Response> fetchAdmission(dynamic id) async {
+    try {
+      var token = StorageController().getToken();
+      if (token == null) {
+        throw Exception('No token available');
+      }
+      var response = await DioConnector.dio.get("online-admission/$id");
+      return response;
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        StorageController().deleteToken();
+      }
+      rethrow;
+    }
+  }
+
+  static Future<Response> submitAdmission(dynamic id, String filePath, bool terms) async {
+    try {
+      var token = StorageController().getToken();
+      if (token == null) {
+        throw Exception('No token available');
+      }
+
+      // Create FormData for multipart upload
+      final formData = FormData.fromMap({
+        'payment': await MultipartFile.fromFile(filePath),
+        'terms': terms ? '1' : '0',
+      });
+
+      var response = await DioConnector.dio.post(
+        "online-admission/$id",
+        data: formData,
+      );
+      return response;
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        StorageController().deleteToken();
+      }
+      rethrow;
+    }
+  }
+}
+
