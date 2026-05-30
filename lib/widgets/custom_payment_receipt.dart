@@ -55,7 +55,7 @@ class CustomPaymentReceipt extends StatelessWidget {
                     "Amount: Rs.$amount | Date: $date",
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
-                        color: const Color(0xFF4a5565),
+                        color: AppColors.textSecondary,
                         fontWeight: FontWeight.w500,
                         fontSize: 14,
                       ),

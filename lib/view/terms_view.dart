@@ -34,7 +34,7 @@ class _TermsViewState extends State<TermsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor:  const Color(0xFFf9fafb),
+      backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {
@@ -153,7 +153,7 @@ class _TermsViewState extends State<TermsView> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -162,7 +162,7 @@ class _TermsViewState extends State<TermsView> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
+                    color: AppColors.textMuted,
                     fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
@@ -174,7 +174,7 @@ class _TermsViewState extends State<TermsView> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          color: AppColors.iconMuted,
           size: isSmall ? 18 : 20,
         ),
         const Gap(7),
@@ -182,9 +182,9 @@ class _TermsViewState extends State<TermsView> {
           'Terms & Conditions',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
+              color: AppColors.textSecondary,
               fontSize: isSmall ? 13 : 15,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

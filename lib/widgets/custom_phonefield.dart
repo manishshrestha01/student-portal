@@ -97,7 +97,7 @@ class CustomPhoneField extends StatelessWidget {
           dropdownIcon: Icon(
             Icons.arrow_drop_down,
             size: 18,
-            color: Colors.black54,
+            color: AppColors.textLight,
           ),
           decoration: InputDecoration(
             hintText: 'Enter number',

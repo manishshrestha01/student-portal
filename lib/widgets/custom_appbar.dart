@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,7 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           top: 10,
           bottom: 10,
         ),
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: AppColors.white,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         title: Image.asset(
@@ -42,7 +43,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               width: 16.66666603088379,
               height: 16.66666603088379,
               colorFilter: const ColorFilter.mode(
-                Color(0xFFFFFFFF),
+                AppColors.white,
                 BlendMode.srcIn,
               ),
             ),
@@ -53,7 +54,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 firstName.isNotEmpty ? firstName : "Name",
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.white,
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
                   ),
@@ -61,14 +62,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               );
             }),
             style: TextButton.styleFrom(
-              backgroundColor: const Color(0xFFf85604),
+              backgroundColor: AppColors.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
           ),
         ],
-        shape: Border(bottom: BorderSide(color: Colors.black, width: 0.5)),
+        shape: Border(bottom: BorderSide(color: AppColors.black, width: 0.5)),
     );
       }
 

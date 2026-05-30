@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart';
 import 'package:codeit_app/view/upcoming%20course/upcoming_widget.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
@@ -30,7 +31,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFf9fafb),
+      backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -75,7 +76,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
                           'Next Batches Starting Soon',
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
-                              color: Color(0xFFf85604),
+                              color: AppColors.primary,
                               fontWeight: FontWeight.w500,
                               fontSize: 16,
                             ),
@@ -119,7 +120,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
-                            color: const Color(0xFF717787),
+                            color: AppColors.textMuted,
                             fontWeight: FontWeight.w400,
                             fontStyle: FontStyle.italic,
                             fontSize: 14,
@@ -158,7 +159,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -167,7 +168,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
+                    color: AppColors.textMuted,
                     fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
@@ -179,7 +180,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          color: AppColors.iconMuted,
           size: isSmall ? 18 : 20,
         ),
         const Gap(7),
@@ -187,9 +188,9 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
           'Upcoming Classes',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
+              color: AppColors.textSecondary,
               fontSize: isSmall ? 13 : 15,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

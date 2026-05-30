@@ -55,7 +55,7 @@ class _SecurityViewState extends State<SecurityView> {
   Widget build(BuildContext context) {
     // ... rest of build unchanged, just replace onChanged in both switches:
     return Scaffold(
-      backgroundColor: const Color(0xFFf9fafb),
+      backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -171,7 +171,7 @@ class _SecurityViewState extends State<SecurityView> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -180,7 +180,7 @@ class _SecurityViewState extends State<SecurityView> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
+                    color: AppColors.textMuted,
                     fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
@@ -192,7 +192,7 @@ class _SecurityViewState extends State<SecurityView> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          color: AppColors.iconMuted,
           size: isSmall ? 18 : 20,
         ),
         const Gap(7),
@@ -200,9 +200,9 @@ class _SecurityViewState extends State<SecurityView> {
           'Security',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
+              color: AppColors.textSecondary,
               fontSize: isSmall ? 13 : 15,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

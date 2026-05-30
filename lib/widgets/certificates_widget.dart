@@ -38,7 +38,7 @@ class CertificatesWidget extends StatelessWidget {
           padding: EdgeInsets.all(padding),
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: const Color(0xFFFFFFFF)),
+            border: Border.all(color: AppColors.white),
             borderRadius: BorderRadius.circular(borderRadius),
             boxShadow: [
               BoxShadow(
@@ -61,7 +61,7 @@ class CertificatesWidget extends StatelessWidget {
                     height: iconSize,
                     colorFilter: const ColorFilter.mode(
                       // Color(0xFF9A1CB9), /purple in dashboard
-                      Color(0xFFf85604), // orange in ui
+                      AppColors.primary,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -94,7 +94,7 @@ class CertificatesWidget extends StatelessWidget {
                     width: iconSizeSmall,
                     height: iconSizeSmall,
                     colorFilter: const ColorFilter.mode(
-                      Color(0xB3000000),
+                        AppColors.textNeutral,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -107,7 +107,7 @@ class CertificatesWidget extends StatelessWidget {
                           'Issued to',
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
-                              color: const Color(0xB3000000),
+                              color: AppColors.textNeutral,
                               fontSize: labelFontSize,
                               fontWeight: FontWeight.w500,
                             ),
@@ -119,7 +119,7 @@ class CertificatesWidget extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
-                              color: const Color(0xFF000000),
+                              color: AppColors.textDark,
                               fontSize: labelFontSize,
                               fontWeight: FontWeight.w500,
                             ),
@@ -140,7 +140,7 @@ class CertificatesWidget extends StatelessWidget {
                     width: iconSizeSmall,
                     height: iconSizeSmall,
                     colorFilter: const ColorFilter.mode(
-                      Color(0xB3000000),
+                      AppColors.textNeutral,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -153,7 +153,7 @@ class CertificatesWidget extends StatelessWidget {
                           'Date Completed',
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
-                              color: const Color(0xB3000000),
+                              color: AppColors.textNeutral,
                               fontSize: labelFontSize,
                               fontWeight: FontWeight.w500,
                             ),
@@ -165,7 +165,7 @@ class CertificatesWidget extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
-                              color: const Color(0xFF000000),
+                              color: AppColors.textDark,
                               fontSize: labelFontSize,
                               fontWeight: FontWeight.w500,
                             ),
@@ -190,7 +190,7 @@ class CertificatesWidget extends StatelessWidget {
                     icon: SvgPicture.asset(
                       'assets/support/download.svg',
                       colorFilter: const ColorFilter.mode(
-                        Color(0xFFf85604),
+                        AppColors.primary,
                         BlendMode.srcIn,
                       ),
                       width: isSmall ? 20 : (isMedium ? 22 : 26),
@@ -204,15 +204,15 @@ class CertificatesWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: const Color(0xFFf85604),
+                          color: AppColors.primary,
                           fontSize: buttonFontSize,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFFFFFF),
-                      side: const BorderSide(color: Color(0xFFf85604), width: 1),
+                      backgroundColor: AppColors.white,
+                      side: const BorderSide(color: AppColors.primary, width: 1),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

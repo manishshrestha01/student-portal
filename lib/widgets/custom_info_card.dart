@@ -26,11 +26,11 @@ class InfoCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Color(0xFFF9FAFB),
+          color: AppColors.cannotedit,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: const Color.fromRGBO(0, 0, 0, 0.25),
+              color: AppColors.shadow,
               blurRadius: 1,
               // offset: Offset(0, 4),
               spreadRadius: 0,
@@ -72,7 +72,7 @@ class InfoCard extends StatelessWidget {
                         fontSize: 25,
                          letterSpacing: 0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        color: AppColors.textDark,
                       ),
                     ),
                   ),

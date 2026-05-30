@@ -35,7 +35,7 @@ class _TicketViewState extends State<TicketView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {
@@ -68,7 +68,7 @@ class _TicketViewState extends State<TicketView> {
               textAlign: TextAlign.center,
               style: GoogleFonts.inter(
                 textStyle: const TextStyle(
-                  color: Color(0xFF4B4B4B),
+                  color: AppColors.textMuted,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
@@ -158,7 +158,7 @@ class _TicketViewState extends State<TicketView> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textLight,
                   BlendMode.srcIn,
                 ),
               ),
@@ -167,7 +167,7 @@ class _TicketViewState extends State<TicketView> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
+                    color: AppColors.textLight,
                     fontSize: isMobile ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
@@ -179,7 +179,7 @@ class _TicketViewState extends State<TicketView> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          color: AppColors.textDark,
           size: isMobile ? 18 : 20,
         ),
         const Gap(7),
@@ -189,7 +189,7 @@ class _TicketViewState extends State<TicketView> {
             'Support',
             style: GoogleFonts.inter(
               textStyle: TextStyle(
-                color: const Color(0xFF000000),
+                color: AppColors.textDark,
                 fontSize: isMobile ? 13 : 15,
                 fontWeight: FontWeight.w400,
               ),
@@ -199,7 +199,7 @@ class _TicketViewState extends State<TicketView> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          color: AppColors.textDark,
           size: isMobile ? 18 : 20,
         ),
         const Gap(7),
@@ -207,7 +207,7 @@ class _TicketViewState extends State<TicketView> {
           'My Tickets',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
+              color: AppColors.textDark,
               fontSize: isMobile ? 13 : 15,
               fontWeight: FontWeight.w400,
             ),

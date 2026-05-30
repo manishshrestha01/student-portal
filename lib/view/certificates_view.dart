@@ -32,7 +32,7 @@ class _CertificatesViewState extends State<CertificatesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor: const Color(0xFFF9FAFB),
+    backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -45,8 +45,6 @@ class _CertificatesViewState extends State<CertificatesView> {
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
           final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
           final double titleFontSize = isSmall ? 20 : (isMedium ? 22 : 25);
-          final double breadcrumbFontSize = isSmall ? 12 : (isMedium ? 13 : 15);
-          
           return Obx(() {
             if (certificateController.isLoading.value) {
               return const Center(child: CircularProgressIndicator());
@@ -66,7 +64,7 @@ class _CertificatesViewState extends State<CertificatesView> {
                     Gap(verticalGap),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: _buildBreadcrumb(breadcrumbFontSize),
+                      child: _buildBreadcrumb(isSmall),
                     ),
                     Gap(verticalGap),
                     Text(
@@ -100,7 +98,7 @@ class _CertificatesViewState extends State<CertificatesView> {
     );
   }
 
-  Widget _buildBreadcrumb(double fontSize) {
+  Widget _buildBreadcrumb(bool isSmall) {
     return Row(
       children: [
         GestureDetector(
@@ -112,7 +110,7 @@ class _CertificatesViewState extends State<CertificatesView> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -121,8 +119,8 @@ class _CertificatesViewState extends State<CertificatesView> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
-                    fontSize: fontSize,
+                    color: AppColors.textMuted,
+                    fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -131,19 +129,19 @@ class _CertificatesViewState extends State<CertificatesView> {
           ),
         ),
         const Gap(7),
-        const Icon(
+        Icon(
           Icons.chevron_right,
-          color: Color.fromRGBO(0, 0, 0, 0.9),
-          size: 20,
+          color: AppColors.iconMuted,
+          size: isSmall ? 18 : 20,
         ),
         const Gap(7),
         Text(
           'Certificates',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
-              fontSize: fontSize,
-              fontWeight: FontWeight.w400,
+              color: AppColors.textSecondary,
+              fontSize: isSmall ? 13 : 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

@@ -26,63 +26,73 @@ class ReceiptView extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Gap(22),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: _buildBreadcrumb(),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final double screenWidth = constraints.maxWidth;
+          final bool isSmall = screenWidth < 390;
+          final bool isMedium = screenWidth >= 390 && screenWidth < 768;
+          final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
+          final double verticalGap = isSmall ? 22 : (isMedium ? 24 : 28);
+
+          return SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Gap(verticalGap),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: _buildBreadcrumb(isSmall),
+                  ),
+                  Gap(verticalGap),
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    if (controller.hasError.value) {
+                      return Center(
+                        child: Column(
+                          children: [
+                            Text(
+                              controller.errorMessage.value,
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                            const Gap(12),
+                            ElevatedButton(
+                              onPressed: controller.fetchReceipts,
+                              child: const Text("Retry"),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+
+                    if (controller.receipts.isEmpty) {
+                      return const Center(child: Text("No receipts found."));
+                    }
+
+                    final filtered = controller.receipts
+                        .where((r) => r.receiptId == receiptId)
+                        .toList();
+
+                    if (filtered.isEmpty) {
+                      return const Center(child: Text("Receipt not found."));
+                    }
+
+                    return Column(
+                      children: filtered
+                          .map((Datum receipt) => _buildReceiptCard(receipt))
+                          .toList(),
+                    );
+                  }),
+                  Gap(verticalGap),
+                ],
               ),
-              const Gap(22),
-              Obx(() {
-                if (controller.isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-
-                if (controller.hasError.value) {
-                  return Center(
-                    child: Column(
-                      children: [
-                        Text(
-                          controller.errorMessage.value,
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                        const Gap(12),
-                        ElevatedButton(
-                          onPressed: controller.fetchReceipts,
-                          child: const Text("Retry"),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-
-                if (controller.receipts.isEmpty) {
-                  return const Center(child: Text("No receipts found."));
-                }
-
-                final filtered = controller.receipts
-                    .where((r) => r.receiptId == receiptId)
-                    .toList();
-
-                if (filtered.isEmpty) {
-                  return const Center(child: Text("Receipt not found."));
-                }
-
-                return Column(
-                  children: filtered.map((Datum receipt) {
-                    return _buildReceiptCard(receipt);
-                  }).toList(),
-                );
-              }),
-              const Gap(36),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -109,7 +119,7 @@ class ReceiptView extends StatelessWidget {
             ),
             style: TextButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 18),
-              backgroundColor: const Color(0xFFf85604),
+              backgroundColor: AppColors.primary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -128,7 +138,7 @@ class ReceiptView extends StatelessWidget {
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               color: Colors.white,
-              border: Border.all(color: const Color(0xFFFFFFFF)),
+              border: Border.all(color: AppColors.white),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -277,7 +287,7 @@ class ReceiptView extends StatelessWidget {
                     ),
                     shadows: [
                       BoxShadow(
-                        color: Color(0xFFf85604),
+                        color: AppColors.primary,
                         blurRadius: 0,
                         offset: Offset(0, 6),
                       ),
@@ -347,7 +357,7 @@ class ReceiptView extends StatelessWidget {
     );
   }
 
-  Widget _buildBreadcrumb() {
+  Widget _buildBreadcrumb(bool isSmall) {
     return Row(
       children: [
         GestureDetector(
@@ -359,7 +369,7 @@ class ReceiptView extends StatelessWidget {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -367,9 +377,9 @@ class ReceiptView extends StatelessWidget {
               Text(
                 'Home',
                 style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 0.7),
-                    fontSize: 15,
+                  textStyle: TextStyle(
+                    color: AppColors.textMuted,
+                    fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -378,10 +388,10 @@ class ReceiptView extends StatelessWidget {
           ),
         ),
         const Gap(7),
-        const Icon(
+        Icon(
           Icons.chevron_right,
-          color: Color.fromRGBO(0, 0, 0, 0.9),
-          size: 20,
+          color: AppColors.iconMuted,
+          size: isSmall ? 18 : 20,
         ),
         const Gap(7),
         GestureDetector(
@@ -389,28 +399,28 @@ class ReceiptView extends StatelessWidget {
           child: Text(
             'Payment Receipts',
             style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                color: Color(0xFF000000),
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
+              textStyle: TextStyle(
+                color: AppColors.textMuted,
+                fontSize: isSmall ? 13 : 15,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
         ),
         const Gap(7),
-        const Icon(
+        Icon(
           Icons.chevron_right,
-          color: Color.fromRGBO(0, 0, 0, 0.9),
-          size: 20,
+          color: AppColors.iconMuted,
+          size: isSmall ? 18 : 20,
         ),
         const Gap(7),
         Text(
           'Receipts',
           style: GoogleFonts.inter(
-            textStyle: const TextStyle(
-              color: Color(0xFF000000),
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
+            textStyle: TextStyle(
+              color: AppColors.textSecondary,
+              fontSize: isSmall ? 13 : 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

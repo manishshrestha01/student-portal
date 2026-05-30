@@ -26,7 +26,7 @@ class _SupportViewState extends State<SupportView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFf9fafb),
+      backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -80,7 +80,7 @@ class _SupportViewState extends State<SupportView> {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
-                            color: Color(0xFF4a5565),
+                            color: AppColors.textSecondary,
                             fontSize: isSmall ? 12 : 16,
                             fontWeight: FontWeight.w500,
                             letterSpacing: 0,
@@ -151,7 +151,7 @@ class _SupportViewState extends State<SupportView> {
                           width: 23.83,
                           height: 21.67,
                           colorFilter: const ColorFilter.mode(
-                            Color(0xFFFFFFFF),
+                            AppColors.white,
                             BlendMode.srcIn,
                           ),
                         ),
@@ -159,14 +159,14 @@ class _SupportViewState extends State<SupportView> {
                           'View My Existing Tickets',
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
-                              color: Colors.white,
+                              color: AppColors.white,
                               fontSize: isSmall ? 18 : 20,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFF6900),
+                          backgroundColor: AppColors.primary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -196,7 +196,7 @@ class _SupportViewState extends State<SupportView> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -205,7 +205,7 @@ class _SupportViewState extends State<SupportView> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
+                    color: AppColors.textMuted,
                     fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
@@ -217,7 +217,7 @@ class _SupportViewState extends State<SupportView> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          color: AppColors.iconMuted,
           size: isSmall ? 18 : 20,
         ),
         const Gap(7),
@@ -225,9 +225,9 @@ class _SupportViewState extends State<SupportView> {
           'Support',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
+              color: AppColors.textSecondary,
               fontSize: isSmall ? 13 : 15,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
@@ -252,10 +252,10 @@ class _SupportViewState extends State<SupportView> {
           width: cardWidth,
           height: cardHeight,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.white,
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color: AppColors.black,
               width: 0.5,
             ),
             boxShadow: [
@@ -296,7 +296,7 @@ class _SupportViewState extends State<SupportView> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                         color: Color(0xFF4a5565),
+                          color: AppColors.textTertiary,
                           fontSize: isSmall ? 13 : 14,
                           fontWeight: FontWeight.w500,
                           letterSpacing: 0
@@ -328,7 +328,7 @@ class _SupportViewState extends State<SupportView> {
                         'Create Ticket',
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
-                            color: const Color(0xFFFF6900),
+                            color: AppColors.orangeAccent,
                             fontSize: isSmall ? 15 : 16,
                             fontWeight: FontWeight.w600,
                           ),
@@ -338,7 +338,7 @@ class _SupportViewState extends State<SupportView> {
                       const Icon(
                         Icons.arrow_forward,
                         size: 16,
-                        color: Color(0xFFFF6900),
+                        color: AppColors.orangeAccent,
                       ),
                     ],
                   ),

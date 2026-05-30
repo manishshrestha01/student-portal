@@ -1,4 +1,5 @@
 import 'package:codeit_app/model/course_video_model.dart';
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
@@ -88,7 +89,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       ),
       builder: (context, player) {
         return Scaffold(
-          backgroundColor: const Color(0xFFFFFFFF),
+          backgroundColor: AppColors.white,
           appBar: CustomAppBar(),
           drawer: CustomDrawer(),
           body: LayoutBuilder(
@@ -102,9 +103,6 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                   ? 16
                   : (isMedium ? 24 : 32);
               final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
-              final double breadcrumbFontSize = isSmall
-                  ? 12
-                  : (isMedium ? 13 : 15);
               final double videoTitleFontSize = isSmall
                   ? 18
                   : (isMedium ? 20 : 22);
@@ -122,7 +120,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                       Gap(verticalGap),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
-                        child: _buildBreadcrumb(breadcrumbFontSize),
+                        child: _buildBreadcrumb(isSmall),
                       ),
                       Gap(verticalGap),
                       // YouTube Video Player
@@ -164,7 +162,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                   width: 20,
                                   height: 20,
                                   colorFilter: const ColorFilter.mode(
-                                    Color.fromRGBO(0, 0, 0, 0.6),
+                                    AppColors.black70,
                                     BlendMode.srcIn,
                                   ),
                                 ),
@@ -173,7 +171,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                   "Posted ${currentVideo.posted}",
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
-                                      color: Color.fromRGBO(0, 0, 0, 0.6),
+                                      color: AppColors.black70,
                                       fontSize: bodyFontSize,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -209,7 +207,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                   width: 30.6,
                                   height: 21.6,
                                   colorFilter: const ColorFilter.mode(
-                                    Color(0xFFFF6900),
+                                    AppColors.orangeAccent,
                                     BlendMode.srcIn,
                                   ),
                                 ),
@@ -218,7 +216,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                   "More Class Videos",
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
-                                      color: Colors.black,
+                                      color: AppColors.textDark,
                                       fontSize: subtitleFontSize,
                                       fontWeight: FontWeight.w700,
                                       height: 1.0,
@@ -235,7 +233,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                       vertical: 4,
                                     ),
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
+                                      border: Border.all(color: AppColors.textDark),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
@@ -277,7 +275,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     );
   }
 
-  Widget _buildBreadcrumb(double fontSize) {
+  Widget _buildBreadcrumb(bool isSmall) {
     return Row(
       children: [
         GestureDetector(
@@ -289,7 +287,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -298,8 +296,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
-                    fontSize: fontSize,
+                    color: AppColors.textMuted,
+                    fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -312,29 +310,29 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
           onTap: () => Get.offAll(() => CourseView()),
           child: Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.chevron_right,
-                color: Color.fromRGBO(0, 0, 0, 0.9),
-                size: 20,
+                color: AppColors.iconMuted,
+                size: isSmall ? 18 : 20,
               ),
               const Gap(7),
               Text(
                 'My Courses',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color(0xFF000000),
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.w400,
+                    color: AppColors.textMuted,
+                    fontSize: isSmall ? 13 : 15,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
             ],
           ),
         ),
-        const Icon(
+        Icon(
           Icons.chevron_right,
-          color: Color.fromRGBO(0, 0, 0, 0.9),
-          size: 20,
+          color: AppColors.iconMuted,
+          size: isSmall ? 18 : 20,
         ),
         const Gap(7),
         GestureDetector(
@@ -343,9 +341,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
             'Class Videos',
             style: GoogleFonts.inter(
               textStyle: TextStyle(
-                color: const Color(0xFF000000),
-                fontSize: fontSize,
-                fontWeight: FontWeight.w400,
+                color: AppColors.textSecondary,
+                fontSize: isSmall ? 13 : 15,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),

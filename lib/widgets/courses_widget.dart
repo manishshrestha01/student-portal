@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/courses_model.dart';
 import 'package:codeit_app/view/course_video.dart';
 import 'package:codeit_app/utils/status_mapper.dart';
@@ -33,11 +34,11 @@ class _CoursesWidgetState extends State<CoursesWidget> {
               width: 390,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.boxColor,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color.fromRGBO(0, 0, 0, 0.25),
+                    color: AppColors.shadow,
                     blurRadius: 2,
                     // offset: Offset(0, 4),
                     spreadRadius: 0,
@@ -68,18 +69,18 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: widget.item.status?.toLowerCase() == 'pending' 
-                                  ? const Color(0xFFfff9c2)  // Yellow for pending
-                                  : const Color(0xFFdcfce6), // Green for active
+                                color: widget.item.status?.toLowerCase() == 'pending'
+                                  ? const Color(0xFFfff9c2)
+                                  : const Color(0xFFdcfce6),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(
                               StatusMapper.mapCourseStatus(widget.item.status),
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
-                                  color: widget.item.status?.toLowerCase() == 'pending'
-                                      ? const Color(0xFF894b00)  // Dark brown text for pending
-                                      : const Color(0xFF016630), // Green text for active
+                                    color: widget.item.status?.toLowerCase() == 'pending'
+                                      ? const Color(0xFF894b00)
+                                      : const Color(0xFF016630),
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,
                                   height: 1.0,
@@ -117,7 +118,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               width: 22,
                               height: 22,
                               colorFilter: const ColorFilter.mode(
-                                Color(0xFFf85604),
+                                AppColors.primary,
                                 BlendMode.srcIn,
                               ),
                             ),
@@ -128,9 +129,9 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.inter(
                                   textStyle: const TextStyle(
-                                    color: Colors.black,
+                                    color: AppColors.textSecondary,
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                     height: 1.0,
                                     letterSpacing: 0,
                                   ),
@@ -147,7 +148,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               width: 18,
                               height: 18,
                               colorFilter: const ColorFilter.mode(
-                                 Color(0xFFf85604),
+                                 AppColors.primary,
                                 BlendMode.srcIn,
                               ),
                             ),
@@ -156,9 +157,9 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               "${widget.item.lessons} Lessons",
                               style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
-                                  color: Colors.black,
+                                  color: AppColors.textSecondary,
                                   fontSize: 15,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                   height: 1.0,
                                   letterSpacing: 0,
                                 ),
@@ -170,7 +171,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               width: 18,
                               height: 18,
                               colorFilter: const ColorFilter.mode(
-                                 Color(0xFFf85604),
+                                 AppColors.primary,
                                 BlendMode.srcIn,
                               ),
                             ),
@@ -179,9 +180,9 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               "${widget.item.duration}",
                               style: GoogleFonts.inter(
                                 textStyle: const TextStyle(
-                                  color: Colors.black,
+                                  color: AppColors.textSecondary,
                                   fontSize: 15,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                   height: 1.0,
                                   letterSpacing: 0,
                                 ),
@@ -219,7 +220,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                                           'i',
                                           style: GoogleFonts.inter(
                                             textStyle: const TextStyle(
-                                              color: Colors.white,
+                                              color: AppColors.white,
                                               fontSize: 14,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -233,7 +234,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                                         'Your enrollment is being processed. We\'ll notify you once approved.',
                                         style: GoogleFonts.inter(
                                           textStyle: const TextStyle(
-                                            color: Color(0xFF1447e5),
+                                            color: const Color(0xFF1447e5),
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
                                             height: 1.5,
@@ -252,7 +253,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                                   icon: SvgPicture.asset(
                                     'assets/support/play.svg',
                                     colorFilter: const ColorFilter.mode(
-                                      Color(0xFFf85604),
+                                      AppColors.primary,
                                       BlendMode.srcIn,
                                     ),
                                     width: isSmall ? 20 : (isMedium ? 22 : 26),
@@ -264,16 +265,16 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.inter(
                                       textStyle: TextStyle(
-                                        color: const Color(0xFFf85604),
+                                        color: AppColors.primary,
                                         fontSize: buttonFontSize,
                                         fontWeight: FontWeight.w700,
                                       ),
                                     ),
                                   ),
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: const Color(0xFFFFFFFF),
+                                    backgroundColor: AppColors.white,
                                     side: const BorderSide(
-                                      color: Color(0xFFf85604),
+                                      color: AppColors.primary,
                                       width: 1,
                                     ),
                                     shape: RoundedRectangleBorder(

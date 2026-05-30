@@ -50,7 +50,7 @@ class _HomeViewState extends State<HomeView> {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFf9fafb),
+      backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {
@@ -90,7 +90,7 @@ class _HomeViewState extends State<HomeView> {
                             fontSize: 16,
                             letterSpacing: 0,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xFF4a5565),
+                            color: AppColors.textSecondary,
                           ),
                         ),
                       ),
@@ -99,7 +99,7 @@ class _HomeViewState extends State<HomeView> {
                         onPressed: () =>
                             Get.to(() => const UpcomingClassesView()),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFf85604),
+                          backgroundColor: AppColors.primary,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),

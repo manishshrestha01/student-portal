@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/controller/terms_controller.dart';
 import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart';
@@ -46,7 +47,7 @@ class _CheckoutState extends State<Checkout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFf9fafb),
+      backgroundColor: AppColors.cannotedit,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -83,12 +84,12 @@ class _CheckoutState extends State<Checkout> {
                         20,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: const Color(0xFFFFFFFF)),
+                        color: AppColors.white,
+                        border: Border.all(color: AppColors.white),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.25),
+                            color: AppColors.shadow,
                             blurRadius: 2,
                           ),
                         ],
@@ -101,7 +102,7 @@ class _CheckoutState extends State<Checkout> {
                               children: [
                                 Icon(
                                   Icons.shopping_cart_sharp,
-                                  color: Colors.deepOrange,
+                                  color: AppColors.primary,
                                   size: 28,
                                 ),
                                 const Gap(10),
@@ -109,7 +110,7 @@ class _CheckoutState extends State<Checkout> {
                                   'Checkout Summary',
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
-                                      color: Colors.black,
+                                      color: AppColors.textDark,
                                       fontWeight: FontWeight.w700,
                                       fontSize: 22,
                                     ),
@@ -118,7 +119,7 @@ class _CheckoutState extends State<Checkout> {
                               ],
                             ),
                             const Gap(10),
-                            Divider(color: Colors.grey, thickness: 0.5),
+                            Divider(color: AppColors.divider, thickness: 0.5),
                             const Gap(10),
                             Obx(
                               () => Row(
@@ -129,7 +130,7 @@ class _CheckoutState extends State<Checkout> {
                                     'Course:',
                                     style: GoogleFonts.inter(
                                       textStyle: TextStyle(
-                                        color: Colors.black,
+                                        color: AppColors.textDark,
                                         fontWeight: FontWeight.w400,
                                         fontSize: summaryFontSize,
                                       ),
@@ -145,7 +146,7 @@ class _CheckoutState extends State<Checkout> {
                                       textAlign: TextAlign.end,
                                       style: GoogleFonts.inter(
                                         textStyle: TextStyle(
-                                          color: Colors.black,
+                                          color: AppColors.textDark,
                                           fontWeight: FontWeight.w600,
                                           fontSize: summaryValueFontSize,
                                         ),
@@ -163,7 +164,7 @@ class _CheckoutState extends State<Checkout> {
                                     'Batch Starts:',
                                     style: GoogleFonts.inter(
                                       textStyle: TextStyle(
-                                        color: Colors.black,
+                                        color: AppColors.textDark,
                                         fontWeight: FontWeight.w400,
                                         fontSize: summaryFontSize,
                                       ),
@@ -1062,8 +1063,8 @@ class _CheckoutState extends State<Checkout> {
                 'assets/support/home.svg',
                 width: 19.17,
                 height: 17.35,
-                colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                colorFilter: ColorFilter.mode(
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -1072,7 +1073,7 @@ class _CheckoutState extends State<Checkout> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
+                    color: AppColors.textMuted,
                     fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
@@ -1084,7 +1085,7 @@ class _CheckoutState extends State<Checkout> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          color: AppColors.iconMuted,
           size: isSmall ? 18 : 20,
         ),
         const Gap(7),
@@ -1094,9 +1095,9 @@ class _CheckoutState extends State<Checkout> {
             'Upcoming Classes',
             style: GoogleFonts.inter(
               textStyle: TextStyle(
-                color: const Color(0xFF000000),
+                color: AppColors.textMuted,
                 fontSize: isSmall ? 13 : 15,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
@@ -1104,7 +1105,7 @@ class _CheckoutState extends State<Checkout> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          color: AppColors.iconMuted,
           size: isSmall ? 18 : 20,
         ),
         const Gap(7),
@@ -1112,9 +1113,9 @@ class _CheckoutState extends State<Checkout> {
           'Checkout',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
+              color: AppColors.textSecondary,
               fontSize: isSmall ? 13 : 15,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

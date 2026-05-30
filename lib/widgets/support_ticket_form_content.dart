@@ -85,20 +85,20 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                               'assets/support/home.svg',
                               width: 19.17,
                               height: 17.35,
-                              colorFilter: const ColorFilter.mode(
-                                Color(0xFF4B4B4B),
-                                BlendMode.srcIn,
-                              ),
+                              colorFilter: ColorFilter.mode(
+                                  AppColors.textNeutral,
+                                  BlendMode.srcIn,
+                                ),
                             ),
                             const Gap(8),
                             Text(
                               'Home',
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
-                                  color: const Color(0xFF4B4B4B),
-                                  fontSize: isSmall ? 13 : 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                                    color: const Color(0xFF4B4B4B),
+                                    fontSize: isSmall ? 13 : 14,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                               ),
                             ),
                           ],
@@ -107,7 +107,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                       const Gap(7),
                       Icon(
                         Icons.chevron_right,
-                        color: const Color(0xFF4B4B4B),
+                        color: AppColors.textNeutral,
                         size: isSmall ? 18 : 20,
                       ),
                       const Gap(7),
@@ -117,7 +117,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                           'Support',
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
-                              color: const Color(0xFF4B4B4B),
+                              color: AppColors.textNeutral,
                               fontSize: isSmall ? 13 : 14,
                               fontWeight: FontWeight.w400,
                             ),
@@ -127,20 +127,20 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                       const Gap(7),
                       Icon(
                         Icons.chevron_right,
-                        color: const Color(0xFF4B4B4B),
+                        color: AppColors.textNeutral,
                         size: isSmall ? 18 : 20,
                       ),
                       const Gap(7),
-                      Text(
-                        'New Tickets',
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                            color:  Colors.black,
-                            fontSize: isSmall ? 13 : 14,
-                            fontWeight: FontWeight.w400,
+                        Text(
+                          'New Tickets',
+                          style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                              color: AppColors.textDark,
+                              fontSize: isSmall ? 13 : 14,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),
@@ -153,7 +153,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Colors.black,
+                          color: AppColors.textDark,
                           fontSize: titleSize,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 0,
@@ -171,11 +171,11 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Color(0xFF4a5565),
-                          fontSize: subtitleSize,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 0,
-                        ),
+                            color: AppColors.textTertiary,
+                            fontSize: subtitleSize,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 0,
+                          ),
                       ),
                     ),
                   ),
@@ -187,8 +187,8 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                       'assets/support/bi_ticket-fill.svg',
                       width: 26,
                       height: 16.25,
-                      colorFilter: const ColorFilter.mode(
-                        Color(0xFFf85604),
+                      colorFilter: ColorFilter.mode(
+                        AppColors.primary,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -197,7 +197,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                       'Ticket Information',
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Colors.black,
+                          color: AppColors.textDark,
                           fontSize: sectionTitleSize,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0,
@@ -207,17 +207,17 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                   ],
                 ),
                 const Gap(20),
-                Center(
+                    Center(
                   child: Container(
                     width: formWidth,
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 16),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.white,
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: const Color(0xFFFFFFFF)),
+                      border: Border.all(color: AppColors.white),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.25),
+                          color: AppColors.shadow,
                           blurRadius: 2,
                         ),
                       ],
@@ -283,10 +283,10 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                                   : () => supportController.submitTicket(
                                       selectedCategory,
                                     ),
-                              icon: SvgPicture.asset(
+                                icon: SvgPicture.asset(
                                 'assets/support/submit.svg',
-                                colorFilter: const ColorFilter.mode(
-                                  Colors.white,
+                                colorFilter: ColorFilter.mode(
+                                  AppColors.white,
                                   BlendMode.srcIn,
                                 ),
                                 width: 22.5,
@@ -305,7 +305,7 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
                                 ),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFf85604),
+                                backgroundColor: AppColors.primary,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -332,8 +332,8 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
         Text(
           label,
           style: GoogleFonts.inter(
-            textStyle: TextStyle(
-              color: Colors.black,
+              textStyle: TextStyle(
+              color: AppColors.textDark,
               fontSize: fontSize,
               fontWeight: FontWeight.w400,
             ),
@@ -357,16 +357,16 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
       decoration: BoxDecoration(
         color: AppColors.cannotedit,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color(0xFFF9FAFB)),
+        border: Border.all(color: AppColors.cannotedit),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: 0.25), blurRadius: 2),
+          BoxShadow(color: AppColors.shadow, blurRadius: 2),
         ],
       ),
       child: TextField(
         controller: controller,
         style: GoogleFonts.inter(
-          textStyle: TextStyle(
-            color: isMultiline ? AppColors.textDark : Colors.black,
+            textStyle: TextStyle(
+            color: isMultiline ? AppColors.textDark : AppColors.textDark,
             fontSize: inputFontSize,
             fontWeight: isMultiline ? FontWeight.normal : FontWeight.w400,
             letterSpacing: isMultiline ? -0.15 : 0,

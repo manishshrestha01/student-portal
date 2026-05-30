@@ -66,7 +66,7 @@ class CustomCourseItem extends StatelessWidget {
                     "Mentor: $mentor",
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
-                        color: const Color(0xFF4a5565),
+                        color: AppColors.textSecondary,
                          letterSpacing: 0,
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
@@ -79,14 +79,14 @@ class CustomCourseItem extends StatelessWidget {
                       const Icon(
                         Icons.play_circle,
                         size: 18,
-                        color: Color(0xFFf85604),
+                        color: AppColors.primary,
                       ),
                       const SizedBox(width: 2),
                       Text(
                         "$videos Videos",
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
-                            color: const Color(0xFF4a5565),
+                            color: AppColors.textSecondary,
                             fontWeight: FontWeight.w500,
                              letterSpacing: 0,
                             fontSize: 15,

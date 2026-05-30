@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart';
 import 'package:codeit_app/model/upcoming%20course/upcoming_model.dart';
 import 'package:codeit_app/view/upcoming%20course/checkout.dart';
@@ -32,7 +33,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(color: Colors.black.withValues(alpha: 0.25), blurRadius: 2),
@@ -68,7 +69,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       vertical: 5,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFf85604),
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(20),
                         bottomRight: Radius.circular(20),
@@ -123,7 +124,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       'Starts:',
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Color(0xFF4a5565),
+                          color: AppColors.textTertiary,
                           fontWeight: FontWeight.w500,
                           fontSize: detailFontSize,
                         ),
@@ -134,7 +135,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       '${widget.item.startDate}',
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Color(0xFF4a5565),
+                          color: AppColors.textTertiary,
                           fontWeight: FontWeight.w600,
                           fontSize: detailFontSize,
                         ),
@@ -151,7 +152,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       'Mode:',
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Color(0xFF4a5565),
+                          color: AppColors.textTertiary,
                           fontWeight: FontWeight.w500,
                           fontSize: detailFontSize,
                         ),
@@ -162,7 +163,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       'Online',
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Color(0xFF4a5565),
+                          color: AppColors.textTertiary,
                           fontWeight: FontWeight.w600,
                           fontSize: detailFontSize,
                         ),
@@ -173,7 +174,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       '(Google Meet)',
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Color(0xFF6a7282),
+                          color: AppColors.textMuted,
                           fontWeight: FontWeight.w500,
                           fontSize: detailFontSize,
                         ),
@@ -200,7 +201,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       'Duration:',
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Color(0xFF4a5565),
+                          color: AppColors.textTertiary,
                           fontWeight: FontWeight.w500,
                           fontSize: detailFontSize,
                         ),
@@ -211,7 +212,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       '${widget.item.courseDuration}',
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Color(0xFF4a5565),
+                          color: AppColors.textTertiary,
                           fontWeight: FontWeight.w500,
                           fontSize: detailFontSize,
                         ),
@@ -232,7 +233,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       'Class Time:',
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          color: Color(0xFF4a5565),
+                          color: AppColors.textTertiary,
                           fontWeight: FontWeight.w500,
                           fontSize: detailFontSize,
                         ),
@@ -257,14 +258,14 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     const Icon(
                       Icons.groups,
                       size: 23,
-                      color: Color(0xFFF65505),
+                      color: AppColors.orangeAccent,
                     ),
                     const Gap(8),
                     Text(
                       '${widget.item.availableSeats}',
                       style: GoogleFonts.inter(
                         textStyle: const TextStyle(
-                          color: Color(0xFFF65505),
+                          color: AppColors.orangeAccent,
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.italic,
                           fontSize: 14,
@@ -286,7 +287,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                           'Rs. ${widget.item.offerPrice}',
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
-                              color: Colors.black,
+                              color: AppColors.textDark,
                               fontWeight: FontWeight.w700,
                               fontSize: priceFontSize,
                             ),
@@ -298,11 +299,11 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                               'Rs. ${widget.item.actualPrice}',
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
-                                  color: Color(0xFF6a7282),
+                                  color: AppColors.textMuted,
                                   fontWeight: FontWeight.w500,
                                   fontSize: oldPriceFontSize,
                                   decoration: TextDecoration.lineThrough,
-                                  decorationColor: Color(0xFF6a7282),
+                                  decorationColor: AppColors.textMuted,
                                   decorationThickness: 1,
                                 ),
                               ),
@@ -321,7 +322,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                                 '${widget.item.discount} off',
                                 style: GoogleFonts.inter(
                                   textStyle: const TextStyle(
-                                    color: Color(0xFF008236),
+                                    color: const Color(0xFF008236),
                                     fontWeight: FontWeight.w600,
                                     fontSize: 12,
                                   ),
@@ -342,7 +343,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                         Get.offAll(() => const Checkout());
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFF65505),
+                        backgroundColor: AppColors.orangeAccent,
                         padding: EdgeInsets.symmetric(
                           horizontal: buttonHorizontalPadding,
                           vertical: 12,
@@ -357,7 +358,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                             'Enroll Now',
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
-                                color: Colors.white,
+                                color: AppColors.white,
                                 fontWeight: FontWeight.w700,
                                 fontSize: buttonFontSize,
                               ),
@@ -366,7 +367,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                           const Gap(6),
                           const Icon(
                             Icons.arrow_forward,
-                            color: Colors.white,
+                            color: AppColors.white,
                             size: 16,
                           ),
                         ],
@@ -397,7 +398,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                             width: 24,
                             height: 24,
                             colorFilter: const ColorFilter.mode(
-                              Color(0xFFf85604),
+                              AppColors.primary,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -406,7 +407,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                             'Watch Demo Video',
                             style: GoogleFonts.inter(
                               textStyle: const TextStyle(
-                                color: Color(0xFFf85604),
+                                color: AppColors.primary,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 18,
                               ),

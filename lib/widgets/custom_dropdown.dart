@@ -32,7 +32,7 @@ class CustomCategoryDropdown extends StatelessWidget {
               width: dialogWidth,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: const Color(0xFF333333),
+                color: AppColors.textDark,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
@@ -83,7 +83,7 @@ class CustomCategoryDropdown extends StatelessWidget {
             const Gap(8),
             Icon(
               isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
-              color: isSelected ? const Color(0xFFf85604) : Colors.black,
+              color: isSelected ? AppColors.primary : Colors.black,
               size: 20,
             ),
           ],
@@ -102,7 +102,7 @@ class CustomCategoryDropdown extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.cannotedit,
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: const Color(0xFFF9FAFB)),
+          border: Border.all(color: AppColors.cannotedit),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.25),

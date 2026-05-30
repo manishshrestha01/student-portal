@@ -1,4 +1,5 @@
 import 'package:codeit_app/controller/auth_controller.dart';
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/certificates_view.dart';
 import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/home_view.dart';
@@ -46,7 +47,7 @@ class CustomDrawer extends StatelessWidget {
         final double leftPadding = isSmall ? 24 : (isMedium ? 28 : 30);
         final double logoutLeftPadding = isSmall ? 80 : (isMedium ? 60 : 90);
         final double tileHeight = isShort ? 48 : 56;
-        const Color drawerColor = Color(0xFFf85604);
+        const Color drawerColor = AppColors.primary;
 
         return Drawer(
           width: screenWidth < 500
@@ -72,7 +73,7 @@ class CustomDrawer extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Divider(thickness: 0.5, color: const Color(0xFFFEFEFE)),
+                  Divider(thickness: 0.5, color: AppColors.white),
                   Expanded(
                     child: ListView(
                       padding: EdgeInsets.only(top: gapSize, bottom: gapSize),
@@ -86,7 +87,7 @@ class CustomDrawer extends StatelessWidget {
                             width: iconWidth,
                             height: iconHeight,
                             colorFilter: const ColorFilter.mode(
-                              Color(0xFFFFFFFF),
+                              AppColors.white,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -111,7 +112,7 @@ class CustomDrawer extends StatelessWidget {
                             width: iconWidth,
                             height: iconHeight,
                             colorFilter: const ColorFilter.mode(
-                              Color(0xFFFFFFFF),
+                              AppColors.white,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -137,7 +138,7 @@ class CustomDrawer extends StatelessWidget {
                             width: iconWidth,
                             height: iconHeight,
                             colorFilter: const ColorFilter.mode(
-                              Color(0xFFFFFFFF),
+                              AppColors.white,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -162,7 +163,7 @@ class CustomDrawer extends StatelessWidget {
                             width: iconWidth,
                             height: iconHeight,
                             colorFilter: const ColorFilter.mode(
-                              Color(0xFFFFFFFF),
+                              AppColors.white,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -187,7 +188,7 @@ class CustomDrawer extends StatelessWidget {
                             width: iconWidth,
                             height: iconHeight,
                             colorFilter: const ColorFilter.mode(
-                              Color(0xFFFFFFFF),
+                              AppColors.white,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -213,7 +214,7 @@ class CustomDrawer extends StatelessWidget {
                             width: iconWidth,
                             height: iconHeight,
                             colorFilter: const ColorFilter.mode(
-                              Color(0xFFFFFFFF),
+                              AppColors.white,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -238,7 +239,7 @@ class CustomDrawer extends StatelessWidget {
                             width: iconWidth,
                             height: iconHeight,
                             colorFilter: const ColorFilter.mode(
-                              Color(0xFFFFFFFF),
+                              AppColors.white,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -263,7 +264,7 @@ class CustomDrawer extends StatelessWidget {
                             width: iconWidth,
                             height: iconHeight,
                             colorFilter: const ColorFilter.mode(
-                              Color(0xFFFFFFFF),
+                              AppColors.white,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -336,7 +337,7 @@ class CustomDrawer extends StatelessWidget {
                       width: iconWidth,
                       height: iconHeight,
                       colorFilter: const ColorFilter.mode(
-                        Color(0xFFFFFFFF),
+                        AppColors.white,
                         BlendMode.srcIn,
                       ),
                     ),

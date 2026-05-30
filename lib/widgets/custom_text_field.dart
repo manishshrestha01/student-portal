@@ -72,7 +72,7 @@ class CustomTextField extends StatelessWidget {
             prefixIcon: prefixIcon,
             hintText: hintText,
             hintStyle: GoogleFonts.inter(
-              textStyle: TextStyle(color: AppColors.textLight, fontWeight: .w400),
+              textStyle: TextStyle(color: AppColors.textLight, fontWeight: FontWeight.w400),
             ),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(

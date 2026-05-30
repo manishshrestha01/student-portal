@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/recorded%20videos/index_model.dart';
 import 'package:codeit_app/view/recorded%20videos/purchase.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +111,7 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                   "${widget.item.subHeading}",
                   style: GoogleFonts.inter(
                     textStyle: const TextStyle(
-                      color: Color(0xFF636d7b),
+                      color: AppColors.textSecondary,
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
                     ),
@@ -181,7 +182,7 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                     ElevatedButton(
                       onPressed: () => Get.offAll(() => const Purchase()),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFF65505),
+                        backgroundColor: AppColors.primary,
                         padding: EdgeInsets.symmetric(
                           horizontal: buttonHorizontalPadding,
                           vertical: 12,

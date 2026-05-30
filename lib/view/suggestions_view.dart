@@ -24,7 +24,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  const Color(0xFFf9fafb),
+      backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -72,7 +72,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        border: Border.all(color: const Color(0xFFFFFFFF)),
+                          border: Border.all(color: AppColors.white),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
@@ -120,7 +120,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                 width: 22,
                                 height: 20.62,
                                 colorFilter: const ColorFilter.mode(
-                                  Color(0xFFf85604),
+                                  AppColors.primary,
                                   BlendMode.srcIn,
                                 ),
                               ),
@@ -129,7 +129,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                 'Your Suggestion',
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
-                                    color: const Color(0xFF000000),
+                                    color: AppColors.black,
                                     fontSize: isSmall ? 16 : 18,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -150,7 +150,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                               textAlignVertical: TextAlignVertical.top,
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
-                                  color: const Color(0xFF000000),
+                                    color: AppColors.black,
                                   fontSize: isSmall ? 14 : 16,
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -159,7 +159,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                 hintText: 'We\'d love to hear your ideas.....',
                                 hintStyle: GoogleFonts.inter(
                                   textStyle: TextStyle(
-                                    color: Colors.black,
+                                    color: AppColors.black,
                                     fontSize: isSmall ? 14 : 16,
                                     fontWeight: FontWeight.w400,
                                   ),
@@ -201,7 +201,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                 icon: SvgPicture.asset(
                                   'assets/support/submit.svg',
                                   colorFilter: const ColorFilter.mode(
-                                    Colors.white,
+                                    AppColors.white,
                                     BlendMode.srcIn,
                                   ),
                                   width: 22.5,
@@ -220,7 +220,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                   ),
                                 ),
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFf85604),
+                                  backgroundColor: AppColors.primary,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -254,7 +254,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -263,7 +263,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
+                    color: AppColors.textMuted,
                     fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
@@ -275,7 +275,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
+          color: AppColors.iconMuted,
           size: isSmall ? 18 : 20,
         ),
         const Gap(7),
@@ -283,9 +283,9 @@ class _SuggestionsViewState extends State<SuggestionsView> {
           'Suggestions',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
+              color: AppColors.textSecondary,
               fontSize: isSmall ? 13 : 15,
-              fontWeight: FontWeight.w400,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

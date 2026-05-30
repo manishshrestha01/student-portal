@@ -44,7 +44,7 @@ class _CourseVideoState extends State<CourseVideo> {
   Widget build(BuildContext context) {
     final controller = Get.find<CourseVideoController>();
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+      backgroundColor: AppColors.white,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -57,7 +57,6 @@ class _CourseVideoState extends State<CourseVideo> {
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
           final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
           final double titleFontSize = isSmall ? 20 : (isMedium ? 22 : 25);
-          final double breadcrumbFontSize = isSmall ? 12 : (isMedium ? 13 : 15);
           final double subtitleFontSize = isSmall ? 16 : (isMedium ? 18 : 20);
           final double bodyFontSize = isSmall ? 14 : (isMedium ? 15 : 16);
           final double containerWidth = double.infinity;
@@ -73,7 +72,7 @@ class _CourseVideoState extends State<CourseVideo> {
                   Gap(verticalGap),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: _buildBreadcrumb(breadcrumbFontSize),
+                    child: _buildBreadcrumb(isSmall),
                   ),
                   Gap(verticalGap),
                   Text(
@@ -168,7 +167,7 @@ class _CourseVideoState extends State<CourseVideo> {
                           height: containerHeight,
                           padding: EdgeInsets.all(20),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: AppColors.white,
                             borderRadius: BorderRadius.circular(10),
                             boxShadow: [
                               BoxShadow(
@@ -185,7 +184,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                 width: 26,
                                 height: 26,
                                 colorFilter: const ColorFilter.mode(
-                                  Colors.black,
+                                  AppColors.black,
                                   BlendMode.srcIn,
                                 ),
                               ),
@@ -194,7 +193,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                 "Notes & Resources",
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
-                                    color: Colors.black,
+                                    color: AppColors.black,
                                     fontSize: bodyFontSize,
                                     fontWeight: FontWeight.w400,
                                     height: 1.0,
@@ -205,7 +204,7 @@ class _CourseVideoState extends State<CourseVideo> {
                               Spacer(),
                               const Icon(
                                 Icons.chevron_right,
-                                color: Colors.black,
+                                color: AppColors.black,
                                 size: 20,
                               ),
                             ],
@@ -217,7 +216,7 @@ class _CourseVideoState extends State<CourseVideo> {
                         width: double.infinity,
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
@@ -237,7 +236,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                   width: 30.6,
                                   height: 21.6,
                                   colorFilter: const ColorFilter.mode(
-                                    Color(0xFFf85604),
+                                    AppColors.primary,
                                     BlendMode.srcIn,
                                   ),
                                 ),
@@ -246,7 +245,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                   "Class Videos",
                                   style: GoogleFonts.inter(
                                     textStyle: TextStyle(
-                                      color: Colors.black,
+                                      color: AppColors.black,
                                       fontSize: subtitleFontSize,
                                       fontWeight: FontWeight.w600,
                                       height: 1.0,
@@ -263,7 +262,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                       vertical: 4,
                                     ),
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.black),
+                                      border: Border.all(color: AppColors.black),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
@@ -283,7 +282,7 @@ class _CourseVideoState extends State<CourseVideo> {
                             Divider(
                               height: 1,
                               thickness: 0.5,
-                              color: Colors.black,
+                              color: AppColors.black,
                             ),
                             Obx(() {
                               var videos =
@@ -389,7 +388,7 @@ Widget videoItem(
               width: playIconSize,
               height: playIconSize,
               colorFilter: const ColorFilter.mode(
-                Color.fromRGBO(0, 0, 0, 0.7),
+                AppColors.textMuted,
                 BlendMode.srcIn,
               ),
             ),
@@ -408,7 +407,7 @@ Widget videoItem(
                       fontWeight: FontWeight.w500,
                       letterSpacing: 0,
                       height: 1.25,
-                      color: Colors.black,
+                      color: AppColors.black,
                       fontSize: subtitleFontSize,
                     ),
                   ),
@@ -433,7 +432,7 @@ Widget videoItem(
                         overflow: TextOverflow.ellipsis,
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
-                            color: Color.fromRGBO(0, 0, 0, 0.7),
+                            color: AppColors.black70,
                             fontSize: bodyFontSize,
                             fontWeight: FontWeight.w500,
                           ),
@@ -447,7 +446,7 @@ Widget videoItem(
           ),
           Icon(
             Icons.chevron_right,
-            color: Color.fromRGBO(0, 0, 0, 0.7),
+            color: AppColors.black70,
             size: 20,
           ),
         ],
@@ -456,7 +455,7 @@ Widget videoItem(
   );
 }
 
-Widget _buildBreadcrumb(double fontSize) {
+Widget _buildBreadcrumb(bool isSmall) {
   return Row(
     children: [
       GestureDetector(
@@ -468,7 +467,7 @@ Widget _buildBreadcrumb(double fontSize) {
               width: 19.17,
               height: 17.35,
               colorFilter: const ColorFilter.mode(
-                Color.fromRGBO(0, 0, 0, 0.7),
+                AppColors.black70,
                 BlendMode.srcIn,
               ),
             ),
@@ -477,8 +476,8 @@ Widget _buildBreadcrumb(double fontSize) {
               'Home',
               style: GoogleFonts.inter(
                 textStyle: TextStyle(
-                  color: const Color.fromRGBO(0, 0, 0, 0.7),
-                  fontSize: fontSize,
+                  color: AppColors.textMuted,
+                  fontSize: isSmall ? 13 : 15,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -491,38 +490,38 @@ Widget _buildBreadcrumb(double fontSize) {
         onTap: () => Get.offAll(() => CourseView()),
         child: Row(
           children: [
-            const Icon(
+            Icon(
               Icons.chevron_right,
-              color: Color.fromRGBO(0, 0, 0, 0.9),
-              size: 20,
+              color: AppColors.iconMuted,
+              size: isSmall ? 18 : 20,
             ),
             const Gap(7),
             Text(
               'My Courses',
               style: GoogleFonts.inter(
                 textStyle: TextStyle(
-                  color: const Color(0xFF000000),
-                  fontSize: fontSize,
-                  fontWeight: FontWeight.w400,
+                  color: AppColors.textMuted,
+                  fontSize: isSmall ? 13 : 15,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
           ],
         ),
       ),
-      const Icon(
+      Icon(
         Icons.chevron_right,
-        color: Color.fromRGBO(0, 0, 0, 0.9),
-        size: 20,
+        color: AppColors.iconMuted,
+        size: isSmall ? 18 : 20,
       ),
       const Gap(7),
       Text(
         'Class Videos',
         style: GoogleFonts.inter(
           textStyle: TextStyle(
-            color: const Color(0xFF000000),
-            fontSize: fontSize,
-            fontWeight: FontWeight.w400,
+            color: AppColors.textSecondary,
+            fontSize: isSmall ? 13 : 15,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

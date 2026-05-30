@@ -40,8 +40,8 @@ class _LinkViewState extends State<LinkView> {
             margin: EdgeInsets.only(bottom: 16),
             padding: EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: const Color(0xFFFFFFFF)),
+              color: AppColors.white,
+              border: Border.all(color: AppColors.white),
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
@@ -57,7 +57,7 @@ class _LinkViewState extends State<LinkView> {
                 Container(
                   width: 4,
                   height: 120,
-                  decoration: BoxDecoration(color: const Color(0xFF00c951)),
+                  decoration: BoxDecoration(color: AppColors.greenAccent),
                 ),
                 Gap(16),
                 Expanded(
@@ -78,7 +78,7 @@ class _LinkViewState extends State<LinkView> {
                         "${item.mentorName}",
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
-                            color: const Color(0xFF4a5565),
+                            color: AppColors.textSecondary,
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                           ),
@@ -100,7 +100,7 @@ class _LinkViewState extends State<LinkView> {
                           
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF00a63e),
+                          backgroundColor: AppColors.greenButton,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),

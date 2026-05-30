@@ -18,8 +18,9 @@ class ProfileView extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isSmall = MediaQuery.sizeOf(context).width < 390;
     return Scaffold(
-       backgroundColor:  const Color(0xFFf9fafb),
+      backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {
@@ -49,7 +50,7 @@ class ProfileView extends GetView<AuthController> {
                   Column(
                     children: [
                       Gap(18),
-                      _buildBreadcrumb(),
+                      _buildBreadcrumb(isSmall),
                       Gap(32),
                       Row(
                         children: [
@@ -317,7 +318,7 @@ class ProfileView extends GetView<AuthController> {
     );
   }
 
-  Widget _buildBreadcrumb() {
+  Widget _buildBreadcrumb(bool isSmall) {
     return Row(
       children: [
         GestureDetector(
@@ -329,7 +330,7 @@ class ProfileView extends GetView<AuthController> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -338,8 +339,8 @@ class ProfileView extends GetView<AuthController> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
-                    fontSize: 15,
+                    color: AppColors.textMuted,
+                    fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -350,17 +351,17 @@ class ProfileView extends GetView<AuthController> {
         const Gap(7),
         Icon(
           Icons.chevron_right,
-          color: const Color.fromRGBO(0, 0, 0, 0.9),
-          size: 20,
+          color: AppColors.iconMuted,
+          size: isSmall ? 18 : 20,
         ),
         const Gap(7),
         Text(
           'Profile',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
+              color: AppColors.textSecondary,
+              fontSize: isSmall ? 13 : 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

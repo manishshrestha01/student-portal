@@ -1,3 +1,4 @@
+import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/home_view.dart';
 import 'package:codeit_app/view/support_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
@@ -12,7 +13,7 @@ class GeneralView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+      backgroundColor: AppColors.white,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: SupportTicketFormContent(

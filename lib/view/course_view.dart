@@ -30,7 +30,7 @@ class _CourseViewState extends State<CourseView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9FAFB),
+      backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -43,8 +43,6 @@ class _CourseViewState extends State<CourseView> {
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
           final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
           final double titleFontSize = isSmall ? 20 : (isMedium ? 22 : 25);
-          final double breadcrumbFontSize = isSmall ? 12 : (isMedium ? 13 : 15);
-
           return Obx(() {
             if (courseController.isLoading.value) {
               return const Center(child: CircularProgressIndicator());
@@ -63,7 +61,7 @@ class _CourseViewState extends State<CourseView> {
                     Gap(verticalGap),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: _buildBreadcrumb(breadcrumbFontSize),
+                      child: _buildBreadcrumb(isSmall),
                     ),
                     Gap(verticalGap),
                     Text(
@@ -94,7 +92,7 @@ class _CourseViewState extends State<CourseView> {
     );
   }
 
-  Widget _buildBreadcrumb(double fontSize) {
+  Widget _buildBreadcrumb(bool isSmall) {
     return Row(
       children: [
         GestureDetector(
@@ -106,7 +104,7 @@ class _CourseViewState extends State<CourseView> {
                 width: 19.17,
                 height: 17.35,
                 colorFilter: const ColorFilter.mode(
-                  Color.fromRGBO(0, 0, 0, 0.7),
+                  AppColors.textMuted,
                   BlendMode.srcIn,
                 ),
               ),
@@ -115,8 +113,8 @@ class _CourseViewState extends State<CourseView> {
                 'Home',
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
-                    color: const Color.fromRGBO(0, 0, 0, 0.7),
-                    fontSize: fontSize,
+                    color: AppColors.textMuted,
+                    fontSize: isSmall ? 13 : 15,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -125,19 +123,19 @@ class _CourseViewState extends State<CourseView> {
           ),
         ),
         const Gap(7),
-        const Icon(
+        Icon(
           Icons.chevron_right,
-          color: Color.fromRGBO(0, 0, 0, 0.9),
-          size: 20,
+          color: AppColors.iconMuted,
+          size: isSmall ? 18 : 20,
         ),
         const Gap(7),
         Text(
           'My Courses',
           style: GoogleFonts.inter(
             textStyle: TextStyle(
-              color: const Color(0xFF000000),
-              fontSize: fontSize,
-              fontWeight: FontWeight.w400,
+              color: AppColors.textSecondary,
+              fontSize: isSmall ? 13 : 15,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
