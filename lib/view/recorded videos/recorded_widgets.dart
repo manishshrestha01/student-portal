@@ -17,13 +17,21 @@ class RecordedWidgets extends StatefulWidget {
 class _RecordedWidgetsState extends State<RecordedWidgets> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final bool isSmallDevice = screenWidth < 430;
+    final double cardPadding = isSmallDevice ? 16 : 20;
+    final double priceFontSize = isSmallDevice ? 22 : 24;
+    final double buttonHorizontalPadding = isSmallDevice ? 14 : 20;
+    final double buttonFontSize = isSmallDevice ? 15 : 16;
+    final double imageAspectRatio = isSmallDevice ? 16 / 10 : 16 / 8.6;
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.25), blurRadius: 2),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.25), blurRadius: 2),
         ],
       ),
       child: Column(
@@ -36,13 +44,17 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                child: Image.network(
-                  "${widget.item.thumbnail}",
-                  height: 220,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: imageAspectRatio,
+                  child: Image.network(
+                    "${widget.item.thumbnail}",
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.center,
+                  ),
                 ),
               ),
+
               // Positioned(
               //   bottom: 12,
               //   right: 12,
@@ -74,11 +86,10 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
               //     ),
               //   ),
               // ),
-
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(cardPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -118,53 +129,52 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                         Text(
                           'Rs. ${widget.item.plans[0].price}',
                           style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
+                            textStyle: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
-                              fontSize: 24,
-                              letterSpacing: -0.5,
+                              fontSize: priceFontSize,
                             ),
                           ),
                         ),
-                      //   Row(
-                      //     children: [
-                      //       Text(
-                      //         'Rs. ${widget.item.plans[0].price}',
-                      //         style: GoogleFonts.inter(
-                      //           textStyle: const TextStyle(
-                      //             color: Color(0xFF6a7282),
-                      //             fontWeight: FontWeight.w500,
-                      //             fontSize: 15,
-                      //             decoration: TextDecoration.lineThrough,
-                      //             decorationColor: Color(0xFF6a7282),
-                      //             decorationThickness: 1,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       const Gap(8),
-                      //       Container(
-                      //         padding: const EdgeInsets.symmetric(
-                      //           horizontal: 8,
-                      //           vertical: 4,
-                      //         ),
-                      //         decoration: BoxDecoration(
-                      //           color: const Color(0xFFdcfce6),
-                      //           borderRadius: BorderRadius.circular(4),
-                      //         ),
-                      //         child: Text(
-                      //           '50% off',
-                      //           style: GoogleFonts.inter(
-                      //             textStyle: const TextStyle(
-                      //               color: Color(0xFF008236),
-                      //               fontWeight: FontWeight.w600,
-                      //               fontSize: 12,
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // 
+                        //   Row(
+                        //     children: [
+                        //       Text(
+                        //         'Rs. ${widget.item.plans[0].price}',
+                        //         style: GoogleFonts.inter(
+                        //           textStyle: const TextStyle(
+                        //             color: Color(0xFF6a7282),
+                        //             fontWeight: FontWeight.w500,
+                        //             fontSize: 15,
+                        //             decoration: TextDecoration.lineThrough,
+                        //             decorationColor: Color(0xFF6a7282),
+                        //             decorationThickness: 1,
+                        //           ),
+                        //         ),
+                        //       ),
+                        //       const Gap(8),
+                        //       Container(
+                        //         padding: const EdgeInsets.symmetric(
+                        //           horizontal: 8,
+                        //           vertical: 4,
+                        //         ),
+                        //         decoration: BoxDecoration(
+                        //           color: const Color(0xFFdcfce6),
+                        //           borderRadius: BorderRadius.circular(4),
+                        //         ),
+                        //         child: Text(
+                        //           '50% off',
+                        //           style: GoogleFonts.inter(
+                        //             textStyle: const TextStyle(
+                        //               color: Color(0xFF008236),
+                        //               fontWeight: FontWeight.w600,
+                        //               fontSize: 12,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ],
+                        //   ),
+                        //
                       ],
                     ),
                     const Spacer(),
@@ -172,8 +182,8 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                       onPressed: () => Get.offAll(() => const Purchase()),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFF65505),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: buttonHorizontalPadding,
                           vertical: 12,
                         ),
                         shape: RoundedRectangleBorder(
@@ -185,10 +195,10 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                           Text(
                             'Purchase Now',
                             style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
+                              textStyle: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 16,
+                                fontSize: buttonFontSize,
                               ),
                             ),
                           ),
@@ -197,7 +207,7 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                     ),
                   ],
                 ),
-                ],
+              ],
             ),
           ),
         ],

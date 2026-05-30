@@ -19,13 +19,23 @@ class UpcomingWidget extends StatefulWidget {
 class _UpcomingWidgetState extends State<UpcomingWidget> {
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.sizeOf(context).width;
+    final bool isSmallDevice = screenWidth < 430;
+    final double cardPadding = isSmallDevice ? 16 : 20;
+    final double detailFontSize = isSmallDevice ? 13 : 14;
+    final double priceFontSize = isSmallDevice ? 22 : 24;
+    final double oldPriceFontSize = isSmallDevice ? 13 : 15;
+    final double buttonHorizontalPadding = isSmallDevice ? 14 : 20;
+    final double buttonFontSize = isSmallDevice ? 15 : 16;
+    final double imageAspectRatio = isSmallDevice ? 16 / 10 : 16 / 8.6;
+
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.25), blurRadius: 2),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.25), blurRadius: 2),
         ],
       ),
       child: Column(
@@ -38,11 +48,14 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                child: Image.network(
-                  "${widget.item.courseImage}",
-                  height: 220,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+                child: AspectRatio(
+                  aspectRatio: imageAspectRatio,
+                  child: Image.network(
+                    "${widget.item.courseImage}",
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.center,
+                  ),
                 ),
               ),
               Positioned(
@@ -81,7 +94,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(cardPadding),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -109,10 +122,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Text(
                       'Starts:',
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           color: Color(0xFF4a5565),
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: detailFontSize,
                         ),
                       ),
                     ),
@@ -120,10 +133,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Text(
                       '${widget.item.startDate}',
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           color: Color(0xFF4a5565),
                           fontWeight: FontWeight.w600,
-                          fontSize: 14,
+                          fontSize: detailFontSize,
                         ),
                       ),
                     ),
@@ -137,10 +150,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Text(
                       'Mode:',
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           color: Color(0xFF4a5565),
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: detailFontSize,
                         ),
                       ),
                     ),
@@ -148,10 +161,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Text(
                       'Online',
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           color: Color(0xFF4a5565),
                           fontWeight: FontWeight.w600,
-                          fontSize: 14,
+                          fontSize: detailFontSize,
                         ),
                       ),
                     ),
@@ -159,10 +172,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Text(
                       '(Google Meet)',
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           color: Color(0xFF6a7282),
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: detailFontSize,
                         ),
                       ),
                     ),
@@ -186,10 +199,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Text(
                       'Duration:',
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           color: Color(0xFF4a5565),
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: detailFontSize,
                         ),
                       ),
                     ),
@@ -197,10 +210,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Text(
                       '${widget.item.courseDuration}',
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           color: Color(0xFF4a5565),
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: detailFontSize,
                         ),
                       ),
                     ),
@@ -218,10 +231,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Text(
                       'Class Time:',
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           color: Color(0xFF4a5565),
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: detailFontSize,
                         ),
                       ),
                     ),
@@ -229,10 +242,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     Text(
                       '${widget.item.classTime}',
                       style: GoogleFonts.inter(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                           color: Color(0xFF4a5565),
                           fontWeight: FontWeight.w500,
-                          fontSize: 14,
+                          fontSize: detailFontSize,
                         ),
                       ),
                     ),
@@ -272,11 +285,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                         Text(
                           'Rs. ${widget.item.offerPrice}',
                           style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
+                            textStyle: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
-                              fontSize: 24,
-                              letterSpacing: -0.5,
+                              fontSize: priceFontSize,
                             ),
                           ),
                         ),
@@ -285,10 +297,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                             Text(
                               'Rs. ${widget.item.actualPrice}',
                               style: GoogleFonts.inter(
-                                textStyle: const TextStyle(
+                                textStyle: TextStyle(
                                   color: Color(0xFF6a7282),
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 15,
+                                  fontSize: oldPriceFontSize,
                                   decoration: TextDecoration.lineThrough,
                                   decorationColor: Color(0xFF6a7282),
                                   decorationThickness: 1,
@@ -323,18 +335,16 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     const Spacer(),
                     ElevatedButton(
                       onPressed: () {
-                        final upcomingController = Get.find<UpcomingController>();
+                        final upcomingController =
+                            Get.find<UpcomingController>();
                         upcomingController.selectCourse(widget.item);
-                        
-                        print('flutter: DEBUG: Sending ID to server -> ${widget.item.courseId}');
-                        print('flutter: Course: ${widget.item.courseName}');
-                        
+
                         Get.offAll(() => const Checkout());
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFF65505),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: buttonHorizontalPadding,
                           vertical: 12,
                         ),
                         shape: RoundedRectangleBorder(
@@ -346,10 +356,10 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                           Text(
                             'Enroll Now',
                             style: GoogleFonts.inter(
-                              textStyle: const TextStyle(
+                              textStyle: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 16,
+                                fontSize: buttonFontSize,
                               ),
                             ),
                           ),
@@ -365,7 +375,8 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                   ],
                 ),
                 const Gap(8),
-                if (widget.item.demoVideoId != null && widget.item.demoVideoId!.isNotEmpty) ...[
+                if (widget.item.demoVideoId != null &&
+                    widget.item.demoVideoId!.isNotEmpty) ...[
                   Divider(color: const Color(0xFFe2e8f0), thickness: 1),
                   const Gap(8),
                   Center(
@@ -373,7 +384,8 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       onTap: () async {
                         final videoId = widget.item.demoVideoId ?? '';
                         if (videoId.isNotEmpty) {
-                          final youtubeUrl = 'https://www.youtube.com/watch?v=$videoId';
+                          final youtubeUrl =
+                              'https://www.youtube.com/watch?v=$videoId';
                           await launchUrl(Uri.parse(youtubeUrl));
                         }
                       },

@@ -105,8 +105,12 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
               final double breadcrumbFontSize = isSmall
                   ? 12
                   : (isMedium ? 13 : 15);
-              final double videoTitleFontSize = isSmall ? 18 : (isMedium ? 20 : 22);
-              final double subtitleFontSize = isSmall ? 16 : (isMedium ? 18 : 24);
+              final double videoTitleFontSize = isSmall
+                  ? 18
+                  : (isMedium ? 20 : 22);
+              final double subtitleFontSize = isSmall
+                  ? 18
+                  : (isMedium ? 18 : 24);
               final double bodyFontSize = isSmall ? 12 : (isMedium ? 13 : 14);
 
               return SingleChildScrollView(
@@ -171,7 +175,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                     textStyle: TextStyle(
                                       color: Color.fromRGBO(0, 0, 0, 0.6),
                                       fontSize: bodyFontSize,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
@@ -216,7 +220,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                     textStyle: TextStyle(
                                       color: Colors.black,
                                       fontSize: subtitleFontSize,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w700,
                                       height: 1.0,
                                       letterSpacing: 0,
                                     ),
@@ -253,7 +257,11 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                               thickness: 0.5,
                               color: Colors.black,
                             ),
-                            _buildVideosList(videoTitleFontSize, bodyFontSize, screenWidth),
+                            _buildVideosList(
+                              videoTitleFontSize,
+                              bodyFontSize,
+                              screenWidth,
+                            ),
                           ],
                         ),
                       ),
@@ -346,7 +354,11 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     );
   }
 
-  Widget _buildVideosList(double videoTitleFontSize, double bodyFontSize, double screenWidth) {
+  Widget _buildVideosList(
+    double videoTitleFontSize,
+    double bodyFontSize,
+    double screenWidth,
+  ) {
     var videos = widget.allVideos;
 
     if (videos.isEmpty) {
@@ -365,7 +377,12 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return _buildVideoItem(videos[index], videoTitleFontSize, bodyFontSize, screenWidth);
+        return _buildVideoItem(
+          videos[index],
+          videoTitleFontSize,
+          bodyFontSize,
+          screenWidth,
+        );
       },
       separatorBuilder: (context, index) =>
           const Divider(height: 1, color: Colors.black, thickness: 0.5),
@@ -373,7 +390,12 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     );
   }
 
-  Widget _buildVideoItem(Video video, double videoTitleFontSize, double bodyFontSize, double screenWidth) {
+  Widget _buildVideoItem(
+    Video video,
+    double videoTitleFontSize,
+    double bodyFontSize,
+    double screenWidth,
+  ) {
     final isSelected = currentVideo.id == video.id;
     final isSmall = screenWidth < 390;
     final containerPadding = isSmall ? 10.0 : 12.0;
@@ -416,11 +438,14 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                   children: [
                     Text(
                       "${video.title}",
-                      maxLines: 2,
+                      maxLines: 6,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 0,
+                          height: 1.25,
+                          color: Colors.black,
                           fontSize: videoTitleFontSize,
                         ),
                       ),

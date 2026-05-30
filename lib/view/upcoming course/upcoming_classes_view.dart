@@ -36,7 +36,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final double screenWidth = constraints.maxWidth;
-          final bool isSmall = screenWidth < 390;
+          final bool isSmall = screenWidth < 430;
           final bool isMedium = screenWidth >= 390 && screenWidth < 768;
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
 
@@ -44,104 +44,103 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
             if (upcomingController.isLoading.value) {
               return const Center(child: CircularProgressIndicator());
             }
-             final upcomingList = upcomingController.upcomingclass.value.data;
-            print("Upcoming Classes Count: ${upcomingList.length}");
+            final upcomingList = upcomingController.upcomingclass.value.data;
             if (upcomingList.isEmpty) {
               return const Center(child: Text("No upcoming classes found."));
             }
-          return SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Gap(isSmall ? 24 : 32),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: _buildBreadcrumb(isSmall),
-                  ),
-                  Gap(isSmall ? 24 : 32),
-                  Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFffeee8),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: const Color(0xFFfed1c0),
-                          width: 1,
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Gap(isSmall ? 24 : 32),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _buildBreadcrumb(isSmall),
+                    ),
+                    Gap(isSmall ? 24 : 32),
+                    Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFffeee8),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: const Color(0xFFfed1c0),
+                            width: 1,
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        'Next Batches Starting Soon',
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                            color: Color(0xFFf85604),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                        child: Text(
+                          'Next Batches Starting Soon',
+                          style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                              color: Color(0xFFf85604),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Gap(15),
-                  Center(
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
+                    Gap(15),
+                    Center(
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 36,
+                              height: 1.2,
+                            ),
+                          ),
+                          children: [
+                            const TextSpan(
+                              text: "Upcoming Classes in Google Meet ",
+                            ),
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.middle,
+                              child: Image.network(
+                                'https://codeit.com.np/images/google_meet.png',
+                                height: 36,
+                                width: 36,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Gap(15),
+                    Center(
+                      child: Text(
+                        "Miss a live class? No problem—recorded videos will be available for every session.",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 36,
+                          textStyle: TextStyle(
+                            color: const Color(0xFF717787),
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 14,
                             height: 1.2,
                           ),
                         ),
-                        children: [
-                          const TextSpan(
-                            text: "Upcoming Classes in Google Meet ",
-                          ),
-                          WidgetSpan(
-                            alignment: PlaceholderAlignment.middle,
-                            child: Image.network(
-                              'https://codeit.com.np/images/google_meet.png',
-                              height: 36,
-                              width: 36,
-                            ),
-                          ),
-                        ],
                       ),
                     ),
-                  ),
-                  Gap(15),
-                  Center(
-                    child: Text(
-                      "Miss a live class? No problem—recorded videos will be available for every session.",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          color: const Color(0xFF717787),
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 14,
-                          height: 1.2,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Gap(20),
-                  ...upcomingList.map((item){
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: UpcomingWidget(item: item),
-                    );
-                  }),
-                  Gap(30),
-                ],
+                    Gap(20),
+                    ...upcomingList.map((item) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: UpcomingWidget(item: item),
+                      );
+                    }),
+                    Gap(30),
+                  ],
+                ),
               ),
-            ),
-          );
-        });
+            );
+          });
         },
       ),
     );

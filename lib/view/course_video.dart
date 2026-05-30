@@ -161,7 +161,7 @@ class _CourseVideoState extends State<CourseVideo> {
                       // Gap(20),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => Notes(id: widget.item.enrollmentId,));
+                          Get.to(() => Notes(id: widget.item.enrollmentId));
                         },
                         child: Container(
                           width: double.infinity,
@@ -258,7 +258,10 @@ class _CourseVideoState extends State<CourseVideo> {
                                 GestureDetector(
                                   onTap: toggleSort,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
                                     decoration: BoxDecoration(
                                       border: Border.all(color: Colors.black),
                                       borderRadius: BorderRadius.circular(4),
@@ -277,19 +280,35 @@ class _CourseVideoState extends State<CourseVideo> {
                               ],
                             ),
                             Gap(15),
-                            Divider(height: 1,thickness: 0.5, color: Colors.black),
+                            Divider(
+                              height: 1,
+                              thickness: 0.5,
+                              color: Colors.black,
+                            ),
                             Obx(() {
-                              var videos = controller.coursevideo.value.courseDetails?.videos ?? [];
-                              if (controller.isLoadingForId(widget.item.enrollmentId.toString())) {
+                              var videos =
+                                  controller
+                                      .coursevideo
+                                      .value
+                                      .courseDetails
+                                      ?.videos ??
+                                  [];
+                              if (controller.isLoadingForId(
+                                widget.item.enrollmentId.toString(),
+                              )) {
                                 return const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 20),
-                                  child: Center(child: CircularProgressIndicator()),
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
                                 );
                               }
                               if (videos.isEmpty) {
                                 return const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 20),
-                                  child: Center(child: Text("No videos available.")),
+                                  child: Center(
+                                    child: Text("No videos available."),
+                                  ),
                                 );
                               }
                               // Sort videos
@@ -301,7 +320,13 @@ class _CourseVideoState extends State<CourseVideo> {
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
-                                  return videoItem(videosList[index], videosList, screenWidth, bodyFontSize, subtitleFontSize);
+                                  return videoItem(
+                                    videosList[index],
+                                    videosList,
+                                    screenWidth,
+                                    bodyFontSize,
+                                    subtitleFontSize,
+                                  );
                                 },
                                 separatorBuilder: (context, index) =>
                                     const Divider(
@@ -329,7 +354,13 @@ class _CourseVideoState extends State<CourseVideo> {
 }
 
 // individual video row item
-Widget videoItem(Video video, List<Video> allVideos, double screenWidth, double bodyFontSize, double subtitleFontSize) {
+Widget videoItem(
+  Video video,
+  List<Video> allVideos,
+  double screenWidth,
+  double bodyFontSize,
+  double subtitleFontSize,
+) {
   final isSmall = screenWidth < 390;
   final playIconSize = isSmall ? 16.0 : 24.75;
   final playContainerSize = isSmall ? 70.0 : 82.0;
@@ -370,11 +401,14 @@ Widget videoItem(Video video, List<Video> allVideos, double screenWidth, double 
               children: [
                 Text(
                   "${video.title}",
-                  maxLines: 2,
+                  maxLines: 6,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 0,
+                      height: 1.25,
+                      color: Colors.black,
                       fontSize: subtitleFontSize,
                     ),
                   ),
@@ -421,7 +455,6 @@ Widget videoItem(Video video, List<Video> allVideos, double screenWidth, double 
     ),
   );
 }
-
 
 Widget _buildBreadcrumb(double fontSize) {
   return Row(

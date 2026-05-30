@@ -27,7 +27,8 @@ class Checkout extends StatefulWidget {
 class _CheckoutState extends State<Checkout> {
   final UpcomingController upcomingController = Get.find<UpcomingController>();
   final AuthController authController = Get.find<AuthController>();
-  final AdmissionController admissionController = Get.find<AdmissionController>();
+  final AdmissionController admissionController =
+      Get.find<AdmissionController>();
   bool _agreeToTerms = false;
   final TermsController termsController = Get.find<TermsController>();
   String? _selectedFilePath;
@@ -39,7 +40,6 @@ class _CheckoutState extends State<Checkout> {
       authController.fetchUser();
       termsController.getTerms();
       upcomingController.getUpcomingClasses();
-
     });
   }
 
@@ -52,9 +52,14 @@ class _CheckoutState extends State<Checkout> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final double screenWidth = constraints.maxWidth;
-          final bool isSmall = screenWidth < 390;
+          final bool isSmall = screenWidth < 430;
           final bool isMedium = screenWidth >= 390 && screenWidth < 768;
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
+          final double summaryFontSize = isSmall ? 16 : 18;
+          final double summaryValueFontSize = isSmall ? 17 : 18;
+          final double amountFontSize = isSmall ? 26 : 28;
+          final double studentValueFontSize = isSmall ? 17 : 18;
+          final double termsFontSize = isSmall ? 15 : 16;
 
           return SingleChildScrollView(
             child: Padding(
@@ -115,86 +120,105 @@ class _CheckoutState extends State<Checkout> {
                             const Gap(10),
                             Divider(color: Colors.grey, thickness: 0.5),
                             const Gap(10),
-                            Obx(() => Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Course:',
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    upcomingController.selectedCourse.value?.courseName ?? 'N/A',
-                                    textAlign: TextAlign.end,
+                            Obx(
+                              () => Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Course:',
                                     style: GoogleFonts.inter(
-                                      textStyle: const TextStyle(
+                                      textStyle: TextStyle(
                                         color: Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: summaryFontSize,
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )),
+                                  Expanded(
+                                    child: Text(
+                                      upcomingController
+                                              .selectedCourse
+                                              .value
+                                              ?.courseName ??
+                                          'N/A',
+                                      textAlign: TextAlign.end,
+                                      style: GoogleFonts.inter(
+                                        textStyle: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: summaryValueFontSize,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                             Gap(6),
-                            Obx(() => Row(
-                              children: [
-                                Text(
-                                  'Batch Starts:',
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
+                            Obx(
+                              () => Row(
+                                children: [
+                                  Text(
+                                    'Batch Starts:',
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: summaryFontSize,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  upcomingController.selectedCourse.value?.startDate ?? '--',
-                                  style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
+                                  Spacer(),
+                                  Text(
+                                    upcomingController
+                                            .selectedCourse
+                                            .value
+                                            ?.startDate ??
+                                        '--',
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: summaryValueFontSize,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )),
+                                ],
+                              ),
+                            ),
                             Gap(6),
-                            Obx(() => Row(
-                              children: [
-                                Text(
-                                  'Duration:',
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18,
+                            Obx(
+                              () => Row(
+                                children: [
+                                  Text(
+                                    'Duration:',
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: summaryFontSize,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Spacer(),
-                                Text(
-                                  upcomingController.selectedCourse.value?.courseDuration ?? '--',
-                                  style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
+                                  Spacer(),
+                                  Text(
+                                    upcomingController
+                                            .selectedCourse
+                                            .value
+                                            ?.courseDuration ??
+                                        '--',
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: summaryValueFontSize,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            )),
+                                ],
+                              ),
+                            ),
                             Gap(6),
                             Row(
                               children: [
@@ -204,7 +228,7 @@ class _CheckoutState extends State<Checkout> {
                                     textStyle: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 18,
+                                      fontSize: summaryFontSize,
                                     ),
                                   ),
                                 ),
@@ -212,10 +236,10 @@ class _CheckoutState extends State<Checkout> {
                                 Text(
                                   'Online (Google Meet)',
                                   style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
+                                    textStyle: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 18,
+                                      fontSize: summaryValueFontSize,
                                     ),
                                   ),
                                 ),
@@ -224,80 +248,81 @@ class _CheckoutState extends State<Checkout> {
                             const Gap(10),
                             Divider(color: Colors.grey, thickness: 0.5),
                             const Gap(10),
-                            Obx(() => Row(
-                              children: [
-                                Text(
-                                  'Total Amount:',
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
-                                Spacer(),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Rs. ${upcomingController.selectedCourse.value?.offerPrice?.isEmpty ?? true ? '--' : upcomingController.selectedCourse.value!.offerPrice}/-',
-                                      style: GoogleFonts.inter(
-                                        textStyle: const TextStyle(
-                                          color: Colors.deepOrange,
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 28,
-                                          letterSpacing: -0.5,
-                                        ),
+                            Obx(
+                              () => Row(
+                                children: [
+                                  Text(
+                                    'Total Amount:',
+                                    style: GoogleFonts.inter(
+                                      textStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: summaryFontSize,
                                       ),
                                     ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Rs. ${upcomingController.selectedCourse.value?.actualPrice?.isEmpty ?? true ? '--' : upcomingController.selectedCourse.value!.actualPrice}',
-                                          style: GoogleFonts.inter(
-                                            textStyle: const TextStyle(
-                                              color: Color(0xFF6a7282),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 15,
-                                              decoration:
-                                                  TextDecoration.lineThrough,
-                                              decorationColor: Color(
-                                                0xFF6a7282,
-                                              ),
-                                              decorationThickness: 1,
-                                            ),
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Rs. ${upcomingController.selectedCourse.value?.offerPrice?.isEmpty ?? true ? '--' : upcomingController.selectedCourse.value!.offerPrice}/-',
+                                        style: GoogleFonts.inter(
+                                          textStyle: TextStyle(
+                                            color: Colors.deepOrange,
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: amountFontSize,
                                           ),
                                         ),
-                                        const Gap(8),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 8,
-                                            vertical: 4,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xFFdcfce6),
-                                            borderRadius: BorderRadius.circular(
-                                              4,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            'Save ${upcomingController.selectedCourse.value?.discount?.isEmpty ?? true ? '--' : upcomingController.selectedCourse.value!.discount}',
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Rs. ${upcomingController.selectedCourse.value?.actualPrice?.isEmpty ?? true ? '--' : upcomingController.selectedCourse.value!.actualPrice}',
                                             style: GoogleFonts.inter(
-                                              textStyle: const TextStyle(
-                                                color: Color(0xFF008236),
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 12,
+                                              textStyle: TextStyle(
+                                                color: Color(0xFF6a7282),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: isSmall ? 14 : 15,
+                                                decoration:
+                                                    TextDecoration.lineThrough,
+                                                decorationColor: Color(
+                                                  0xFF6a7282,
+                                                ),
+                                                decorationThickness: 1,
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )),
+                                          const Gap(8),
+                                          Container(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: isSmall ? 6 : 8,
+                                              vertical: 4,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFdcfce6),
+                                              borderRadius:
+                                                  BorderRadius.circular(4),
+                                            ),
+                                            child: Text(
+                                              'Save ${upcomingController.selectedCourse.value?.discount?.isEmpty ?? true ? '--' : upcomingController.selectedCourse.value!.discount}',
+                                              style: GoogleFonts.inter(
+                                                textStyle: TextStyle(
+                                                  color: Color(0xFF008236),
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: isSmall ? 11 : 12,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
                             const Gap(20),
                             Divider(
                               color: const Color(0xFFffd6a8),
@@ -332,107 +357,148 @@ class _CheckoutState extends State<Checkout> {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: Obx(() => Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Full Name',
-                                          style: GoogleFonts.inter(
-                                            textStyle: TextStyle(
-                                              color: const Color(0xFF6a7282),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 14,
+                                padding: EdgeInsets.all(isSmall ? 12 : 15),
+                                child: Obx(
+                                  () => Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Full Name',
+                                            style: GoogleFonts.inter(
+                                              textStyle: TextStyle(
+                                                color: const Color(0xFF6a7282),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Gap(4),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          authController.user.value?.name?.isEmpty ?? true 
-                                              ? '--' 
-                                              : authController.user.value!.name!,
-                                          style: GoogleFonts.inter(
-                                            textStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 18,
+                                        ],
+                                      ),
+                                      Gap(4),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              authController
+                                                          .user
+                                                          .value
+                                                          ?.name
+                                                          ?.isEmpty ??
+                                                      true
+                                                  ? '--'
+                                                  : authController
+                                                        .user
+                                                        .value!
+                                                        .name!,
+                                              maxLines: 2,
+                                              softWrap: true,
+                                              style: GoogleFonts.inter(
+                                                textStyle: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize:
+                                                      studentValueFontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Gap(10),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Email',
-                                          style: GoogleFonts.inter(
-                                            textStyle: TextStyle(
-                                              color: const Color(0xFF6a7282),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 14,
+                                        ],
+                                      ),
+                                      Gap(10),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Email',
+                                            style: GoogleFonts.inter(
+                                              textStyle: TextStyle(
+                                                color: const Color(0xFF6a7282),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Gap(4),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          authController.user.value?.email?.isEmpty ?? true 
-                                              ? '--' 
-                                              : authController.user.value!.email!,
-                                          style: GoogleFonts.inter(
-                                            textStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 18,
+                                        ],
+                                      ),
+                                      Gap(4),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              authController
+                                                          .user
+                                                          .value
+                                                          ?.email
+                                                          ?.isEmpty ??
+                                                      true
+                                                  ? '--'
+                                                  : authController
+                                                        .user
+                                                        .value!
+                                                        .email!,
+                                              maxLines: 2,
+                                              softWrap: true,
+                                              style: GoogleFonts.inter(
+                                                textStyle: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize:
+                                                      studentValueFontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Gap(10),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          'Whatsapp',
-                                          style: GoogleFonts.inter(
-                                            textStyle: TextStyle(
-                                              color: const Color(0xFF6a7282),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 14,
+                                        ],
+                                      ),
+                                      Gap(10),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'Whatsapp',
+                                            style: GoogleFonts.inter(
+                                              textStyle: TextStyle(
+                                                color: const Color(0xFF6a7282),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Gap(4),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          authController.user.value?.phone?.isEmpty ?? true 
-                                              ? '--' 
-                                              : authController.user.value!.phone!,
-                                          style: GoogleFonts.inter(
-                                            textStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 18,
+                                        ],
+                                      ),
+                                      Gap(4),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              authController
+                                                          .user
+                                                          .value
+                                                          ?.phone
+                                                          ?.isEmpty ??
+                                                      true
+                                                  ? '--'
+                                                  : authController
+                                                        .user
+                                                        .value!
+                                                        .phone!,
+                                              maxLines: 2,
+                                              softWrap: true,
+                                              style: GoogleFonts.inter(
+                                                textStyle: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize:
+                                                      studentValueFontSize,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Gap(10),
-                                      ],
-                                    ),
-                                  ],
-                                )),
+                                          Gap(10),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                             const Gap(10),
@@ -442,6 +508,7 @@ class _CheckoutState extends State<Checkout> {
                             ),
                             const Gap(10),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   'Upload Payment Receipt',
@@ -449,7 +516,7 @@ class _CheckoutState extends State<Checkout> {
                                     textStyle: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 18,
+                                      fontSize: isSmall ? 17 : 18,
                                     ),
                                   ),
                                 ),
@@ -511,7 +578,9 @@ class _CheckoutState extends State<Checkout> {
                                                     color: Colors.red,
                                                     shape: BoxShape.circle,
                                                   ),
-                                                  padding: const EdgeInsets.all(4),
+                                                  padding: const EdgeInsets.all(
+                                                    4,
+                                                  ),
                                                   child: const Icon(
                                                     Icons.close,
                                                     color: Colors.white,
@@ -523,25 +592,29 @@ class _CheckoutState extends State<Checkout> {
                                           ],
                                         )
                                       : Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             SvgPicture.asset(
                                               'assets/support/upload.svg',
                                               width: 48,
                                               height: 48,
-                                              colorFilter: const ColorFilter.mode(
-                                                Color(0xFF6a7282),
-                                                BlendMode.srcIn,
-                                              ),
+                                              colorFilter:
+                                                  const ColorFilter.mode(
+                                                    Color(0xFF6a7282),
+                                                    BlendMode.srcIn,
+                                                  ),
                                             ),
                                             const Gap(5),
                                             Text(
                                               'Click to upload receipt',
                                               style: GoogleFonts.inter(
                                                 textStyle: TextStyle(
-                                                  color: const Color(0xFF4a5565),
+                                                  color: const Color(
+                                                    0xFF4a5565,
+                                                  ),
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 18,
+                                                  fontSize: isSmall ? 16 : 18,
                                                 ),
                                               ),
                                             ),
@@ -550,7 +623,9 @@ class _CheckoutState extends State<Checkout> {
                                               '(PNG, JPG • Max 2MB)',
                                               style: GoogleFonts.inter(
                                                 textStyle: TextStyle(
-                                                  color: const Color(0xFF4a5565),
+                                                  color: const Color(
+                                                    0xFF4a5565,
+                                                  ),
                                                   fontWeight: FontWeight.w400,
                                                   fontSize: 14,
                                                 ),
@@ -563,6 +638,7 @@ class _CheckoutState extends State<Checkout> {
                             ),
                             Gap(20),
                             Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 GestureDetector(
                                   onTap: () {
@@ -570,41 +646,62 @@ class _CheckoutState extends State<Checkout> {
                                       _agreeToTerms = !_agreeToTerms;
                                     });
                                   },
-                                  child: Checkbox(
-                                    value: _agreeToTerms,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _agreeToTerms = value ?? false;
-                                      });
-                                    },
-                                    activeColor: Colors.deepOrange,
-                                    checkColor: Colors.white,
-                                    side: BorderSide(
-                                      color: Colors.black,
-                                      width: 2,
+                                  child: SizedBox(
+                                    width: 40,
+                                    height: 40,
+                                    child: Transform.scale(
+                                      scale: 0.9,
+                                      child: Checkbox(
+                                        value: _agreeToTerms,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            _agreeToTerms = value ?? false;
+                                          });
+                                        },
+                                        activeColor: Colors.deepOrange,
+                                        checkColor: Colors.white,
+                                        side: BorderSide(
+                                          color: Colors.black,
+                                          width: 2,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                                Text(
-                                  'I agree to the',
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                Gap(4),
-                                GestureDetector(
-                                  onTap: () => _showTermsAndConditions(context),
-                                  child: Text(
-                                    'Terms and Conditions',
-                                    style: GoogleFonts.inter(
-                                      textStyle: TextStyle(
-                                        color: Colors.deepOrange,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16,
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () =>
+                                        _showTermsAndConditions(context),
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      alignment: Alignment.centerLeft,
+                                      child: RichText(
+                                        text: TextSpan(
+                                          style: GoogleFonts.inter(
+                                            textStyle: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: termsFontSize,
+                                              height: 1.25,
+                                            ),
+                                          ),
+                                          children: [
+                                            const TextSpan(
+                                              text: 'I agree to the ',
+                                            ),
+                                            TextSpan(
+                                              text: 'Terms and Conditions',
+                                              style: GoogleFonts.inter(
+                                                textStyle: TextStyle(
+                                                  color: Colors.deepOrange,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: termsFontSize,
+                                                  height: 1.25,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -615,23 +712,32 @@ class _CheckoutState extends State<Checkout> {
                             SizedBox(
                               width: double.infinity,
                               child: ElevatedButton(
-                                onPressed: _agreeToTerms ? () {
-                                  if (_selectedFilePath == null) {
-                                    Get.snackbar(
-                                      'Error',
-                                      'Please upload payment receipt',
-                                      snackPosition: SnackPosition.TOP,
-                                      backgroundColor: Colors.red,
-                                      colorText: Colors.white,
-                                      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                      borderRadius: 12,
-                                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                      dismissDirection: DismissDirection.up,
-                                    );
-                                  } else {
-                                    _confirmPayment();
-                                  }
-                                } : null,
+                                onPressed: _agreeToTerms
+                                    ? () {
+                                        if (_selectedFilePath == null) {
+                                          Get.snackbar(
+                                            'Error',
+                                            'Please upload payment receipt',
+                                            snackPosition: SnackPosition.TOP,
+                                            backgroundColor: Colors.red,
+                                            colorText: Colors.white,
+                                            margin: const EdgeInsets.symmetric(
+                                              horizontal: 16,
+                                              vertical: 12,
+                                            ),
+                                            borderRadius: 12,
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 16,
+                                              vertical: 12,
+                                            ),
+                                            dismissDirection:
+                                                DismissDirection.up,
+                                          );
+                                        } else {
+                                          _confirmPayment();
+                                        }
+                                      }
+                                    : null,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFFf85604),
                                   disabledBackgroundColor: Colors.grey.shade400,
@@ -709,12 +815,14 @@ class _CheckoutState extends State<Checkout> {
   Future<void> _pickFromGallery() async {
     try {
       final picker = image_picker.ImagePicker();
-      final image = await picker.pickImage(source: image_picker.ImageSource.gallery);
-      
+      final image = await picker.pickImage(
+        source: image_picker.ImageSource.gallery,
+      );
+
       if (image != null) {
         final int fileSizeInBytes = await image.length();
         final double fileSizeInMB = fileSizeInBytes / (1024 * 1024);
-        
+
         // Validate file size (max 2MB)
         if (fileSizeInMB > 2) {
           Get.snackbar(
@@ -730,11 +838,11 @@ class _CheckoutState extends State<Checkout> {
           );
           return;
         }
-        
+
         setState(() {
           _selectedFilePath = image.path;
         });
-        
+
         Get.snackbar(
           'Success',
           'File uploaded successfully',
@@ -781,11 +889,8 @@ class _CheckoutState extends State<Checkout> {
 
       // Get the upcoming ID from the selected course (NOT courseId)
       final selectedCourseData = upcomingController.selectedCourse.value;
-      print("DEBUG: selectedCourse -> $selectedCourseData");
-      
       final upcomingId = selectedCourseData?.upcomingId;
-      print("DEBUG: upcomingId extracted -> $upcomingId");
-      
+
       if (upcomingId == null) {
         Get.snackbar(
           'Error',
