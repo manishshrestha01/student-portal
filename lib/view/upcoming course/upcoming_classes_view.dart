@@ -46,6 +46,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
               return const Center(child: CircularProgressIndicator());
             }
             final upcomingList = upcomingController.upcomingclass.value.data;
+            print("Upcoming Count: ${upcomingList.length}");
             if (upcomingList.isEmpty) {
               return const Center(child: Text("No upcoming classes found."));
             }

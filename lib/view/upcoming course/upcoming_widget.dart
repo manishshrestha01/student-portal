@@ -336,6 +336,9 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                     const Spacer(),
                     ElevatedButton(
                       onPressed: () {
+                        print("Selected Course: ${widget.item.courseName}");
+                        print("Upcoming Course ID: ${widget.item.upcomingId}");
+                        print("Offer Price: ${widget.item.offerPrice}");
                         final upcomingController =
                             Get.find<UpcomingController>();
                         upcomingController.selectCourse(widget.item);

@@ -25,6 +25,8 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
     final double buttonHorizontalPadding = isSmallDevice ? 14 : 20;
     final double buttonFontSize = isSmallDevice ? 15 : 16;
     final double imageAspectRatio = isSmallDevice ? 16 / 10 : 16 / 8.6;
+    final plan = widget.item.plans.isNotEmpty ? widget.item.plans.first : null;
+    final priceLabel = plan?.price != null ? 'Rs. ${plan!.price}' : 'Price unavailable';
 
     return Container(
       width: double.infinity,
@@ -128,7 +130,7 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Rs. ${widget.item.plans[0].price}',
+                          priceLabel,
                           style: GoogleFonts.inter(
                             textStyle: TextStyle(
                               color: Colors.black,
@@ -180,7 +182,17 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                     ),
                     const Spacer(),
                     ElevatedButton(
-                      onPressed: () => Get.offAll(() => const Purchase()),
+                      onPressed: widget.item.slug == null || widget.item.slug!.isEmpty
+                          ? null
+                          : () {
+                              final planName = plan?.name ?? 'N/A';
+                              final planPrice = plan?.price != null ? 'Rs. ${plan!.price}' : 'N/A';
+                              print('courseName: ${widget.item.name}, slug: ${widget.item.slug}, plan: $planName, price: $planPrice');
+                              Get.to(
+                                () => const Purchase(),
+                                arguments: {'slug': widget.item.slug},
+                              );
+                            },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         padding: EdgeInsets.symmetric(

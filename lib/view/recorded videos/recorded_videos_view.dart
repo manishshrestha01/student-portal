@@ -46,8 +46,11 @@ class _RecordedVideosViewState extends State<RecordedVideosView> {
             if (recordedController.isLoading.value) {
               return const Center(child: CircularProgressIndicator());
             }
-             final recordedList = recordedController.recordedVideos.toList();
-            print("Recorded Videos Count: ${recordedList.length}");
+            final recordedList = recordedController.recordedVideos.toList();
+            print("Recorded Count: ${recordedList.length}");
+            if (recordedController.errorMessage.value.isNotEmpty) {
+              return Center(child: Text(recordedController.errorMessage.value));
+            }
             if (recordedList.isEmpty) {
               return const Center(child: Text("No recorded videos found."));
             }

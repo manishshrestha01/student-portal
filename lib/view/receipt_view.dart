@@ -20,7 +20,7 @@ class ReceiptView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ReceiptController controller = Get.put(ReceiptController());
+    final ReceiptController controller = Get.find<ReceiptController>();
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,

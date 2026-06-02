@@ -30,7 +30,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final AuthController authController = Get.find<AuthController>();
-  final ReceiptController receiptController = Get.put(ReceiptController());
+  final ReceiptController receiptController = Get.put(ReceiptController(), permanent: true);
   final CoursesController coursesController = Get.put(CoursesController());
   final CertificatesController certificatesController = Get.put(
     CertificatesController(),
