@@ -569,6 +569,12 @@ class _PurchaseState extends State<Purchase> {
                               thickness: 2,
                             ),
                             const Gap(10),
+                            //fonepay and bank transfer sections
+                            const _FonePaySection(),
+                            const Gap(16),
+                            const _BankTransferSection(),
+
+                            const Gap(10),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -1182,3 +1188,238 @@ class _PurchaseState extends State<Purchase> {
     );
   }
 }
+
+
+/// FonePay and Bank Transfer sections
+
+class _FonePaySection extends StatelessWidget {
+  const _FonePaySection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE8C97A), width: 1.5),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      child: Column(
+        children: [
+          Text(
+            'We accept',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                fontSize: 13,
+                color: AppColors.textDark,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          const Gap(8),
+          // FonePay logo badge
+             Container(
+            width: 170,
+            height: 70,
+            decoration: BoxDecoration(
+              border: Border.all(color: const Color(0xFFE8C97A), width: 1.5),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image(
+                image: AssetImage('assets/images/fonepay_image.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const Gap(6),
+          Text(
+            'नेपाल राष्ट्र बैंकबाट अनुमति प्राप्त',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                fontSize: 12,
+                color: AppColors.textDark,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          const Gap(16),
+          // QR Code box
+          Container(
+            width: 170,
+            height: 170,
+            decoration: BoxDecoration(
+              border: Border.all(color: const Color(0xFFE8C97A), width: 1.5),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(6),
+              child: Image(
+                image: AssetImage('assets/images/esewa_qr.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const Gap(14),
+          Text(
+            'Scan to Pay',
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF222222),
+              ),
+            ),
+          ),
+          const Gap(8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '* ',
+                style: GoogleFonts.inter(
+                  textStyle: const TextStyle(
+                    color: Color(0xFFD62B2B),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Text(
+                'Please take a screenshot after the payment.',
+                style: GoogleFonts.inter(
+                  textStyle: const TextStyle(
+                    color: Color(0xFF555555),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BankTransferSection extends StatelessWidget {
+  const _BankTransferSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE0E0E0), width: 1.5),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Icon(
+                Icons.account_balance,
+                size: 22,
+                color: Color(0xFF222222),
+              ),
+              const Gap(8),
+              Text(
+                'Bank Transfer',
+                style: GoogleFonts.inter(
+                  textStyle: const TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF222222),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const Gap(16),
+          _BankDetailRow(label: 'Bank:', value: 'Nepal Bank Limited'),
+          const Gap(10),
+          _BankDetailRow(label: 'Account Name:', value: 'Code IT'),
+          const Gap(10),
+          _BankDetailRow(label: 'Ac/No:', value: '01600106885462000001'),
+          const Gap(10),
+          _BankDetailRow(label: 'Branch:', value: 'Dharan'),
+          const Gap(16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '* ',
+                style: GoogleFonts.inter(
+                  textStyle: const TextStyle(
+                    color: Color(0xFFD62B2B),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Text(
+                'Please take a screenshot after the payment.',
+                style: GoogleFonts.inter(
+                  textStyle: const TextStyle(
+                    color: Color(0xFF555555),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BankDetailRow extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _BankDetailRow({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 130,
+          child: Text(
+            label,
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 14,
+                color: Color(0xFF222222),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: GoogleFonts.inter(
+              textStyle: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF444444),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+
