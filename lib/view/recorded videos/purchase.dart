@@ -995,7 +995,7 @@ class _PurchaseState extends State<Purchase> {
         return;
       }
 
-      print('DEBUG: About to submit receipt. courseId=$courseId, plan=$selectedPlanValue, file=${_selectedFilePath}');
+      print('DEBUG: About to submit receipt. courseId=$courseId, plan=$selectedPlanValue, file=$_selectedFilePath');
       await storeController.submitStoreWithPayment(
         courseId,
         selectedPlanValue,

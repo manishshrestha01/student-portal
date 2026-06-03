@@ -234,7 +234,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                                         'Your enrollment is being processed. We\'ll notify you once approved.',
                                         style: GoogleFonts.inter(
                                           textStyle: const TextStyle(
-                                            color: const Color(0xFF1447e5),
+                                            color: Color(0xFF1447e5),
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
                                             height: 1.5,

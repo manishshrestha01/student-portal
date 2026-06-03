@@ -69,7 +69,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         ],
-        shape: Border(bottom: BorderSide(color: AppColors.black, width: 0.5)),
+        shape: Border(bottom: BorderSide(color: AppColors.textTertiary, width: 0.5)),
     );
       }
 

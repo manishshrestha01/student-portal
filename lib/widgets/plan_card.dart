@@ -18,14 +18,14 @@ class PlanCard extends StatelessWidget {
   final bool selected;
 
   const PlanCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.price,
     required this.features,
     this.onSelect,
     this.selected = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

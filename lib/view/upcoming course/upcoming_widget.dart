@@ -322,7 +322,7 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                                 '${widget.item.discount} off',
                                 style: GoogleFonts.inter(
                                   textStyle: const TextStyle(
-                                    color: const Color(0xFF008236),
+                                    color: Color(0xFF008236),
                                     fontWeight: FontWeight.w600,
                                     fontSize: 12,
                                   ),
