@@ -19,16 +19,21 @@ class StoreService {
     }
   }
 
-  static Future<Response> submitStore(dynamic id, String filePath, bool terms) async {
+  static Future<Response> submitStore(
+    dynamic id,
+    String plan,
+    String filePath,
+    bool terms,
+  ) async {
     try {
       var token = StorageController().getToken();
       if (token == null) {
         throw Exception('No token available');
       }
 
-      // Create FormData for multipart upload
       final formData = FormData.fromMap({
         'payment': await MultipartFile.fromFile(filePath),
+        'plan': plan,
         'terms': terms ? '1' : '0',
       });
 

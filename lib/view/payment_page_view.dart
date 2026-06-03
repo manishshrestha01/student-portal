@@ -10,13 +10,26 @@ import 'package:get/get.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PaymentPage extends StatelessWidget {
+class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final ReceiptController controller = Get.find<ReceiptController>();
+  State<PaymentPage> createState() => _PaymentPageState();
+}
 
+class _PaymentPageState extends State<PaymentPage> {
+  final ReceiptController controller = Get.find<ReceiptController>();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.fetchReceipts();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: CustomAppBar(),
@@ -59,6 +72,8 @@ class PaymentPage extends StatelessWidget {
                     if (controller.isLoading.value) {
                       return const Center(child: CircularProgressIndicator());
                     }
+                    final receiptsList = controller.receipts;
+                    print("Receipts Count: ${receiptsList.length}");
 
                     if (controller.hasError.value) {
                       return const Text("Failed to load payments");

@@ -40,6 +40,7 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      receiptController.fetchReceipts();
       coursesController.getCourses();
       certificatesController.getCertificates();
     });

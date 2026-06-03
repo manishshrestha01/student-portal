@@ -3,6 +3,8 @@ import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/controller/terms_controller.dart';
 import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart';
 import 'package:codeit_app/controller/upcoming%20course/admission_controller.dart';
+import 'package:codeit_app/view/Payments/bankaccount.dart';
+import 'package:codeit_app/view/Payments/fonepay.dart';
 import 'package:codeit_app/view/upcoming%20course/upcoming_classes_view.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
@@ -507,7 +509,12 @@ class _CheckoutState extends State<Checkout> {
                               color: const Color(0xFFffd6a8),
                               thickness: 2,
                             ),
-                            const Gap(10),
+                            const Gap(20),
+                            //fonepay and bank transfer sections
+                            const Fonepay(),
+                            const Gap(20),
+                            const Bankaccount(),
+                            const Gap(20),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

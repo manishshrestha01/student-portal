@@ -33,7 +33,7 @@ class Datum {
 
     factory Datum.fromJson(Map<String, dynamic> json){ 
         return Datum(
-            certicateId: int.tryParse(json["certificate_id"]?.toString() ?? ""),
+            certicateId: json["certicate_id"],
             courseName: json["course_name"],
             issuedTo: json["Issued to"],
             courseCompletionDate: json["course_completion_Date"],

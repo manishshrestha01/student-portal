@@ -1,8 +1,10 @@
 import 'package:codeit_app/controller/recorded%20videos/show_controller.dart';
+import 'package:codeit_app/controller/recorded%20videos/store_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/controller/auth_controller.dart';
 import 'package:codeit_app/controller/terms_controller.dart';
-import 'package:codeit_app/controller/upcoming%20course/admission_controller.dart';
+import 'package:codeit_app/view/Payments/bankaccount.dart';
+import 'package:codeit_app/view/Payments/fonepay.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -29,8 +31,7 @@ class Purchase extends StatefulWidget {
 class _PurchaseState extends State<Purchase> {
   final ShowController showController = Get.find<ShowController>();
   final AuthController authController = Get.find<AuthController>();
-  final AdmissionController admissionController =
-      Get.find<AdmissionController>();
+  final StoreController storeController = Get.find<StoreController>();
   bool _agreeToTerms = false;
   final TermsController termsController = Get.find<TermsController>();
   String? _selectedFilePath;
@@ -267,8 +268,6 @@ class _PurchaseState extends State<Purchase> {
                                   (_selectedPlanIndex != null &&
                                       _selectedPlanIndex! < livePlans.length)
                                   ? livePlans[_selectedPlanIndex!]
-                                  : livePlans.isNotEmpty
-                                  ? livePlans.first
                                   : null;
 
                               return Row(
@@ -347,8 +346,6 @@ class _PurchaseState extends State<Purchase> {
                                   (_selectedPlanIndex != null &&
                                       _selectedPlanIndex! < livePlans.length)
                                   ? livePlans[_selectedPlanIndex!]
-                                  : livePlans.isNotEmpty
-                                  ? livePlans.first
                                   : null;
 
                               return Row(
@@ -568,12 +565,11 @@ class _PurchaseState extends State<Purchase> {
                               color: const Color(0xFFffd6a8),
                               thickness: 2,
                             ),
-                            const Gap(10),
+                            const Gap(20),
                             //fonepay and bank transfer sections
-                            const _FonePaySection(),
-                            const Gap(16),
-                            const _BankTransferSection(),
-
+                            const Fonepay(),
+                            const Gap(20),
+                            const Bankaccount(),
                             const Gap(10),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -957,6 +953,17 @@ class _PurchaseState extends State<Purchase> {
 
       final courseId =
           showController.showrecordedvideos.value?.data?.course?.id;
+      final liveCourse = showController.showrecordedvideos.value?.data?.course;
+      final livePlans = liveCourse?.plans ?? const [];
+      final selectedPlan = (_selectedPlanIndex != null &&
+              _selectedPlanIndex! < livePlans.length)
+          ? livePlans[_selectedPlanIndex!]
+          : null;
+      final selectedPlanValue = selectedPlan?.value?.isNotEmpty == true
+          ? selectedPlan!.value!
+          : selectedPlan?.name?.isNotEmpty == true
+              ? selectedPlan!.name!
+              : '';
 
       if (courseId == null) {
         Get.snackbar(
@@ -973,14 +980,32 @@ class _PurchaseState extends State<Purchase> {
         return;
       }
 
-      await admissionController.submitAdmissionWithPayment(
+      if (selectedPlanValue.isEmpty) {
+        Get.snackbar(
+          'Error',
+          'Please select a plan before submitting payment.',
+          snackPosition: SnackPosition.TOP,
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          borderRadius: 12,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          dismissDirection: DismissDirection.up,
+        );
+        return;
+      }
+
+      print('DEBUG: About to submit receipt. courseId=$courseId, plan=$selectedPlanValue, file=${_selectedFilePath}');
+      await storeController.submitStoreWithPayment(
         courseId,
+        selectedPlanValue,
         _selectedFilePath!,
         _agreeToTerms,
       );
+      print('DEBUG: Submission finished. store.success=${storeController.store.value.success}, message=${storeController.store.value.message}');
 
       // Navigate to home after successful submission
-      if (admissionController.submitadmission.value.success == true) {
+      if (storeController.store.value.success == true) {
         Future.delayed(const Duration(seconds: 2), () {
           Get.offAll(() => HomeView());
         });
@@ -1188,238 +1213,3 @@ class _PurchaseState extends State<Purchase> {
     );
   }
 }
-
-
-/// FonePay and Bank Transfer sections
-
-class _FonePaySection extends StatelessWidget {
-  const _FonePaySection();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE8C97A), width: 1.5),
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-      child: Column(
-        children: [
-          Text(
-            'We accept',
-            style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                fontSize: 13,
-                color: AppColors.textDark,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          const Gap(8),
-          // FonePay logo badge
-             Container(
-            width: 170,
-            height: 70,
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color(0xFFE8C97A), width: 1.5),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image(
-                image: AssetImage('assets/images/fonepay_image.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const Gap(6),
-          Text(
-            'नेपाल राष्ट्र बैंकबाट अनुमति प्राप्त',
-            style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                fontSize: 12,
-                color: AppColors.textDark,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          const Gap(16),
-          // QR Code box
-          Container(
-            width: 170,
-            height: 170,
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color(0xFFE8C97A), width: 1.5),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image(
-                image: AssetImage('assets/images/esewa_qr.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const Gap(14),
-          Text(
-            'Scan to Pay',
-            style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF222222),
-              ),
-            ),
-          ),
-          const Gap(8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '* ',
-                style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                    color: Color(0xFFD62B2B),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              Text(
-                'Please take a screenshot after the payment.',
-                style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                    color: Color(0xFF555555),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _BankTransferSection extends StatelessWidget {
-  const _BankTransferSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFE0E0E0), width: 1.5),
-      ),
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(
-                Icons.account_balance,
-                size: 22,
-                color: Color(0xFF222222),
-              ),
-              const Gap(8),
-              Text(
-                'Bank Transfer',
-                style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF222222),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const Gap(16),
-          _BankDetailRow(label: 'Bank:', value: 'Nepal Bank Limited'),
-          const Gap(10),
-          _BankDetailRow(label: 'Account Name:', value: 'Code IT'),
-          const Gap(10),
-          _BankDetailRow(label: 'Ac/No:', value: '01600106885462000001'),
-          const Gap(10),
-          _BankDetailRow(label: 'Branch:', value: 'Dharan'),
-          const Gap(16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                '* ',
-                style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                    color: Color(0xFFD62B2B),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              Text(
-                'Please take a screenshot after the payment.',
-                style: GoogleFonts.inter(
-                  textStyle: const TextStyle(
-                    color: Color(0xFF555555),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _BankDetailRow extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const _BankDetailRow({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: 130,
-          child: Text(
-            label,
-            style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-                color: Color(0xFF222222),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: Text(
-            value,
-            style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF444444),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-
