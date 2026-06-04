@@ -1,4 +1,3 @@
-
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/controller/recorded%20videos/recorded_controller.dart';
 import 'package:codeit_app/view/recorded%20videos/recorded_widgets.dart';
@@ -21,12 +20,21 @@ class RecordedVideosView extends StatefulWidget {
 
 class _RecordedVideosViewState extends State<RecordedVideosView> {
   final RecordedController recordedController = Get.find<RecordedController>();
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       recordedController.getRecordedVideos();
     });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,6 +55,14 @@ class _RecordedVideosViewState extends State<RecordedVideosView> {
               return const Center(child: CircularProgressIndicator());
             }
             final recordedList = recordedController.recordedVideos.toList();
+            final displayedList = _searchQuery.isEmpty
+                ? recordedList
+                : recordedList.where((item) {
+                    final query = _searchQuery.toLowerCase();
+                    return (item.name ?? '').toLowerCase().contains(query) ||
+                        (item.slug ?? '').toLowerCase().contains(query) ||
+                        (item.subHeading ?? '').toLowerCase().contains(query);
+                  }).toList();
             print("Recorded Count: ${recordedList.length}");
             if (recordedController.errorMessage.value.isNotEmpty) {
               return Center(child: Text(recordedController.errorMessage.value));
@@ -54,91 +70,169 @@ class _RecordedVideosViewState extends State<RecordedVideosView> {
             if (recordedList.isEmpty) {
               return const Center(child: Text("No recorded videos found."));
             }
-          return SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Gap(isSmall ? 24 : 32),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: _buildBreadcrumb(isSmall),
-                  ),
-                  Gap(isSmall ? 24 : 32),
-                  Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
+            return SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Gap(isSmall ? 24 : 32),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: _buildBreadcrumb(isSmall),
+                    ),
+                    Gap(isSmall ? 24 : 32),
+                    Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
                           color: const Color(0xFFffeee8),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
                             color: const Color(0xFFfed1c0),
-                          width: 1,
+                            width: 1,
+                          ),
                         ),
-                      ),
-                      child: Text(
-                        'Learn Anytime, Anywhere',
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
+                        child: Text(
+                          'Learn Anytime, Anywhere',
+                          style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Gap(15),
-                  Center(
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
+                    Gap(15),
+                    Center(
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 36,
+                              height: 1.2,
+                            ),
+                          ),
+                          children: [
+                            const TextSpan(text: "Code IT Recorded Videos"),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Gap(15),
+                    Center(
+                      child: Text(
+                        "Access 500+ hours of premium recorded content. Watch anytime, rewind, and learn at your own pace with our comprehensive video library.",
+                        textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 36,
+                          textStyle: TextStyle(
+                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.italic,
+                            fontSize: 14,
                             height: 1.2,
                           ),
                         ),
-                        children: [
-                          const TextSpan(
-                            text: "Code IT Recorded Videos",
-                          ),
-                         ],
                       ),
                     ),
-                  ),
-                  Gap(15),
-                  Center(
-                    child: Text(
-                      "Access 500+ hours of premium recorded content. Watch anytime, rewind, and learn at your own pace with our comprehensive video library.",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          color: AppColors.textSecondary,
-                          fontWeight: FontWeight.w400,
-                          fontStyle: FontStyle.italic,
-                          fontSize: 14,
-                          height: 1.2,
+                    Gap(20),
+                    SearchBar(
+                      controller: _searchController,
+                      hintText: 'Search by course name',
+                      hintStyle: WidgetStateProperty.all(
+                        const TextStyle(
+                          color: AppColors.textMuted,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
+                      // onChanged: (value) {
+                      //   setState(() {
+                      //     _searchQuery = value.trim();
+                      //   });
+                      // },
+                      onSubmitted: (value) {
+                        setState(() {
+                          _searchQuery = value.trim();
+                        });
+                        FocusScope.of(context).unfocus();
+                      },
+                      onTapOutside: (_) {
+                        FocusScope.of(context).unfocus();
+                      },
+                      leading: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _searchQuery = _searchController.text.trim();
+                          });
+                          FocusScope.of(context).unfocus();
+                        },
+                        child: Icon(
+                          Icons.search,
+                          color: AppColors.iconMuted,
+                        ),
+                      ),
+                      trailing: [
+                        IconButton(
+                          icon: const Icon(Icons.close_rounded),
+                           color: AppColors.iconMuted,
+                          onPressed: () {
+                            _searchController.clear();
+                            setState(() {
+                              _searchQuery = '';
+                            });
+                          },
+                        ),
+                      ],
+                      backgroundColor: WidgetStateProperty.all(Colors.white),
+                      shadowColor: WidgetStateProperty.all(AppColors.shadow),
+                      elevation: WidgetStateProperty.all(4),
+                      shape: WidgetStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                          side: BorderSide(color: AppColors.shadow, width: 0.5),
+                        ),
+                      ),
+                      padding: WidgetStateProperty.all(
+                        const EdgeInsets.symmetric(horizontal: 12),
+                      ),
                     ),
-                  ),
-                  Gap(20),
-                  ...recordedList.map((item){
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: RecordedWidgets(item: item),
-                    );
-                  }),
-                  Gap(30),
-                ],
+                    Gap(20),
+                    if (displayedList.isEmpty)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 32),
+                        child: Center(
+                          child: Text(
+                            _searchQuery.isEmpty
+                                ? 'No recorded videos found.'
+                                : 'No recorded videos match your search.',
+                            style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                color: AppColors.textMuted,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ...displayedList.map((item) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: RecordedWidgets(item: item),
+                      );
+                    }),
+                    Gap(30),
+                  ],
+                ),
               ),
-            ),
-          );
-        });
+            );
+          });
         },
       ),
     );

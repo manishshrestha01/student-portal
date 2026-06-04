@@ -118,7 +118,7 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                       fontSize: 14,
                     ),
                   ),
-                  maxLines: 2,
+                  maxLines: 10,
                   overflow: TextOverflow.ellipsis,
                 ),
                 const Gap(8),
