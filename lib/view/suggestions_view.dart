@@ -19,7 +19,8 @@ class SuggestionsView extends StatefulWidget {
 }
 
 class _SuggestionsViewState extends State<SuggestionsView> {
-  final SuggestionController suggestionController = Get.find<SuggestionController>();
+  final SuggestionController suggestionController =
+      Get.find<SuggestionController>();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                          border: Border.all(color: AppColors.white),
+                        border: Border.all(color: AppColors.white),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
@@ -150,7 +151,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                               textAlignVertical: TextAlignVertical.top,
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
-                                    color: AppColors.black,
+                                  color: AppColors.black,
                                   fontSize: isSmall ? 14 : 16,
                                   fontWeight: FontWeight.w400,
                                 ),
@@ -246,6 +247,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [

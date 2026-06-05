@@ -150,6 +150,7 @@ class _TicketViewState extends State<TicketView> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [
@@ -184,6 +185,7 @@ class _TicketViewState extends State<TicketView> {
         ),
         const Gap(7),
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => SupportView()),
           child: Text(
             'Support',

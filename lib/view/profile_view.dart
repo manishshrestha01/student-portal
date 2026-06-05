@@ -32,7 +32,6 @@ class ProfileView extends GetView<AuthController> {
           controller.whatsapp.text = user.phone ?? '';
           controller.countryCode.text = user.countryCode ?? '';
           controller.address.text = user.address ?? '';
-        
         }
         print("Name: ${controller.name.text}");
         print("Email: ${controller.email.text}");

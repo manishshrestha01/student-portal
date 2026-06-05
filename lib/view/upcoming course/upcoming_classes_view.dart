@@ -3,6 +3,7 @@ import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart
 import 'package:codeit_app/view/upcoming%20course/upcoming_widget.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
+import 'package:codeit_app/widgets/network_image_fallback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -104,10 +105,12 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
                             ),
                             WidgetSpan(
                               alignment: PlaceholderAlignment.middle,
-                              child: Image.network(
-                                'https://codeit.com.np/images/google_meet.png',
+                              child: NetworkImageFallback(
+                                imageUrl:
+                                    'https://codeit.com.np/images/google_meet.png',
                                 height: 36,
                                 width: 36,
+                                fit: BoxFit.contain,
                               ),
                             ),
                           ],
@@ -152,6 +155,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [

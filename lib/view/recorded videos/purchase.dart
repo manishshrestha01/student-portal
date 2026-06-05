@@ -36,15 +36,16 @@ class _PurchaseState extends State<Purchase> {
   final TermsController termsController = Get.find<TermsController>();
   String? _selectedFilePath;
   int? _selectedPlanIndex;
+  late final String _slug;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      authController.fetchUser();
-      termsController.getTerms();
-      showController.getRecordedVideos(Get.arguments['slug']);
-    });
+    final arguments = Get.arguments;
+    _slug = arguments is Map ? arguments['slug']?.toString() ?? '' : '';
+    authController.fetchUser();
+    termsController.getTerms();
+    showController.getRecordedVideos(_slug);
   }
 
   @override
@@ -599,6 +600,7 @@ class _PurchaseState extends State<Purchase> {
                             ),
                             Gap(20),
                             GestureDetector(
+                              behavior: HitTestBehavior.opaque,
                               onTap: _pickFromGallery,
                               child: DottedBorder(
                                 options: const RoundedRectDottedBorderOptions(
@@ -632,6 +634,8 @@ class _PurchaseState extends State<Purchase> {
                                               top: 8,
                                               right: 8,
                                               child: GestureDetector(
+                                                behavior:
+                                                    HitTestBehavior.opaque,
                                                 onTap: () {
                                                   setState(() {
                                                     _selectedFilePath = null;
@@ -705,6 +709,7 @@ class _PurchaseState extends State<Purchase> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
                                   onTap: () {
                                     setState(() {
                                       _agreeToTerms = !_agreeToTerms;
@@ -734,6 +739,7 @@ class _PurchaseState extends State<Purchase> {
                                 ),
                                 Expanded(
                                   child: GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
                                     onTap: () =>
                                         _showTermsAndConditions(context),
                                     child: FittedBox(
@@ -955,15 +961,15 @@ class _PurchaseState extends State<Purchase> {
           showController.showrecordedvideos.value?.data?.course?.id;
       final liveCourse = showController.showrecordedvideos.value?.data?.course;
       final livePlans = liveCourse?.plans ?? const [];
-      final selectedPlan = (_selectedPlanIndex != null &&
-              _selectedPlanIndex! < livePlans.length)
+      final selectedPlan =
+          (_selectedPlanIndex != null && _selectedPlanIndex! < livePlans.length)
           ? livePlans[_selectedPlanIndex!]
           : null;
       final selectedPlanValue = selectedPlan?.value?.isNotEmpty == true
           ? selectedPlan!.value!
           : selectedPlan?.name?.isNotEmpty == true
-              ? selectedPlan!.name!
-              : '';
+          ? selectedPlan!.name!
+          : '';
 
       if (courseId == null) {
         Get.snackbar(
@@ -995,14 +1001,18 @@ class _PurchaseState extends State<Purchase> {
         return;
       }
 
-      print('DEBUG: About to submit receipt. courseId=$courseId, plan=$selectedPlanValue, file=$_selectedFilePath');
+      print(
+        'DEBUG: About to submit receipt. courseId=$courseId, plan=$selectedPlanValue, file=$_selectedFilePath',
+      );
       await storeController.submitStoreWithPayment(
         courseId,
         selectedPlanValue,
         _selectedFilePath!,
         _agreeToTerms,
       );
-      print('DEBUG: Submission finished. store.success=${storeController.store.value.success}, message=${storeController.store.value.message}');
+      print(
+        'DEBUG: Submission finished. store.success=${storeController.store.value.success}, message=${storeController.store.value.message}',
+      );
 
       // Navigate to home after successful submission
       if (storeController.store.value.success == true) {
@@ -1063,6 +1073,7 @@ class _PurchaseState extends State<Purchase> {
                       ),
                     ),
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
                       onTap: () => Navigator.pop(context),
                       child: Icon(Icons.close, size: 24, color: Colors.black),
                     ),
@@ -1146,6 +1157,7 @@ class _PurchaseState extends State<Purchase> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [
@@ -1180,6 +1192,7 @@ class _PurchaseState extends State<Purchase> {
         ),
         const Gap(7),
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => RecordedVideosView()),
           child: Text(
             'Recorded Courses',

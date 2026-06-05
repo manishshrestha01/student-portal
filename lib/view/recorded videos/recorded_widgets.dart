@@ -1,6 +1,7 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/recorded%20videos/index_model.dart';
 import 'package:codeit_app/view/recorded%20videos/purchase.dart';
+import 'package:codeit_app/widgets/network_image_fallback.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,9 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
     final double buttonFontSize = isSmallDevice ? 15 : 16;
     final double imageAspectRatio = isSmallDevice ? 16 / 10 : 16 / 8.6;
     final plan = widget.item.plans.isNotEmpty ? widget.item.plans.first : null;
-    final priceLabel = plan?.price != null ? 'Rs. ${plan!.price}' : 'Price unavailable';
+    final priceLabel = plan?.price != null
+        ? 'Rs. ${plan!.price}'
+        : 'Price unavailable';
 
     return Container(
       width: double.infinity,
@@ -49,8 +52,8 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                 ),
                 child: AspectRatio(
                   aspectRatio: imageAspectRatio,
-                  child: Image.network(
-                    "${widget.item.thumbnail}",
+                  child: NetworkImageFallback(
+                    imageUrl: widget.item.thumbnail,
                     width: double.infinity,
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
@@ -182,12 +185,17 @@ class _RecordedWidgetsState extends State<RecordedWidgets> {
                     ),
                     const Spacer(),
                     ElevatedButton(
-                      onPressed: widget.item.slug == null || widget.item.slug!.isEmpty
+                      onPressed:
+                          widget.item.slug == null || widget.item.slug!.isEmpty
                           ? null
                           : () {
                               final planName = plan?.name ?? 'N/A';
-                              final planPrice = plan?.price != null ? 'Rs. ${plan!.price}' : 'N/A';
-                              print('courseName: ${widget.item.name}, slug: ${widget.item.slug}, plan: $planName, price: $planPrice');
+                              final planPrice = plan?.price != null
+                                  ? 'Rs. ${plan!.price}'
+                                  : 'N/A';
+                              print(
+                                'courseName: ${widget.item.name}, slug: ${widget.item.slug}, plan: $planName, price: $planPrice',
+                              );
                               Get.to(
                                 () => const Purchase(),
                                 arguments: {'slug': widget.item.slug},

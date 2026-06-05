@@ -8,6 +8,7 @@ import 'package:codeit_app/view/notes.dart';
 import 'package:codeit_app/view/video_player_page.dart';
 import 'package:codeit_app/widgets/custom_appbar.dart';
 import 'package:codeit_app/widgets/custom_drawer.dart';
+import 'package:codeit_app/widgets/network_image_fallback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -97,8 +98,8 @@ class _CourseVideoState extends State<CourseVideo> {
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Image.network(
-                          "${widget.item.courseImage}",
+                        child: NetworkImageFallback(
+                          imageUrl: widget.item.courseImage,
                           fit: BoxFit.cover,
                           alignment: Alignment.center,
                         ),
@@ -159,6 +160,7 @@ class _CourseVideoState extends State<CourseVideo> {
                       // ),
                       // Gap(20),
                       GestureDetector(
+                        behavior: HitTestBehavior.opaque,
                         onTap: () {
                           Get.to(() => Notes(id: widget.item.enrollmentId));
                         },
@@ -255,6 +257,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                 ),
                                 Spacer(),
                                 GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
                                   onTap: toggleSort,
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
@@ -262,7 +265,9 @@ class _CourseVideoState extends State<CourseVideo> {
                                       vertical: 4,
                                     ),
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: AppColors.black),
+                                      border: Border.all(
+                                        color: AppColors.black,
+                                      ),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
@@ -370,6 +375,7 @@ Widget videoItem(
   return Padding(
     padding: EdgeInsets.symmetric(vertical: isSmall ? 10 : 15),
     child: GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () {
         Get.to(() => VideoPlayerPage(video: video, allVideos: allVideos));
       },
@@ -444,11 +450,7 @@ Widget videoItem(
               ],
             ),
           ),
-          Icon(
-            Icons.chevron_right,
-            color: AppColors.black70,
-            size: 20,
-          ),
+          Icon(Icons.chevron_right, color: AppColors.black70, size: 20),
         ],
       ),
     ),
@@ -459,6 +461,7 @@ Widget _buildBreadcrumb(bool isSmall) {
   return Row(
     children: [
       GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () => Get.offAll(() => HomeView()),
         child: Row(
           children: [
@@ -487,6 +490,7 @@ Widget _buildBreadcrumb(bool isSmall) {
       ),
       const Gap(7),
       GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () => Get.offAll(() => CourseView()),
         child: Row(
           children: [

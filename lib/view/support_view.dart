@@ -188,6 +188,7 @@ class _SupportViewState extends State<SupportView> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [
@@ -247,6 +248,7 @@ class _SupportViewState extends State<SupportView> {
   }) {
     return Center(
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: Container(
           width: cardWidth,
@@ -254,10 +256,7 @@ class _SupportViewState extends State<SupportView> {
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: AppColors.black,
-              width: 0.5,
-            ),
+            border: Border.all(color: AppColors.black, width: 0.5),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withValues(alpha: 0.25),
@@ -299,7 +298,7 @@ class _SupportViewState extends State<SupportView> {
                           color: AppColors.textTertiary,
                           fontSize: isSmall ? 13 : 14,
                           fontWeight: FontWeight.w500,
-                          letterSpacing: 0
+                          letterSpacing: 0,
                         ),
                       ),
                     ),

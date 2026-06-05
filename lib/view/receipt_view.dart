@@ -345,9 +345,17 @@ class ReceiptView extends StatelessWidget {
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 ),
                 const Gap(9),
-                Text('For any queries, contact ',textAlign: TextAlign.center,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),),
+                Text(
+                  'For any queries, contact ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                ),
                 Gap(9),
-                Text("support@codeit.com.np | Reg No.\n 11757/6371/04 | PAN 602345817",textAlign: TextAlign.center,style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),),
+                Text(
+                  "support@codeit.com.np | Reg No.\n 11757/6371/04 | PAN 602345817",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                ),
                 Gap(20),
               ],
             ),
@@ -361,6 +369,7 @@ class ReceiptView extends StatelessWidget {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [
@@ -395,6 +404,7 @@ class ReceiptView extends StatelessWidget {
         ),
         const Gap(7),
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.to(() => PaymentPage()),
           child: Text(
             'Payment Receipts',

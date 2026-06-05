@@ -32,7 +32,7 @@ class _CertificatesViewState extends State<CertificatesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    backgroundColor: AppColors.surface,
+      backgroundColor: AppColors.surface,
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: LayoutBuilder(
@@ -40,7 +40,7 @@ class _CertificatesViewState extends State<CertificatesView> {
           final double screenWidth = constraints.maxWidth;
           final bool isSmall = screenWidth < 390;
           final bool isMedium = screenWidth >= 390 && screenWidth < 768;
-          
+
           // Responsive values
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
           final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
@@ -49,7 +49,8 @@ class _CertificatesViewState extends State<CertificatesView> {
             if (certificateController.isLoading.value) {
               return const Center(child: CircularProgressIndicator());
             }
-            final certificatesList = certificateController.certificate.value.data;
+            final certificatesList =
+                certificateController.certificate.value.data;
             print("Certificates Count: ${certificatesList.length}");
             if (certificatesList.isEmpty) {
               return const Center(child: Text("No certificates found."));
@@ -82,9 +83,7 @@ class _CertificatesViewState extends State<CertificatesView> {
                     ...certificatesList.map((item) {
                       return Padding(
                         padding: EdgeInsets.only(bottom: horizontalPadding),
-                        child: CertificatesWidget(
-                          item: item,
-                        ), 
+                        child: CertificatesWidget(item: item),
                       );
                     }),
                     Gap(horizontalPadding),
@@ -102,6 +101,7 @@ class _CertificatesViewState extends State<CertificatesView> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [

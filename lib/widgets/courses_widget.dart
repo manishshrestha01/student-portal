@@ -2,6 +2,7 @@ import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/courses_model.dart';
 import 'package:codeit_app/view/course_video.dart';
 import 'package:codeit_app/utils/status_mapper.dart';
+import 'package:codeit_app/widgets/network_image_fallback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -54,8 +55,8 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                     child: Stack(
                       children: [
                         Positioned.fill(
-                          child: Image.network(
-                            "${widget.item.courseImage}",
+                          child: NetworkImageFallback(
+                            imageUrl: widget.item.courseImage,
                             fit: BoxFit.cover,
                             alignment: Alignment.center,
                           ),
@@ -69,7 +70,8 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                                color: widget.item.status?.toLowerCase() == 'pending'
+                              color:
+                                  widget.item.status?.toLowerCase() == 'pending'
                                   ? const Color(0xFFfff9c2)
                                   : const Color(0xFFdcfce6),
                               borderRadius: BorderRadius.circular(20),
@@ -78,7 +80,9 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               StatusMapper.mapCourseStatus(widget.item.status),
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
-                                    color: widget.item.status?.toLowerCase() == 'pending'
+                                  color:
+                                      widget.item.status?.toLowerCase() ==
+                                          'pending'
                                       ? const Color(0xFF894b00)
                                       : const Color(0xFF016630),
                                   fontSize: 12,
@@ -148,7 +152,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               width: 18,
                               height: 18,
                               colorFilter: const ColorFilter.mode(
-                                 AppColors.primary,
+                                AppColors.primary,
                                 BlendMode.srcIn,
                               ),
                             ),
@@ -171,7 +175,7 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                               width: 18,
                               height: 18,
                               colorFilter: const ColorFilter.mode(
-                                 AppColors.primary,
+                                AppColors.primary,
                                 BlendMode.srcIn,
                               ),
                             ),
@@ -249,7 +253,9 @@ class _CoursesWidgetState extends State<CoursesWidget> {
                                 width: double.infinity,
                                 height: buttonHeight,
                                 child: ElevatedButton.icon(
-                                  onPressed: () => Get.offAll(() => CourseVideo(item: widget.item)),
+                                  onPressed: () => Get.offAll(
+                                    () => CourseVideo(item: widget.item),
+                                  ),
                                   icon: SvgPicture.asset(
                                     'assets/support/play.svg',
                                     colorFilter: const ColorFilter.mode(

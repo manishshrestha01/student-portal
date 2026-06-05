@@ -166,21 +166,19 @@ class _RecordedVideosViewState extends State<RecordedVideosView> {
                         FocusScope.of(context).unfocus();
                       },
                       leading: GestureDetector(
+                        behavior: HitTestBehavior.opaque,
                         onTap: () {
                           setState(() {
                             _searchQuery = _searchController.text.trim();
                           });
                           FocusScope.of(context).unfocus();
                         },
-                        child: Icon(
-                          Icons.search,
-                          color: AppColors.iconMuted,
-                        ),
+                        child: Icon(Icons.search, color: AppColors.iconMuted),
                       ),
                       trailing: [
                         IconButton(
                           icon: const Icon(Icons.close_rounded),
-                           color: AppColors.iconMuted,
+                          color: AppColors.iconMuted,
                           onPressed: () {
                             _searchController.clear();
                             setState(() {
@@ -242,6 +240,7 @@ class _RecordedVideosViewState extends State<RecordedVideosView> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [

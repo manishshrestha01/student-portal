@@ -2,6 +2,7 @@ import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/controller/upcoming%20course/upcoming_controller.dart';
 import 'package:codeit_app/model/upcoming%20course/upcoming_model.dart';
 import 'package:codeit_app/view/upcoming%20course/checkout.dart';
+import 'package:codeit_app/widgets/network_image_fallback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -51,8 +52,8 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                 ),
                 child: AspectRatio(
                   aspectRatio: imageAspectRatio,
-                  child: Image.network(
-                    "${widget.item.courseImage}",
+                  child: NetworkImageFallback(
+                    imageUrl: widget.item.courseImage,
                     width: double.infinity,
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
@@ -181,10 +182,11 @@ class _UpcomingWidgetState extends State<UpcomingWidget> {
                       ),
                     ),
                     const Gap(6),
-                    Image.network(
-                      'https://codeit.com.np/images/google_meet.png',
+                    NetworkImageFallback(
+                      imageUrl: 'https://codeit.com.np/images/google_meet.png',
                       height: 16,
                       width: 16,
+                      fit: BoxFit.contain,
                     ),
                   ],
                 ),

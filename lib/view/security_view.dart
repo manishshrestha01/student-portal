@@ -163,6 +163,7 @@ class _SecurityViewState extends State<SecurityView> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [

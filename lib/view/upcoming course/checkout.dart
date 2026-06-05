@@ -90,10 +90,7 @@ class _CheckoutState extends State<Checkout> {
                         border: Border.all(color: AppColors.white),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
-                          BoxShadow(
-                            color: AppColors.shadow,
-                            blurRadius: 2,
-                          ),
+                          BoxShadow(color: AppColors.shadow, blurRadius: 2),
                         ],
                       ),
                       child: Padding(
@@ -543,6 +540,7 @@ class _CheckoutState extends State<Checkout> {
                             ),
                             Gap(20),
                             GestureDetector(
+                              behavior: HitTestBehavior.opaque,
                               onTap: _pickFromGallery,
                               child: DottedBorder(
                                 options: const RoundedRectDottedBorderOptions(
@@ -576,6 +574,8 @@ class _CheckoutState extends State<Checkout> {
                                               top: 8,
                                               right: 8,
                                               child: GestureDetector(
+                                                behavior:
+                                                    HitTestBehavior.opaque,
                                                 onTap: () {
                                                   setState(() {
                                                     _selectedFilePath = null;
@@ -649,6 +649,7 @@ class _CheckoutState extends State<Checkout> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
                                   onTap: () {
                                     setState(() {
                                       _agreeToTerms = !_agreeToTerms;
@@ -678,6 +679,7 @@ class _CheckoutState extends State<Checkout> {
                                 ),
                                 Expanded(
                                   child: GestureDetector(
+                                    behavior: HitTestBehavior.opaque,
                                     onTap: () =>
                                         _showTermsAndConditions(context),
                                     child: FittedBox(
@@ -980,6 +982,7 @@ class _CheckoutState extends State<Checkout> {
                       ),
                     ),
                     GestureDetector(
+                      behavior: HitTestBehavior.opaque,
                       onTap: () => Navigator.pop(context),
                       child: Icon(Icons.close, size: 24, color: Colors.black),
                     ),
@@ -1063,6 +1066,7 @@ class _CheckoutState extends State<Checkout> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [
@@ -1097,6 +1101,7 @@ class _CheckoutState extends State<Checkout> {
         ),
         const Gap(7),
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => UpcomingClassesView()),
           child: Text(
             'Upcoming Classes',

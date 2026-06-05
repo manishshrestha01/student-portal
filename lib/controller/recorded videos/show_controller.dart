@@ -7,12 +7,17 @@ class ShowController extends GetxController {
   var showrecordedvideos = Rxn<ShowModel>();
   var isLoading = false.obs;
   var errorMessage = ''.obs;
+  String? _activeSlug;
 
   Future<void> getRecordedVideos(String slug) async {
-    if (slug.trim().isEmpty) {
+    final requestedSlug = slug.trim();
+    if (requestedSlug.isEmpty) {
+      showrecordedvideos.value = null;
       errorMessage('Invalid recorded course slug.');
       return;
     }
+    _activeSlug = requestedSlug;
+    showrecordedvideos.value = null;
     try {
       isLoading(true);
       errorMessage('');
@@ -22,8 +27,9 @@ class ShowController extends GetxController {
         return;
       }
 
-      var response = await ShowService.showRecordedVideos(slug);
+      var response = await ShowService.showRecordedVideos(requestedSlug);
       if (response.statusCode == 200) {
+        if (_activeSlug != requestedSlug) return;
         final responseData = response.data;
         if (responseData is Map<String, dynamic>) {
           showrecordedvideos.value = ShowModel.fromJson(responseData);
@@ -32,9 +38,13 @@ class ShowController extends GetxController {
         }
       }
     } catch (e) {
-      errorMessage('Could not load recorded courses. Please try again.');
+      if (_activeSlug == requestedSlug) {
+        errorMessage('Could not load recorded courses. Please try again.');
+      }
     } finally {
-      isLoading(false);
+      if (_activeSlug == requestedSlug) {
+        isLoading(false);
+      }
     }
   }
 }

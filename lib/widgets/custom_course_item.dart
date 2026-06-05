@@ -1,4 +1,5 @@
 import 'package:codeit_app/core/constants/colors.dart';
+import 'package:codeit_app/widgets/network_image_fallback.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -34,8 +35,8 @@ class CustomCourseItem extends StatelessWidget {
               child: SizedBox(
                 height: 108,
                 width: 97,
-                child: Image.network(
-                  image,
+                child: NetworkImageFallback(
+                  imageUrl: image,
                   height: 108,
                   width: 97,
                   fit: BoxFit.cover,
@@ -54,9 +55,9 @@ class CustomCourseItem extends StatelessWidget {
                     title,
                     style: GoogleFonts.inter(
                       textStyle: const TextStyle(
-                       color: AppColors.textDark,
+                        color: AppColors.textDark,
                         fontWeight: FontWeight.w600,
-                         letterSpacing: 0,
+                        letterSpacing: 0,
                         fontSize: 20,
                       ),
                     ),
@@ -67,7 +68,7 @@ class CustomCourseItem extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         color: AppColors.textSecondary,
-                         letterSpacing: 0,
+                        letterSpacing: 0,
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
                       ),
@@ -88,7 +89,7 @@ class CustomCourseItem extends StatelessWidget {
                           textStyle: TextStyle(
                             color: AppColors.textSecondary,
                             fontWeight: FontWeight.w500,
-                             letterSpacing: 0,
+                            letterSpacing: 0,
                             fontSize: 15,
                           ),
                         ),

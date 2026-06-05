@@ -143,6 +143,7 @@ class _PaymentPageState extends State<PaymentPage> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [

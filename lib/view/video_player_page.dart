@@ -226,6 +226,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                 ),
                                 Spacer(),
                                 GestureDetector(
+                                  behavior: HitTestBehavior.opaque,
                                   onTap: toggleSort,
                                   child: Container(
                                     padding: const EdgeInsets.symmetric(
@@ -233,7 +234,9 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                                       vertical: 4,
                                     ),
                                     decoration: BoxDecoration(
-                                      border: Border.all(color: AppColors.textDark),
+                                      border: Border.all(
+                                        color: AppColors.textDark,
+                                      ),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
                                     child: Text(
@@ -279,6 +282,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     return Row(
       children: [
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => HomeView()),
           child: Row(
             children: [
@@ -307,6 +311,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         ),
         const Gap(7),
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => CourseView()),
           child: Row(
             children: [
@@ -336,6 +341,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
         ),
         const Gap(7),
         GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () => Get.back(),
           child: Text(
             'Class Videos',
@@ -402,6 +408,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: isSmall ? 10 : 15),
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () => _playVideo(video),
         child: Container(
           decoration: BoxDecoration(
