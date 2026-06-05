@@ -3,7 +3,7 @@ import 'package:get_storage/get_storage.dart';
 
 class StorageController extends GetxController {
   final box = GetStorage('MyStorage');
-final biometricEnabled = false.obs;
+  final biometricEnabled = false.obs;
 
 @override
   void onInit() {
@@ -23,8 +23,9 @@ final biometricEnabled = false.obs;
   void deleteToken() {
     box.remove("token");
     box.remove("user");
+    box.remove("remember_email");
     box.remove("biometric_enabled");
-     biometricEnabled.value = false;
+    biometricEnabled.value = false;
   }
 
   void clearSession() {
@@ -33,6 +34,18 @@ final biometricEnabled = false.obs;
 
   Future<void> saveUser(Map<String, dynamic> user) async {
     await box.write("user", user);
+  }
+
+  Future<void> saveRememberedEmail(String email) async {
+    await box.write("remember_email", email);
+  }
+
+  String? getRememberedEmail() {
+    return box.read("remember_email");
+  }
+
+  void clearRememberedEmail() {
+    box.remove("remember_email");
   }
 
   // Save login state for biometric unlock

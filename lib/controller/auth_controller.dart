@@ -22,6 +22,7 @@ class AuthController extends GetxController {
     super.onInit();
     _storage = Get.find<StorageController>();
     clearForm();
+    _restoreRememberedEmail();
     checkAuth();
   }
 
@@ -61,6 +62,16 @@ class AuthController extends GetxController {
   final currentPassword = TextEditingController();
   final newPassword = TextEditingController();
   final confirmPassword = TextEditingController();
+
+  void _restoreRememberedEmail() {
+    final rememberedEmail = _storage.getRememberedEmail();
+    if (rememberedEmail != null && rememberedEmail.isNotEmpty) {
+      email.text = rememberedEmail;
+      rememberMe.value = true;
+    } else {
+      rememberMe.value = false;
+    }
+  }
 
   void clearForm() {
     name.clear();
@@ -158,7 +169,11 @@ class AuthController extends GetxController {
 
       if (response.statusCode == 200 && loginMessage.value.success == true) {
         _storage.saveToken(loginMessage.value.token!);
-        // Enable biometric after first successful login
+        if (rememberMe.value) {
+          await _storage.saveRememberedEmail(email.text.trim());
+        } else {
+          _storage.clearRememberedEmail();
+        }
         DioConnector.dio.options.headers["Authorization"] =
             "Bearer ${loginMessage.value.token!}";
       
@@ -335,7 +350,17 @@ class AuthController extends GetxController {
   void logout() {
     _storage.clearSession();
     user.value = null;
-     clearForm();
+    clearForm();
+    if (rememberMe.value) {
+      final rememberedEmail = _storage.getRememberedEmail();
+      if (rememberedEmail != null && rememberedEmail.isNotEmpty) {
+        email.text = rememberedEmail;
+      }
+    } else {
+      _storage.clearRememberedEmail();
+      rememberMe.value = false;
+      email.clear();
+    }
     DioConnector.dio.options.headers.remove('Authorization');
     Get.offAllNamed(AppRoutes.login);
   }
