@@ -4,6 +4,7 @@ import 'package:codeit_app/controller/courses_controller.dart';
 import 'package:codeit_app/controller/certificates_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/view/certificates_view.dart';
+import 'package:codeit_app/view/course_video.dart';
 import 'package:codeit_app/view/course_view.dart';
 import 'package:codeit_app/view/link_view.dart';
 import 'package:codeit_app/view/payment_page_view.dart';
@@ -275,7 +276,7 @@ Widget _buildCourseSection(BuildContext context) {
         mentor: course.mentorName ?? "Instructor",
         videos: course.lessons?.toString() ?? "0",
         image: course.courseImage ?? "",
-        onTap: () => Get.to(() => CourseView()),
+        onTap: () => Get.to(() => CourseVideo(item: course)),
       );
     }).toList();
 

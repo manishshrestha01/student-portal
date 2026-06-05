@@ -109,3 +109,6 @@ flutter:
 
 
 
+dependency_overrides:
+  local_auth_darwin: 1.4.0
+  objective_c: 9.3.0

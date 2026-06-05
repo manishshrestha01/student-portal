@@ -23,91 +23,104 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
       appBar: AppBar(
         backgroundColor: AppColors.backgroundColor,
         elevation: 0,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.transparent,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: CustomFormContainer(
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  //w1 logo
-                  Image.asset(
-                    'assets/images/code-it-logo.png',
-                    height: 67,
-                    width: 284,
-                  ),
-                  Gap(20),
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final isSmall = constraints.maxWidth < 390;
 
-                  //w2
-                  Text(
-                    'Password recovery',
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Gap(10),
-                  //w3
-                  Text(
-                    "Enter your email address to recover your password",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: AppColors.textLight,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Center(
+                    child: CustomFormContainer(
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Image.asset(
+                              'assets/images/code-it-logo.png',
+                              height: isSmall ? 58 : 67,
+                              width: double.infinity,
+                              fit: BoxFit.contain,
+                            ),
+                            Gap(isSmall ? 16 : 20),
+                            Text(
+                              'Password recovery',
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  fontSize: isSmall ? 22 : 26,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0,
+                                  color: AppColors.textDark,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Gap(isSmall ? 8 : 10),
+                            Text(
+                              'Enter your email address to recover your password',
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  fontSize: isSmall ? 14 : 16,
+                                  fontWeight: FontWeight.w400,
+                                  letterSpacing: 0,
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            Gap(isSmall ? 24 : 34),
+                            CustomTextField(
+                              controller: controller.emailController,
+                              labelText: 'Email Address',
+                              isRequired: true,
+                              hintText: 'Enter your email address',
+                              keyboardType: TextInputType.emailAddress,
+                              validator: Validators.emailValidator,
+                            ),
+                            Gap(isSmall ? 16 : 20),
+                            Obx(
+                              () => CustomButton(
+                                text: 'Send OTP',
+                                isLoading: controller.isLoading.value,
+                                backgroundColor: Colors.white,
+                                textColor: AppColors.primary,
+                                borderColor: AppColors.primary,
+                                onPressed: () {
+                                  if (formKey.currentState!.validate()) {
+                                    controller.sendOtp();
+                                  }
+                                },
+                              ),
+                            ),
+                            Gap(isSmall ? 16 : 20),
+                            Center(
+                          child: CustomTextButton(
+                            text: 'Back to Login',
+                            routeName: AppRoutes.login,
+                          ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    textAlign: TextAlign.center,
                   ),
-
-                  Gap(34),
-
-                  //w4 email label
-                  CustomTextField(
-                    controller: controller.emailController,
-                    labelText: "Email your registered email address",
-                    hintText: "Enter your email address",
-                    isRequired: true,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: Validators.emailValidator,
-                  ),
-
-                  Gap(20),
-                  //w5 button
-                  Obx(
-                    () => CustomButton(
-                      text: "Send OTP",
-                      isLoading: controller.isLoading.value,
-                      backgroundColor: Colors.white,
-                      textColor: AppColors.primary,
-                      borderColor: AppColors.primary,
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          controller.sendOtp();
-                        }
-                      },
-                    ),
-                  ),
-                  Gap(20),
-
-                  //w6
-                  CustomTextButton(
-                    text: "Back to Login",
-                    routeName: AppRoutes.login,
-                  ),
-                ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

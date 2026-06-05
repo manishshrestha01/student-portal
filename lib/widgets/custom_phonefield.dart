@@ -1,5 +1,6 @@
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/countries.dart';
@@ -13,6 +14,7 @@ class CustomPhoneField extends StatelessWidget {
   final bool isRequired;
   final String initialCountryCode;
   final String? Function(intl_phone_field.PhoneNumber?)? validator;
+  final String? requiredMessage;
 
   const CustomPhoneField({
     super.key,
@@ -22,6 +24,7 @@ class CustomPhoneField extends StatelessWidget {
     this.isRequired = true,
     this.initialCountryCode = 'NP',
     this.validator,
+    this.requiredMessage,
   });
 
   String _resolveInitialCountryCode(String value) {
@@ -51,6 +54,29 @@ class CustomPhoneField extends StatelessWidget {
     final initialCountry = _resolveInitialCountryCode(
       countryCodeController?.text ?? initialCountryCode,
     );
+    final labelStyle = GoogleFonts.inter(
+      textStyle: const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0,
+        color: AppColors.textDark,
+      ),
+    );
+    final requiredStyle = GoogleFonts.inter(
+      textStyle: const TextStyle(
+        fontSize: 18,
+        color: AppColors.primary,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0,
+      ),
+    );
+    final hintStyle = GoogleFonts.inter(
+      textStyle: const TextStyle(
+        color: AppColors.textLight,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0,
+      ),
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,21 +86,13 @@ class CustomPhoneField extends StatelessWidget {
           children: [
             Text(
               labelText,
-              style: GoogleFonts.inter(
-                textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-              ),
+              style: labelStyle,
             ),
             if (isRequired) ...[
               Gap(2),
               Text(
                 "*",
-                style: GoogleFonts.inter(
-                  textStyle: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                style: requiredStyle,
               ),
             ],
           ],
@@ -87,6 +105,7 @@ class CustomPhoneField extends StatelessWidget {
           showCountryFlag: true,
           showDropdownIcon: true,
           disableLengthCheck: true,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           invalidNumberMessage:
               null, 
           style: GoogleFonts.inter(
@@ -100,13 +119,8 @@ class CustomPhoneField extends StatelessWidget {
             color: AppColors.textLight,
           ),
           decoration: InputDecoration(
-            hintText: 'Enter number',
-            hintStyle: GoogleFonts.inter(
-              textStyle: TextStyle(
-                color: AppColors.textLight,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
+            hintText: 'Enter your WhatsApp number',
+            hintStyle: hintStyle,
             counterText: "", 
             isDense: true, 
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -141,8 +155,11 @@ class CustomPhoneField extends StatelessWidget {
           validator:
               validator ??
               (phone) {
-                if (phone == null || phone.number.isEmpty) {
-                  return '$labelText is required';
+                if (controller.text.trim().isEmpty) {
+                  return requiredMessage ?? 'WhatsApp Number is required';
+                }
+                if (phone == null) {
+                  return requiredMessage ?? 'WhatsApp Number is required';
                 }
                 if (!phone.isValidNumber()) {
                   return 'Please enter a valid $labelText';

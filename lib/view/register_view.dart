@@ -17,145 +17,155 @@ class RegisterView extends GetView<AuthController> {
 
   @override
   Widget build(BuildContext context) {
+    final key = GlobalKey<FormState>();
 
-    var key = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         backgroundColor: AppColors.backgroundColor,
         elevation: 0,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
+        shadowColor: Colors.transparent,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Center(
+      body: SafeArea(
         child: SingleChildScrollView(
-          child: CustomFormContainer(
-            child: Form(
-              key: key,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  //w1 logo
-                  Image.asset(
-                    'assets/images/code-it-logo.png',
-                    height: 67,
-                    width: 284,
-                  ),
-                  Gap(20),
-
-                  //w2
-                  Text(
-                    'Create a student account',
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  Gap(10),
-                  //w3
-                  Text(
-                    "Join Code IT Student Portal",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: AppColors.textLight,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-
-                  Gap(34),
-
-                  //w4 fullname
-                  CustomTextField(
-                    controller: controller.name,
-                    labelText: "Full Name",
-                    isRequired: true,
-                    hintText: "Enter your full name",
-                    validator: (value) => value!.isEmpty ? "Full name is required" : null,
-                  ),
-                  Gap(10),
-
-                  //w5 email
-                  CustomTextField(
-                    controller: controller.email,
-                    labelText: "Email Address",
-                    isRequired: true,
-                    hintText: "Enter your email address",
-                    keyboardType: TextInputType.emailAddress,
-                      validator: Validators.emailValidator,
-                  ),
-                  Gap(20),
-
-                  //w6 number
-              CustomPhoneField(
-                    controller: controller.whatsapp,
-                    countryCodeController: controller.countryCode,
-                    labelText: "WhatsApp Number",
-                    isRequired: true,
-                  ),
-                  Gap(20),
-
-                  //w7
-                   Obx(() {
-                    return CustomTextField(
-                      controller: controller.password,
-                      labelText: "Password",
-                      hintText: "Enter your password",
-                      obscureText: controller.isPasswordHidden.value,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          controller.isPasswordHidden.value
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: SingleChildScrollView(
+              child: CustomFormContainer(
+                child: Form(
+                  key: key,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final isSmall = constraints.maxWidth < 390;
+          
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                        Image.asset(
+                          'assets/images/code-it-logo.png',
+                          height: isSmall ? 58 : 67,
+                          width: double.infinity,
+                          fit: BoxFit.contain,
                         ),
-                        onPressed: () {
-                          controller.isPasswordHidden.value =
-                              !controller.isPasswordHidden.value;
-                        },
-                      ),
-                      validator: (value) =>
-                          value!.isEmpty ? "Password is required" : null,
-                    );
-                  }), Gap(20),
-
-                  //w8 button
-                  CustomButton(text: "Create Account", onPressed: () {
-                    if (key.currentState!.validate()){
-                    controller.register();
-                      
-                    }
-                  }),
-
-                  Gap(20),
-
-                  //w9 row
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          "Already have an account?",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
+                        Gap(isSmall ? 16 : 20),
+                              Text(
+                                'Create a student account',
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    fontSize: isSmall ? 22 : 26,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 0,
+                                    color: AppColors.textDark,
+                                  ),
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                        Gap(isSmall ? 8 : 10),
+                        Text(
+                                'Join Code IT Student Portal',
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    fontSize: isSmall ? 14 : 16,
+                                    fontWeight: FontWeight.w400,
+                                    letterSpacing: 0,
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
+                                textAlign: TextAlign.center,
                         ),
-                      ),
-                      CustomTextButton(
-                        clearForm: controller.clearForm,
-                        text: "Log in",
-                        routeName: AppRoutes.login,
-                      ),
-                    ],
+                        Gap(isSmall ? 24 : 34),
+                        CustomTextField(
+                          controller: controller.name,
+                          labelText: 'Full Name',
+                          isRequired: true,
+                          hintText: 'Enter your full name',
+                          validator: (value) =>
+                              value!.isEmpty ? 'Full name is required' : null,
+                        ),
+                        Gap(isSmall ? 10 : 12),
+                        CustomTextField(
+                          controller: controller.email,
+                          labelText: 'Email Address',
+                          isRequired: true,
+                          hintText: 'Enter your email address',
+                          keyboardType: TextInputType.emailAddress,
+                          validator: Validators.emailValidator,
+                        ),
+                        Gap(isSmall ? 16 : 20),
+                        CustomPhoneField(
+                          controller: controller.whatsapp,
+                          countryCodeController: controller.countryCode,
+                          labelText: 'WhatsApp Number',
+                          isRequired: true,
+                          requiredMessage: 'WhatsApp Number is required',
+                        ),
+                        Gap(isSmall ? 16 : 20),
+                        Obx(() {
+                          return CustomTextField(
+                            controller: controller.password,
+                            labelText: 'Password',
+                            hintText: 'Enter your password',
+                            isRequired: true,
+                            obscureText: controller.isPasswordHidden.value,
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                controller.isPasswordHidden.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                controller.isPasswordHidden.value =
+                                    !controller.isPasswordHidden.value;
+                              },
+                            ),
+                            validator: (value) =>
+                                value!.isEmpty ? 'Password is required' : null,
+                          );
+                        }),
+                        Gap(isSmall ? 16 : 20),
+                        CustomButton(
+                          text: 'Create Account',
+                          onPressed: () {
+                            if (key.currentState!.validate()) {
+                              controller.register();
+                            }
+                          },
+                        ),
+                        Gap(isSmall ? 16 : 20),
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          runSpacing: 8,
+                          spacing: 12,
+                          children: [
+                                  Text(
+                                    'Already have an account?',
+                                    style: TextStyle(
+                                      fontSize: isSmall ? 14 : 16,
+                                      fontWeight: FontWeight.w400,
+                                      letterSpacing: 0,
+                                      color: AppColors.textDark,
+                                    ),
+                                  ),
+                            CustomTextButton(
+                              clearForm: controller.clearForm,
+                              text: 'Log in',
+                              routeName: AppRoutes.login,
+                            ),
+                          ],
+                        ),
+                        ],
+                      );
+                    },
                   ),
-                ],
+                ),
               ),
             ),
           ),

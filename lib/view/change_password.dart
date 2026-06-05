@@ -49,7 +49,12 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                   Text(
                     'Reset your password',
                     style: GoogleFonts.inter(
-                      textStyle: TextStyle(fontSize: 26, fontWeight: FontWeight.w600),
+                      textStyle: const TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0,
+                        color: AppColors.textDark,
+                      ),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -58,10 +63,11 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                   Text(
                     "Please enter your new password",
                     style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: AppColors.textLight,
+                      textStyle: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
+                        letterSpacing: 0,
+                        color: AppColors.textSecondary,
                       ),
                     ),
                     textAlign: TextAlign.center,
@@ -76,9 +82,10 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                           : "Email: ${controller.email.value}",
                       style: GoogleFonts.inter(
                         textStyle: const TextStyle(
-                          color: AppColors.textDark,
+                          color: AppColors.textSecondary,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
+                          letterSpacing: 0,
                         ),
                       ),
                       textAlign: TextAlign.center,
@@ -156,7 +163,11 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       Text(
                         "Your password must contain",
                         style: GoogleFonts.inter(
-                          textStyle: TextStyle(fontWeight: FontWeight.w600),
+                          textStyle: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0,
+                            color: AppColors.textDark,
+                          ),
                         ),
                       ),
                       Row(
@@ -170,9 +181,11 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                           Text(
                             "At least 6 characters",
                             style: GoogleFonts.inter(
-                              textStyle: TextStyle(
-                                color: AppColors.textDark,
+                              textStyle: const TextStyle(
                                 fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                letterSpacing: 0,
+                                color: AppColors.textSecondary,
                               ),
                             ),
                           ),

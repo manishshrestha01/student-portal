@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final Color? textColor;
+  final String? requiredMessage;
 
   const CustomTextField({
     super.key,
@@ -27,10 +28,35 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.validator,
     this.textColor,
+    this.requiredMessage,
   });
 
   @override
   Widget build(BuildContext context) {
+    final labelStyle = GoogleFonts.inter(
+      textStyle: const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0,
+        color: AppColors.textDark,
+      ),
+    );
+    final requiredStyle = GoogleFonts.inter(
+      textStyle: const TextStyle(
+        fontSize: 18,
+        color: AppColors.primary,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0,
+      ),
+    );
+    final hintStyle = GoogleFonts.inter(
+      textStyle: const TextStyle(
+        color: AppColors.textLight,
+        fontWeight: FontWeight.w400,
+        letterSpacing: 0,
+      ),
+    );
+
     return Column(
       children: [
         //w1 labeltext
@@ -39,9 +65,7 @@ class CustomTextField extends StatelessWidget {
             children: [
               Text(
                 labelText!,
-                style: GoogleFonts.inter(
-                  textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-                ),
+                style: labelStyle,
               ),
 
               if (isRequired) ...[
@@ -49,13 +73,7 @@ class CustomTextField extends StatelessWidget {
 
                 Text(
                   "*",
-                  style: GoogleFonts.inter(
-                    textStyle: TextStyle(
-                      fontSize: 18,
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  style: requiredStyle,
                 ),
               ],
             ],
@@ -67,13 +85,20 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           obscureText: obscureText,
           keyboardType: keyboardType,
-          validator: validator,
+          validator: validator ??
+              (value) {
+                if (!isRequired) {
+                  return null;
+                }
+                if (value == null || value.isEmpty) {
+                  return requiredMessage ?? '$labelText is required';
+                }
+                return null;
+              },
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
             hintText: hintText,
-            hintStyle: GoogleFonts.inter(
-              textStyle: TextStyle(color: AppColors.textLight, fontWeight: FontWeight.w400),
-            ),
+            hintStyle: hintStyle,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.primary, width: 2),

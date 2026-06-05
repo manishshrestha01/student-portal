@@ -18,14 +18,14 @@ class CustomFormContainer extends StatelessWidget {
         } else if (constraints.maxWidth > 600) {
           maxWidth = 450; // tablet
         } else {
-          maxWidth = constraints.maxWidth * 0.92; // mobile
+          maxWidth = constraints.maxWidth * 0.98; // mobile
         }
 
         return Center(
           child: Container(
             width: maxWidth, 
             padding: const EdgeInsets.all(16), 
-            margin: const EdgeInsets.symmetric(vertical: 20),
+            margin: const EdgeInsets.symmetric(vertical: 12),
 
             decoration: BoxDecoration(
               color: AppColors.boxColor,

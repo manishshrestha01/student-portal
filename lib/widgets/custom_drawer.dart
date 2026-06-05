@@ -46,7 +46,7 @@ class CustomDrawer extends StatelessWidget {
             : (isSmall ? 30 : (isMedium ? 35 : 40));
         final double leftPadding = isSmall ? 24 : (isMedium ? 28 : 30);
         final double logoutLeftPadding = isSmall ? 80 : (isMedium ? 60 : 90);
-        final double tileHeight = isShort ? 48 : 56;
+        final double tileHeight = isShort ? 42 : 52;
         const Color drawerColor = AppColors.primary;
 
         return Drawer(
