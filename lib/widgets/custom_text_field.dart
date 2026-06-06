@@ -36,7 +36,7 @@ class CustomTextField extends StatelessWidget {
     final labelStyle = GoogleFonts.inter(
       textStyle: const TextStyle(
         fontSize: 18,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         letterSpacing: 0,
         color: AppColors.textDark,
       ),
@@ -52,7 +52,7 @@ class CustomTextField extends StatelessWidget {
     final hintStyle = GoogleFonts.inter(
       textStyle: const TextStyle(
         color: AppColors.textLight,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         letterSpacing: 0,
       ),
     );
@@ -63,19 +63,9 @@ class CustomTextField extends StatelessWidget {
         if (labelText != null) ...[
           Row(
             children: [
-              Text(
-                labelText!,
-                style: labelStyle,
-              ),
+              Text(labelText!, style: labelStyle),
 
-              if (isRequired) ...[
-                Gap(2),
-
-                Text(
-                  "*",
-                  style: requiredStyle,
-                ),
-              ],
+              if (isRequired) ...[Gap(2), Text("*", style: requiredStyle)],
             ],
           ),
         ],
@@ -85,7 +75,16 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           obscureText: obscureText,
           keyboardType: keyboardType,
-          validator: validator ??
+          style: GoogleFonts.inter(
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0,
+              color: AppColors.textDark,
+            ),
+          ),
+          validator:
+              validator ??
               (value) {
                 if (!isRequired) {
                   return null;
@@ -96,6 +95,8 @@ class CustomTextField extends StatelessWidget {
                 return null;
               },
           decoration: InputDecoration(
+            fillColor: AppColors.white,
+            filled: true,
             prefixIcon: prefixIcon,
             hintText: hintText,
             hintStyle: hintStyle,

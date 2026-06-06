@@ -47,7 +47,7 @@ class ProfileView extends GetView<AuthController> {
                 children: [
                   Gap(18),
                   Column(
-                    children: [Gap(18), _buildBreadcrumb(isSmall), Gap(32)],
+                    children: [Gap(18), _buildBreadcrumb(isSmall), Gap(12)],
                   ),
                 ],
               ),
@@ -61,12 +61,13 @@ class ProfileView extends GetView<AuthController> {
                         color: AppColors.textDark,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
+                        letterSpacing: 0,
                       ),
                     ),
                   ),
                 ],
               ),
-              Gap(20),
+              Gap(12),
               Center(
                 child: Column(
                   children: [
@@ -79,9 +80,13 @@ class ProfileView extends GetView<AuthController> {
                             //w1
                             Text(
                               'Update Your Profile',
-                              style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.w600,
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0,
+                                  color: AppColors.textDark,
+                                ),
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -89,10 +94,13 @@ class ProfileView extends GetView<AuthController> {
                             //w2
                             Text(
                               "Keep your current information",
-                              style: TextStyle(
-                                color: AppColors.textLight,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 0,
+                                ),
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -178,9 +186,13 @@ class ProfileView extends GetView<AuthController> {
                             //w1
                             Text(
                               'Change Your Password',
-                              style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.w600,
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  fontSize: 26,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0,
+                                  color: AppColors.textDark,
+                                ),
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -188,10 +200,13 @@ class ProfileView extends GetView<AuthController> {
                             //w2
                             Text(
                               "Keep your account secure",
-                              style: TextStyle(
-                                color: AppColors.textLight,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  color: AppColors.textSecondary,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                  letterSpacing: 0,
+                                ),
                               ),
                               textAlign: TextAlign.center,
                             ),

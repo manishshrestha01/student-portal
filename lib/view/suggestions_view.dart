@@ -108,7 +108,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                 textStyle: TextStyle(
                                   color: AppColors.textDark,
                                   fontSize: isSmall ? 14 : 16,
-                                  fontWeight: FontWeight.w300,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
                             ),
@@ -132,7 +132,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                                   textStyle: TextStyle(
                                     color: AppColors.black,
                                     fontSize: isSmall ? 16 : 18,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),
@@ -151,18 +151,20 @@ class _SuggestionsViewState extends State<SuggestionsView> {
                               textAlignVertical: TextAlignVertical.top,
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
-                                  color: AppColors.black,
+                                  color: AppColors.textDark,
                                   fontSize: isSmall ? 14 : 16,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 0,
                                 ),
                               ),
                               decoration: InputDecoration(
                                 hintText: 'We\'d love to hear your ideas.....',
                                 hintStyle: GoogleFonts.inter(
                                   textStyle: TextStyle(
-                                    color: AppColors.black,
+                                    color: AppColors.textSecondary,
                                     fontSize: isSmall ? 14 : 16,
                                     fontWeight: FontWeight.w400,
+                                    letterSpacing: 0,
                                   ),
                                 ),
                                 contentPadding: const EdgeInsets.all(10),

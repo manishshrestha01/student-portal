@@ -33,7 +33,8 @@ class CustomPhoneField extends StatelessWidget {
       return 'NP';
     }
 
-    if (normalizedValue.length == 2 && normalizedValue == normalizedValue.toUpperCase()) {
+    if (normalizedValue.length == 2 &&
+        normalizedValue == normalizedValue.toUpperCase()) {
       return normalizedValue;
     }
 
@@ -57,7 +58,7 @@ class CustomPhoneField extends StatelessWidget {
     final labelStyle = GoogleFonts.inter(
       textStyle: const TextStyle(
         fontSize: 18,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         letterSpacing: 0,
         color: AppColors.textDark,
       ),
@@ -73,7 +74,7 @@ class CustomPhoneField extends StatelessWidget {
     final hintStyle = GoogleFonts.inter(
       textStyle: const TextStyle(
         color: AppColors.textLight,
-        fontWeight: FontWeight.w400,
+        fontWeight: FontWeight.w500,
         letterSpacing: 0,
       ),
     );
@@ -84,17 +85,8 @@ class CustomPhoneField extends StatelessWidget {
         // Label
         Row(
           children: [
-            Text(
-              labelText,
-              style: labelStyle,
-            ),
-            if (isRequired) ...[
-              Gap(2),
-              Text(
-                "*",
-                style: requiredStyle,
-              ),
-            ],
+            Text(labelText, style: labelStyle),
+            if (isRequired) ...[Gap(2), Text("*", style: requiredStyle)],
           ],
         ),
         Gap(10),
@@ -106,10 +98,22 @@ class CustomPhoneField extends StatelessWidget {
           showDropdownIcon: true,
           disableLengthCheck: true,
           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          invalidNumberMessage:
-              null, 
+          invalidNumberMessage: null,
           style: GoogleFonts.inter(
-            textStyle: TextStyle(fontSize: 16),
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0,
+              color: AppColors.textDark,
+            ),
+          ),
+          dropdownTextStyle: GoogleFonts.inter(
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0,
+              color: AppColors.textDark,
+            ),
           ),
           flagsButtonPadding: EdgeInsets.symmetric(horizontal: 8),
           dropdownIconPosition: IconPosition.trailing,
@@ -121,8 +125,8 @@ class CustomPhoneField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: 'Enter your WhatsApp number',
             hintStyle: hintStyle,
-            counterText: "", 
-            isDense: true, 
+            counterText: "",
+            isDense: true,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.primary, width: 2),
@@ -147,7 +151,8 @@ class CustomPhoneField extends StatelessWidget {
           },
           onCountryChanged: (country) {
             try {
-              countryCodeController?.text = country.dialCode.startsWith('+') == true
+              countryCodeController?.text =
+                  country.dialCode.startsWith('+') == true
                   ? country.dialCode
                   : '+${country.dialCode}';
             } catch (_) {}
