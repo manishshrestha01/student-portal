@@ -18,7 +18,7 @@ class CustomFormContainer extends StatelessWidget {
         } else if (constraints.maxWidth > 600) {
           maxWidth = 450; // tablet
         } else {
-          maxWidth = constraints.maxWidth * 0.98; // mobile
+          maxWidth = constraints.maxWidth * 0.96; // mobile
         }
 
         return Center(
