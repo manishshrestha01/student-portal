@@ -173,7 +173,7 @@ class _RecordedVideosViewState extends State<RecordedVideosView> {
                           });
                           FocusScope.of(context).unfocus();
                         },
-                        child: Icon(Icons.search, color: AppColors.iconMuted),
+                        child: Icon(Icons.search, color: AppColors.orangeAccent),
                       ),
                       trailing: [
                         IconButton(
