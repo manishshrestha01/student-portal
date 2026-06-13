@@ -1023,7 +1023,7 @@ class _PurchaseState extends State<Purchase> {
     } catch (e) {
       Get.snackbar(
         'Error',
-        'Error confirming payment.Please check your internet connection.',
+        'Error confirming payment.',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,
