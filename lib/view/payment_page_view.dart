@@ -44,95 +44,119 @@ class _PaymentPageState extends State<PaymentPage> {
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
           final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
           final double titleFontSize = isSmall ? 20 : (isMedium ? 22 : 25);
-          return SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Gap(verticalGap),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: _buildBreadcrumb(isSmall),
+          return RefreshIndicator(
+            onRefresh: () async {
+              await controller.fetchReceipts();
+            },
+            child: Obx(() {
+              if (controller.isLoading.value) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: CircularProgressIndicator()),
                   ),
-                  Gap(verticalGap),
-                  Text(
-                    "My Receipts",
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        fontSize: titleFontSize,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0,
-                        color: Colors.black,
+                );
+              }
+              final receiptsList = controller.receipts;
+              print("Receipts Count: ${receiptsList.length}");
+
+              if (controller.hasError.value) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: Text("Failed to load payments")),
+                  ),
+                );
+              }
+
+              if (controller.receipts.isEmpty) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: Text("No payments found")),
+                  ),
+                );
+              }
+
+              return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Gap(verticalGap),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: _buildBreadcrumb(isSmall),
                       ),
-                    ),
-                  ),
-                  Gap(verticalGap),
-                  Obx(() {
-                    if (controller.isLoading.value) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    final receiptsList = controller.receipts;
-                    print("Receipts Count: ${receiptsList.length}");
-
-                    if (controller.hasError.value) {
-                      return const Text("Failed to load payments");
-                    }
-
-                    if (controller.receipts.isEmpty) {
-                      return const Text("No payments found");
-                    }
-
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withAlpha(64),
-                            blurRadius: 2,
-                            spreadRadius: 0,
+                      Gap(verticalGap),
+                      Text(
+                        "My Receipts",
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            fontSize: titleFontSize,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0,
+                            color: Colors.black,
                           ),
-                        ],
+                        ),
                       ),
-                      child: Column(
-                        children: List.generate(controller.receipts.length, (
-                          index,
-                        ) {
-                          final receipt = controller.receipts[index];
-                          final isLast =
-                              index == controller.receipts.length - 1;
+                      Gap(verticalGap),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withAlpha(64),
+                              blurRadius: 2,
+                              spreadRadius: 0,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: List.generate(controller.receipts.length, (
+                            index,
+                          ) {
+                            final receipt = controller.receipts[index];
+                            final isLast =
+                                index == controller.receipts.length - 1;
 
-                          return Column(
-                            children: [
-                              CustomPaymentReceipt(
-                                title: receipt.courseName ?? "Course",
-                                amount: receipt.amount?.toString() ?? "0",
-                                date: receipt.enrolledDate ?? "",
-                                icon: SvgPicture.asset(
-                                  'assets/support/payments_border.svg',
-                                  width: 40,
-                                  height: 40,
+                            return Column(
+                              children: [
+                                CustomPaymentReceipt(
+                                  title: receipt.courseName ?? "Course",
+                                  amount: receipt.amount?.toString() ?? "0",
+                                  date: receipt.enrolledDate ?? "",
+                                  icon: SvgPicture.asset(
+                                    'assets/support/payments_border.svg',
+                                    width: 40,
+                                    height: 40,
+                                  ),
+                                  receiptId: receipt.receiptId ?? 0,
                                 ),
-                                receiptId: receipt.receiptId ?? 0,
-                              ),
-                              if (!isLast)
-                                const Divider(
-                                  height: 1,
-                                  thickness: 1,
-                                  indent: 14,
-                                  endIndent: 14,
-                                  color: AppColors.divider,
-                                ),
-                            ],
-                          );
-                        }),
+                                if (!isLast)
+                                  const Divider(
+                                    height: 1,
+                                    thickness: 1,
+                                    indent: 14,
+                                    endIndent: 14,
+                                    color: AppColors.divider,
+                                  ),
+                              ],
+                            );
+                          }),
+                        ),
                       ),
-                    );
-                  }),
-                ],
-              ),
-            ),
+                    ],
+                  ),
+                ),
+              );
+            }),
           );
         },
       ),

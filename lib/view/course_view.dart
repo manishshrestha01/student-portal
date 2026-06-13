@@ -43,50 +43,68 @@ class _CourseViewState extends State<CourseView> {
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
           final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
           final double titleFontSize = isSmall ? 20 : (isMedium ? 22 : 25);
-          return Obx(() {
-            if (courseController.isLoading.value) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            final coursesList = courseController.courses.value.data;
-            print("Courses Count: ${coursesList.length}");
-            if (coursesList.isEmpty) {
-              return const Center(child: Text("No courses found."));
-            }
-            return SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Gap(verticalGap),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _buildBreadcrumb(isSmall),
-                    ),
-                    Gap(verticalGap),
-                    Text(
-                      'My Courses',
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          color: AppColors.textDark,
-                          fontSize: titleFontSize,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 0,
+          return RefreshIndicator(
+            onRefresh: () async {
+              await courseController.getCourses();
+            },
+            child: Obx(() {
+              if (courseController.isLoading.value) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: CircularProgressIndicator()),
+                  ),
+                );
+              }
+              final coursesList = courseController.courses.value.data;
+              print("Courses Count: ${coursesList.length}");
+              if (coursesList.isEmpty) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: Text("No courses found.")),
+                  ),
+                );
+              }
+              return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Gap(verticalGap),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: _buildBreadcrumb(isSmall),
+                      ),
+                      Gap(verticalGap),
+                      Text(
+                        'My Courses',
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            color: AppColors.textDark,
+                            fontSize: titleFontSize,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0,
+                          ),
                         ),
                       ),
-                    ),
-                    Gap(verticalGap),
-                    ...coursesList.map((item) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: horizontalPadding),
-                        child: CoursesWidget(item: item),
-                      );
-                    }),
-                  ],
+                      Gap(verticalGap),
+                      ...coursesList.map((item) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: horizontalPadding),
+                          child: CoursesWidget(item: item),
+                        );
+                      }),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          });
+              );
+            }),
+          );
         },
       ),
     );

@@ -50,187 +50,211 @@ class _RecordedVideosViewState extends State<RecordedVideosView> {
           final bool isMedium = screenWidth >= 390 && screenWidth < 768;
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
 
-          return Obx(() {
-            if (recordedController.isLoading.value) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            final recordedList = recordedController.recordedVideos.toList();
-            final displayedList = _searchQuery.isEmpty
-                ? recordedList
-                : recordedList.where((item) {
-                    final query = _searchQuery.toLowerCase();
-                    return (item.name ?? '').toLowerCase().contains(query) ||
-                        (item.slug ?? '').toLowerCase().contains(query) ||
-                        (item.subHeading ?? '').toLowerCase().contains(query);
-                  }).toList();
-            print("Recorded Count: ${recordedList.length}");
-            if (recordedController.errorMessage.value.isNotEmpty) {
-              return Center(child: Text(recordedController.errorMessage.value));
-            }
-            if (recordedList.isEmpty) {
-              return const Center(child: Text("No recorded videos found."));
-            }
-            return SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Gap(isSmall ? 24 : 32),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _buildBreadcrumb(isSmall),
-                    ),
-                    Gap(isSmall ? 24 : 32),
-                    Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFffeee8),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: const Color(0xFFfed1c0),
-                            width: 1,
-                          ),
-                        ),
-                        child: Text(
-                          'Learn Anytime, Anywhere',
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
+          return RefreshIndicator(
+            onRefresh: () async {
+              await recordedController.getRecordedVideos();
+            },
+            child: Obx(() {
+              if (recordedController.isLoading.value) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: CircularProgressIndicator()),
+                  ),
+                );
+              }
+              final recordedList = recordedController.recordedVideos.toList();
+              final displayedList = _searchQuery.isEmpty
+                  ? recordedList
+                  : recordedList.where((item) {
+                      final query = _searchQuery.toLowerCase();
+                      return (item.name ?? '').toLowerCase().contains(query) ||
+                          (item.slug ?? '').toLowerCase().contains(query) ||
+                          (item.subHeading ?? '').toLowerCase().contains(query);
+                    }).toList();
+              print("Recorded Count: ${recordedList.length}");
+              if (recordedController.errorMessage.value.isNotEmpty) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: Center(child: Text(recordedController.errorMessage.value)),
+                  ),
+                );
+              }
+              if (recordedList.isEmpty) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: Text("No recorded videos found.")),
+                  ),
+                );
+              }
+              return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Gap(isSmall ? 24 : 32),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: _buildBreadcrumb(isSmall),
+                      ),
+                      Gap(isSmall ? 24 : 32),
+                      Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFffeee8),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: const Color(0xFFfed1c0),
+                              width: 1,
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                    Gap(15),
-                    Center(
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
-                          style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 36,
-                              height: 1.2,
-                            ),
-                          ),
-                          children: [
-                            const TextSpan(text: "Code IT Recorded Videos"),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Gap(15),
-                    Center(
-                      child: Text(
-                        "Access 500+ hours of premium recorded content. Watch anytime, rewind, and learn at your own pace with our comprehensive video library.",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                            color: AppColors.textSecondary,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 14,
-                            height: 1.2,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Gap(20),
-                    SearchBar(
-                      controller: _searchController,
-                      hintText: 'Search by course name',
-                      hintStyle: WidgetStateProperty.all(
-                        const TextStyle(
-                          color: AppColors.textMuted,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      // onChanged: (value) {
-                      //   setState(() {
-                      //     _searchQuery = value.trim();
-                      //   });
-                      // },
-                      onSubmitted: (value) {
-                        setState(() {
-                          _searchQuery = value.trim();
-                        });
-                        FocusScope.of(context).unfocus();
-                      },
-                      onTapOutside: (_) {
-                        FocusScope.of(context).unfocus();
-                      },
-                      leading: GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: () {
-                          setState(() {
-                            _searchQuery = _searchController.text.trim();
-                          });
-                          FocusScope.of(context).unfocus();
-                        },
-                        child: Icon(Icons.search, color: AppColors.orangeAccent),
-                      ),
-                      trailing: [
-                        IconButton(
-                          icon: const Icon(Icons.close_rounded),
-                          color: AppColors.iconMuted,
-                          onPressed: () {
-                            _searchController.clear();
-                            setState(() {
-                              _searchQuery = '';
-                            });
-                          },
-                        ),
-                      ],
-                      backgroundColor: WidgetStateProperty.all(Colors.white),
-                      shadowColor: WidgetStateProperty.all(AppColors.shadow),
-                      elevation: WidgetStateProperty.all(4),
-                      shape: WidgetStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          side: BorderSide(color: AppColors.shadow, width: 0.5),
-                        ),
-                      ),
-                      padding: WidgetStateProperty.all(
-                        const EdgeInsets.symmetric(horizontal: 12),
-                      ),
-                    ),
-                    Gap(20),
-                    if (displayedList.isEmpty)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 32),
-                        child: Center(
                           child: Text(
-                            _searchQuery.isEmpty
-                                ? 'No recorded videos found.'
-                                : 'No recorded videos match your search.',
+                            'Learn Anytime, Anywhere',
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
-                                color: AppColors.textMuted,
-                                fontSize: 14,
+                                color: AppColors.primary,
                                 fontWeight: FontWeight.w500,
+                                fontSize: 16,
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ...displayedList.map((item) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: RecordedWidgets(item: item),
-                      );
-                    }),
-                    Gap(30),
-                  ],
+                      Gap(15),
+                      Center(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 36,
+                                height: 1.2,
+                              ),
+                            ),
+                            children: [
+                              const TextSpan(text: "Code IT Recorded Videos"),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Gap(15),
+                      Center(
+                        child: Text(
+                          "Access 500+ hours of premium recorded content. Watch anytime, rewind, and learn at your own pace with our comprehensive video library.",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                              color: AppColors.textSecondary,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.italic,
+                              fontSize: 14,
+                              height: 1.2,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Gap(20),
+                      SearchBar(
+                        controller: _searchController,
+                        hintText: 'Search by course name',
+                        hintStyle: WidgetStateProperty.all(
+                          const TextStyle(
+                            color: AppColors.textMuted,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        // onChanged: (value) {
+                        //   setState(() {
+                        //     _searchQuery = value.trim();
+                        //   });
+                        // },
+                        onSubmitted: (value) {
+                          setState(() {
+                            _searchQuery = value.trim();
+                          });
+                          FocusScope.of(context).unfocus();
+                        },
+                        onTapOutside: (_) {
+                          FocusScope.of(context).unfocus();
+                        },
+                        leading: GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            setState(() {
+                              _searchQuery = _searchController.text.trim();
+                            });
+                            FocusScope.of(context).unfocus();
+                          },
+                          child: Icon(Icons.search, color: AppColors.orangeAccent),
+                        ),
+                        trailing: [
+                          IconButton(
+                            icon: const Icon(Icons.close_rounded),
+                            color: AppColors.iconMuted,
+                            onPressed: () {
+                              _searchController.clear();
+                              setState(() {
+                                _searchQuery = '';
+                              });
+                            },
+                          ),
+                        ],
+                        backgroundColor: WidgetStateProperty.all(Colors.white),
+                        shadowColor: WidgetStateProperty.all(AppColors.shadow),
+                        elevation: WidgetStateProperty.all(4),
+                        shape: WidgetStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                            side: BorderSide(color: AppColors.shadow, width: 0.5),
+                          ),
+                        ),
+                        padding: WidgetStateProperty.all(
+                          const EdgeInsets.symmetric(horizontal: 12),
+                        ),
+                      ),
+                      Gap(20),
+                      if (displayedList.isEmpty)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 32),
+                          child: Center(
+                            child: Text(
+                              _searchQuery.isEmpty
+                                  ? 'No recorded videos found.'
+                                  : 'No recorded videos match your search.',
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                  color: AppColors.textMuted,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ...displayedList.map((item) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: RecordedWidgets(item: item),
+                        );
+                      }),
+                      Gap(30),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          });
+              );
+            }),
+          );
         },
       ),
     );

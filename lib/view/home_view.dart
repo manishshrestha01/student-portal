@@ -41,6 +41,7 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      authController.fetchUser();
       receiptController.fetchReceipts();
       coursesController.getCourses();
       certificatesController.getCertificates();
@@ -57,12 +58,20 @@ class _HomeViewState extends State<HomeView> {
       drawer: CustomDrawer(),
       body: Obx(() {
         final user = authController.user.value;
-        if (user == null) {
-          return const SizedBox.shrink();
-        }
-        final firstName = (user.name ?? '').split(' ').first;
-        return SingleChildScrollView(
-          child: Center(
+        final rawName = (user?.name ?? '').split(' ').first;
+        final firstName = rawName.isEmpty ? 'User' : rawName;
+        return RefreshIndicator(
+          onRefresh: () async {
+            await Future.wait([
+              authController.fetchUser(),
+              receiptController.fetchReceipts(),
+              coursesController.getCourses(),
+              certificatesController.getCertificates(),
+            ]);
+          },
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Center(
             child: Container(
               width: width > 600 ? 400 : width * 0.9,
               padding: EdgeInsets.all(16),
@@ -194,6 +203,7 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
             ),
+          ),
           ),
         );
       }),

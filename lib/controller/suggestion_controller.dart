@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/model/suggestion_model.dart';
 import 'package:codeit_app/service/suggestion_service.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ class SuggestionController extends GetxController {
       Get.snackbar('Error', 'Please enter your suggestion.');
       return;
     }
+
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
 
     try {
       isLoading(true);

@@ -1,4 +1,5 @@
 
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/model/receipt_model.dart';
 import 'package:codeit_app/service/receipt_service.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,9 @@ class ReceiptController extends GetxController {
   }
 
   Future<void> fetchReceipts() async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
+
     try {
       isLoading(true);
       hasError(false);

@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/model/support_ticket.dart';
 import 'package:codeit_app/service/support_service.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,9 @@ class SupportController extends GetxController {
       Get.snackbar('Error', 'Please enter message.');
       return;
     }
+
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
 
     try {
       isLoading(true);

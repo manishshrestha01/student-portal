@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/model/terms_model.dart';
 import 'package:codeit_app/service/terms_service.dart';
@@ -8,6 +9,9 @@ class TermsController extends GetxController {
   var isLoading = false.obs;
 
   Future<void> getTerms() async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
+
     try {
       isLoading(true);
 

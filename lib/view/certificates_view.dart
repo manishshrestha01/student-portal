@@ -45,53 +45,71 @@ class _CertificatesViewState extends State<CertificatesView> {
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
           final double verticalGap = isSmall ? 24 : (isMedium ? 28 : 32);
           final double titleFontSize = isSmall ? 20 : (isMedium ? 22 : 25);
-          return Obx(() {
-            if (certificateController.isLoading.value) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            final certificatesList =
-                certificateController.certificate.value.data;
-            print("Certificates Count: ${certificatesList.length}");
-            if (certificatesList.isEmpty) {
-              return const Center(child: Text("No certificates found."));
-            }
+          return RefreshIndicator(
+            onRefresh: () async {
+              await certificateController.getCertificates();
+            },
+            child: Obx(() {
+              if (certificateController.isLoading.value) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: CircularProgressIndicator()),
+                  ),
+                );
+              }
+              final certificatesList =
+                  certificateController.certificate.value.data;
+              print("Certificates Count: ${certificatesList.length}");
+              if (certificatesList.isEmpty) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: Text("No certificates found.")),
+                  ),
+                );
+              }
 
-            return SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Gap(verticalGap),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _buildBreadcrumb(isSmall),
-                    ),
-                    Gap(verticalGap),
-                    Text(
-                      'My Certificates',
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          color: AppColors.textDark,
-                          fontSize: titleFontSize,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 0,
+              return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Gap(verticalGap),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: _buildBreadcrumb(isSmall),
+                      ),
+                      Gap(verticalGap),
+                      Text(
+                        'My Certificates',
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            color: AppColors.textDark,
+                            fontSize: titleFontSize,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0,
+                          ),
                         ),
                       ),
-                    ),
-                    Gap(verticalGap),
-                    ...certificatesList.map((item) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: horizontalPadding),
-                        child: CertificatesWidget(item: item),
-                      );
-                    }),
-                    Gap(horizontalPadding),
-                  ],
+                      Gap(verticalGap),
+                      ...certificatesList.map((item) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: horizontalPadding),
+                          child: CertificatesWidget(item: item),
+                        );
+                      }),
+                      Gap(horizontalPadding),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          });
+              );
+            }),
+          );
         },
       ),
     );

@@ -42,110 +42,128 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
           final bool isMedium = screenWidth >= 390 && screenWidth < 768;
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
 
-          return Obx(() {
-            if (upcomingController.isLoading.value) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            final upcomingList = upcomingController.upcomingclass.value.data;
-            print("Upcoming Count: ${upcomingList.length}");
-            if (upcomingList.isEmpty) {
-              return const Center(child: Text("No upcoming classes found."));
-            }
-            return SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Gap(isSmall ? 24 : 32),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: _buildBreadcrumb(isSmall),
-                    ),
-                    Gap(isSmall ? 24 : 32),
-                    Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFffeee8),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                            color: const Color(0xFFfed1c0),
-                            width: 1,
+          return RefreshIndicator(
+            onRefresh: () async {
+              await upcomingController.getUpcomingClasses();
+            },
+            child: Obx(() {
+              if (upcomingController.isLoading.value) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: CircularProgressIndicator()),
+                  ),
+                );
+              }
+              final upcomingList = upcomingController.upcomingclass.value.data;
+              print("Upcoming Count: ${upcomingList.length}");
+              if (upcomingList.isEmpty) {
+                return SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: SizedBox(
+                    height: constraints.maxHeight,
+                    child: const Center(child: Text("No upcoming classes found.")),
+                  ),
+                );
+              }
+              return SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Gap(isSmall ? 24 : 32),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: _buildBreadcrumb(isSmall),
+                      ),
+                      Gap(isSmall ? 24 : 32),
+                      Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFffeee8),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: const Color(0xFFfed1c0),
+                              width: 1,
+                            ),
                           ),
-                        ),
-                        child: Text(
-                          'Next Batches Starting Soon',
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                          child: Text(
+                            'Next Batches Starting Soon',
+                            style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Gap(15),
-                    Center(
-                      child: RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(
+                      Gap(15),
+                      Center(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 36,
+                                height: 1.2,
+                              ),
+                            ),
+                            children: [
+                              const TextSpan(
+                                text: "Upcoming Classes in Google Meet ",
+                              ),
+                              WidgetSpan(
+                                alignment: PlaceholderAlignment.middle,
+                                child: NetworkImageFallback(
+                                  imageUrl:
+                                      'https://codeit.com.np/images/google_meet.png',
+                                  height: 36,
+                                  width: 36,
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Gap(15),
+                      Center(
+                        child: Text(
+                          "Miss a live class? No problem—recorded videos will be available for every session.",
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 36,
+                            textStyle: TextStyle(
+                              color: AppColors.textMuted,
+                              fontWeight: FontWeight.w400,
+                              fontStyle: FontStyle.italic,
+                              fontSize: 14,
                               height: 1.2,
                             ),
                           ),
-                          children: [
-                            const TextSpan(
-                              text: "Upcoming Classes in Google Meet ",
-                            ),
-                            WidgetSpan(
-                              alignment: PlaceholderAlignment.middle,
-                              child: NetworkImageFallback(
-                                imageUrl:
-                                    'https://codeit.com.np/images/google_meet.png',
-                                height: 36,
-                                width: 36,
-                                fit: BoxFit.contain,
-                              ),
-                            ),
-                          ],
                         ),
                       ),
-                    ),
-                    Gap(15),
-                    Center(
-                      child: Text(
-                        "Miss a live class? No problem—recorded videos will be available for every session.",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                            color: AppColors.textMuted,
-                            fontWeight: FontWeight.w400,
-                            fontStyle: FontStyle.italic,
-                            fontSize: 14,
-                            height: 1.2,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Gap(20),
-                    ...upcomingList.map((item) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: UpcomingWidget(item: item),
-                      );
-                    }),
-                    Gap(30),
-                  ],
+                      Gap(20),
+                      ...upcomingList.map((item) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: UpcomingWidget(item: item),
+                        );
+                      }),
+                      Gap(30),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          });
+              );
+            }),
+          );
         },
       ),
     );

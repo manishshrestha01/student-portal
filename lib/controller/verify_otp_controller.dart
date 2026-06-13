@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/controller/forgot_password_controller.dart';
 import 'package:codeit_app/model/verify_otp_model.dart';
 import 'package:codeit_app/routes/app_routes.dart';
@@ -99,6 +100,8 @@ Timer? _timer;
       Get.snackbar('Error', 'OTP must be $otpLength digits.');
       return;
     }
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
 
     try {
       isLoading(true);
@@ -151,6 +154,8 @@ Timer? _timer;
       Get.offNamed(AppRoutes.forgotPassword);
       return;
     }
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
 
     try {
       isResending(true);

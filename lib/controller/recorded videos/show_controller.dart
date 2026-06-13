@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/model/recorded%20videos/show_model.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/service/recorded%20videos/show_service.dart';
@@ -10,6 +11,9 @@ class ShowController extends GetxController {
   String? _activeSlug;
 
   Future<void> getRecordedVideos(String slug) async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
+
     final requestedSlug = slug.trim();
     if (requestedSlug.isEmpty) {
       showrecordedvideos.value = null;

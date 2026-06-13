@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/model/login_model.dart';
@@ -125,6 +126,8 @@ class AuthController extends GetxController {
   }
   // Register user.
   Future<void> register() async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
     try {
       isLoading(true);
       final response = await AuthService.register(
@@ -160,6 +163,8 @@ class AuthController extends GetxController {
 
   // Login user.
   Future<void> login() async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
     try {
       isLoading(true);
 
@@ -196,6 +201,8 @@ class AuthController extends GetxController {
   }
 
   Future<void> fetchUser() async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
     try {
       final response = await AuthService.getUser();
       if (response.statusCode == 200) {
@@ -225,6 +232,8 @@ class AuthController extends GetxController {
   }
 
   Future<void> updateProfile() async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
     try {
       isLoading(true);
       final response = await AuthService.updateProfile(
@@ -307,6 +316,8 @@ class AuthController extends GetxController {
       Get.snackbar("Error", "New password must be at least 6 characters long");
       return;
     }
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
 
     try {
       isLoading(true);

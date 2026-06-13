@@ -51,7 +51,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               final user = authController.user.value;
               final firstName = (user?.name ?? '').split(' ').first;
               return Text(
-                firstName.isNotEmpty ? firstName : "Name",
+                firstName.isNotEmpty ? firstName : "User",
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
                     color: AppColors.white,

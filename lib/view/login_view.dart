@@ -1,4 +1,5 @@
 import 'package:codeit_app/controller/auth_controller.dart';
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/core/constants/colors.dart';
 import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/utils/biometric_auth.dart';
@@ -176,6 +177,9 @@ class LoginView extends GetView<AuthController> {
                             const Gap(20),
                             InkWell(
                               onTap: () async {
+                                final networkController = Get.find<NetworkController>();
+                                if (!await networkController.checkConnectivity()) return;
+
                                 final isEnabled =
                                     controller.storageController.biometricEnabled.value;
                                 final token = controller.storageController.getToken();

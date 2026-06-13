@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/model/upcoming%20course/admission_model.dart';
 import 'package:codeit_app/service/upcoming%20course/admission_service.dart';
@@ -14,6 +15,9 @@ class AdmissionController extends GetxController {
   }
 
   Future<void> sendAdmission(dynamic id) async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
+
     final idString = id.toString();
     print("DEBUG: Sending ID to server -> $idString");
     try {
@@ -54,6 +58,9 @@ class AdmissionController extends GetxController {
   }
 
   Future<void> submitAdmissionWithPayment(dynamic id, String filePath, bool terms) async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
+
     final idString = id.toString();
     print("DEBUG: Submitting admission with payment for ID -> $idString");
     print("DEBUG: File path -> $filePath");
@@ -116,7 +123,7 @@ class AdmissionController extends GetxController {
       errorMessage('Could not submit admission. Please try again.');
       Get.snackbar(
         "Error",
-        "Failed to submit admission: $e",
+        "Failed to submit admission.",
         backgroundColor: Colors.red,
         colorText: Colors.white,
         snackPosition: SnackPosition.TOP,

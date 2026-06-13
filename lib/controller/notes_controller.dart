@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/model/notes_model.dart';
 import 'package:codeit_app/service/notes_service.dart';
@@ -13,6 +14,9 @@ class NotesController extends GetxController {
   }
 
   Future<void> sendNote(dynamic id) async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
+
     final idString = id.toString();
     print("DEBUG: Sending ID to server -> $idString");
     try {

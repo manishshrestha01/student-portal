@@ -928,7 +928,7 @@ class _PurchaseState extends State<Purchase> {
     } catch (e) {
       Get.snackbar(
         'Error',
-        'Error picking image: $e',
+        'Error picking image.',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,
@@ -1023,7 +1023,7 @@ class _PurchaseState extends State<Purchase> {
     } catch (e) {
       Get.snackbar(
         'Error',
-        'Error confirming payment: $e',
+        'Error confirming payment.Please check your internet connection.',
         snackPosition: SnackPosition.TOP,
         backgroundColor: Colors.red,
         colorText: Colors.white,

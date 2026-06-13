@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/model/certificates_model.dart';
 import 'package:codeit_app/service/certificates_service.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
@@ -15,6 +16,9 @@ class CertificatesController extends GetxController {
   }
 
   Future<void> getCertificates() async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
+
     try {
       isLoading(true);
       errorMessage('');

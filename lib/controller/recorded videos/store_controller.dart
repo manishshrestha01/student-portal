@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/controller/receipt_controller.dart';
 import 'package:codeit_app/model/recorded%20videos/store_model.dart';
@@ -20,6 +21,9 @@ class StoreController extends GetxController {
 		String filePath,
 		bool terms,
 	) async {
+		final network = Get.find<NetworkController>();
+		if (!await network.checkConnectivity()) return;
+
 		final idString = id.toString();
 		try {
 			loadingIds[idString] = true;
@@ -77,7 +81,7 @@ class StoreController extends GetxController {
 			errorMessage('Could not submit payment. Please try again.');
 			Get.snackbar(
 				'Error',
-				'Failed to submit payment: $e',
+				'Failed to submit payment.',
 				backgroundColor: Colors.red,
 				colorText: Colors.white,
 				snackPosition: SnackPosition.TOP,

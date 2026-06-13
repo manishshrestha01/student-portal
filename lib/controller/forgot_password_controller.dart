@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/model/forgot_password_model.dart';
 import 'package:codeit_app/routes/app_routes.dart';
 import 'package:codeit_app/service/forgot_password_service.dart';
@@ -25,6 +26,9 @@ class ForgotPasswordController extends GetxController {
       Get.snackbar('Error', 'Please enter a valid email address.');
       return;
     }
+
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
 
     try {
       isLoading(true);

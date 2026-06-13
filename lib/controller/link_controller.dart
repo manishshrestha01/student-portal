@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/model/link_model.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/service/link_service.dart';
@@ -9,6 +10,9 @@ class LinkController extends GetxController {
   var errorMessage = ''.obs;
 
   Future<void> getLinks() async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
+
     try {
       isLoading(true);
       errorMessage('');

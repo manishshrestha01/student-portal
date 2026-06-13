@@ -1,3 +1,4 @@
+import 'package:codeit_app/controller/network_controller.dart';
 import 'package:codeit_app/model/upcoming%20course/upcoming_model.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:codeit_app/service/upcoming%20course/upcoming_service.dart';
@@ -16,6 +17,9 @@ class UpcomingController extends GetxController {
   }
 
   Future<void> getUpcomingClasses() async {
+    final network = Get.find<NetworkController>();
+    if (!await network.checkConnectivity()) return;
+
     try {
       isLoading(true);
       errorMessage('');
