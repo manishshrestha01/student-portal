@@ -54,16 +54,21 @@ class ProfileView extends GetView<AuthController> {
               Row(
                 children: [
                   Gap(18),
-                  Text(
-                    'Update Profile',
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        color: AppColors.textDark,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0,
+                  Column(
+                    children: [
+                      Gap(18),
+                      Text(
+                        'Update Profile',
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            color: AppColors.textDark,
+                            fontSize: 25,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
