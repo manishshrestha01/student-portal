@@ -291,7 +291,7 @@ class CustomDrawer extends StatelessWidget {
                             size: iconWidth,
                           ),
                           title: Text(
-                            "Recorded Videos",
+                            "Buy Recorded Videos",
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
                                 color: Colors.white,
