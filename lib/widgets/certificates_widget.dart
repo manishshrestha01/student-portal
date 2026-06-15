@@ -188,7 +188,7 @@ class CertificatesWidget extends StatelessWidget {
                         ? null
                         : () => controller.sendEmail(item.certicateId.toString()),
                     icon: SvgPicture.asset(
-                      'assets/support/download.svg',
+                      'assets/support/email.svg',
                       colorFilter: const ColorFilter.mode(
                         AppColors.primary,
                         BlendMode.srcIn,

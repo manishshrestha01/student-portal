@@ -210,7 +210,7 @@ class LoginView extends GetView<AuthController> {
                                     );
                                   }
                                 } else {
-                                  Get.snackbar('Failed', 'Authentication failed');
+                                  Get.snackbar('Failed', 'Authentication failed', backgroundColor: Colors.red, colorText: Colors.white);
                                 }
                               },
                               borderRadius: BorderRadius.circular(12),

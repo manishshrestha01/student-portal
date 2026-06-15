@@ -40,7 +40,6 @@ class EmailCertificatesController extends GetxController {
             emailcertificate.value.message ?? "Something went wrong",
             backgroundColor: emailcertificate.value.success == true ? Colors.green : Colors.red,
             colorText: Colors.white,
-            snackPosition: SnackPosition.BOTTOM,
           );
           print("SERVER MESSAGE: ${emailcertificate.value.message}");
         } else {

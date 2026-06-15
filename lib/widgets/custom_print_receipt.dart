@@ -190,10 +190,13 @@ Future<void> printReceipt(Datum receipt) async {
       },
     ),
   );
+  
+  final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+  final String fileName = 'Receipt_${receipt.receiptId ?? 'unknown'}_$timestamp.pdf';
 
   await Printing.layoutPdf(
     onLayout: (_) async => pdf.save(),
-    name: 'Receipt_${receipt.receiptId ?? 'unknown'}.pdf',
+    name: fileName,
   );
 }
 

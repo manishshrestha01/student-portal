@@ -117,26 +117,28 @@ Timer? _timer;
           Get.snackbar(
             'Success',
             verifyOtpResponse.value.message ?? 'OTP verified successfully.',
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
           );
           Get.toNamed(
             AppRoutes.changePassword,
             arguments: {'email': emailValue, 'otp': otp},
           );
         } else {
-          Get.snackbar('Error', _extractErrorMessage(data));
+          Get.snackbar('Error', _extractErrorMessage(data), backgroundColor: Colors.red, colorText: Colors.white);
         }
       } else {
-        Get.snackbar('Error', 'Unexpected response from server.');
+        Get.snackbar('Error', 'Unexpected response from server.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } on DioException catch (e) {
       final data = e.response?.data;
       if (data is Map<String, dynamic>) {
-        Get.snackbar('Error', _extractErrorMessage(data));
+        Get.snackbar('Error', _extractErrorMessage(data), backgroundColor: Colors.red, colorText: Colors.white);
       } else {
-        Get.snackbar('Error', 'Could not verify OTP. Please try again.');
+        Get.snackbar('Error', 'Could not verify OTP. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } catch (_) {
-      Get.snackbar('Error', 'Could not verify OTP. Please try again.');
+      Get.snackbar('Error', 'Could not verify OTP. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
     } finally {
       isLoading(false);
     }
@@ -148,6 +150,8 @@ Timer? _timer;
       Get.snackbar(
         'Error',
         'Email is missing. Please try forgot password again.',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
       );
 
    
@@ -176,22 +180,24 @@ Timer? _timer;
             message is String && message.isNotEmpty
                 ? message
                 : 'OTP sent to your email.',
-          );
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
         } else {
-          Get.snackbar('Error', _extractErrorMessage(data));
+          Get.snackbar('Error', _extractErrorMessage(data), backgroundColor: Colors.red, colorText: Colors.white);
         }
       } else {
-        Get.snackbar('Error', 'Unexpected response from server.');
+        Get.snackbar('Error', 'Unexpected response from server.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } on DioException catch (e) {
       final data = e.response?.data;
       if (data is Map<String, dynamic>) {
-        Get.snackbar('Error', _extractErrorMessage(data));
+        Get.snackbar('Error', _extractErrorMessage(data), backgroundColor: Colors.red, colorText: Colors.white);
       } else {
-        Get.snackbar('Error', 'Could not send OTP. Please try again.');
+        Get.snackbar('Error', 'Could not send OTP. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } catch (_) {
-      Get.snackbar('Error', 'Could not send OTP. Please try again.');
+      Get.snackbar('Error', 'Could not send OTP. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
     } finally {
       isResending(false);
     }

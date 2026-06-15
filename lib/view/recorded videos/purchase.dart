@@ -163,6 +163,8 @@ class _PurchaseState extends State<Purchase> {
                                     Get.snackbar(
                                       'Plan selected',
                                       '${plan.name ?? 'Selected'} plan selected',
+                                      backgroundColor: Colors.green,
+                                      colorText: Colors.white,
                                       snackPosition: SnackPosition.TOP,
                                     );
                                   },

@@ -45,21 +45,23 @@ class ChangePasswordController extends GetxController {
       Get.snackbar(
         'Error',
         'Email is missing. Please start from forgot password again.',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
       );
       Get.offAllNamed(AppRoutes.forgotPassword);
       return;
     }
 
     if (password.isEmpty) {
-      Get.snackbar('Error', 'Please enter new password.');
+      Get.snackbar('Error', 'Please enter new password.', backgroundColor: Colors.red, colorText: Colors.white);
       return;
     }
     if (confirmPassword.isEmpty) {
-      Get.snackbar('Error', 'Please confirm your password.');
+      Get.snackbar('Error', 'Please confirm your password.', backgroundColor: Colors.red, colorText: Colors.white);
       return;
     }
     if (password != confirmPassword) {
-      Get.snackbar('Error', 'Passwords do not match.');
+      Get.snackbar('Error', 'Passwords do not match.', backgroundColor: Colors.red, colorText: Colors.white);
       return;
     }
 
@@ -87,6 +89,8 @@ class ChangePasswordController extends GetxController {
             'Success',
             resetPasswordResponse.value.message ??
                 'Password changed successfully. Please login.',
+                backgroundColor: Colors.green,
+            colorText: Colors.white,
           );
           passwordController.clear();
           confirmPasswordController.clear();
@@ -95,20 +99,22 @@ class ChangePasswordController extends GetxController {
           Get.snackbar(
             'Error',
             resetPasswordResponse.value.message ?? 'Failed to reset password.',
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
           );
         }
       } else {
-        Get.snackbar('Error', 'Unexpected response from server.');
+        Get.snackbar('Error', 'Unexpected response from server.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } on DioException catch (e) {
       final data = e.response?.data;
       if (data is Map<String, dynamic>) {
-        Get.snackbar('Error', _extractMessage(data) ?? 'Failed to reset password.');
+        Get.snackbar('Error', _extractMessage(data) ?? 'Failed to reset password.', backgroundColor: Colors.red, colorText: Colors.white);
       } else {
-        Get.snackbar('Error', 'Could not reset password. Please try again.');
+        Get.snackbar('Error', 'Could not reset password. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } catch (_) {
-      Get.snackbar('Error', 'Could not reset password. Please try again.');
+      Get.snackbar('Error', 'Could not reset password. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
     } finally {
       isLoading(false);
     }

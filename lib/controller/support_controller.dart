@@ -17,15 +17,15 @@ class SupportController extends GetxController {
     final String category = _mapCategory(categoryLabel);
 
     if (subject.isEmpty) {
-      Get.snackbar('Error', 'Please enter subject.');
+      Get.snackbar('Error', 'Please enter subject.', backgroundColor: Colors.red, colorText: Colors.white);
       return;
     }
     if (subject.length < 5) {
-      Get.snackbar('Error', 'Subject must be at least 5 characters.');
+      Get.snackbar('Error', 'Subject must be at least 5 characters.', backgroundColor: Colors.red, colorText: Colors.white);
       return;
     }
     if (message.isEmpty) {
-      Get.snackbar('Error', 'Please enter message.');
+      Get.snackbar('Error', 'Please enter message.', backgroundColor: Colors.red, colorText: Colors.white);
       return;
     }
 
@@ -47,16 +47,18 @@ class SupportController extends GetxController {
           Get.snackbar(
             'Success',
             supportResponse.value.message ?? 'Your ticket has been sent.',
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
           );
           clearFields();
         } else {
-          Get.snackbar('Error', _extractErrorMessage(data));
+          Get.snackbar('Error', _extractErrorMessage(data), backgroundColor: Colors.red, colorText: Colors.white);
         }
       } else {
-        Get.snackbar('Error', 'Unexpected response from server.');
+        Get.snackbar('Error', 'Unexpected response from server.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Could not submit ticket. Please try again.');
+      Get.snackbar('Error', 'Could not submit ticket. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
     } finally {
       isLoading(false);
     }

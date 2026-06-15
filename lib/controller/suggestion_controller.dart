@@ -14,7 +14,12 @@ class SuggestionController extends GetxController {
     final message = messageController.text.trim();
 
     if (message.isEmpty) {
-      Get.snackbar('Error', 'Please enter your suggestion.');
+      Get.snackbar(
+        'Error',
+        'Please enter your suggestion.',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
       return;
     }
 
@@ -33,16 +38,18 @@ class SuggestionController extends GetxController {
             'Success',
             suggestionResponse.value.message ??
                 'Suggestion submitted successfully.',
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
           );
           messageController.clear();
         } else {
-          Get.snackbar('Error', _extractErrorMessage(data));
+          Get.snackbar('Error', _extractErrorMessage(data), backgroundColor: Colors.red, colorText: Colors.white);
         }
       } else {
-        Get.snackbar('Error', 'Unexpected response from server.');
+        Get.snackbar('Error', 'Unexpected response from server.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Could not submit suggestion. Please try again.');
+      Get.snackbar('Error', 'Could not submit suggestion. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
     } finally {
       isLoading(false);
     }

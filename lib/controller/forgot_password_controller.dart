@@ -19,11 +19,11 @@ class ForgotPasswordController extends GetxController {
     final email = emailController.text.trim();
 
     if (email.isEmpty) {
-      Get.snackbar('Error', 'Please enter your email address.');
+      Get.snackbar('Error', 'Please enter your email address.', backgroundColor: Colors.red, colorText: Colors.white);
       return;
     }
     if (!GetUtils.isEmail(email)) {
-      Get.snackbar('Error', 'Please enter a valid email address.');
+      Get.snackbar('Error', 'Please enter a valid email address.', backgroundColor: Colors.red, colorText: Colors.white);
       return;
     }
 
@@ -42,23 +42,25 @@ class ForgotPasswordController extends GetxController {
           Get.snackbar(
             'Success',
             forgotPasswordResponse.value.message ?? 'OTP sent to your email.',
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
           );
           Get.toNamed(AppRoutes.verifyOtp, arguments: {'email': email});
         } else {
-          Get.snackbar('Error', _extractErrorMessage(data));
+          Get.snackbar('Error', _extractErrorMessage(data), backgroundColor: Colors.red, colorText: Colors.white);
         }
       } else {
-        Get.snackbar('Error', 'Unexpected response from server.');
+        Get.snackbar('Error', 'Unexpected response from server.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } on DioException catch (e) {
       final data = e.response?.data;
       if (data is Map<String, dynamic>) {
-        Get.snackbar('Error', _extractErrorMessage(data));
+        Get.snackbar('Error', _extractErrorMessage(data), backgroundColor: Colors.red, colorText: Colors.white);
       } else {
-        Get.snackbar('Error', 'Could not send OTP. Please try again.');
+        Get.snackbar('Error', 'Could not send OTP. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
       }
     } catch (_) {
-      Get.snackbar('Error', 'Could not send OTP. Please try again.');
+      Get.snackbar('Error', 'Could not send OTP. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
     } finally {
       isLoading(false);
     }
