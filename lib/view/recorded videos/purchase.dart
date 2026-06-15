@@ -1197,7 +1197,7 @@ class _PurchaseState extends State<Purchase> {
           behavior: HitTestBehavior.opaque,
           onTap: () => Get.offAll(() => RecordedVideosView()),
           child: Text(
-            'Recorded Courses',
+            'Recorded Videos',
             style: GoogleFonts.inter(
               textStyle: TextStyle(
                 color: AppColors.textMuted,
