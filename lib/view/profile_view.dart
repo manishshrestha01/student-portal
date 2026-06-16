@@ -133,13 +133,7 @@ class ProfileView extends GetView<AuthController> {
                               isRequired: true,
                             ),
                             Gap(20),
-                            //w6 address
-                            CustomTextField(
-                              controller: controller.address,
-                              labelText: "Address",
-                              hintText: "Enter your address",
-                            ),
-                            Gap(20),
+                          
                             //w7 button
                             Align(
                               alignment: Alignment.centerLeft,
