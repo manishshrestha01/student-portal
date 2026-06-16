@@ -289,10 +289,10 @@ class AuthController extends GetxController {
 
   Future<void> resetPassword() async {
     // Validate all fields are filled
-    if (currentPassword.text.isEmpty) {
-      Get.snackbar("Error", "Please enter your current password", backgroundColor: Colors.red, colorText: Colors.white);
-      return;
-    }
+    // if (currentPassword.text.isEmpty) {
+    //   Get.snackbar("Error", "Please enter your current password", backgroundColor: Colors.red, colorText: Colors.white);
+    //   return;
+    // }
 
     if (newPassword.text.isEmpty) {
       Get.snackbar("Error", "Please enter your new password", backgroundColor: Colors.red, colorText: Colors.white);

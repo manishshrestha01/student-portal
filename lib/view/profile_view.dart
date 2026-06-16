@@ -210,28 +210,28 @@ class ProfileView extends GetView<AuthController> {
                               textAlign: TextAlign.center,
                             ),
                             Gap(34),
-                            //w3 current password
-                            Obx(() {
-                              return CustomTextField(
-                                controller: controller.currentPassword,
-                                labelText: "Current Password",
-                                hintText: "Enter your current password",
-                                obscureText:
-                                    controller.currentPasswordHidden.value,
-                                suffixIcon: IconButton(
-                                  onPressed: () {
-                                    controller.currentPasswordHidden.value =
-                                        !controller.currentPasswordHidden.value;
-                                  },
-                                  icon: Icon(
-                                    controller.currentPasswordHidden.value
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                  ),
-                                ),
-                              );
-                            }),
-                            Gap(20),
+                            // //w3 current password
+                            // Obx(() {
+                            //   return CustomTextField(
+                            //     controller: controller.currentPassword,
+                            //     labelText: "Current Password",
+                            //     hintText: "Enter your current password",
+                            //     obscureText:
+                            //         controller.currentPasswordHidden.value,
+                            //     suffixIcon: IconButton(
+                            //       onPressed: () {
+                            //         controller.currentPasswordHidden.value =
+                            //             !controller.currentPasswordHidden.value;
+                            //       },
+                            //       icon: Icon(
+                            //         controller.currentPasswordHidden.value
+                            //             ? Icons.visibility_off
+                            //             : Icons.visibility,
+                            //       ),
+                            //     ),
+                            //   );
+                            // }),
+                            // Gap(20),
                             //w4 new password
                             Obx(() {
                               return CustomTextField(
