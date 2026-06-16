@@ -126,6 +126,7 @@ class AuthController extends GetxController {
   }
   // Register user.
   Future<void> register() async {
+    if (isLoading.value || Get.isSnackbarOpen) return;
     final network = Get.find<NetworkController>();
     if (!await network.checkConnectivity()) return;
     try {
@@ -233,6 +234,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> updateProfile() async {
+    if (isLoading.value || Get.isSnackbarOpen) return;
     final network = Get.find<NetworkController>();
     if (!await network.checkConnectivity()) return;
     try {
@@ -293,6 +295,7 @@ class AuthController extends GetxController {
     //   Get.snackbar("Error", "Please enter your current password", backgroundColor: Colors.red, colorText: Colors.white);
     //   return;
     // }
+    if (isLoading.value || Get.isSnackbarOpen) return;
 
     if (newPassword.text.isEmpty) {
       Get.snackbar("Error", "Please enter your new password", backgroundColor: Colors.red, colorText: Colors.white);

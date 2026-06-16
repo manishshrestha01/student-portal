@@ -10,51 +10,61 @@ class SuggestionController extends GetxController {
 
   final TextEditingController messageController = TextEditingController();
 
-  Future<void> submitSuggestion() async {
-    final message = messageController.text.trim();
+Future<void> submitSuggestion() async {
+  final message = messageController.text.trim();
 
-    if (message.isEmpty) {
+  if (message.isEmpty) {
+    if (!Get.isSnackbarOpen) {
       Get.snackbar(
         'Error',
         'Please enter your suggestion.',
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
-      return;
     }
+    return;
+  }
 
-    final network = Get.find<NetworkController>();
-    if (!await network.checkConnectivity()) return;
+  if (isLoading.value) return; 
 
-    try {
-      isLoading(true);
-      final response = await SuggestionService.submitSuggestion(message);
+  final network = Get.find<NetworkController>();
+  if (!await network.checkConnectivity()) return;
 
-      final data = response.data;
-      if (data is Map<String, dynamic>) {
-        if (data['success'] == true) {
-          suggestionResponse.value = SuggestionModel.fromJson(data);
+  try {
+    isLoading(true);
+    final response = await SuggestionService.submitSuggestion(message);
+
+    final data = response.data;
+    if (data is Map<String, dynamic>) {
+      if (data['success'] == true) {
+        suggestionResponse.value = SuggestionModel.fromJson(data);
+        if (!Get.isSnackbarOpen) {
           Get.snackbar(
             'Success',
-            suggestionResponse.value.message ??
-                'Suggestion submitted successfully.',
+            suggestionResponse.value.message ?? 'Suggestion submitted successfully.',
             backgroundColor: Colors.green,
             colorText: Colors.white,
           );
-          messageController.clear();
-        } else {
+        }
+        messageController.clear();
+      } else {
+        if (!Get.isSnackbarOpen) {
           Get.snackbar('Error', _extractErrorMessage(data), backgroundColor: Colors.red, colorText: Colors.white);
         }
-      } else {
+      }
+    } else {
+      if (!Get.isSnackbarOpen) {
         Get.snackbar('Error', 'Unexpected response from server.', backgroundColor: Colors.red, colorText: Colors.white);
       }
-    } catch (e) {
-      Get.snackbar('Error', 'Could not submit suggestion. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
-    } finally {
-      isLoading(false);
     }
+  } catch (e) {
+    if (!Get.isSnackbarOpen) {
+      Get.snackbar('Error', 'Could not submit suggestion. Please try again.', backgroundColor: Colors.red, colorText: Colors.white);
+    }
+  } finally {
+    isLoading(false);
   }
-
+}
   String _extractErrorMessage(Map<String, dynamic> data) {
     final errors = data['errors'];
     if (errors is Map<String, dynamic>) {
