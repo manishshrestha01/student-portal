@@ -12,6 +12,7 @@ import 'package:codeit_app/widgets/network_image_fallback.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -297,6 +298,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                       .courseDetails
                                       ?.videos ??
                                   [];
+
                               if (controller.isLoadingForId(
                                 widget.item.enrollmentId.toString(),
                               )) {
@@ -307,6 +309,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                   ),
                                 );
                               }
+
                               if (videos.isEmpty) {
                                 return const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 20),
@@ -315,18 +318,57 @@ class _CourseVideoState extends State<CourseVideo> {
                                   ),
                                 );
                               }
-                              // Sort videos
-                              if (!isAscending) {
-                                videos = videos.reversed.toList();
+
+                              // --- REFINED SORTING LOGIC ---
+                              final DateFormat formatter = DateFormat(
+                                "MMM dd, yyyy",
+                              );
+
+                              int extractDay(String title) {
+                                final regExp = RegExp(
+                                  r'Day\D*(\d+)',
+                                  caseSensitive: false,
+                                );
+                                final match = regExp.firstMatch(title);
+                                return match != null
+                                    ? int.parse(match.group(1)!)
+                                    : 0;
                               }
-                              final videosList = List<Video>.from(videos);
+
+                              final sortedVideos = List<Video>.from(videos)
+                                ..sort((a, b) {
+                                  int dayA = extractDay(a.title ?? "");
+                                  int dayB = extractDay(b.title ?? "");
+
+                                  if (dayA != 0 && dayB != 0) {
+                                    return dayA.compareTo(dayB);
+                                  }
+                                  DateTime dateA =
+                                      DateTime.tryParse(a.posted ?? "") ??
+                                      formatter.parse(
+                                        a.posted ?? "Jan 01, 2026",
+                                      );
+                                  DateTime dateB =
+                                      DateTime.tryParse(b.posted ?? "") ??
+                                      formatter.parse(
+                                        b.posted ?? "Jan 01, 2026",
+                                      );
+
+                                  return dateA.compareTo(dateB);
+                                });
+
+                              final displayList = isAscending
+                                  ? sortedVideos
+                                  : sortedVideos.reversed.toList();
+                              // --- END SORTING LOGIC ---
+
                               return ListView.separated(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return videoItem(
-                                    videosList[index],
-                                    videosList,
+                                    displayList[index],
+                                    displayList,
                                     screenWidth,
                                     bodyFontSize,
                                     subtitleFontSize,
@@ -338,7 +380,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                       color: Colors.black,
                                       thickness: 0.5,
                                     ),
-                                itemCount: videos.length,
+                                itemCount: displayList.length,
                               );
                             }),
                           ],

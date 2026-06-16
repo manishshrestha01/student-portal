@@ -134,7 +134,7 @@ class CustomPhoneField extends StatelessWidget {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey.shade400),
+              borderSide: BorderSide(color: AppColors.textLight),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
@@ -147,15 +147,18 @@ class CustomPhoneField extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
           ),
           onChanged: (phone) {
-            countryCodeController?.text = phone.countryCode;
+            String code = phone.countryCode;
+            if (!code.startsWith('+')) {
+              code = '+$code';
+            }
+            countryCodeController?.text = code;
           },
           onCountryChanged: (country) {
-            try {
-              countryCodeController?.text =
-                  country.dialCode.startsWith('+') == true
-                  ? country.dialCode
-                  : '+${country.dialCode}';
-            } catch (_) {}
+            String code = country.dialCode;
+            if (!code.startsWith('+')) {
+              code = '+$code';
+            }
+            countryCodeController?.text = code;
           },
           validator:
               validator ??
