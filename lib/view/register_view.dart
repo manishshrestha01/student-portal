@@ -86,8 +86,7 @@ class RegisterView extends GetView<AuthController> {
                           labelText: 'Full Name',
                           isRequired: true,
                           hintText: 'Enter your full name',
-                          validator: (value) =>
-                              value!.isEmpty ? 'Full name is required' : null,
+                          validator: Validators.nameValidator,
                         ),
                         Gap(isSmall ? 10 : 12),
                         CustomTextField(

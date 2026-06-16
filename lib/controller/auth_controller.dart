@@ -340,7 +340,7 @@ class AuthController extends GetxController {
             "Success",
             resetPasswordMessage.value.message ??
                 "Password updated successfully",
-            backgroundColor: AppColors.primary,
+            backgroundColor: Colors.green,
             colorText: Colors.white,
           );
         } else {

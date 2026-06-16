@@ -15,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ProfileView extends GetView<AuthController> {
   const ProfileView({super.key});
+  static final GlobalKey<FormState> _profileFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +79,7 @@ class ProfileView extends GetView<AuthController> {
                   children: [
                     CustomFormContainer(
                       child: Form(
+                        key: _profileFormKey,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -115,6 +117,7 @@ class ProfileView extends GetView<AuthController> {
                               controller: controller.name,
                               labelText: "Full Name",
                               hintText: "Enter your full name",
+                              validator: Validators.nameValidator,
                             ),
                             Gap(10),
                             //w4 email
@@ -133,7 +136,7 @@ class ProfileView extends GetView<AuthController> {
                               isRequired: true,
                             ),
                             Gap(20),
-                          
+
                             //w7 button
                             Align(
                               alignment: Alignment.centerLeft,
@@ -142,7 +145,12 @@ class ProfileView extends GetView<AuthController> {
                                 height: 44,
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
-                                    await controller.updateProfile();
+                                    if (_profileFormKey.currentState!
+                                        .validate()) {
+                                      await controller.updateProfile();
+                                    } else {
+                                      debugPrint("Email validation failed");
+                                    }
                                   },
                                   icon: const Icon(
                                     Icons.save,

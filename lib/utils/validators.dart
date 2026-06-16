@@ -8,4 +8,14 @@ class Validators {
     }
     return null;
   }
+
+  static String? nameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Full name is required";
+    }
+    if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(value)) {
+      return "Special characters are not allowed";
+    }
+    return null;
+  }
 }
