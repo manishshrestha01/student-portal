@@ -73,7 +73,7 @@ class RegisterView extends GetView<AuthController> {
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                     fontSize: isSmall ? 14 : 16,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                     letterSpacing: 0,
                                     color: AppColors.textSecondary,
                                   ),
@@ -149,7 +149,7 @@ class RegisterView extends GetView<AuthController> {
                                     'Already have an account?',
                                     style: TextStyle(
                                       fontSize: isSmall ? 14 : 16,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       letterSpacing: 0,
                                       color: AppColors.textDark,
                                     ),

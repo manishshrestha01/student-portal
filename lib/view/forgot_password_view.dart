@@ -74,7 +74,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
                                   fontSize: isSmall ? 14 : 16,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                   letterSpacing: 0,
                                   color: AppColors.textSecondary,
                                 ),

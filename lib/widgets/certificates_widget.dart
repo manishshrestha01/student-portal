@@ -14,14 +14,14 @@ class CertificatesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<EmailCertificatesController>();
-    
+
     return LayoutBuilder(
       builder: (context, constraints) {
         // Responsive breakpoints
         final double screenWidth = constraints.maxWidth;
         final bool isSmall = screenWidth < 390;
         final bool isMedium = screenWidth >= 390 && screenWidth < 768;
-        
+
         // Responsive values
         final double padding = isSmall ? 16 : (isMedium ? 18 : 20);
         final double gapSize = isSmall ? 8 : 9;
@@ -32,7 +32,8 @@ class CertificatesWidget extends StatelessWidget {
         final double buttonHeight = isSmall ? 44 : (isMedium ? 50 : 50);
         final double buttonFontSize = isSmall ? 14 : (isMedium ? 20 : 20);
         final double borderRadius = isSmall ? 16 : 20;
-        
+        final double emailIconSize = isSmall ? 20 : (isMedium ? 26 : 30);
+
         return Container(
           width: double.infinity,
           padding: EdgeInsets.all(padding),
@@ -85,7 +86,7 @@ class CertificatesWidget extends StatelessWidget {
               Gap(padding * 0.5),
               const Divider(thickness: 1, color: Colors.black),
               Gap(padding),
-              
+
               // Issued To Row
               Row(
                 children: [
@@ -94,7 +95,7 @@ class CertificatesWidget extends StatelessWidget {
                     width: iconSizeSmall,
                     height: iconSizeSmall,
                     colorFilter: const ColorFilter.mode(
-                        AppColors.textNeutral,
+                      AppColors.textNeutral,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -131,7 +132,7 @@ class CertificatesWidget extends StatelessWidget {
                 ],
               ),
               Gap(padding * 0.5),
-              
+
               // Date Completed Row
               Row(
                 children: [
@@ -177,24 +178,26 @@ class CertificatesWidget extends StatelessWidget {
                 ],
               ),
               Gap(padding * 1.3),
-              
+
               // Email Button
               Obx(
                 () => SizedBox(
                   width: double.infinity,
                   height: buttonHeight,
                   child: ElevatedButton.icon(
-                    onPressed: controller.isLoadingForId(item.certicateId.toString())
+                    onPressed:
+                        controller.isLoadingForId(item.certicateId.toString())
                         ? null
-                        : () => controller.sendEmail(item.certicateId.toString()),
+                        : () =>
+                              controller.sendEmail(item.certicateId.toString()),
                     icon: SvgPicture.asset(
                       'assets/support/email.svg',
                       colorFilter: const ColorFilter.mode(
                         AppColors.primary,
                         BlendMode.srcIn,
                       ),
-                      width: isSmall ? 20 : (isMedium ? 22 : 26),
-                      height: isSmall ? 20 : (isMedium ? 22 : 26),
+                      width: emailIconSize,
+                      height: emailIconSize,
                     ),
                     label: Text(
                       controller.isLoadingForId(item.certicateId.toString())
@@ -212,7 +215,10 @@ class CertificatesWidget extends StatelessWidget {
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.white,
-                      side: const BorderSide(color: AppColors.primary, width: 1),
+                      side: const BorderSide(
+                        color: AppColors.primary,
+                        width: 1,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

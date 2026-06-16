@@ -63,11 +63,11 @@ class LoginView extends GetView<AuthController> {
                             ),
                             Gap(isSmall ? 8 : 10),
                             Text(
-                              'Log into your email address',
+                              'Log in to your email address',
                               style: GoogleFonts.inter(
                                 textStyle: TextStyle(
                                   fontSize: isSmall ? 14 : 16,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                   letterSpacing: 0,
                                   color: AppColors.textSecondary,
                                 ),
@@ -163,7 +163,7 @@ class LoginView extends GetView<AuthController> {
                                     'or continue with',
                                     style: TextStyle(
                                       fontSize: isSmall ? 12 : 14,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       letterSpacing: 0,
                                       color: AppColors.textSecondary,
                                     ),
@@ -258,7 +258,7 @@ class LoginView extends GetView<AuthController> {
                                   "Don't have an account yet?",
                                   style: TextStyle(
                                     fontSize: isSmall ? 14 : 16,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w500,
                                     letterSpacing: 0,
                                     color: AppColors.textDark,
                                   ),
