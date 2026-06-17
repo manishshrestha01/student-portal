@@ -57,6 +57,17 @@ class _HomeViewState extends State<HomeView> {
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: Obx(() {
+        final bool isAuthLoading = authController.isLoading.value; 
+        final bool isCoursesLoading = coursesController.isLoading.value;
+
+        if (isAuthLoading || isCoursesLoading) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primary,
+            ),
+          );
+        }
+
         final user = authController.user.value;
         final rawName = (user?.name ?? '').split(' ').first;
         final firstName = rawName.isEmpty ? 'User' : rawName;

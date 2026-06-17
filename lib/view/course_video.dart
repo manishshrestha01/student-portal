@@ -305,7 +305,7 @@ class _CourseVideoState extends State<CourseVideo> {
                                 return const Padding(
                                   padding: EdgeInsets.symmetric(vertical: 20),
                                   child: Center(
-                                    child: CircularProgressIndicator(),
+                                    child: CircularProgressIndicator(color: AppColors.primary,),
                                   ),
                                 );
                               }

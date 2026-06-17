@@ -52,7 +52,7 @@ class _UpcomingClassesViewState extends State<UpcomingClassesView> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: SizedBox(
                     height: constraints.maxHeight,
-                    child: const Center(child: CircularProgressIndicator()),
+                    child: const Center(child: CircularProgressIndicator(color: AppColors.primary,)),
                   ),
                 );
               }

@@ -60,7 +60,7 @@ class _RecordedVideosViewState extends State<RecordedVideosView> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: SizedBox(
                     height: constraints.maxHeight,
-                    child: const Center(child: CircularProgressIndicator()),
+                    child: const Center(child: CircularProgressIndicator(color: AppColors.primary,)),
                   ),
                 );
               }

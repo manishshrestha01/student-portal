@@ -40,7 +40,7 @@ class _TicketViewState extends State<TicketView> {
       drawer: CustomDrawer(),
       body: Obx(() {
         if (ticketController.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: AppColors.primary,));
         }
 
         if (ticketController.errorMessage.value.isNotEmpty) {

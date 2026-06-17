@@ -85,7 +85,7 @@ class _PurchaseState extends State<Purchase> {
                     if (showController.isLoading.value && course == null) {
                       return const Padding(
                         padding: EdgeInsets.only(top: 40),
-                        child: Center(child: CircularProgressIndicator()),
+                        child: Center(child: CircularProgressIndicator(color: AppColors.primary,)),
                       );
                     }
 
@@ -1086,7 +1086,7 @@ class _PurchaseState extends State<Purchase> {
               Expanded(
                 child: Obx(() {
                   if (termsController.isLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator(color: AppColors.primary,));
                   }
                   final String content =
                       (termsController.terms.value.data ?? '').trim();

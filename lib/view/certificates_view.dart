@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart'; 
 
 class CertificatesView extends StatefulWidget {
   const CertificatesView({super.key});
@@ -55,14 +56,14 @@ class _CertificatesViewState extends State<CertificatesView> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: SizedBox(
                     height: constraints.maxHeight,
-                    child: const Center(child: CircularProgressIndicator()),
+                    child: const Center(child: CircularProgressIndicator(color: AppColors.primary,)),
                   ),
                 );
               }
-              final certificatesList =
-                  certificateController.certificate.value.data;
-              print("Certificates Count: ${certificatesList.length}");
-              if (certificatesList.isEmpty) {
+              final rawList = certificateController.certificate.value.data;
+              print("Certificates Count: ${rawList.length}");
+              
+              if (rawList.isEmpty) {
                 return SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: SizedBox(
@@ -71,6 +72,23 @@ class _CertificatesViewState extends State<CertificatesView> {
                   ),
                 );
               }
+              DateTime parseCompletionDate(String? dateStr) {
+                if (dateStr == null || dateStr.trim().isEmpty) {
+                  return DateTime(1970);
+                }
+                try {
+                  return DateFormat('MMM dd, yyyy').parse(dateStr.trim());
+                } catch (e) {
+                  debugPrint("Error parsing date: $dateStr, error: $e");
+                  return DateTime(1970); 
+                }
+              }
+
+              final sortedCertificatesList = List.from(rawList)..sort((a, b) {
+                final DateTime dateA = parseCompletionDate(a.courseCompletionDate);
+                final DateTime dateB = parseCompletionDate(b.courseCompletionDate);
+                return dateB.compareTo(dateA); 
+              });
 
               return SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -97,7 +115,7 @@ class _CertificatesViewState extends State<CertificatesView> {
                         ),
                       ),
                       Gap(verticalGap),
-                      ...certificatesList.map((item) {
+                      ...sortedCertificatesList.map((item) {
                         return Padding(
                           padding: EdgeInsets.only(bottom: horizontalPadding),
                           child: CertificatesWidget(item: item),

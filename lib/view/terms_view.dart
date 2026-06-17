@@ -39,7 +39,7 @@ class _TermsViewState extends State<TermsView> {
       drawer: CustomDrawer(),
       body: Obx(() {
         if (termsController.isLoading.value) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator(color: AppColors.primary,));
         }
         return LayoutBuilder(
           builder: (context, constraints) {

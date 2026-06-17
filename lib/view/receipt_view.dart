@@ -48,7 +48,7 @@ class ReceiptView extends StatelessWidget {
                   Gap(verticalGap),
                   Obx(() {
                     if (controller.isLoading.value) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator(color: AppColors.primary,));
                     }
 
                     if (controller.hasError.value) {

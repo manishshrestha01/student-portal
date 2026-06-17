@@ -993,7 +993,7 @@ class _CheckoutState extends State<Checkout> {
               Expanded(
                 child: Obx(() {
                   if (termsController.isLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator(color: AppColors.primary,));
                   }
                   final String content =
                       (termsController.terms.value.data ?? '').trim();

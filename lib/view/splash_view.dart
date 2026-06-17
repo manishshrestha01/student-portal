@@ -23,7 +23,7 @@ class _SplashViewState extends State<SplashView> {
               height: 35,
             ),
             const SizedBox(height: 20),
-            const CircularProgressIndicator(),
+            const CircularProgressIndicator(color: AppColors.primary,),
           ],
         ),
       ),
