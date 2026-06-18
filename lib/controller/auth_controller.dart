@@ -241,7 +241,7 @@ class AuthController extends GetxController {
       isLoading(true);
       final response = await AuthService.updateProfile(
         name.text,
-        email.text,
+        email.text.trim(),
         whatsapp.text,
         address.text,
         countryCode.text,
