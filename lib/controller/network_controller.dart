@@ -5,23 +5,30 @@ import 'package:internet_connection_checker_plus/internet_connection_checker_plu
 
 class NetworkController extends GetxController {
   late StreamSubscription<InternetStatus> _connectionSubscription;
-  bool _isConnected = true;
+  bool _isConnected = true; 
 
   @override
   void onInit() {
     super.onInit();
+    
+    InternetConnection().internetStatus.then((status) {
+      _isConnected = (status == InternetStatus.connected);
+    });
+
     _connectionSubscription =
         InternetConnection().onStatusChange.listen((status) {
       _isConnected = (status == InternetStatus.connected);
       if (_isConnected) {
-        // Dismiss the No Internet snackbar immediately when internet is back
         Get.closeAllSnackbars();
       }
     });
   }
 
   Future<bool> checkConnectivity() async {
-    _isConnected = await InternetConnection().hasInternetAccess;
+    if (_isConnected) {
+      return true;
+    }
+    _isConnected = await InternetConnection().hasInternetAccess;   
     if (!_isConnected) {
       Get.closeAllSnackbars();
       Get.rawSnackbar(
@@ -45,7 +52,7 @@ class NetworkController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         margin: const EdgeInsets.all(10),
         borderRadius: 10,
-         duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
         isDismissible: false,
         snackStyle: SnackStyle.FLOATING,
       );
