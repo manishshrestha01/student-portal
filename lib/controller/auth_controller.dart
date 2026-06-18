@@ -170,7 +170,7 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
 
-      final response = await AuthService.login(email.text, password.text);
+      final response = await AuthService.login(email.text.trim(), password.text);
 
       loginMessage.value = LoginModel.fromJson(response.data);
 
