@@ -62,4 +62,17 @@ class StorageController extends GetxController {
     final data = box.read("user");
     return data != null ? Map<String, dynamic>.from(data) : null;
   }
+
+  Future<void> saveLocalPassword(String password) async {
+  await box.write("local_password", password);
 }
+
+String? getLocalPassword() {
+  return box.read("local_password");
+}
+
+void clearLocalPassword() {
+  box.remove("local_password");
+}
+}
+

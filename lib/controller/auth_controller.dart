@@ -12,7 +12,6 @@ import 'package:codeit_app/utils/dio_connector.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class AuthController extends GetxController {
   late final StorageController _storage;
 
@@ -107,12 +106,10 @@ class AuthController extends GetxController {
 
       final biometricEnabled = _storage.getBiometricEnabled();
       if (biometricEnabled) {
-     
         Future.delayed(const Duration(seconds: 1), () {
           Get.offAllNamed(AppRoutes.login);
         });
       } else {
-       
         Future.delayed(const Duration(seconds: 1), () {
           Get.offAllNamed(AppRoutes.home);
         });
@@ -124,9 +121,19 @@ class AuthController extends GetxController {
       });
     }
   }
+
   // Register user.
   Future<void> register() async {
     if (isLoading.value || Get.isSnackbarOpen) return;
+    if (password.text.trim().length < 8) {
+      Get.snackbar(
+        "Error",
+        "The password field must be at least 8 characters.",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
     final network = Get.find<NetworkController>();
     if (!await network.checkConnectivity()) return;
     try {
@@ -141,7 +148,12 @@ class AuthController extends GetxController {
       if (response.statusCode == 200) {
         registerMessage.value = RegisterModel.fromJson(response.data);
         if (registerMessage.value.success == true) {
-          Get.snackbar("Success", "Registration successful", backgroundColor: Colors.green, colorText: Colors.white);
+          Get.snackbar(
+            "Success",
+            "Registration successful",
+            backgroundColor: Colors.green,
+            colorText: Colors.white,
+          );
           clearForm();
           Get.toNamed(AppRoutes.login);
         } else {
@@ -150,14 +162,20 @@ class AuthController extends GetxController {
             registerMessage.value.errors?.email.isNotEmpty == true
                 ? registerMessage.value.errors!.email[0]
                 : "Registration failed",
-          backgroundColor: Colors.red, colorText: Colors.white
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
           );
         }
       } else {
         registerMessage.value = RegisterModel.fromJson(response.data);
       }
     } catch (e) {
-      Get.snackbar("Error", "An error occurred", backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar(
+        "Error",
+        "An error occurred",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     } finally {
       isLoading(false);
     }
@@ -170,12 +188,18 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
 
-      final response = await AuthService.login(email.text.trim(), password.text);
+      final response = await AuthService.login(
+        email.text.trim(),
+        password.text,
+      );
 
       loginMessage.value = LoginModel.fromJson(response.data);
 
       if (response.statusCode == 200 && loginMessage.value.success == true) {
         _storage.saveToken(loginMessage.value.token!);
+
+        await _storage.saveLocalPassword(password.text);
+
         if (rememberMe.value) {
           await _storage.saveRememberedEmail(email.text.trim());
         } else {
@@ -183,7 +207,7 @@ class AuthController extends GetxController {
         }
         DioConnector.dio.options.headers["Authorization"] =
             "Bearer ${loginMessage.value.token!}";
-      
+
         await fetchUser();
         Get.offNamed(AppRoutes.home);
       } else {
@@ -196,7 +220,12 @@ class AuthController extends GetxController {
         );
       }
     } catch (e) {
-      Get.snackbar("Error", loginMessage.value.message ?? "Login failed", backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar(
+        "Error",
+        loginMessage.value.message ?? "Login failed",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     } finally {
       isLoading(false);
     }
@@ -276,14 +305,20 @@ class AuthController extends GetxController {
         } else {
           Get.snackbar(
             "Error",
-            updateProfileMessage.value.message ?? "Please fill all fields correctly",
+            updateProfileMessage.value.message ??
+                "Please fill all fields correctly",
             backgroundColor: Colors.red,
             colorText: Colors.white,
           );
         }
       }
     } catch (e) {
-      Get.snackbar("Error", "Failed to update profile", backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar(
+        "Error",
+        "Failed to update profile",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     } finally {
       isLoading(false);
     }
@@ -291,37 +326,78 @@ class AuthController extends GetxController {
 
   Future<void> resetPassword() async {
     // Validate all fields are filled
-    // if (currentPassword.text.isEmpty) {
-    //   Get.snackbar("Error", "Please enter your current password", backgroundColor: Colors.red, colorText: Colors.white);
-    //   return;
-    // }
     if (isLoading.value || Get.isSnackbarOpen) return;
 
+    if (currentPassword.text.isEmpty) {
+      Get.snackbar(
+        "Error",
+        "Please enter your current password",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+    final storedPassword = _storage.getLocalPassword();
+    if (storedPassword == null || currentPassword.text != storedPassword) {
+      Get.snackbar(
+        "Error",
+        "Incorrect current password",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
     if (newPassword.text.isEmpty) {
-      Get.snackbar("Error", "Please enter your new password", backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar(
+        "Error",
+        "Please enter your new password",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
       return;
     }
 
     if (confirmPassword.text.isEmpty) {
-      Get.snackbar("Error", "Please confirm your new password", backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar(
+        "Error",
+        "Please confirm your new password",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
       return;
     }
 
     // Validate new password and confirm password match
     if (newPassword.text != confirmPassword.text) {
-      Get.snackbar("Error", "New password and confirm password must match", backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar(
+        "Error",
+        "New password and confirm password must match",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
       return;
     }
 
     // Validate new password is different from current password
     if (currentPassword.text == newPassword.text) {
-      Get.snackbar("Error", "New password must be different from current password", backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar(
+        "Error",
+        "New password must be different from current password",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
       return;
     }
 
     // Validate new password minimum length
-    if (newPassword.text.length < 6) {
-      Get.snackbar("Error", "New password must be at least 6 characters long", backgroundColor: Colors.red, colorText: Colors.white);
+    if (newPassword.text.length < 8) {
+      Get.snackbar(
+        "Error",
+        "New password must be at least 8 characters long",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
       return;
     }
     final network = Get.find<NetworkController>();
@@ -338,6 +414,7 @@ class AuthController extends GetxController {
       if (response.statusCode == 200) {
         resetPasswordMessage.value = ResetPasswordModel.fromJson(response.data);
         if (resetPasswordMessage.value.success == true) {
+          await _storage.saveLocalPassword(newPassword.text.trim());
           clearPasswordForm();
           Get.snackbar(
             "Success",
@@ -361,10 +438,14 @@ class AuthController extends GetxController {
           backgroundColor: Colors.red,
           colorText: Colors.white,
         );
-        
       }
     } catch (e) {
-      Get.snackbar("Error", "Failed to update password: ${e.toString()}", backgroundColor: Colors.red, colorText: Colors.white);
+      Get.snackbar(
+        "Error",
+        "Failed to update password: ${e.toString()}",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
     } finally {
       isLoading(false);
     }
@@ -373,6 +454,7 @@ class AuthController extends GetxController {
   //logout
   void logout() {
     _storage.clearSession();
+    _storage.clearLocalPassword();
     user.value = null;
     clearForm();
     if (rememberMe.value) {
