@@ -211,7 +211,7 @@ class ProfileView extends GetView<AuthController> {
                                 textStyle: TextStyle(
                                   color: AppColors.textSecondary,
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                   letterSpacing: 0,
                                 ),
                               ),
