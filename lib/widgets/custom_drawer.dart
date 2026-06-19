@@ -51,7 +51,7 @@ class CustomDrawer extends StatelessWidget {
 
         return Drawer(
           width: screenWidth < 500
-              ? screenWidth * 0.75
+              ? (screenWidth * 0.80) 
               : (screenWidth < 900 ? 350 : 400),
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
           child: Container(
@@ -61,16 +61,25 @@ class CustomDrawer extends StatelessWidget {
                 children: [
                   ListTile(
                     minTileHeight: isShort ? 64 : null,
-                    title: Text(
-                      "</> CODE IT",
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: titleFontSize,
-                          fontWeight: FontWeight.w700,
-                        ),
+                    title: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "</> CODE IT",
+                            style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: titleFontSize,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.center,
                     ),
                   ),
                   Divider(thickness: 0.5, color: AppColors.white),
