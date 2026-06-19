@@ -3,6 +3,7 @@ import 'package:codeit_app/model/certificates_model.dart';
 import 'package:codeit_app/service/certificates_service.dart';
 import 'package:codeit_app/controller/storage_controller.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class CertificatesController extends GetxController {
   var certificate = CertificatesModel(sucess: true, data: [],).obs;
@@ -13,6 +14,18 @@ class CertificatesController extends GetxController {
   void onInit() {
     super.onInit();
     getCertificates();
+  }
+
+  DateTime _parseCompletionDate(String? dateStr) {
+    if (dateStr == null || dateStr.trim().isEmpty) {
+      return DateTime(1970);
+    }
+    try {
+      return DateFormat('MMM dd, yyyy').parse(dateStr.trim());
+    } catch (e) {
+      print("Error parsing date: $dateStr, error: $e");
+      return DateTime(1970); 
+    }
   }
 
   Future<void> getCertificates() async {
@@ -32,7 +45,16 @@ class CertificatesController extends GetxController {
       if (response.statusCode == 200) {
         final responseData = response.data;
         if (responseData is Map<String, dynamic>) {
-          certificate.value = CertificatesModel.fromJson(responseData);
+          final parsedModel = CertificatesModel.fromJson(responseData);
+          // ignore: unnecessary_null_comparison
+          if (parsedModel.data != null) {
+            parsedModel.data.sort((a, b) {
+              final DateTime dateA = _parseCompletionDate(a.courseCompletionDate);
+              final DateTime dateB = _parseCompletionDate(b.courseCompletionDate);
+              return dateB.compareTo(dateA);
+            });
+          }
+          certificate.value = parsedModel;
         } else {
           certificate.value = CertificatesModel(sucess: false, data: []);
           errorMessage('Unexpected response format from server.');
