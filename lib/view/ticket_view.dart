@@ -407,8 +407,8 @@ class _TicketViewState extends State<TicketView> {
       iconPath = 'assets/support/technical_chip.svg';
       backgroundColor = const Color(0xFFFFE2E2);
       textColor = const Color(0xFF9E0812);
-    } else if (value.contains('counselling')) {
-      label = 'Counselling';
+    } else if (value.contains('counseling')) {
+      label = 'Counseling';
       iconPath = 'assets/support/counselling_chip.svg';
       backgroundColor = const Color(0xFFDCFCE6);
       textColor = const Color(0xFF016630);

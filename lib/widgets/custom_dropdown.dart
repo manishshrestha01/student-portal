@@ -43,7 +43,7 @@ class CustomCategoryDropdown extends StatelessWidget {
                   const Gap(8),
                   _buildItem(context, 'Technical'),
                   const Gap(8),
-                  _buildItem(context, 'Counselling'),
+                  _buildItem(context, 'Counseling'),
                   const Gap(8),
                   _buildItem(context, 'Internship'),
                 ],

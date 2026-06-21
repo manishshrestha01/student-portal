@@ -121,7 +121,7 @@ class _SupportViewState extends State<SupportView> {
                     isSmall: isSmall,
                     iconPath: 'assets/support/counselling.svg',
                     iconColor: const Color(0xFF138023),
-                    title: 'Counselling Support',
+                    title: 'Counseling Support',
                     description:
                         'Help choosing courses, career guidance, learning path planning, or study advice.',
                   ),

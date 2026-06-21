@@ -17,7 +17,7 @@ class CounselingView extends StatelessWidget {
       appBar: CustomAppBar(),
       drawer: CustomDrawer(),
       body: SupportTicketFormContent(
-        initialCategory: 'Counselling',
+        initialCategory: 'Counseling',
         onHomeTap: () => Get.offAll(() => HomeView()),
         onSupportTap: () => Get.offAll(() => SupportView()),
       ),
