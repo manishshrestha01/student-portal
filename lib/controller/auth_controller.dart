@@ -134,6 +134,7 @@ class AuthController extends GetxController {
       );
       return;
     }
+    if (!_isValidNepalPhoneNumber()) return;
     final network = Get.find<NetworkController>();
     if (!await network.checkConnectivity()) return;
     try {
@@ -264,6 +265,7 @@ class AuthController extends GetxController {
 
   Future<void> updateProfile() async {
     if (isLoading.value || Get.isSnackbarOpen) return;
+    if (!_isValidNepalPhoneNumber()) return;
     final network = Get.find<NetworkController>();
     if (!await network.checkConnectivity()) return;
     try {
@@ -323,6 +325,24 @@ class AuthController extends GetxController {
       isLoading(false);
     }
   }
+  //nepal phone number validation
+  bool _isValidNepalPhoneNumber() {
+  if (countryCode.text.trim() == '+977') {
+    final phoneRaw = whatsapp.text.trim();
+    final nepalPhoneRegex = RegExp(r'^(97|98)\d{8}$');
+    
+    if (!nepalPhoneRegex.hasMatch(phoneRaw)) {
+      Get.snackbar(
+        "Invalid Phone Number",
+        "Nepal mobile numbers must be 10 digits and start with 97 or 98.",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return false;
+    }
+  }
+  return true;
+}
 
   Future<void> resetPassword() async {
     // Validate all fields are filled
