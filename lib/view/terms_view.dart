@@ -57,7 +57,7 @@ class _TermsViewState extends State<TermsView> {
     final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
     final double contentWidth = math.min(
       screenWidth - (horizontalPadding * 2),
-      620,
+      screenWidth >= 1000 ? 960 : 620,
     );
     final String content = (termsController.terms.value.data ?? '').trim();
     //data

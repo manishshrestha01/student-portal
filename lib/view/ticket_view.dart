@@ -88,10 +88,10 @@ class _TicketViewState extends State<TicketView> {
   Widget _buildPageContent(double screenWidth) {
     final bool isSmall = screenWidth < 390;
     final bool isMedium = screenWidth >= 390 && screenWidth < 768;
-    final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
+    final double horizontalPadding = isSmall ? 8 : (isMedium ? 16 : 32);
     final double contentWidth = math.min(
       screenWidth - (horizontalPadding * 2),
-      620,
+      screenWidth >= 1000 ? 960 : 620,
     );
     final List<Datum> tickets = ticketController.ticket.value.data;
 
@@ -221,10 +221,10 @@ class _TicketViewState extends State<TicketView> {
 
   Widget _buildTicketTable(List<Datum> tickets, bool isSmall, bool isMedium) {
     final EdgeInsets cellPadding = EdgeInsets.symmetric(
-      horizontal: isSmall ? 10 : (isMedium ? 14 : 28),
-      vertical: isSmall ? 12 : (isMedium ? 14 : 20),
+      horizontal: isSmall ? 6 : (isMedium ? 12 : 28),
+      vertical: isSmall ? 10 : (isMedium ? 14 : 20),
     );
-    final double headerFontSize = isSmall ? 11 : (isMedium ? 13 : 18);
+    final double headerFontSize = isSmall ? 11 : (isMedium ? 13 : 14);
     const BorderRadius tableBorderRadius = BorderRadius.all(
       Radius.circular(22),
     );
@@ -326,7 +326,7 @@ class _TicketViewState extends State<TicketView> {
     EdgeInsets cellPadding,
     bool showDivider,
   ) {
-    final double subjectFontSize = isSmall ? 12 : (isMedium ? 15 : 20);
+    final double subjectFontSize = isSmall ? 12 : (isMedium ? 15 : 15);
     return Column(
       children: [
         Container(
@@ -448,7 +448,7 @@ class _TicketViewState extends State<TicketView> {
             style: GoogleFonts.inter(
               textStyle: TextStyle(
                 color: textColor,
-                fontSize: isSmall ? 11 : (isMedium ? 13 : 18),
+                fontSize: isSmall ? 11 : (isMedium ? 13 : 14),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -488,7 +488,7 @@ class _TicketViewState extends State<TicketView> {
         style: GoogleFonts.inter(
           textStyle: TextStyle(
             color: textColor,
-            fontSize: isSmall ? 11 : (isMedium ? 13 : 18),
+            fontSize: isSmall ? 11 : (isMedium ? 13 : 14),
             fontWeight: FontWeight.w600,
           ),
         ),

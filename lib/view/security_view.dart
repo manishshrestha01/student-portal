@@ -63,7 +63,8 @@ class _SecurityViewState extends State<SecurityView> {
           final double screenWidth = constraints.maxWidth;
           final bool isSmall = screenWidth < 390;
           final bool isMedium = screenWidth >= 390 && screenWidth < 768;
-          final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
+          final double horizontalPadding = isSmall ? 12 : (isMedium ? 24 : 32);
+          final double contentWidth = screenWidth >= 1000 ? 800 : (screenWidth >= 600 ? 550 : screenWidth - (horizontalPadding * 2));
 
           return SingleChildScrollView(
             child: Padding(
@@ -90,7 +91,7 @@ class _SecurityViewState extends State<SecurityView> {
                   Gap(isSmall ? 20 : 32),
                   Center(
                     child: Container(
-                      width: 400,
+                      width: contentWidth,
                       padding: EdgeInsets.fromLTRB(
                         isSmall ? 12 : 18,
                         14,

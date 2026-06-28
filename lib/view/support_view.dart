@@ -37,7 +37,7 @@ class _SupportViewState extends State<SupportView> {
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
           final double contentWidth = math.min(
             screenWidth - (horizontalPadding * 2),
-            620,
+            screenWidth >= 900 ? 960 : 620,
           );
           final double cardHeight = isSmall ? 238 : 252;
           final double buttonHeight = isSmall ? 52 : 50;
@@ -90,52 +90,129 @@ class _SupportViewState extends State<SupportView> {
                     ),
                   ),
                   const Gap(23),
-                  _buildSupportCard(
-                    onTap: () => Get.offAll(() => const GeneralView()),
-                    cardWidth: contentWidth,
-                    cardHeight: cardHeight,
-                    isSmall: isSmall,
-                    iconPath: 'assets/support/general.svg',
-                    iconColor: const Color(0xFF22408B),
-                    title: 'General Support',
-                    description:
-                        'Questions about courses, payments, schedule, enrollment or other general inquiries.',
-                  ),
-                  const Gap(23),
-                  _buildSupportCard(
-                    onTap: () => Get.offAll(() => const TechnicalView()),
-                    cardWidth: contentWidth,
-                    cardHeight: cardHeight,
-                    isSmall: isSmall,
-                    iconPath: 'assets/support/technical.svg',
-                    iconColor: const Color(0xFFBC120E),
-                    title: 'Technical Support',
-                    description:
-                        'Login issues, platform errors, video not playing, file access problems, etc.',
-                  ),
-                  const Gap(23),
-                  _buildSupportCard(
-                    onTap: () => Get.offAll(() => const CounselingView()),
-                    cardWidth: contentWidth,
-                    cardHeight: cardHeight,
-                    isSmall: isSmall,
-                    iconPath: 'assets/support/counselling.svg',
-                    iconColor: const Color(0xFF138023),
-                    title: 'Counseling Support',
-                    description:
-                        'Help choosing courses, career guidance, learning path planning, or study advice.',
-                  ),
-                  const Gap(23),
-                  _buildSupportCard(
-                    onTap: () => Get.offAll(() => const InternshipView()),
-                    cardWidth: contentWidth,
-                    cardHeight: cardHeight,
-                    isSmall: isSmall,
-                    iconPath: 'assets/support/internship.svg',
-                    iconColor: const Color(0xFF9A1CB9),
-                    title: 'Internship Support',
-                    description:
-                        'Help with internship tasks, project guidance, workplace questions, or reports.',
+                  Center(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(maxWidth: contentWidth),
+                      child: screenWidth >= 900
+                          ? Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: _buildSupportCard(
+                                        onTap: () => Get.offAll(() => const GeneralView()),
+                                        cardWidth: double.infinity,
+                                        cardHeight: cardHeight,
+                                        isSmall: isSmall,
+                                        iconPath: 'assets/support/general.svg',
+                                        iconColor: const Color(0xFF22408B),
+                                        title: 'General Support',
+                                        description:
+                                            'Questions about courses, payments, schedule, enrollment or other general inquiries.',
+                                      ),
+                                    ),
+                                    const Gap(23),
+                                    Expanded(
+                                      child: _buildSupportCard(
+                                        onTap: () => Get.offAll(() => const TechnicalView()),
+                                        cardWidth: double.infinity,
+                                        cardHeight: cardHeight,
+                                        isSmall: isSmall,
+                                        iconPath: 'assets/support/technical.svg',
+                                        iconColor: const Color(0xFFBC120E),
+                                        title: 'Technical Support',
+                                        description:
+                                            'Login issues, platform errors, video not playing, file access problems, etc.',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Gap(23),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: _buildSupportCard(
+                                        onTap: () => Get.offAll(() => const CounselingView()),
+                                        cardWidth: double.infinity,
+                                        cardHeight: cardHeight,
+                                        isSmall: isSmall,
+                                        iconPath: 'assets/support/counselling.svg',
+                                        iconColor: const Color(0xFF138023),
+                                        title: 'Counseling Support',
+                                        description:
+                                            'Help choosing courses, career guidance, learning path planning, or study advice.',
+                                      ),
+                                    ),
+                                    const Gap(23),
+                                    Expanded(
+                                      child: _buildSupportCard(
+                                        onTap: () => Get.offAll(() => const InternshipView()),
+                                        cardWidth: double.infinity,
+                                        cardHeight: cardHeight,
+                                        isSmall: isSmall,
+                                        iconPath: 'assets/support/internship.svg',
+                                        iconColor: const Color(0xFF9A1CB9),
+                                        title: 'Internship Support',
+                                        description:
+                                            'Help with internship tasks, project guidance, workplace questions, or reports.',
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                _buildSupportCard(
+                                  onTap: () => Get.offAll(() => const GeneralView()),
+                                  cardWidth: double.infinity,
+                                  cardHeight: cardHeight,
+                                  isSmall: isSmall,
+                                  iconPath: 'assets/support/general.svg',
+                                  iconColor: const Color(0xFF22408B),
+                                  title: 'General Support',
+                                  description:
+                                      'Questions about courses, payments, schedule, enrollment or other general inquiries.',
+                                ),
+                                const Gap(23),
+                                _buildSupportCard(
+                                  onTap: () => Get.offAll(() => const TechnicalView()),
+                                  cardWidth: double.infinity,
+                                  cardHeight: cardHeight,
+                                  isSmall: isSmall,
+                                  iconPath: 'assets/support/technical.svg',
+                                  iconColor: const Color(0xFFBC120E),
+                                  title: 'Technical Support',
+                                  description:
+                                      'Login issues, platform errors, video not playing, file access problems, etc.',
+                                ),
+                                const Gap(23),
+                                _buildSupportCard(
+                                  onTap: () => Get.offAll(() => const CounselingView()),
+                                  cardWidth: double.infinity,
+                                  cardHeight: cardHeight,
+                                  isSmall: isSmall,
+                                  iconPath: 'assets/support/counselling.svg',
+                                  iconColor: const Color(0xFF138023),
+                                  title: 'Counseling Support',
+                                  description:
+                                      'Help choosing courses, career guidance, learning path planning, or study advice.',
+                                ),
+                                const Gap(23),
+                                _buildSupportCard(
+                                  onTap: () => Get.offAll(() => const InternshipView()),
+                                  cardWidth: double.infinity,
+                                  cardHeight: cardHeight,
+                                  isSmall: isSmall,
+                                  iconPath: 'assets/support/internship.svg',
+                                  iconColor: const Color(0xFF9A1CB9),
+                                  title: 'Internship Support',
+                                  description:
+                                      'Help with internship tasks, project guidance, workplace questions, or reports.',
+                                ),
+                              ],
+                            ),
+                    ),
                   ),
                   Gap(isSmall ? 20 : 40),
                   Center(

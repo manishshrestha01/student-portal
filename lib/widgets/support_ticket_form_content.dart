@@ -55,9 +55,9 @@ class _SupportTicketFormContentState extends State<SupportTicketFormContent> {
         final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
         final double contentWidth = math.min(
           screenWidth - (horizontalPadding * 2),
-          620,
+          screenWidth >= 1000 ? 900 : 620,
         );
-        final double formWidth = math.min(contentWidth, 520);
+        final double formWidth = math.min(contentWidth, screenWidth >= 1000 ? 800 : 520);
         final double titleSize = isSmall ? 22 : 26;
         final double subtitleSize = isSmall ? 14 : 16;
         final double sectionTitleSize = isSmall ? 18 : 20;

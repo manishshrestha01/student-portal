@@ -83,138 +83,189 @@ class _HomeViewState extends State<HomeView> {
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             child: Center(
-            child: Container(
-              width: width > 600 ? 400 : width * 0.9,
-              padding: EdgeInsets.all(16),
-              margin: EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Welcome section
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Welcome back, $firstName!",
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 0,
-                            color: Color(0xFF1A1A2E),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        "Here's your learning snapshot today.",
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            fontSize: 16,
-                            letterSpacing: 0,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                      ),
-                      Gap(10),
-                      ElevatedButton.icon(
-                        onPressed: () =>
-                            Get.to(() => const UpcomingClassesView()),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        icon: Icon(Icons.add, size: 20),
-                        label: Text(
-                          "Enroll in a Course",
+              child: Container(
+                width: width > 1200 ? 1100 : (width > 800 ? 760 : width * 0.9),
+                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Welcome section
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Welcome back, $firstName!",
                           style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                              color: AppColors.boxColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                            textStyle: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
                               letterSpacing: 0,
+                              color: Color(0xFF1A1A2E),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Gap(10),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 10 , left: 0, top: 5, right: 0),
-                    child: LinkView(),
-                  ),
-                  // Info cards
-                  Column(
-                    children: [
-                      Obx(() {
-                        return InfoCard(
-                          title: "Active Courses",
-                          value: coursesController.courses.value.data.length
-                              .toString(),
-                          icon: SvgPicture.asset(
-                            'assets/support/course_border.svg',
-                            width: 55,
-                            height: 55,
+                        Text(
+                          "Here's your learning snapshot today.",
+                          style: GoogleFonts.inter(
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              letterSpacing: 0,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.textSecondary,
+                            ),
                           ),
-                          onTap: () => Get.offAll(() => const CourseView()),
-                        );
-                      }),
-                      Gap(20),
-                      Obx(() {
-                        return InfoCard(
-                          title: "Certificates",
-                          value: certificatesController
-                              .certificate
-                              .value
-                              .data
-                              .length
-                              .toString(),
-                          icon: SvgPicture.asset(
-                            'assets/support/certificate_border.svg',
-                            width: 55,
-                            height: 55,
+                        ),
+                        const Gap(10),
+                        ElevatedButton.icon(
+                          onPressed: () =>
+                              Get.to(() => const UpcomingClassesView()),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                          onTap: () =>
-                              Get.offAll(() => const CertificatesView()),
-                        );
-                      }),
-                      Gap(20),
-
-                      Obx(() {
-                        return InfoCard(
-                          title: "Payments",
-                          value: receiptController.receipts.length.toString(),
-                          icon: SvgPicture.asset(
-                            'assets/support/payments_border.svg',
-                            width: 55,
-                            height: 55,
+                          icon: const Icon(Icons.add, size: 20),
+                          label: Text(
+                            "Enroll in a Course",
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                color: AppColors.boxColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0,
+                              ),
+                            ),
                           ),
-                          onTap: () => Get.to(() => const PaymentPage()),
-                        );
-                      }),
-                    ],
-                  ),
-                  Gap(40),
+                        ),
+                      ],
+                    ),
+                    const Gap(10),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10 , left: 0, top: 5, right: 0),
+                      child: LinkView(),
+                    ),
+                    // Info cards
+                    width > 800
+                        ? Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Obx(() {
+                                  return InfoCard(
+                                    title: "Active Courses",
+                                    value: coursesController.courses.value.data.length
+                                        .toString(),
+                                    icon: SvgPicture.asset(
+                                      'assets/support/course_border.svg',
+                                      width: 55,
+                                      height: 55,
+                                    ),
+                                    onTap: () => Get.offAll(() => const CourseView()),
+                                  );
+                                }),
+                              ),
+                              const Gap(20),
+                              Expanded(
+                                child: Obx(() {
+                                  return InfoCard(
+                                    title: "Certificates",
+                                    value: certificatesController
+                                        .certificate
+                                        .value
+                                        .data
+                                        .length
+                                        .toString(),
+                                    icon: SvgPicture.asset(
+                                      'assets/support/certificate_border.svg',
+                                      width: 55,
+                                      height: 55,
+                                    ),
+                                    onTap: () =>
+                                        Get.offAll(() => const CertificatesView()),
+                                  );
+                                }),
+                              ),
+                              const Gap(20),
+                              Expanded(
+                                child: Obx(() {
+                                  return InfoCard(
+                                    title: "Payments",
+                                    value: receiptController.receipts.length.toString(),
+                                    icon: SvgPicture.asset(
+                                      'assets/support/payments_border.svg',
+                                      width: 55,
+                                      height: 55,
+                                    ),
+                                    onTap: () => Get.to(() => const PaymentPage()),
+                                  );
+                                }),
+                              ),
+                            ],
+                          )
+                        : Column(
+                            children: [
+                              Obx(() {
+                                return InfoCard(
+                                  title: "Active Courses",
+                                  value: coursesController.courses.value.data.length
+                                      .toString(),
+                                  icon: SvgPicture.asset(
+                                    'assets/support/course_border.svg',
+                                    width: 55,
+                                    height: 55,
+                                  ),
+                                  onTap: () => Get.offAll(() => const CourseView()),
+                                );
+                              }),
+                              const Gap(20),
+                              Obx(() {
+                                return InfoCard(
+                                  title: "Certificates",
+                                  value: certificatesController
+                                      .certificate
+                                      .value
+                                      .data
+                                      .length
+                                      .toString(),
+                                  icon: SvgPicture.asset(
+                                    'assets/support/certificate_border.svg',
+                                    width: 55,
+                                    height: 55,
+                                  ),
+                                  onTap: () =>
+                                      Get.offAll(() => const CertificatesView()),
+                                );
+                              }),
+                              const Gap(20),
+                              Obx(() {
+                                return InfoCard(
+                                  title: "Payments",
+                                  value: receiptController.receipts.length.toString(),
+                                  icon: SvgPicture.asset(
+                                    'assets/support/payments_border.svg',
+                                    width: 55,
+                                    height: 55,
+                                  ),
+                                  onTap: () => Get.to(() => const PaymentPage()),
+                                );
+                              }),
+                            ],
+                          ),
+                    const Gap(40),
 
-                  // Courses section
-                  _buildCourseSection(context),
-                  Gap(40),
-
-                  // Payments section
-                  _buildPaymentSection(context),
-
-                  Gap(40),
-
-                  // Certificates section
-                  _buildCertificateSection(context),
-                ],
+                    // Sections
+                    _buildCourseSection(context),
+                    const Gap(40),
+                    _buildPaymentSection(context),
+                    const Gap(40),
+                    _buildCertificateSection(context),
+                  ],
+                ),
               ),
             ),
-          ),
           ),
         );
       }),
@@ -257,7 +308,7 @@ Widget _buildPaymentSection(BuildContext context) {
               receiptId: receipt.receiptId ?? 0,
             ),
           );
-          Gap(12);
+          
           //add divider between items
           if (i < items.length - 1) {
             widgets.add(
@@ -301,11 +352,28 @@ Widget _buildCourseSection(BuildContext context) {
       );
     }).toList();
 
+    final widgets = <Widget>[];
+    for (int i = 0; i < courseItems.length; i++) {
+      widgets.add(courseItems[i]);
+
+      if (i < courseItems.length - 1) {
+        widgets.add(
+          const Divider(
+            height: 1,
+            thickness: 1,
+            indent: 14,
+            endIndent: 14,
+            color: Color.fromARGB(255, 223, 219, 219),
+          ),
+        );
+      }
+    }
+
     return CustomParentContainer(
       title: "My Courses",
       seeall: "See All",
       onTapSeeAll: () => Get.to(() => const CourseView()),
-      children: courseItems,
+      children: widgets,
     );
   });
 }

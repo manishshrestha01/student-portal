@@ -36,7 +36,7 @@ class _SuggestionsViewState extends State<SuggestionsView> {
           final double horizontalPadding = isSmall ? 16 : (isMedium ? 24 : 32);
           final double contentWidth = math.min(
             screenWidth - (horizontalPadding * 2),
-            620,
+            screenWidth >= 1000 ? 800 : 620,
           );
 
           return SingleChildScrollView(

@@ -242,12 +242,41 @@ class _RecordedVideosViewState extends State<RecordedVideosView> {
                             ),
                           ),
                         ),
-                      ...displayedList.map((item) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: RecordedWidgets(item: item),
-                        );
-                      }),
+                      ...() {
+                        int crossAxisCount = 1;
+                        if (screenWidth >= 1100) {
+                          crossAxisCount = 3;
+                        } else if (screenWidth >= 700) {
+                          crossAxisCount = 2;
+                        }
+
+                        final rows = <Widget>[];
+                        for (int i = 0; i < displayedList.length; i += crossAxisCount) {
+                          final chunk = displayedList.skip(i).take(crossAxisCount).toList();
+                          rows.add(
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  for (int j = 0; j < chunk.length; j++) ...[
+                                    Expanded(
+                                      child: RecordedWidgets(item: chunk[j]),
+                                    ),
+                                    if (j < chunk.length - 1) const Gap(20),
+                                  ],
+                                  // Add empty placeholders to keep grid alignment uniform
+                                  for (int j = chunk.length; j < crossAxisCount; j++) ...[
+                                    const Expanded(child: SizedBox.shrink()),
+                                    if (j < crossAxisCount - 1) const Gap(20),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          );
+                        }
+                        return rows;
+                      }(),
                       Gap(30),
                     ],
                   ),
